@@ -12,6 +12,8 @@ export class FleetComponent implements OnInit {
   mapMinHeight = 768;
   vehicles$: Observable<any>;
   bus_number: string;
+  map_lat = 34.056539;
+  map_lgt = -118.237485;
 
   constructor(
     private dataService: DataService
