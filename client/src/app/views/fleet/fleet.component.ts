@@ -11,6 +11,7 @@ import { DataService } from '../../services';
 export class FleetComponent implements OnInit {
   mapMinHeight = 768;
   vehicles$: Observable<any>;
+  bus_number: string;
 
   constructor(
     private dataService: DataService
