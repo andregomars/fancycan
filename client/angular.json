@@ -26,6 +26,7 @@
               "node_modules/flag-icon-css/css/flag-icon.css",
               "node_modules/font-awesome/css/font-awesome.css",
               "node_modules/simple-line-icons/css/simple-line-icons.css",
+              "node_modules/snazzy-info-window/dist/snazzy-info-window.css",
               "src/scss/style.scss"
             ],
             "stylePreprocessorOptions": {

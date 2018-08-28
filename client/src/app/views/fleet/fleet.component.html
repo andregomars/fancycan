@@ -5,10 +5,17 @@
         <ng-container *ngIf="(vehicles$ | async) as locations">
           <agm-marker-cluster *ngIf="locations && locations.length > 0" [imagePath]="'https://googlemaps.github.io/js-marker-clusterer/images/m'">
             <agm-marker *ngFor="let loc of locations" [latitude]="loc.latitude" [longitude]="loc.longitude">
-              <agm-info-window>
-                <!-- <a [routerLink]="['snapshot', fleetId, loc.vehicle_id]">{{loc.bus_number}}</a> -->
+            <!-- <agm-marker *ngFor="let loc of locations" [latitude]="loc.latitude" [longitude]="loc.longitude" 
+              iconUrl="assets/img/map/map_markerblue.png" [label]="loc.bus_number"> -->
+              <!-- <agm-info-window>
+                <a [routerLink]="['snapshot', fleetId, loc.vehicle_id]">{{loc.bus_number}}</a>
                 {{ loc.bus_number }}
-              </agm-info-window>
+              </agm-info-window> -->
+              <agm-snazzy-info-window [maxWidth]="200" [closeWhenOthersOpen]="true">
+                <ng-template>
+                  My first Snazzy Info Window!
+                </ng-template>
+              </agm-snazzy-info-window>
             </agm-marker>
           </agm-marker-cluster>
         </ng-container>

@@ -6,7 +6,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { AgmCoreModule } from '@agm/core';
 import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
-
+import { AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
 
 import { FleetComponent } from './fleet.component';
 import { VehicleComponent } from './vehicle.component';
@@ -24,6 +24,7 @@ import { DataService } from '../../services';
     FleetRoutingModule,
     AppPipeModule,
     AgmCoreModule.forRoot(environment.agm),
+    AgmSnazzyInfoWindowModule,
     AgmJsMarkerClustererModule,
     ButtonsModule.forRoot()
   ],

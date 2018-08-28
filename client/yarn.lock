@@ -10,6 +10,10 @@
   version "1.0.0-beta.3"
   resolved "https://registry.yarnpkg.com/@agm/js-marker-clusterer/-/js-marker-clusterer-1.0.0-beta.3.tgz#93b902c77325e5038cd36050cc721ff795c18c6c"
 
+"@agm/snazzy-info-window@^1.0.0-beta.3":
+  version "1.0.0-beta.3"
+  resolved "https://registry.yarnpkg.com/@agm/snazzy-info-window/-/snazzy-info-window-1.0.0-beta.3.tgz#0860b61745eb32ebb4817e3ff1426e459bbfe3d2"
+
 "@angular-devkit/architect@0.7.5":
   version "0.7.5"
   resolved "https://registry.yarnpkg.com/@angular-devkit/architect/-/architect-0.7.5.tgz#e2d856b671fe8b0615db1efc144a7f75b55fb6e1"
@@ -5341,6 +5345,10 @@ snapdragon@^0.8.1:
     source-map "^0.5.6"
     source-map-resolve "^0.5.0"
     use "^3.1.0"
+
+snazzy-info-window@^1.1.0:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/snazzy-info-window/-/snazzy-info-window-1.1.1.tgz#3b4da4f41c3aa6aa4ad878ecb97c3c2eb5c89b2f"
 
 socket.io-adapter@~1.1.0:
   version "1.1.1"
