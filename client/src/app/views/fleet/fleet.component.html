@@ -1,0 +1,47 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-12 col-lg-9 pt-2 px-0" [style.min-height.px]="mapMinHeight">
+      <ng-container *ngIf="(vehicles$ | async) as locations">
+        <agm-map id="map_canvas" *ngIf="locations && locations.length > 0" class="" [zoom]=10 [streetViewControl]=false [latitude]="locations[0].latitude"
+          [longitude]="locations[0].longitude">
+          <agm-marker-cluster [imagePath]="'https://googlemaps.github.io/js-marker-clusterer/images/m'">
+            <agm-marker *ngFor="let loc of locations" [latitude]="loc.latitude" [longitude]="loc.longitude">
+              <agm-info-window>
+                <!-- <a [routerLink]="['snapshot', fleetId, loc.vehicle_id]">{{loc.bus_number}}</a> -->
+                {{ loc.bus_number }}
+              </agm-info-window>
+            </agm-marker>
+          </agm-marker-cluster>
+        </agm-map>
+      </ng-container>
+    </div>
+    <div class="col-12 col-lg-3 pt-2 px-1">
+      <table class="table table-responsive-lg table-striped table-hover table-outline table-sm mb-0">
+        <thead class="text-white bg-primary">
+          <tr>
+            <th>#</th>
+            <th>SOC/Range</th>
+            <th>Odometer</th>
+            <th>Updated</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let vehicle of vehicles$ | async">
+            <td>
+              <div class="small text-muted">{{ vehicle.bus_number }}</div>
+            </td>
+            <td>
+              <div class="small text-muted">{{ (vehicle.soc / vehicle.range).toFixed(2) }}</div>
+            </td>
+            <td>
+              <div class="small text-muted">{{ vehicle.odometer }}</div>
+            </td>
+            <td>
+              <div class="small text-muted">{{ vehicle.updated | date: 'MM/DD' }}</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

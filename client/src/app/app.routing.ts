@@ -7,19 +7,19 @@ import { DefaultLayoutComponent } from './containers';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'dashboard',
+    redirectTo: 'fleet',
     pathMatch: 'full',
   },
   {
     path: '',
     component: DefaultLayoutComponent,
     data: {
-      title: 'Home'
+      title: ''
     },
     children: [
       {
-        path: 'dashboard',
-        loadChildren: './views/dashboard/dashboard.module#DashboardModule'
+        path: 'fleet',
+        loadChildren: './views/fleet/fleet.module#FleetModule'
       }
     ]
   }
