@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { share, map } from 'rxjs/operators';
 import { DataService } from '../../services';
 
 @Component({
@@ -16,7 +17,30 @@ export class FleetComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.vehicles$ = this.dataService.getVehicles();
+    this.loadData();
+  }
+
+  private loadData() {
+    this.vehicles$ = this.dataService.getVehicles().pipe(
+      share()
+    );
+  }
+
+  filterVehicles(busno: string) {
+      if (!busno || busno.length === 0) {
+        this.loadData();
+        return;
+      }
+
+      // if (!busno || busno.length < 2) {
+      //   return;
+      // }
+
+      this.vehicles$ = this.dataService.getVehicles().pipe(
+        map(vehicles =>
+          vehicles.filter(v => v.bus_number.toString().toUpperCase().indexOf(busno.trim().toUpperCase()) > -1)
+        ),
+      );
   }
 
 }

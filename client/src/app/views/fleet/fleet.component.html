@@ -16,28 +16,32 @@
       </ng-container>
     </div>
     <div class="col-12 col-lg-3 pt-2 px-1">
-      <table class="table table-responsive-lg table-striped table-hover table-outline table-sm mb-0">
-        <thead class="text-white bg-primary">
+      <input class="form-control bg-dark input-filter" size="5" 
+        [(ngModel)]="bus_number"
+        type="text" placeholder="Filter by vehicle number"
+        (keyup)=filterVehicles(bus_number)/>
+      <table class="table table-responsive-lg table-striped table-hover table-outline table-sm mt-1">
+        <thead class="text-white thead-light bg-primary">
           <tr>
-            <th>#</th>
-            <th>SOC/Range</th>
-            <th>Odometer</th>
-            <th>Updated</th>
+            <th><small>#</small></th>
+            <th><small>SOC/Range</small></th>
+            <th><small>Odometer</small></th>
+            <th><small>Updated</small></th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let vehicle of vehicles$ | async">
             <td>
-              <div class="small text-muted">{{ vehicle.bus_number }}</div>
+              <div class="small">{{ vehicle.bus_number }}</div>
             </td>
             <td>
-              <div class="small text-muted">{{ (vehicle.soc / vehicle.range).toFixed(2) }}</div>
+              <div class="small">{{ (vehicle.soc / vehicle.range).toFixed(2) }}</div>
             </td>
             <td>
-              <div class="small text-muted">{{ vehicle.odometer }}</div>
+              <div class="small">{{ vehicle.odometer }}</div>
             </td>
             <td>
-              <div class="small text-muted">{{ vehicle.updated | date: 'MM/DD' }}</div>
+              <div class="small">{{ vehicle.updated | date: 'MM/DD' }}</div>
             </td>
           </tr>
         </tbody>
