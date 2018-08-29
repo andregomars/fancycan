@@ -56,7 +56,7 @@ export class FleetComponent implements OnInit {
         label: {
           color: '#ffffff',
           fontFamily: '',
-          fontSize: '11px',
+          fontSize: '9px',
           fontWeight: 'normal',
           text: ve.bus_number.toString()
         }
