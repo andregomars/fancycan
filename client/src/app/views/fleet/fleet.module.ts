@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
+import { NgxGaugeModule } from 'ngx-gauge';
 import { AgmCoreModule } from '@agm/core';
 import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
 import { AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
@@ -14,6 +15,7 @@ import { FleetRoutingModule } from './fleet-routing.module';
 import { environment } from '../../../environments/environment';
 import { AppPipeModule } from '../../pipes/pipes.module';
 import { DataService } from '../../services';
+import { FleetOutletComponent } from './fleet-outlet.component';
 
 @NgModule({
   imports: [
@@ -21,6 +23,7 @@ import { DataService } from '../../services';
     FormsModule,
     ChartsModule,
     BsDropdownModule,
+    NgxGaugeModule,
     FleetRoutingModule,
     AppPipeModule,
     AgmCoreModule.forRoot(environment.agm),
@@ -29,6 +32,7 @@ import { DataService } from '../../services';
     ButtonsModule.forRoot()
   ],
   declarations: [
+    FleetOutletComponent,
     FleetComponent,
     VehicleComponent
   ],

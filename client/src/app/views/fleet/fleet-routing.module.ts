@@ -4,18 +4,29 @@ import { Routes,
 
 import { FleetComponent } from './fleet.component';
 import { VehicleComponent } from './vehicle.component';
+import { FleetOutletComponent } from './fleet-outlet.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: FleetComponent,
+    component: FleetOutletComponent,
     data: {
       title: 'Fleet'
     },
     children: [
       {
-        path: '/:vid',
+        path: '',
+        component: FleetComponent,
+        data: {
+          title: ' '
+        }
+      },
+      {
+        path: 'vehicle/:vid',
         component: VehicleComponent,
+        data: {
+          title: 'Vehicle'
+        }
       }
     ]
   }

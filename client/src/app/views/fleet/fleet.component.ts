@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { share, map, tap } from 'rxjs/operators';
-import { MarkerLabel } from '@agm/core';
 
 import { DataService } from '../../services';
 import { MapStyle } from './map-style';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-fleet',
@@ -12,6 +12,7 @@ import { MapStyle } from './map-style';
   styleUrls: ['./fleet.component.scss']
 })
 export class FleetComponent implements OnInit {
+  loadMap = environment.loadMap;
   mapMinHeight = 768;
   mapZoom = 12;
   mapStyle = new MapStyle().styler;
@@ -31,7 +32,6 @@ export class FleetComponent implements OnInit {
   private loadData() {
     this.vehicles$ = this.dataService.getVehicles().pipe(
       map(vehicles => this.attachMapLabel(vehicles)),
-      tap(x => console.log(x)),
       share()
     );
   }

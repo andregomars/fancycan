@@ -17,6 +17,7 @@ export const environment = {
   apiRootLocal: 'assets/data',
   reportFallbackMonths: 3,
   delayEmulatorTimer: 2000,
+  loadMap: true,
   dataSource: DataSourceType.Local
 };
 

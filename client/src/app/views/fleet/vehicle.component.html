@@ -1,3 +1,306 @@
-<p>
-  vehicle works!
-</p>
+<div class="animated fadeIn">
+  <div class="row mt-2">
+    <div class="col-12 col-md-5">
+      <a href="javascript:void(0)" class="text-white"><u>&gt; LAMTA &gt; 5001</u></a>
+    </div>
+    <div class="col-12 col-md-7">
+      <div class="row">
+        <div class="col-12 col-md-6">
+          Current Time: {{ currentTime | date: 'yyyy-MM-dd hh:mm:ss'}}
+        </div>
+        <div class="col-12 col-md-6">
+          Last updated: {{ lastUpdated }}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-2">
+    <div class="col-12 col-lg-4">
+      <div class="row mt-2 pt-2 justify-content-around border border-secondary rounded">
+        <div class="col-5">
+          <label>Engine</label>
+        </div>
+        <div class="col-4">
+          <label class="switch switch-label switch-outline-secondary-alt">
+            <input type="checkbox" class="switch-input">
+            <span class="switch-slider" data-checked="On" data-unchecked="Off"></span>
+          </label>
+        </div>
+        <div class="col-3"></div>
+      </div>
+      <div class="row mt-2 pt-2 justify-content-around border border-secondary rounded">
+        <div class="col-5">
+          <label>Transmission</label>
+        </div>
+        <div class="col-7">
+          <label class="switch switch-label switch-outline-secondary-alt">
+            <input type="checkbox" class="switch-input">
+            <span class="switch-slider" data-checked="D" data-unchecked="P"></span>
+          </label>
+        </div>
+      </div>
+      <div class="row mt-2 border border-secondary rounded">
+        <div class="col">
+          <div class="row mt-2">
+            <div class="col">
+              <label>Fuel economy</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-7">
+              <div class="card text-white">
+                <div class="chart-wrapper mt-0" style="height:70px;">
+                  <canvas baseChart class="chart" [datasets]="lineChart3Data" [labels]="lineChart3Labels" [options]="lineChart3Options" [colors]="lineChart3Colours"
+                    [legend]="lineChart3Legend" [chartType]="lineChart3Type"></canvas>
+                </div>
+              </div>
+            </div>
+            <div class="col-5">
+              <p>
+                <small>Latest value:</small>
+              </p>
+              <p>
+                <small>Avg:</small>
+              </p>
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col">
+              <label class="fc-label-100">Engine idle</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-8">
+              <div class="progress border border-dark">
+                <div class="progress-bar bg-success" [style.width.%]="engineRunning">
+                  <!-- <small>{{engingRunning}}%</small> -->
+                </div>
+              </div>
+            </div>
+            <div class="col-4">
+              <label>Running</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-8">
+              <div class="progress border border-dark">
+                <div class="progress-bar bg-success" [style.width.%]="engineIdle">
+                  <!-- <small>{{engingIdle}}%</small> -->
+                </div>
+              </div>
+            </div>
+            <div class="col-4">
+              <label>Idle</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col mt-2 p-2" [style.min-height.px]="mapMinHeight" [style.background-color]="'#242f3e'">
+          <agm-map id="map_canvas" *ngIf="loadMap" [zoom]="mapZoom" [streetViewControl]=false [styles]="mapStyle" [latitude]="map_lat"
+            [longitude]="map_lgt">
+            <ng-container *ngIf="(vehicles$ | async) as locations">
+              <agm-marker *ngFor="let loc of locations" [latitude]="loc.latitude" [longitude]="loc.longitude">
+              </agm-marker>
+              <agm-polyline [polylineDraggable]=false [strokeColor]="'red'" [strokeOpacity]="0.5" [strokeWeight]="5">
+                <agm-polyline-point *ngFor="let loc of locations" [latitude]="loc.latitude" [longitude]="loc.longitude">
+                </agm-polyline-point>
+              </agm-polyline>
+            </ng-container>
+          </agm-map>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-lg-4">
+      <div class="row no-gutters">
+        <div class="col-6">
+          <ngx-gauge size="100" foregroundColor="#007bff" [type]="'semi'" [value]="85" [label]="'Speed'" [thick]="12" [append]="">
+          </ngx-gauge>
+        </div>
+        <div class="col-6">
+          <ngx-gauge size="100" foregroundColor="#007bff" [type]="'semi'" [value]="57" [label]="'RPM'" [thick]="12" [append]="">
+          </ngx-gauge>
+        </div>
+        <div class="col-6">
+          <ngx-gauge size="100" foregroundColor="#007bff" [type]="'semi'" [value]="68.3" [label]="'Spare 1'" [thick]="12" [append]="">
+          </ngx-gauge>
+        </div>
+        <div class="col-6">
+          <ngx-gauge size="100" foregroundColor="#007bff" [type]="'semi'" [value]="68.3" [label]="'Spare 2'" [thick]="12" [append]="">
+          </ngx-gauge>
+        </div>
+      </div>
+      <!-- <div class="dropdown-divider border border-info"></div> -->
+      <div class="dropdown-divider"></div>
+      <div class="row">
+        <div class="col-12 col-md-6">
+          Odometer: {{ odometer }}
+        </div>
+        <div class="col-12 col-md-6">
+          VIN: {{ vin }}
+        </div>
+      </div>
+      <div class="row px-2">
+        <div class="col text-center">
+          <img [src]="imgBus" class="img-fluid" alt="bus" width="60%" height="auto">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="row">
+            <div class="col">
+              <label>Coolant level</label>
+            </div>
+          </div>
+          <div class="progress border border-dark">
+            <div class="progress-bar bg-success" [style.width.%]="'80'">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="row">
+            <div class="col">
+              <label>Coolant temperature</label>
+            </div>
+          </div>
+          <div class="progress border border-dark">
+            <div class="progress-bar bg-success" [style.width.%]="'80'">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="row">
+            <div class="col">
+              <label>Spare 1</label>
+            </div>
+          </div>
+          <div class="progress border border-dark">
+            <div class="progress-bar bg-success" [style.width.%]="'80'">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="row">
+            <div class="col">
+              <label>Spare 2</label>
+            </div>
+          </div>
+          <div class="progress border border-dark">
+            <div class="progress-bar bg-success" [style.width.%]="'80'">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="col-12 col-md-6">
+          <div class="row">
+            <div class="col-7">
+              <label>Front door</label>
+            </div>
+            <div class="col-5">
+              <label class="switch switch-label switch-outline-secondary-alt">
+                <input type="checkbox" class="switch-input" checked>
+                <span class="switch-slider" data-checked="On" data-unchecked="Off"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-6">
+          <div class="row">
+            <div class="col-7">
+              <label>Rear door</label>
+            </div>
+            <div class="col-5">
+              <label class="switch switch-label switch-outline-secondary-alt">
+                <input type="checkbox" class="switch-input">
+                <span class="switch-slider" data-checked="On" data-unchecked="Off"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-6">
+          <div class="row">
+            <div class="col-7">
+              <label>Spare 1</label>
+            </div>
+            <div class="col-5">
+              <label class="switch switch-label switch-outline-secondary-alt">
+                <input type="checkbox" class="switch-input" checked>
+                <span class="switch-slider" data-checked="On" data-unchecked="Off"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-6">
+          <div class="row">
+            <div class="col-7">
+              <label>Spare 2</label>
+            </div>
+            <div class="col-5">
+              <label class="switch switch-label switch-outline-secondary-alt">
+                <input type="checkbox" class="switch-input">
+                <span class="switch-slider" data-checked="On" data-unchecked="Off"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-lg-4">
+      <div class="row">
+        <table class="table table-responsive-lg table-striped table-hover table-outline table-sm mt-1">
+          <thead class="text-white thead-light bg-primary">
+            <tr>
+              <th><small>Alert name</small></th>
+              <th><small>SPN</small></th>
+              <th><small>Date time</small></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let alert of alerts$ | async">
+              <td>
+                <div class="small">{{ alert.name }}</div>
+              </td>
+              <td>
+                <div class="small">{{ alert.spn }}</div>
+              </td>
+              <td>
+                <div class="small">{{ alert.updated }}</div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="row">
+        <table class="table table-responsive-lg table-striped table-hover table-outline table-sm mt-1">
+          <thead class="text-white thead-light bg-primary">
+            <tr>
+              <th><small>SPN</small></th>
+              <th><small>Name</small></th>
+              <th><small>PGN</small></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let definition of definitions$ | async">
+              <td>
+                <div class="small">{{ definition.spn }}</div>
+              </td>
+              <td>
+                <div class="small">{{ definition.name }}</div>
+              </td>
+              <td>
+                <div class="small">{{ definition.updated }}</div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
