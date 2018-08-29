@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { share, map } from 'rxjs/operators';
+import { share, map, tap } from 'rxjs/operators';
+import { MarkerLabel } from '@agm/core';
+
 import { DataService } from '../../services';
+import { MapStyle } from './map-style';
 
 @Component({
   selector: 'app-fleet',
@@ -10,6 +13,8 @@ import { DataService } from '../../services';
 })
 export class FleetComponent implements OnInit {
   mapMinHeight = 768;
+  mapZoom = 12;
+  mapStyle = new MapStyle().styler;
   vehicles$: Observable<any>;
   bus_number: string;
   map_lat = 34.056539;
@@ -25,6 +30,8 @@ export class FleetComponent implements OnInit {
 
   private loadData() {
     this.vehicles$ = this.dataService.getVehicles().pipe(
+      map(vehicles => this.attachMapLabel(vehicles)),
+      tap(x => console.log(x)),
       share()
     );
   }
@@ -35,15 +42,26 @@ export class FleetComponent implements OnInit {
         return;
       }
 
-      // if (!busno || busno.length < 2) {
-      //   return;
-      // }
-
       this.vehicles$ = this.dataService.getVehicles().pipe(
+        map(vehicles => this.attachMapLabel(vehicles)),
         map(vehicles =>
           vehicles.filter(v => v.bus_number.toString().toUpperCase().indexOf(busno.trim().toUpperCase()) > -1)
         ),
       );
+  }
+
+  private attachMapLabel(vehicles: any): any {
+    return vehicles.map(ve => {
+      return Object.assign(ve, {
+        label: {
+          color: '#ffffff',
+          fontFamily: '',
+          fontSize: '11px',
+          fontWeight: 'normal',
+          text: ve.bus_number.toString()
+        }
+      });
+    });
   }
 
 }

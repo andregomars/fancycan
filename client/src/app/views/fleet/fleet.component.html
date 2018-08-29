@@ -1,21 +1,18 @@
 <div class="animated fadeIn">
   <div class="row">
     <div class="col-12 col-lg-9 pt-2 px-0" [style.min-height.px]="mapMinHeight">
-      <agm-map id="map_canvas" class="" [zoom]=10 [streetViewControl]=false [latitude]="map_lat" [longitude]="map_lgt">
+      <agm-map id="map_canvas" class="" [zoom]="mapZoom" [streetViewControl]=false [styles]="mapStyle"
+        [latitude]="map_lat" [longitude]="map_lgt">
         <ng-container *ngIf="(vehicles$ | async) as locations">
-          <agm-marker-cluster *ngIf="locations && locations.length > 0" [imagePath]="'https://googlemaps.github.io/js-marker-clusterer/images/m'">
-            <agm-marker *ngFor="let loc of locations" [latitude]="loc.latitude" [longitude]="loc.longitude">
-            <!-- <agm-marker *ngFor="let loc of locations" [latitude]="loc.latitude" [longitude]="loc.longitude" 
-              iconUrl="assets/img/map/map_markerblue.png" [label]="loc.bus_number"> -->
-              <!-- <agm-info-window>
-                <a [routerLink]="['snapshot', fleetId, loc.vehicle_id]">{{loc.bus_number}}</a>
-                {{ loc.bus_number }}
-              </agm-info-window> -->
-              <agm-snazzy-info-window [maxWidth]="200" [closeWhenOthersOpen]="true">
-                <ng-template>
-                  My first Snazzy Info Window!
-                </ng-template>
-              </agm-snazzy-info-window>
+          <agm-marker-cluster *ngIf="locations && locations.length > 0" 
+            [imagePath]="'https://googlemaps.github.io/js-marker-clusterer/images/m'">
+            <agm-marker *ngFor="let loc of locations" [latitude]="loc.latitude" [longitude]="loc.longitude" 
+              iconUrl="assets/img/map/bus.40.png" [label]="loc.label"> 
+              <agm-snazzy-info-window [maxWidth]="300" [closeWhenOthersOpen]="true">
+                  <ng-template>
+                    <small class="text-dark">{{ loc.latitude }}, {{ loc.longitude }}</small>
+                  </ng-template>
+                </agm-snazzy-info-window>
             </agm-marker>
           </agm-marker-cluster>
         </ng-container>
