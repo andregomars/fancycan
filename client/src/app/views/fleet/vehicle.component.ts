@@ -35,6 +35,7 @@ export class VehicleComponent implements OnInit {
   vin = 'V12W132456107';
   // imgBus = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxTQs-WUfduw5KFdJ6cpeCpZKsA0cOx8XVGaRuTwLffC48M8Pk';
   imgBus = 'assets/img/vehicle/bus.png';
+  imgEngineCheck = 'assets/img/vehicle/check_engine.png';
 
    // lineChart3
   public lineChart3Data: Array<any> = [
