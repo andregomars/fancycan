@@ -20,7 +20,7 @@ export class VehicleComponent implements OnInit {
   vehicles$: Observable<any>;
 
   loadMap = environment.loadMap;
-  mapMinHeight = 300;
+  mapMinHeight = 350;
   mapZoom = 15;
   mapStyle = new MapStyle().styler;
   bus_number: string;
