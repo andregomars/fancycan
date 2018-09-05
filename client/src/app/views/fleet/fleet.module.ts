@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { NgxGaugeModule } from 'ngx-gauge';
 import { AgmCoreModule } from '@agm/core';
 import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
@@ -29,7 +30,8 @@ import { FleetOutletComponent } from './fleet-outlet.component';
     AgmCoreModule.forRoot(environment.agm),
     AgmSnazzyInfoWindowModule,
     AgmJsMarkerClustererModule,
-    ButtonsModule.forRoot()
+    ButtonsModule.forRoot(),
+    TooltipModule.forRoot()
   ],
   declarations: [
     FleetOutletComponent,

@@ -18,6 +18,7 @@ export class VehicleComponent implements OnInit {
   alerts$: Observable<any>;
   definitions$: Observable<any>;
   vehicles$: Observable<any>;
+  tip_fuel_economy$: Observable<string>;
 
   loadMap = environment.loadMap;
   mapMinHeight = 350;
@@ -84,12 +85,19 @@ export class VehicleComponent implements OnInit {
   public lineChart3Legend = false;
   public lineChart3Type = 'line';
 
+
   constructor(
     private dataService: DataService
   ) { }
 
   ngOnInit() {
+    this.loadTooltips();
     this.loadData();
+  }
+
+  private loadTooltips() {
+    this.tip_fuel_economy$ = this.dataService.getToolTip('fueleconomy');
+    // this.tip_fuel_economy$ = this.dataService.getToolTip('fueleconomy', 'fleet/vehicle');
   }
 
   private loadData() {

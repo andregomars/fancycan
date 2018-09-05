@@ -4,9 +4,12 @@
       <a href="javascript:void(0)" class="text-white"><u>&gt; LAMTA &gt; 5001</u></a>
     </div>
     <div class="col-6 col-md-2">
-      <label class="btn btn-light btn-sm m-0 p-1 text-success font-weight-bold" [style.width.px]="100">
+      <!-- <label class="btn btn-light btn-sm m-0 p-1 text-success font-weight-bold" [style.width.px]="100">
         Updating <input type="file" hidden>
-      </label>
+      </label> -->
+      <button class="btn btn-link">
+        <i class="fa fa-refresh monospace">&nbsp;Update</i>
+      </button>
     </div>
     <div class="col-12 col-md-7">
       <div class="row">
@@ -50,7 +53,9 @@
         <div class="col">
           <div class="row mt-2">
             <div class="col">
-              <label>Fuel economy</label>
+              <label>Fuel economy&nbsp;
+                <i class="fa fa-question-circle-o" [tooltip]="tip_fuel_economy$ | async" placement="right"></i>
+              </label>
             </div>
           </div>
           <div class="row">

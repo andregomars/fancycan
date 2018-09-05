@@ -1,0 +1,12 @@
+[
+    {
+        "name": "fueleconomy",
+        "path": "fleet/vehicle",
+        "description": "Fuel economy is evaluated by gas per mile"
+    },
+    {
+        "name": "reserved",
+        "path": "",
+        "description": "reserved for example"
+    }
+]

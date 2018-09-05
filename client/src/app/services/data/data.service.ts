@@ -4,6 +4,7 @@ import { Observable, pipe } from 'rxjs';
 
 
 import { environment, DataSourceType } from '../../../environments/environment';
+import { share, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,7 @@ export class DataService {
   private sourceType: DataSourceType;
   private rootUrl: string;
   private delayEmulatorTimer: number;
+  private tooltips$: Observable<any>;
 
 
   constructor(
@@ -47,4 +49,34 @@ export class DataService {
       .get<any>(`${this.rootUrl}/definitions.json`);
   }
 
+  getToolTips(): Observable<any> {
+    if (this.tooltips$) {
+      return this.tooltips$;
+    } else {
+      this.tooltips$ = this.http
+        .get<any>(`${this.rootUrl}/tooltips.json`).pipe(
+          share()
+        );
+    }
+  }
+
+  getToolTip(name: string, path?: string): Observable<string> {
+    this.getToolTips();
+    return this.tooltips$.pipe(
+      map(tips => {
+        let found: any;
+        if (path && path.length > 0) {
+          found = tips.find(tip => tip.name === name && tip.path === path);
+        } else {
+          found = tips.find(tip => tip.name === name);
+        }
+
+        if (found) {
+          return found.description;
+        } else {
+          return '';
+        }
+      })
+    );
+  }
 }

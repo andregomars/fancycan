@@ -12,6 +12,8 @@ import { environment } from '../../../environments/environment';
   styleUrls: ['./fleet.component.scss']
 })
 export class FleetComponent implements OnInit {
+  hideSideInfo: boolean;
+
   loadMap = environment.loadMap;
   mapMinHeight = 768;
   mapZoom = 12;
@@ -26,14 +28,8 @@ export class FleetComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.hideSideInfo = false;
     this.loadData();
-  }
-
-  private loadData() {
-    this.vehicles$ = this.dataService.getVehicles().pipe(
-      map(vehicles => this.attachMapLabel(vehicles)),
-      share()
-    );
   }
 
   filterVehicles(busno: string) {
@@ -48,6 +44,17 @@ export class FleetComponent implements OnInit {
           vehicles.filter(v => v.bus_number.toString().toUpperCase().indexOf(busno.trim().toUpperCase()) > -1)
         ),
       );
+  }
+
+  resizeSideInfo() {
+    this.hideSideInfo = !this.hideSideInfo;
+  }
+
+  private loadData() {
+    this.vehicles$ = this.dataService.getVehicles().pipe(
+      map(vehicles => this.attachMapLabel(vehicles)),
+      share()
+    );
   }
 
   private attachMapLabel(vehicles: any): any {
