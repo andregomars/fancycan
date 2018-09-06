@@ -10,6 +10,7 @@ import { DataService } from '../../services';
 })
 export class TooltipLabelComponent implements OnInit {
   @Input() label: string;
+  @Input() placement = 'top';
   tooltip$: Observable<string>;
 
   constructor(

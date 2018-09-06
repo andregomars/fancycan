@@ -49,58 +49,56 @@
           </label>
         </div>
       </div>
-      <div class="row mt-2 border border-secondary rounded">
-        <div class="col">
-          <div class="row mt-2">
+      <div class="row mt-2 py-2 border border-secondary rounded">
+        <div class="col-12 col-lg-6">
+          <div class="row">
             <div class="col">
-              <app-tooltip-label [label]="'fuel economy'"></app-tooltip-label>
+              <app-tooltip-label label="fuel economy"></app-tooltip-label>
             </div>
           </div>
           <div class="row">
-            <div class="col-7">
-              <div class="card text-white">
+            <div class="col">
+              <div class="card text-white mb-2">
                 <div class="chart-wrapper mt-0" style="height:70px;">
                   <canvas baseChart class="chart" [datasets]="lineChart3Data" [labels]="lineChart3Labels" [options]="lineChart3Options" [colors]="lineChart3Colours"
                     [legend]="lineChart3Legend" [chartType]="lineChart3Type"></canvas>
                 </div>
               </div>
             </div>
-            <div class="col-5">
-              <p>
-                <small>Latest value:</small>
-              </p>
-              <p>
-                <small>Avg:</small>
-              </p>
-            </div>
           </div>
-          <div class="row mt-2">
+          <div class="row">
             <div class="col">
-              <app-tooltip-label [label]="'engine idle'"></app-tooltip-label>
+              <small>Latest value:</small>
             </div>
           </div>
           <div class="row">
-            <div class="col-8">
-              <div class="progress border border-dark">
-                <div class="progress-bar bg-success" [style.width.%]="engineRunning">
-                  <!-- <small>{{engingRunning}}%</small> -->
-                </div>
-              </div>
+            <div class="col">
+              <small>Avg:</small>
             </div>
-            <div class="col-4">
-              <label>Running</label>
+          </div>
+        </div>
+        <div class="col-12 col-lg-6">
+          <div class="row">
+            <div class="col">
+              <app-tooltip-label label="engine idle"></app-tooltip-label>
             </div>
           </div>
           <div class="row">
-            <div class="col-8">
-              <div class="progress border border-dark">
-                <div class="progress-bar bg-success" [style.width.%]="engineIdle">
-                  <!-- <small>{{engingIdle}}%</small> -->
+            <div class="col mb-2">
+                <div class="chart-wrapper mt-0" style="height:70px;">
+                  <canvas baseChart class="chart" [datasets]="lineChart3Data" [labels]="lineChart3Labels" [options]="lineChart3Options" [colors]="lineChart3Colours"
+                    [legend]="lineChart3Legend" [chartType]="'pie'"></canvas>
                 </div>
-              </div>
             </div>
-            <div class="col-4">
-              <label>Idle</label>
+          </div>
+          <div class="row">
+            <div class="col">
+              <small>Running: </small>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <small>Idle:</small>
             </div>
           </div>
         </div>

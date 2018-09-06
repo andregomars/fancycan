@@ -76,7 +76,7 @@ export class VehicleComponent implements OnInit {
     }
   };
   public lineChart3Colours: Array<any> = [
-    { // brandInfo
+    {
       backgroundColor: hexToRgba(getStyle('--info'), 10),
       borderColor: getStyle('--info'),
       pointHoverBackgroundColor: '#fff'
@@ -98,7 +98,6 @@ export class VehicleComponent implements OnInit {
   private loadData() {
     this.vehicles$ = this.dataService.getVehicles().pipe(
       map(vehicles => this.attachMapLabel(vehicles)),
-      // tap(x => console.log(x)),
       share()
     );
 
