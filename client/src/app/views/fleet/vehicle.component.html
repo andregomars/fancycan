@@ -53,9 +53,7 @@
         <div class="col">
           <div class="row mt-2">
             <div class="col">
-              <label>Fuel economy&nbsp;
-                <i class="fa fa-question-circle-o" [tooltip]="tip_fuel_economy$ | async" placement="right"></i>
-              </label>
+              <app-tooltip-label [label]="'fuel economy'"></app-tooltip-label>
             </div>
           </div>
           <div class="row">
@@ -78,7 +76,7 @@
           </div>
           <div class="row mt-2">
             <div class="col">
-              <label class="fc-label-100">Engine idle</label>
+              <app-tooltip-label [label]="'engine idle'"></app-tooltip-label>
             </div>
           </div>
           <div class="row">
@@ -126,19 +124,19 @@
     <div class="col-12 col-lg-4">
       <div class="row no-gutters mt-2">
         <div class="col-6 text-center">
-          <ngx-gauge size="100" foregroundColor="#17a2b8" [type]="'semi'" [value]="85" [label]="'Speed'" [thick]="12" [append]="">
+          <ngx-gauge size="100" foregroundColor="#17a2b8" [type]="gaugeType" [value]="85" [label]="'Speed'" [thick]="gaugeThick" [append]="">
           </ngx-gauge>
         </div>
         <div class="col-6 text-center">
-          <ngx-gauge size="100" foregroundColor="#17a2b8" [type]="'semi'" [value]="57" [label]="'RPM'" [thick]="12" [append]="">
+          <ngx-gauge size="100" foregroundColor="#17a2b8" [type]="gaugeType" [value]="57" [label]="'RPM'" [thick]="gaugeThick" [append]="">
           </ngx-gauge>
         </div>
         <div class="col-6 text-center">
-          <ngx-gauge size="100" foregroundColor="#17a2b8" [type]="'semi'" [value]="68.3" [label]="'Spare 1'" [thick]="12" [append]="">
+          <ngx-gauge size="100" foregroundColor="#17a2b8" [type]="gaugeType" [value]="68.3" [label]="'Spare 1'" [thick]="gaugeThick" [append]="">
           </ngx-gauge>
         </div>
         <div class="col-6 text-center">
-          <ngx-gauge size="100" foregroundColor="#17a2b8" [type]="'semi'" [value]="68.3" [label]="'Spare 2'" [thick]="12" [append]="">
+          <ngx-gauge size="100" foregroundColor="#17a2b8" [type]="gaugeType" [value]="68.3" [label]="'Spare 2'" [thick]="gaugeThick" [append]="">
           </ngx-gauge>
         </div>
       </div>
@@ -215,7 +213,7 @@
             <div class="col-7">
               <label>Front door</label>
             </div>
-            <div class="col-5">
+            <div class="col-5 text-right">
               <label class="switch switch-label switch-outline-secondary-alt">
                 <input type="checkbox" class="switch-input" checked>
                 <span class="switch-slider" data-checked="On" data-unchecked="Off"></span>
@@ -228,7 +226,7 @@
             <div class="col-7">
               <label>Rear door</label>
             </div>
-            <div class="col-5">
+            <div class="col-5 text-right">
               <label class="switch switch-label switch-outline-secondary-alt">
                 <input type="checkbox" class="switch-input">
                 <span class="switch-slider" data-checked="On" data-unchecked="Off"></span>
@@ -241,7 +239,7 @@
             <div class="col-7">
               <label>Spare 1</label>
             </div>
-            <div class="col-5">
+            <div class="col-5 text-right">
               <label class="switch switch-label switch-outline-secondary-alt">
                 <input type="checkbox" class="switch-input" checked>
                 <span class="switch-slider" data-checked="On" data-unchecked="Off"></span>
@@ -254,7 +252,7 @@
             <div class="col-7">
               <label>Spare 2</label>
             </div>
-            <div class="col-5">
+            <div class="col-5 text-right">
               <label class="switch switch-label switch-outline-secondary-alt">
                 <input type="checkbox" class="switch-input">
                 <span class="switch-slider" data-checked="On" data-unchecked="Off"></span>
@@ -265,7 +263,7 @@
       </div>
     </div>
     <div class="col-12 col-lg-4">
-      <div class="row table-responsive-lg">
+      <div class="row table-responsive-lg m-0">
         <table class="table table-striped table-hover table-outline table-sm mt-1">
           <thead class="text-white thead-light bg-primary">
             <tr>
@@ -289,7 +287,7 @@
           </tbody>
         </table>
       </div>
-      <div class="row table-responsive-lg">
+      <div class="row table-responsive-lg m-0">
         <table class="table table-striped table-hover table-outline table-sm mt-1">
           <thead class="text-white thead-light bg-primary">
             <tr>

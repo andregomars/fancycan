@@ -1,11 +1,16 @@
 [
     {
-        "name": "fueleconomy",
-        "path": "fleet/vehicle",
+        "label": "fuel economy",
+        "path": "/fleet/vehicle",
         "description": "Fuel economy is evaluated by gas per mile"
     },
     {
-        "name": "reserved",
+        "label": "engine idle",
+        "path": "/fleet/vehicle",
+        "description": "Engine is on but not in motion"
+    },
+    {
+        "label": "reserved",
         "path": "",
         "description": "reserved for example"
     }

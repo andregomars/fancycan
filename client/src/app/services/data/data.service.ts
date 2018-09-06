@@ -60,15 +60,16 @@ export class DataService {
     }
   }
 
-  getToolTip(name: string, path?: string): Observable<string> {
+  getToolTip(label: string, path?: string): Observable<string> {
     this.getToolTips();
     return this.tooltips$.pipe(
       map(tips => {
         let found: any;
         if (path && path.length > 0) {
-          found = tips.find(tip => tip.name === name && tip.path === path);
+          found = tips.find(tip =>
+            tip.label.toString().toLowerCase() === label.toLowerCase() && tip.path === path);
         } else {
-          found = tips.find(tip => tip.name === name);
+          found = tips.find(tip => tip.label.toString().toLowerCase() === label.toLocaleLowerCase());
         }
 
         if (found) {
