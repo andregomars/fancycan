@@ -49,6 +49,11 @@ export class DataService {
       .get<any>(`${this.rootUrl}/definitions.json`);
   }
 
+  getDecodes(): Observable<any> {
+    return this.http
+      .get<any>(`${this.rootUrl}/decodes.json`);
+  }
+
   getToolTips(): Observable<any> {
     if (this.tooltips$) {
       return this.tooltips$;

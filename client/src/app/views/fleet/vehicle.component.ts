@@ -17,6 +17,7 @@ import { MapStyle } from './map-style';
 export class VehicleComponent implements OnInit {
   alerts$: Observable<any>;
   definitions$: Observable<any>;
+  decodes$: Observable<any>;
   vehicles$: Observable<any>;
 
   loadMap = environment.loadMap;
@@ -106,6 +107,10 @@ export class VehicleComponent implements OnInit {
     );
 
     this.definitions$ = this.dataService.getDefinitions().pipe(
+      share()
+    );
+
+    this.decodes$ = this.dataService.getDecodes().pipe(
       share()
     );
   }
