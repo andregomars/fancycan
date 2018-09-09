@@ -20,6 +20,10 @@ export const routes: Routes = [
       {
         path: 'fleet',
         loadChildren: './views/fleet/fleet.module#FleetModule'
+      },
+      {
+        path: 'vehicle/:id',
+        loadChildren: './views/vehicle/vehicle.module#VehicleModule'
       }
     ]
   }

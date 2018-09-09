@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { share, map, tap } from 'rxjs/operators';
 
 import { DataService } from '../../services';
-import { MapStyle } from './map-style';
+import { MapStyle } from './../shared/map-style';
 import { environment } from '../../../environments/environment';
 
 @Component({

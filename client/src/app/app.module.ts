@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { LocationStrategy, HashLocationStrategy, PathLocationStrategy } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
@@ -62,7 +62,8 @@ import { environment } from '../environments/environment';
   ],
   providers: [{
     provide: LocationStrategy,
-    useClass: HashLocationStrategy
+    // useClass: HashLocationStrategy
+    useClass: PathLocationStrategy
   }],
   bootstrap: [ AppComponent ]
 })

@@ -9,8 +9,8 @@ import { AgmCoreModule } from '@agm/core';
 import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
 import { AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
 
-import { FleetComponent } from './fleet.component';
-import { FleetRoutingModule } from './fleet-routing.module';
+import { VehicleComponent } from './vehicle.component';
+import { VehicleRoutingModule } from './vehicle-routing.module';
 import { environment } from '../../../environments/environment';
 import { AppPipeModule } from '../../pipes/pipes.module';
 import { DataService } from '../../services';
@@ -23,19 +23,19 @@ import { ComponentsModule } from './../../components/components.module';
     ChartsModule,
     BsDropdownModule,
     NgxGaugeModule,
-    FleetRoutingModule,
     AppPipeModule,
+    VehicleRoutingModule,
     AgmCoreModule.forRoot(environment.agm),
     AgmSnazzyInfoWindowModule,
     AgmJsMarkerClustererModule,
     ButtonsModule.forRoot(),
-    ComponentsModule
+    ComponentsModule,
   ],
   declarations: [
-    FleetComponent,
+    VehicleComponent
   ],
   providers: [
     DataService
   ]
 })
-export class FleetModule { }
+export class VehicleModule { }

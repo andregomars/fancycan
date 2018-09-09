@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 import { DataService } from '../../services';
 import { share, map, tap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
-import { MapStyle } from './map-style';
+import { MapStyle } from './../shared/map-style';
 
 @Component({
   selector: 'app-vehicle',
