@@ -1,8 +1,23 @@
 <div class="row">
-  <div class="col-12 col-md-4 form-group">
-    <input class="form-control" #drp="bsDaterangepicker" bsDaterangepicker [(ngModel)]="bsRangeValue">
+  <div class="col-12 col-lg-6">
+    <div class="input-group">
+      <span class="input-group-prepend">
+        <span class="input-group-text">
+          <i class="fa fa-calendar"></i> Date:
+        </span>
+      </span>
+      <input class="form-control" #drp="bsDaterangepicker" bsDaterangepicker [(ngModel)]="bsRangeValue">
+    </div>
   </div>
-  <div class="col-12 col-md-3 form-group">
-    <button class="btn btn-success" (click)="drp.toggle()" [attr.aria-expanded]="drp.isOpen">Date Range Picker</button>
+  <div class="col-12 col-lg-3">
+    <div class="input-group">
+      <span class="input-group-prepend">
+        <span class="input-group-text">
+          <i class="fa fa-calendar"></i> Month:
+        </span>
+      </span>
+      <input [(ngModel)]="selectedMonth" [typeahead]="months" typeaheadOptionField="name" class="form-control">
+    </div>
   </div>
+  <div class="col-12 col-lg-3"></div>
 </div>

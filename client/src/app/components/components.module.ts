@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { BsDatepickerModule  } from 'ngx-bootstrap/datepicker';
+import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 
 import { TooltipLabelComponent } from './tooltip-label/tooltip-label.component';
 import { DatepickerBarComponent } from './datepicker-bar/datepicker-bar.component';
@@ -12,6 +13,7 @@ import { DatepickerBarComponent } from './datepicker-bar/datepicker-bar.componen
       CommonModule,
       FormsModule,
       TooltipModule.forRoot(),
+      TypeaheadModule.forRoot(),
       BsDatepickerModule.forRoot()
   ],
   declarations: [
