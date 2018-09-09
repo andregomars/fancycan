@@ -62,8 +62,8 @@ import { environment } from '../environments/environment';
   ],
   providers: [{
     provide: LocationStrategy,
-    // useClass: HashLocationStrategy
-    useClass: PathLocationStrategy
+    useClass: HashLocationStrategy
+    // useClass: PathLocationStrategy
   }],
   bootstrap: [ AppComponent ]
 })

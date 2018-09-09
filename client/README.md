@@ -1,6 +1,6 @@
 # FancyCan project
 
-## URL conventions
+## URL paths
 /fleets
 /fleet/LAMTA
 /vehicle/5001

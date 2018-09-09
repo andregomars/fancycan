@@ -1,19 +1,26 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { BsDatepickerModule  } from 'ngx-bootstrap/datepicker';
 
 import { TooltipLabelComponent } from './tooltip-label/tooltip-label.component';
+import { DatepickerBarComponent } from './datepicker-bar/datepicker-bar.component';
 
 @NgModule({
   imports: [
       CommonModule,
-      TooltipModule.forRoot()
+      FormsModule,
+      TooltipModule.forRoot(),
+      BsDatepickerModule.forRoot()
   ],
   declarations: [
-      TooltipLabelComponent
+      TooltipLabelComponent,
+      DatepickerBarComponent
   ],
   exports: [
-      TooltipLabelComponent
+      TooltipLabelComponent,
+      DatepickerBarComponent
   ]
 })
 export class ComponentsModule { }

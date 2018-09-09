@@ -37,6 +37,7 @@
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/chart.js/dist/Chart.min.js",
+              "node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
               "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
             ]
           },

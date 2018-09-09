@@ -24,6 +24,10 @@ export const routes: Routes = [
       {
         path: 'vehicle/:id',
         loadChildren: './views/vehicle/vehicle.module#VehicleModule'
+      },
+      {
+        path: 'alerts/:id',
+        loadChildren: './views/alerts/alerts.module#AlertsModule'
       }
     ]
   }
