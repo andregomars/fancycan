@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../services';
 import { Observable } from 'rxjs';
-import { share, map } from 'rxjs/operators';
+import { share, map, scan } from 'rxjs/operators';
 
 @Component({
   selector: 'app-alerts',
@@ -15,6 +15,9 @@ export class AlertsComponent implements OnInit {
   topNum = 5;
   alertRateLabels: string[];
   alertRateValues: number[];
+  alertTypeLabels: string[];
+  alertTypeValues: number[];
+
   pieOptions = {
     legend: {
       position: 'right'
@@ -36,7 +39,11 @@ export class AlertsComponent implements OnInit {
       const scannedObj = output.find(sourceObj => sourceObj[keyName] === current[keyName]);
 
       if (scannedObj) {
-        scannedObj[valueName] += current[valueName];
+        if (valueName) {
+          scannedObj[valueName] += current[valueName];
+        } else {
+          scannedObj[valueName] += 1;
+        }
       } else {
         output = [...output, current];
       }
@@ -47,12 +54,17 @@ export class AlertsComponent implements OnInit {
 
   private loadPieCharts() {
     this.alerts$.subscribe((alerts: any[]) => {
-      console.log(alerts)
-    
-      const aggregatedAlertsRate = this.getAggregateData(alerts, 'vehicle_number', 'total_alert');
-      aggregatedAlertsRate.sort((a, b) => b.total_alert - a.total_alert).splice(this.topNum);
-      this.alertRateLabels = aggregatedAlertsRate.map(x => x.vehicle_number);
-      this.alertRateValues = aggregatedAlertsRate.map(x => x.total_alert);
+      const aggregated = this.getAggregateData(alerts, 'vehicle_number', 'total_alert');
+      aggregated.sort((a, b) => b.total_alert - a.total_alert).splice(this.topNum);
+      this.alertRateLabels = aggregated.map(x => x.vehicle_number);
+      this.alertRateValues = aggregated.map(x => x.total_alert);
+      }
+    );
+    this.alerts$.subscribe((alerts: any[]) => {
+      const aggregated = this.getAggregateData(alerts, 'spn', 'total_alert');
+      aggregated.sort((a, b) => b.total_alert - a.total_alert).splice(this.topNum);
+      this.alertTypeLabels = aggregated.map(x => x.spn);
+      this.alertTypeValues = aggregated.map(x => x.total_alert);
       }
     );
   }

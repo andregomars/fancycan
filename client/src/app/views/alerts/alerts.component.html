@@ -5,7 +5,7 @@
     </div>
   </div>
   <div class="row mt-1">
-    <div class="col-12 col-lg-9">
+    <div class="col-12 col-lg-6">
       <div class="table-responsive-lg">
         <table class="table table-striped table-hover table-outline table-sm mt-1">
           <thead class="text-white thead-light bg-primary">
@@ -55,16 +55,25 @@
         </table>
       </div>
     </div>
-    <div class="col-12 col-lg-3">
+    <div class="col-12 col-lg-6">
       <div class="row mt-2">
         <div class="col mt-2">
-          <div class="text-center small">Alert Rate (top {{ topNum }})</div>
+          <h4 class="text-center">Alert Rate (top {{ topNum }})</h4>
           <div class="chart-wrapper">
             <canvas baseChart class="chart" *ngIf="alertRateLabels && alertRateLabels.length > 0" [data]="alertRateValues"
               [labels]="alertRateLabels" [chartType]="'pie'" [options]="pieOptions"></canvas>
           </div>
         </div>
       </div>
+      <div class="row mt-2">
+          <div class="col mt-2">
+            <h4 class="text-center">Alert Type (top {{ topNum }})</h4>
+            <div class="chart-wrapper">
+              <canvas baseChart class="chart" *ngIf="alertTypeLabels && alertTypeLabels.length > 0" [data]="alertTypeValues"
+                [labels]="alertTypeLabels" [chartType]="'pie'" [options]="pieOptions"></canvas>
+            </div>
+          </div>
+        </div>
     </div>
   </div>
 </div>
