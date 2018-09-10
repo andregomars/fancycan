@@ -1,61 +1,121 @@
 [
     {
         "name": "Low Power",
+        "vehicle_number": 5001,
+        "odometer": 10000,
+        "total_alert": 5,
+        "critical": 3,
+        "general": 2,
         "spn": "",
         "updated": "2018-08-27 13:23:33"
     },
     {
         "name": "Left Gun",
+        "vehicle_number": 5001,
+        "odometer": 10000,
+        "total_alert": 5,
+        "critical": 3,
+        "general": 2,
         "spn": "",
         "updated": "2018-08-29 13:23:33"
     },
     {
         "name": "Engine Fail",
+        "vehicle_number": 5001,
+        "odometer": 10000,
+        "total_alert": 5,
+        "critical": 3,
+        "general": 2,
         "spn": "",
         "updated": "2018-08-27 13:23:33"
     },
     {
         "name": "Low Power",
+        "vehicle_number": 5001,
+        "odometer": 10000,
+        "total_alert": 5,
+        "critical": 3,
+        "general": 2,
         "spn": "",
         "updated": "2018-08-27 13:23:33"
     },
     {
         "name": "Low Power",
+        "vehicle_number": 5001,
+        "odometer": 10000,
+        "total_alert": 5,
+        "critical": 3,
+        "general": 2,
         "spn": "",
         "updated": "2018-08-27 13:23:33"
     },
     {
         "name": "Low Power",
+        "vehicle_number": 5001,
+        "odometer": 10000,
+        "total_alert": 5,
+        "critical": 2,
+        "general": 3,
         "spn": "",
         "updated": "2018-08-27 13:23:33"
     },
     {
         "name": "Low Power",
+        "vehicle_number": 5001,
+        "odometer": 10000,
+        "total_alert": 5,
+        "critical": 3,
+        "general": 2,
         "spn": "",
         "updated": "2018-08-27 13:23:33"
     },
     {
         "name": "Low Power",
+        "vehicle_number": 5001,
+        "odometer": 10000,
+        "total_alert": 5,
+        "critical": 3,
+        "general": 2,
         "spn": "",
         "updated": "2018-08-27 13:23:33"
     },
     {
         "name": "Low Power",
+        "vehicle_number": 5001,
+        "odometer": 10000,
+        "total_alert": 5,
+        "critical": 2,
+        "general": 3,
         "spn": "",
         "updated": "2018-08-27 13:23:33"
     },
     {
         "name": "Low Power",
+        "vehicle_number": 5001,
+        "odometer": 10000,
+        "total_alert": 5,
+        "critical": 3,
+        "general": 2,
         "spn": "",
         "updated": "2018-08-27 13:23:33"
     },
     {
         "name": "Low Power",
+        "vehicle_number": 5001,
+        "odometer": 10000,
+        "total_alert": 5,
+        "critical": 3,
+        "general": 2,
         "spn": "",
         "updated": "2018-08-27 13:23:33"
     },
     {
         "name": "Low Power",
+        "vehicle_number": 5001,
+        "odometer": 10000,
+        "total_alert": 5,
+        "critical": 2,
+        "general": 3,
         "spn": "",
         "updated": "2018-08-27 13:23:33"
     }

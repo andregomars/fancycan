@@ -19,12 +19,12 @@ export class DatepickerBarComponent implements OnInit {
 
   ngOnInit() {
     this.months = [
-      { name: 'Sep', value: 9 },
-      { name: 'Aug', value: 8 },
-      { name: 'Jul', value: 7 },
-      { name: 'Jun', value: 6 }
+      { label: 'September - 09/2018', value: '2018-09-01' },
+      { label: 'August - 08/2018', value: '2018-08-01' },
+      { label: 'July - 07/2018', value: '2018-07-01' },
+      { label: 'June - 06/2018', value: '2018-06-01' }
     ];
-    this.years = [2018, 2017, 2016, 2015];
+    this.years = [2018, 2017, 2016];
 
     // this.selectedMonth = { name: 'Sep', value: 9};
     this.maxDate.setDate(this.maxDate.getDate() + 7);

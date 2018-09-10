@@ -1,23 +1,38 @@
 <div class="row">
   <div class="col-12 col-lg-6">
-    <div class="input-group">
+    <div class="input-group mt-1">
       <span class="input-group-prepend">
         <span class="input-group-text">
-          <i class="fa fa-calendar"></i> Date:
+          <i class="fa fa-calendar"></i>&nbsp;Date:&nbsp;&nbsp;&nbsp;&nbsp;
         </span>
       </span>
       <input class="form-control" #drp="bsDaterangepicker" bsDaterangepicker [(ngModel)]="bsRangeValue">
     </div>
   </div>
   <div class="col-12 col-lg-3">
-    <div class="input-group">
+    <div class="input-group mt-1">
       <span class="input-group-prepend">
         <span class="input-group-text">
-          <i class="fa fa-calendar"></i> Month:
+          <i class="fa fa-calendar"></i>&nbsp;Month:&nbsp;
         </span>
       </span>
-      <input [(ngModel)]="selectedMonth" [typeahead]="months" typeaheadOptionField="name" class="form-control">
+      <!-- <span class="border border-dark">
+        <ng-select placeholder="select month" [options]="months" class="bootstrap"
+          style="border-color: grey"></ng-select>
+      </span> -->
+      <input [(ngModel)]="selectedMonth" [typeahead]="months" typeaheadOptionField="label" 
+        placeholder="Input and select month" class="form-control">
     </div>
   </div>
-  <div class="col-12 col-lg-3"></div>
+  <div class="col-12 col-lg-3">
+    <div class="input-group mt-1">
+      <span class="input-group-prepend">
+        <span class="input-group-text">
+          <i class="fa fa-calendar"></i>&nbsp;Year:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </span>
+      </span>
+      <input [(ngModel)]="selectedYear" [typeahead]="years" 
+        placeholder="Input and select year" class="form-control">
+    </div>
+  </div>
 </div>

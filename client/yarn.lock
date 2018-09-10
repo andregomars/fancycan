@@ -236,6 +236,12 @@
     "@angular-devkit/schematics" "~0.7.0"
     "@schematics/angular" "~0.7.0"
 
+"@ng-select/ng-select@^2.8.0":
+  version "2.8.0"
+  resolved "https://registry.yarnpkg.com/@ng-select/ng-select/-/ng-select-2.8.0.tgz#6cec4cf52b2b494018b5d987ea1cb5f75dae3d54"
+  dependencies:
+    tslib "^1.9.0"
+
 "@ngtools/webpack@6.1.5":
   version "6.1.5"
   resolved "https://registry.yarnpkg.com/@ngtools/webpack/-/webpack-6.1.5.tgz#134639686eb4519885ed27665babdf80ce098263"
@@ -3970,11 +3976,19 @@ neo-async@^2.5.0:
   version "2.5.2"
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.5.2.tgz#489105ce7bc54e709d736b195f82135048c50fcc"
 
+ng-select@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/ng-select/-/ng-select-1.0.0.tgz#4453c0c88c1afdc322161bef45d7f900b8fb130e"
+
 ng2-charts@^1.6.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/ng2-charts/-/ng2-charts-1.6.0.tgz#108a2133ff62a8623895240fadbddbea2951f29d"
   dependencies:
     chart.js "^2.6.0"
+
+ng2-select@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/ng2-select/-/ng2-select-2.0.0.tgz#99e66f147ae479ef171378cbc526e639ff4e2df7"
 
 ngx-bootstrap@^3.0.1:
   version "3.0.1"

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from '../../services';
+import { Observable } from 'rxjs';
+import { share, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-alerts',
@@ -6,10 +9,104 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./alerts.component.scss']
 })
 export class AlertsComponent implements OnInit {
+  alerts$: Observable<any>;
+  sumEntry$: Observable<any>;
+  avgEntry$: Observable<any>;
+  topNum = 5;
+  alertRateLabels: string[];
+  alertRateValues: number[];
+  pieOptions = {
+    legend: {
+      position: 'right'
+    }
+  };
 
-  constructor() { }
+  constructor(
+    private dataService: DataService
+  ) { }
 
   ngOnInit() {
+    this.loadTable();
+    this.loadPieCharts();
   }
 
+  private getAggregateData(sourcList: any[], keyName: string, valueName: string): any[] {
+    let output = [];
+    sourcList.forEach(current => {
+      const scannedObj = output.find(sourceObj => sourceObj[keyName] === current[keyName]);
+
+      if (scannedObj) {
+        scannedObj[valueName] += current[valueName];
+      } else {
+        output = [...output, current];
+      }
+    });
+
+    return output;
+  }
+
+  private loadPieCharts() {
+    this.alerts$.subscribe((alerts: any[]) => {
+      console.log(alerts)
+    
+      const aggregatedAlertsRate = this.getAggregateData(alerts, 'vehicle_number', 'total_alert');
+      aggregatedAlertsRate.sort((a, b) => b.total_alert - a.total_alert).splice(this.topNum);
+      this.alertRateLabels = aggregatedAlertsRate.map(x => x.vehicle_number);
+      this.alertRateValues = aggregatedAlertsRate.map(x => x.total_alert);
+      }
+    );
+  }
+
+  private loadTable() {
+    this.alerts$ = this.dataService.getAlerts().pipe(
+      share()
+    );
+
+    const sumEntryInitial = {
+      name: null,
+      vehicle_number: null,
+      odometer: 0,
+      total_alert: 0,
+      critical: 0,
+      general: 0,
+      spn: null,
+      updated: null,
+      count: 0
+    };
+
+    this.sumEntry$ = this.alerts$.pipe(
+      map((alerts: any[]) => {
+        return alerts.reduce((sum, cur) => {
+          return {
+            name: null,
+            vehicle_number: 'SUM',
+            odometer: sum.odometer + cur.odometer,
+            total_alert: sum.total_alert + cur.total_alert,
+            critical: sum.critical + cur.critical,
+            general: sum.general + cur.general,
+            spn: null,
+            updated: null,
+            count: sum.count + 1
+          };
+        }, sumEntryInitial);
+      }),
+      share()
+    );
+
+    this.avgEntry$ = this.sumEntry$.pipe(
+      map(sum => {
+          return {
+            name: null,
+            vehicle_number: 'AVG',
+            odometer: sum.odometer / sum.count,
+            total_alert: sum.total_alert / sum.count,
+            critical: sum.critical / sum.count,
+            general: sum.general / sum.count,
+            spn: null,
+            updated: null,
+            count: sum.count
+          };
+      })
+    );
+  }
 }
