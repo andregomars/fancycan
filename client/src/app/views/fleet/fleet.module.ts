@@ -9,7 +9,7 @@ import { AgmCoreModule } from '@agm/core';
 import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
 import { AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
 
-import { FleetComponent } from './fleet.component';
+import { FleetDashboardComponent } from './fleet-dashboard.component';
 import { FleetRoutingModule } from './fleet-routing.module';
 import { environment } from '../../../environments/environment';
 import { AppPipeModule } from '../../pipes/pipes.module';
@@ -32,7 +32,7 @@ import { ComponentsModule } from './../../components/components.module';
     ComponentsModule
   ],
   declarations: [
-    FleetComponent,
+    FleetDashboardComponent,
   ],
   providers: [
     DataService

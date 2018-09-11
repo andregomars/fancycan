@@ -8,10 +8,10 @@ import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-fleet',
-  templateUrl: './fleet.component.html',
-  styleUrls: ['./fleet.component.scss']
+  templateUrl: './fleet-dashboard.component.html',
+  styleUrls: ['./fleet-dashboard.component.scss']
 })
-export class FleetComponent implements OnInit {
+export class FleetDashboardComponent implements OnInit {
   hideSideInfo: boolean;
 
   loadMap = environment.loadMap;

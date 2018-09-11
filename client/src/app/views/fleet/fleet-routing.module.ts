@@ -2,14 +2,14 @@ import { NgModule } from '@angular/core';
 import { Routes,
      RouterModule } from '@angular/router';
 
-import { FleetComponent } from './fleet.component';
+import { FleetDashboardComponent } from './fleet-dashboard.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: FleetComponent,
+    component: FleetDashboardComponent,
     data: {
-      title: 'Fleet'
+      title: 'Fleet Dashboard'
     }
   }
 ];
