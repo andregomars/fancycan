@@ -11,10 +11,9 @@ import { AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
 
 import { FleetDashboardComponent } from './fleet-dashboard.component';
 import { FleetRoutingModule } from './fleet-routing.module';
-import { environment } from '../../../environments/environment';
 import { AppPipeModule } from '../../pipes/pipes.module';
-import { DataService } from '../../services';
 import { ComponentsModule } from './../../components/components.module';
+import { FleetComponent } from './fleet.component';
 
 @NgModule({
   imports: [
@@ -25,17 +24,14 @@ import { ComponentsModule } from './../../components/components.module';
     NgxGaugeModule,
     FleetRoutingModule,
     AppPipeModule,
-    AgmCoreModule.forRoot(environment.agm),
+    AgmCoreModule,
     AgmSnazzyInfoWindowModule,
     AgmJsMarkerClustererModule,
-    ButtonsModule.forRoot(),
-    ComponentsModule
+    ComponentsModule,
   ],
   declarations: [
+    FleetComponent,
     FleetDashboardComponent,
   ],
-  providers: [
-    DataService
-  ]
 })
 export class FleetModule { }

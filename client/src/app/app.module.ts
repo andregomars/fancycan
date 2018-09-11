@@ -38,6 +38,9 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { ServicesModule } from './services/services.module';
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   imports: [
@@ -51,20 +54,25 @@ import { environment } from '../environments/environment';
     AppHeaderModule,
     AppSidebarModule,
     PerfectScrollbarModule,
+    AgmCoreModule.forRoot(environment.agm),
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
+    ButtonsModule.forRoot(),
     ChartsModule,
+    ServicesModule.forRoot(),
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   declarations: [
     AppComponent,
     ...APP_CONTAINERS,
   ],
-  providers: [{
-    provide: LocationStrategy,
-    useClass: HashLocationStrategy
-    // useClass: PathLocationStrategy
-  }],
+  providers: [
+    {
+      provide: LocationStrategy,
+      useClass: HashLocationStrategy,
+      // useClass: PathLocationStrategy
+    }
+  ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

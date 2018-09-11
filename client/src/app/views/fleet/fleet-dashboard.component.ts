@@ -7,7 +7,7 @@ import { MapStyle } from './../shared/map-style';
 import { environment } from '../../../environments/environment';
 
 @Component({
-  selector: 'app-fleet',
+  selector: 'app-fleet-dashboard',
   templateUrl: './fleet-dashboard.component.html',
   styleUrls: ['./fleet-dashboard.component.scss']
 })

@@ -1,0 +1,11 @@
+<div class="animated fadeIn">
+  <div class="row m-4">
+    <div *ngFor="let item of fleets" class="col-12 col-md-6">
+      <!-- <button [routerLink]="['/fleet/dashboard']"  -->
+      <button (click)="nav(item)" 
+        class="btn btn-secondary btn-block text-warning h-75 pt-3 pb-4">
+        <h2>{{ item }}</h2>
+      </button>
+    </div>
+  </div>
+</div>
