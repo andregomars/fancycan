@@ -69,8 +69,8 @@ import { AgmCoreModule } from '@agm/core';
   providers: [
     {
       provide: LocationStrategy,
-      useClass: HashLocationStrategy,
-      // useClass: PathLocationStrategy
+      // useClass: HashLocationStrategy,
+      useClass: PathLocationStrategy
     }
   ],
   bootstrap: [ AppComponent ]
