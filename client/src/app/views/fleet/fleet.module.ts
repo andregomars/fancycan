@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { NgxGaugeModule } from 'ngx-gauge';
 import { AgmCoreModule } from '@agm/core';
 import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
@@ -13,7 +12,7 @@ import { FleetDashboardComponent } from './fleet-dashboard.component';
 import { FleetRoutingModule } from './fleet-routing.module';
 import { AppPipeModule } from '../../pipes/pipes.module';
 import { ComponentsModule } from './../../components/components.module';
-import { FleetComponent } from './fleet.component';
+import { FleetListComponent } from './fleet-list.component';
 
 @NgModule({
   imports: [
@@ -30,7 +29,7 @@ import { FleetComponent } from './fleet.component';
     ComponentsModule,
   ],
   declarations: [
-    FleetComponent,
+    FleetListComponent,
     FleetDashboardComponent,
   ],
 })

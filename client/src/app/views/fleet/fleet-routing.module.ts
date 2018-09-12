@@ -5,12 +5,12 @@ import {
 } from '@angular/router';
 
 import { FleetDashboardComponent } from './fleet-dashboard.component';
-import { FleetComponent } from './fleet.component';
+import { FleetListComponent } from './fleet-list.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: FleetComponent,
+    component: FleetListComponent,
     data: {
       title: 'Fleet'
     }

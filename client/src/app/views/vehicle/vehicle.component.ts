@@ -4,10 +4,12 @@ import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
 
 import * as moment from 'moment';
 import { Observable } from 'rxjs';
-import { DataService } from '../../services';
-import { share, map, tap } from 'rxjs/operators';
+import { DataService, UtilityService, StorageService } from '../../services';
+import { share, map, tap, switchMap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { MapStyle } from './../shared/map-style';
+import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ViewProfile } from '../../model';
 
 @Component({
   selector: 'app-vehicle',
@@ -89,11 +91,29 @@ export class VehicleComponent implements OnInit {
 
 
   constructor(
+    private route: ActivatedRoute,
+    private utilityService: UtilityService,
+    private storageService: StorageService,
     private dataService: DataService
   ) { }
 
   ngOnInit() {
+    this.initViewProfile();
     this.loadData();
+  }
+
+  private initViewProfile() {
+    this.route.paramMap.pipe(
+      map((params: ParamMap) => params.get('id')),
+      switchMap((vcode: string) => {
+          const fleets$ = this.dataService.getFleets();
+          return this.utilityService.getViewProfileByVehicleCode(vcode, fleets$);
+        }
+      )
+    ).subscribe((profile: ViewProfile) => {
+      this.storageService.setViewProfile(profile);
+    });
+
   }
 
   private loadData() {
