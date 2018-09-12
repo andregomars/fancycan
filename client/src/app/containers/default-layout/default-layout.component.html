@@ -8,13 +8,18 @@
   [mobileAsideMenuToggler]="false">
   <ul class="navbar-nav d-md-down-none mr-auto">
     <li class="nav-item px-3">
-      <span>
-        <a class="nav-link" [routerLink]="['/fleet']">Fleet</a>
-      </span>
-      <small class="text-warning">{{ fcode$ | async }}</small>
+      <a class="nav-link" [routerLink]="['/fleet']">Fleet</a>
+      <small class="text-warning">{{ (viewProfile$ | async)?.fleet_code }}</small>
     </li>
-    <li class="nav-item px-3">
+    <li class="nav-item px-3" *ngIf="(viewProfile$ | async)?.fleet_code">
       <a class="nav-link" [routerLink]="['/vehicle']">Vehicle</a>
+      <small class="text-warning">{{ (viewProfile$ | async)?.vehicle_code }}</small>
+    </li>
+    <li class="nav-item px-3" *ngIf="(viewProfile$ | async)?.fleet_code">
+      <a class="nav-link text-warning" [routerLink]="['/fleet']" 
+        (click)="resetViewProfile()">
+        <i class="fa fa-times" title="Reset fleet & vehicle"></i>
+      </a>
     </li>
   </ul>
 </app-header>

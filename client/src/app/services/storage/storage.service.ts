@@ -1,23 +1,31 @@
 import { Injectable } from '@angular/core';
 import { Observable, pipe, Subject, BehaviorSubject } from 'rxjs';
+import { ViewProfile } from '../../model';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class StorageService {
-    private fcode$ = new BehaviorSubject<string>('');
+    private viewProfile$: BehaviorSubject<ViewProfile>;
 
-    watchFcode(): Observable<string> {
-        return this.fcode$.asObservable();
+    constructor() {
+        this.viewProfile$ = new BehaviorSubject<ViewProfile>({
+            fleet_code: null,
+            vehicle_code: null
+        });
     }
 
-    setFcode(fcode: string) {
-        this.fcode$.next(fcode);
+    watchViewProfile(): Observable<ViewProfile> {
+        return this.viewProfile$.asObservable();
     }
 
-    removeFcode() {
-        this.fcode$.next('');
+    setViewProfile(viewProfile: ViewProfile) {
+        this.viewProfile$.next(viewProfile);
+    }
+
+    clearViewProfile() {
+        this.viewProfile$.next({ fleet_code: null, vehicle_code: null});
     }
 
 }

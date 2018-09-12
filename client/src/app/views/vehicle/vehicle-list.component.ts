@@ -5,13 +5,13 @@ import { Observable } from 'rxjs';
 import { ViewProfile } from '../../model';
 
 @Component({
-  selector: 'app-fleet',
-  templateUrl: './fleet.component.html',
-  styleUrls: ['./fleet.component.scss']
+  selector: 'app-vehicle-list',
+  templateUrl: './vehicle-list.component.html',
+  styleUrls: ['./vehicle-list.component.scss']
 })
-export class FleetComponent implements OnInit {
+export class VehicleListComponent implements OnInit {
   viewProfile$: Observable<ViewProfile>;
-  fleets = ['LAMTA', 'AVTA', 'BYD', 'LBT', 'RTD', 'Soltran'];
+  vehicles = ['5001', '5002', '5003', '5012', '5030', '5075'];
 
   constructor(
     private storageService: StorageService,
@@ -22,11 +22,11 @@ export class FleetComponent implements OnInit {
     this.viewProfile$ = this.storageService.watchViewProfile();
   }
 
-  nav(fcode: string) {
-    this.router.navigate(['/fleet/dashboard']);
+  nav(fcode: string, vcode: string) {
+    this.router.navigate(['/vehicle', vcode]);
     const viewProfile: ViewProfile = {
       fleet_code: fcode,
-      vehicle_code: '',
+      vehicle_code: vcode,
     };
 
     this.storageService.setViewProfile(viewProfile);

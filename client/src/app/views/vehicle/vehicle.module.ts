@@ -9,6 +9,7 @@ import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
 import { AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
 
 import { VehicleComponent } from './vehicle.component';
+import { VehicleListComponent } from './vehicle-list.component';
 import { VehicleRoutingModule } from './vehicle-routing.module';
 import { AppPipeModule } from '../../pipes/pipes.module';
 import { ComponentsModule } from './../../components/components.module';
@@ -28,7 +29,8 @@ import { ComponentsModule } from './../../components/components.module';
     ComponentsModule,
   ],
   declarations: [
-    VehicleComponent
+    VehicleComponent,
+    VehicleListComponent
   ],
 })
 export class VehicleModule { }

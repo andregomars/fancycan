@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { navItems } from './../../_nav';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
+import { ViewProfile } from '../../model';
 import { StorageService } from '../../services';
-import { tap } from 'rxjs/operators';
+import { share } from 'rxjs/operators';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './default-layout.component.html'
 })
 export class DefaultLayoutComponent implements OnInit {
-  fcode$: Observable<string>;
+  viewProfile$: Observable<ViewProfile>;
   navItems = navItems;
   sidebarMinimized = true;
   element: HTMLElement = document.body;
@@ -29,10 +30,12 @@ export class DefaultLayoutComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.fcode$ = of(localStorage.getItem('fcode'));
-    this.fcode$ = this.storageService.watchFcode().pipe(
-      tap(() => console.log('tap here'))
+    this.viewProfile$ = this.storageService.watchViewProfile().pipe(
     );
+  }
 
+  resetViewProfile() {
+    this.storageService.clearViewProfile();
+    // this.viewProfile$ = this.storageService.watchViewProfile();
   }
 }

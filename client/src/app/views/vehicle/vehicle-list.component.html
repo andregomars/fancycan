@@ -1,0 +1,15 @@
+<div class="animated fadeIn">
+  <div class="row m-4">
+    <ng-container *ngIf="(viewProfile$ | async)?.fleet_code; then listTemplate; else navTemplate"></ng-container>
+    <ng-template #listTemplate>
+      <div *ngFor="let item of vehicles" class="col-12 col-md-6">
+        <button (click)="nav('avta', item)" class="btn btn-secondary btn-block text-warning h-75 pt-3 pb-4">
+          <h2>{{ item }}</h2>
+        </button>
+      </div>
+    </ng-template>
+    <ng-template #navTemplate>
+      <h1>Please select fleet first</h1>
+    </ng-template>
+  </div>
+</div>

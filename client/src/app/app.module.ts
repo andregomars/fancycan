@@ -18,7 +18,7 @@ import { AppComponent } from './app.component';
 import { DefaultLayoutComponent } from './containers';
 
 const APP_CONTAINERS = [
-  DefaultLayoutComponent
+  DefaultLayoutComponent,
 ];
 
 import {
