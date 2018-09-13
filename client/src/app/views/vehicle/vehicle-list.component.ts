@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { StorageService, DataService } from '../../services';
-import { Observable } from 'rxjs';
+import { StorageService, DataService, UtilityService } from '../../services';
+import { Observable, timer } from 'rxjs';
 import { ViewProfile } from '../../model';
-import { switchMap, map } from 'rxjs/operators';
+import { switchMap, map, share, debounce, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-vehicle-list',
@@ -13,9 +13,11 @@ import { switchMap, map } from 'rxjs/operators';
 export class VehicleListComponent implements OnInit {
   viewProfile$: Observable<ViewProfile>;
   vehicles$: Observable<any>;
+  filteredVehicles$: Observable<any>;
 
   constructor(
     private storageService: StorageService,
+    private utilityService: UtilityService,
     private dataService: DataService,
     private router: Router
   ) { }
@@ -23,6 +25,7 @@ export class VehicleListComponent implements OnInit {
   ngOnInit() {
     this.viewProfile$ = this.storageService.watchViewProfile();
     this.loadData();
+    this.filteredVehicles$ = this.vehicles$;
   }
 
   nav(fcode: string, vcode: string) {
@@ -35,23 +38,26 @@ export class VehicleListComponent implements OnInit {
     this.storageService.setViewProfile(viewProfile);
   }
 
+  filterVehicles(vcode: string) {
+      if (!vcode || vcode.length === 0) {
+        this.loadData();
+        return;
+      }
+
+      this.filteredVehicles$ = this.vehicles$.pipe(
+        debounce(() => timer(300)),
+        map(vehicles =>
+          vehicles.filter(v => v.vcode.toUpperCase().indexOf(vcode.trim().toUpperCase()) > -1)
+        ),
+      );
+  }
+
   private loadData() {
     this.vehicles$ = this.viewProfile$.pipe(
-      switchMap(profile =>
-        this.dataService.getFleets().pipe(
-          map(fleets => fleets.find(fleet =>
-            fleet.code.toUpperCase() === profile.fleet_code.toUpperCase())
-          ),
-          map(fleet => {
-            return fleet.vehicles.map(vehicle => {
-              return {
-                vcode: vehicle.code,
-                fcode: profile.fleet_code
-              };
-            });
-          })
-        )
-      ),
+      switchMap(profile => {
+        const fleets$ = this.dataService.getFleets();
+        return this.utilityService.getVehiclesByFleetCode(profile.fleet_code, fleets$);
+      })
     );
   }
 }

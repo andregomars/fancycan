@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, share } from 'rxjs/operators';
 import { ViewProfile } from '../../model';
 
 @Injectable({
@@ -34,4 +34,10 @@ export class UtilityService {
         );
     }
 
+    getVehiclesByFleetCode(fcode: string, fleets$: Observable<any>): Observable<any[]> {
+         return this.getFlattedVehicles(fleets$).pipe(
+            map((vehicles: any[]) =>
+                vehicles.filter(vehicle => vehicle.fcode.toUpperCase() === fcode.toUpperCase()))
+        );
+    }
 }

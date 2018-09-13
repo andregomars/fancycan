@@ -1,19 +1,28 @@
 <div class="animated fadeIn">
-  <div class="row m-4">
-    <ng-container *ngIf="(viewProfile$ | async)?.fleet_code as fcode; 
+  <ng-container *ngIf="(viewProfile$ | async)?.fleet_code as fcode; 
       then listTemplate; 
       else navTemplate">
-    </ng-container>
-    <ng-template #listTemplate>
-      <div *ngFor="let vehicle of vehicles$ | async" class="col-12 col-md-6">
-        <button (click)="nav(vehicle.fcode, vehicle.vcode)" 
-          class="btn btn-secondary btn-block text-warning h-75 pt-3 pb-4">
+  </ng-container>
+  <ng-template #listTemplate>
+    <div class="row m-4">
+      <div class="col-12 col-md-4">
+        <div class="d-flex justify-content-around">
+          <input class="form-control bg-dark input-filter" size="5" [(ngModel)]="bus_number" type="text" placeholder="Filter by vehicle number"
+            (keyup)="filterVehicles(bus_number)" />
+        </div>
+      </div>
+    </div>
+    <div class="row m-4">
+      <div *ngFor="let vehicle of filteredVehicles$ | async" class="col-12 col-sm-6 col-md-4 col-lg-3">
+        <button (click)="nav(vehicle.fcode, vehicle.vcode)" class="btn btn-secondary btn-block text-warning h-75 pt-3 pb-4">
           <h2>{{ vehicle.vcode }}</h2>
         </button>
       </div>
-    </ng-template>
-    <ng-template #navTemplate>
+    </div>
+  </ng-template>
+  <ng-template #navTemplate>
+    <div class="row m-4">
       <h1>Please select fleet first</h1>
-    </ng-template>
-  </div>
+    </div>
+  </ng-template>
 </div>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { share, map, tap } from 'rxjs/operators';
+import { Observable, timer } from 'rxjs';
+import { share, map, tap, debounce } from 'rxjs/operators';
 
 import { DataService } from '../../services';
 import { MapStyle } from './../shared/map-style';
@@ -19,6 +19,7 @@ export class FleetDashboardComponent implements OnInit {
   mapZoom = 12;
   mapStyle = new MapStyle().styler;
   vehicles$: Observable<any>;
+  filteredVehicles$: Observable<any>;
   bus_number: string;
   map_lat = 34.056539;
   map_lgt = -118.237485;
@@ -30,16 +31,18 @@ export class FleetDashboardComponent implements OnInit {
   ngOnInit() {
     this.hideSideInfo = false;
     this.loadData();
+    this.filteredVehicles$ = this.vehicles$;
   }
 
   filterVehicles(busno: string) {
       if (!busno || busno.length === 0) {
         this.loadData();
+        this.filteredVehicles$ = this.vehicles$;
         return;
       }
 
-      this.vehicles$ = this.dataService.getVehicles().pipe(
-        map(vehicles => this.attachMapLabel(vehicles)),
+      this.filteredVehicles$ = this.vehicles$.pipe(
+        debounce(() => timer(300)),
         map(vehicles =>
           vehicles.filter(v => v.bus_number.toString().toUpperCase().indexOf(busno.trim().toUpperCase()) > -1)
         ),
