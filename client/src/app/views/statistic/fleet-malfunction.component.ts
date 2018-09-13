@@ -4,11 +4,11 @@ import { Observable } from 'rxjs';
 import { share, map, scan } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-alerts',
-  templateUrl: './alerts.component.html',
-  styleUrls: ['./alerts.component.scss']
+  selector: 'app-statistic-malfunction',
+  templateUrl: './fleet-malfunction.component.html',
+  styleUrls: ['./fleet-malfunction.component.scss']
 })
-export class AlertsComponent implements OnInit {
+export class FleetMalfunctionComponent implements OnInit {
   alerts$: Observable<any>;
   sumEntry$: Observable<any>;
   avgEntry$: Observable<any>;

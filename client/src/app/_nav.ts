@@ -10,8 +10,19 @@ export const navItems = [
     icon: 'fa fa-bus'
   },
   {
-    name: 'Alerts',
-    url: '/alerts/5001',
-    icon: 'fa fa-exclamation-triangle'
+    name: 'Statistic',
+    icon: 'fa fa-area-chart',
+    children: [
+      {
+        name: 'Fleet Malfunction',
+        url: '/statistic/malfunction/fleet/LAMTA',
+        icon: 'fa fa-flag'
+      }
+    ]
   }
+  // {
+  //   name: 'Alerts',
+  //   url: '/alerts/5001',
+  //   icon: 'fa fa-exclamation-triangle'
+  // }
 ];
