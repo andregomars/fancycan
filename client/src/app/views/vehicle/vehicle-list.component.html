@@ -1,9 +1,9 @@
 <div class="animated fadeIn">
-  <ng-container *ngIf="(viewProfile$ | async)?.fleet_code as fcode; 
+  <!-- <ng-container *ngIf="(viewProfile$ | async)?.fleet_code as fcode; 
       then listTemplate; 
       else navTemplate">
-  </ng-container>
-  <ng-template #listTemplate>
+  </ng-container> -->
+  <!-- <ng-template #listTemplate> -->
     <div class="row m-4">
       <div class="col-12 col-md-4">
         <div class="d-flex justify-content-around">
@@ -19,10 +19,10 @@
         </button>
       </div>
     </div>
-  </ng-template>
-  <ng-template #navTemplate>
+  <!-- </ng-template> -->
+  <!-- <ng-template #navTemplate>
     <div class="row m-4">
       <h1>Please select fleet first</h1>
     </div>
-  </ng-template>
+  </ng-template> -->
 </div>
