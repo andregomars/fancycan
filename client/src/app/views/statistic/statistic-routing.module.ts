@@ -17,9 +17,16 @@ const routes: Routes = [
     },
     children: [
       {
-        path: 'malfunction/fleet/:id',
+        path: 'malfunction/fleet',
         component: FleetMalfunctionComponent,
         canActivate: [ FleetGuard ],
+        data: {
+          title: 'Malfunction'
+        }
+      },
+      {
+        path: 'malfunction/fleet/:id',
+        component: FleetMalfunctionComponent,
         data: {
           title: 'Malfunction'
         }

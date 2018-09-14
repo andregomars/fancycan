@@ -17,13 +17,17 @@ export class FleetGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
       return this.storageService.watchViewProfile().pipe(
-        map(profile => !!profile.fleet_code),
-        tap(hasFleetCode => {
-          if (!hasFleetCode) {
+        tap(profile => {
+          if (profile && profile.fleet_code) {
+            if (state.url !== '/vehicle') {
+              this.router.navigate([state.url, profile.fleet_code]);
+            }
+          } else {
             console.error('need to choose a fleet');
             this.router.navigate(['/fleet']);
           }
-        })
+        }),
+        map(profile => !!profile.fleet_code)
       );
   }
 }

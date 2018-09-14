@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Location } from '@angular/common';
 import { DataService, UtilityService } from '../../services';
 import { Observable } from 'rxjs';
 import { map, share } from 'rxjs/operators';
@@ -40,14 +39,12 @@ export class RtmComponent implements OnInit {
   imgEngineCheck = 'assets/img/vehicle/check_engine.png';
 
   constructor(
-    private locationService: Location,
     private dataService: DataService,
     private utitlityService: UtilityService
   ) { }
 
   ngOnInit() {
     this.loadData();
-    this.locationService.replaceState('/vehicle/rtm/5001');
   }
 
   private loadData() {
