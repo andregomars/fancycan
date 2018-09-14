@@ -11,6 +11,7 @@ import { switchMap, map, share, debounce, tap } from 'rxjs/operators';
   styleUrls: ['./vehicle-list.component.scss']
 })
 export class VehicleListComponent implements OnInit {
+  bus_number: string;
   viewProfile$: Observable<ViewProfile>;
   vehicles$: Observable<any>;
   filteredVehicles$: Observable<any>;
