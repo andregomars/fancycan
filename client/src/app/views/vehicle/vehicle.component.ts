@@ -38,7 +38,6 @@ export class VehicleComponent implements OnInit {
   engineIdle = 60;
   odometer = 27026.8;
   vin = 'V12W132456107';
-  // imgBus = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxTQs-WUfduw5KFdJ6cpeCpZKsA0cOx8XVGaRuTwLffC48M8Pk';
   imgBus = 'assets/img/vehicle/bus.png';
   imgEngineCheck = 'assets/img/vehicle/check_engine.png';
 
@@ -118,7 +117,7 @@ export class VehicleComponent implements OnInit {
 
   private loadData() {
     this.vehicles$ = this.dataService.getVehicles().pipe(
-      map(vehicles => this.attachMapLabel(vehicles)),
+      map(vehicles => this.utilityService.attachMapLabel(vehicles)),
       share()
     );
 
@@ -133,20 +132,6 @@ export class VehicleComponent implements OnInit {
     this.decodes$ = this.dataService.getDecodes().pipe(
       share()
     );
-  }
-
-  private attachMapLabel(vehicles: any): any {
-    return vehicles.map(ve => {
-      return Object.assign(ve, {
-        label: {
-          color: '#ffffff',
-          fontFamily: '',
-          fontSize: '9px',
-          fontWeight: 'normal',
-          text: ve.bus_number.toString()
-        }
-      });
-    });
   }
 
 }

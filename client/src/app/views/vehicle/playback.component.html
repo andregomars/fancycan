@@ -1,0 +1,341 @@
+<div class="animated fadeIn">
+  <div class="row mt-2">
+    <div class="col-12 col-md-4">
+    </div>
+    <div class="col-12 col-md-8">
+      <div class="row">
+        <div class="col-12 col-md-6">
+          Start Time: {{ currentTime | date: 'yyyy-MM-dd hh:mm:ss'}}
+        </div>
+        <div class="col-12 col-md-6">
+          <div class="border border-rounded w-25">
+            <button class="btn btn-link btn-sm">
+              <i class="fa fa-refresh"></i>
+            </button>
+            <button class="btn btn-link btn-sm">
+              <i class="fa fa-stop"></i>
+            </button>
+            <button class="btn btn-link btn-sm">
+              <i class="fa fa-play"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 col-lg-4">
+      <div class="row mt-2 pt-2 justify-content-around border border-secondary rounded">
+        <div class="col-5">
+          <label>Engine</label>
+        </div>
+        <div class="col-4">
+          <label class="switch switch-label switch-outline-secondary-alt">
+            <input type="checkbox" class="switch-input">
+            <span class="switch-slider" data-checked="On" data-unchecked="Off"></span>
+          </label>
+        </div>
+        <div class="col-3">
+          <img [src]="imgEngineCheck" class="img-fluid" alt="bus" width="35px" height="28px">
+        </div>
+      </div>
+      <div class="row mt-2 pt-2 justify-content-around border border-secondary rounded">
+        <div class="col-5">
+          <label>Transmission</label>
+        </div>
+        <div class="col-7">
+          <label class="switch switch-label switch-outline-secondary-alt">
+            <input type="checkbox" class="switch-input">
+            <span class="switch-slider" data-checked="D" data-unchecked="P"></span>
+          </label>
+        </div>
+      </div>
+      <div class="row mt-2 py-2 border border-secondary rounded">
+        <div class="col table-responsive-lg">
+          <table class="table table-striped table-hover table-outline table-sm mt-1">
+            <thead class="text-white thead-light bg-primary">
+              <tr>
+                <th><small>CAN ID</small></th>
+                <th><small>Start bit</small></th>
+                <th><small>Length</small></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <input type="text" class="form-control" />
+                </td>
+                <td>
+                  <input type="text" class="form-control" />
+                </td>
+                <td>
+                  <input type="text" class="form-control" />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="row mt-2 py-2 border border-secondary rounded">
+        <div class="col-6 table-responsive-lg">
+          <table class="table table-striped table-hover table-outline table-sm mt-1">
+            <thead class="text-white thead-light bg-primary">
+              <tr>
+                <th><small>Max</small></th>
+                <th><small>Min</small></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <input type="text" class="form-control" />
+                </td>
+                <td>
+                  <input type="text" class="form-control" />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="col-6 table-responsive-lg">
+          <table class="table table-striped table-hover table-outline table-sm mt-1">
+            <thead class="text-white thead-light bg-primary">
+              <tr>
+                <th><small>Times</small></th>
+                <th><small>Time</small></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <input type="text" class="form-control" />
+                </td>
+                <td>
+                  <input type="text" class="form-control" />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="row mt-2 py-2 border border-secondary rounded">
+        <ul class="col list-unstyled">
+          <li *ngFor="let item of rawDataList" class="row">
+            <div class="col-4">
+              {{ item.id }}
+            </div>
+            <div class="col-8">
+              {{ item.data }}
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-12 col-lg-4">
+      <div class="row no-gutters mt-2">
+        <div class="col-6 text-center">
+          <ngx-gauge size="100" foregroundColor="#17a2b8" [type]="gaugeType" [value]="85" [label]="'Speed'" [thick]="gaugeThick"
+            [append]="">
+          </ngx-gauge>
+        </div>
+        <div class="col-6 text-center">
+          <ngx-gauge size="100" foregroundColor="#17a2b8" [type]="gaugeType" [value]="57" [label]="'RPM'" [thick]="gaugeThick"
+            [append]="">
+          </ngx-gauge>
+        </div>
+        <div class="col-6 text-center">
+          <ngx-gauge size="100" foregroundColor="#17a2b8" [type]="gaugeType" [value]="68.3" [label]="'Spare 1'" [thick]="gaugeThick"
+            [append]="">
+          </ngx-gauge>
+        </div>
+        <div class="col-6 text-center">
+          <ngx-gauge size="100" foregroundColor="#17a2b8" [type]="gaugeType" [value]="68.3" [label]="'Spare 2'" [thick]="gaugeThick"
+            [append]="">
+          </ngx-gauge>
+        </div>
+      </div>
+      <div class="dropdown-divider"></div>
+      <div class="row">
+        <div class="col-12 col-md-6">
+          Odometer: {{ odometer }}
+        </div>
+        <div class="col-12 col-md-6">
+          VIN: {{ vin }}
+        </div>
+      </div>
+      <div class="row px-2">
+        <div class="col text-center">
+          <img [src]="imgBus" class="img-fluid" alt="bus" width="60%" height="auto">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="row">
+            <div class="col">
+              <label>Coolant level</label>
+            </div>
+          </div>
+          <div class="progress border border-dark">
+            <div class="progress-bar bg-success" [style.width.%]="'50'">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="row">
+            <div class="col">
+              <label>Coolant temperature</label>
+            </div>
+          </div>
+          <div class="progress border border-dark">
+            <div class="progress-bar bg-success" [style.width.%]="'90'">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="row">
+            <div class="col">
+              <label>Spare 1</label>
+            </div>
+          </div>
+          <div class="progress border border-dark">
+            <div class="progress-bar bg-success" [style.width.%]="'22'">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="row">
+            <div class="col">
+              <label>Spare 2</label>
+            </div>
+          </div>
+          <div class="progress border border-dark">
+            <div class="progress-bar bg-success" [style.width.%]="'80'">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="col-12 col-md-6">
+          <div class="row">
+            <div class="col-7">
+              <label>Front door</label>
+            </div>
+            <div class="col-5 text-right">
+              <label class="switch switch-label switch-outline-secondary-alt">
+                <input type="checkbox" class="switch-input" checked>
+                <span class="switch-slider" data-checked="On" data-unchecked="Off"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-6">
+          <div class="row">
+            <div class="col-7">
+              <label>Rear door</label>
+            </div>
+            <div class="col-5 text-right">
+              <label class="switch switch-label switch-outline-secondary-alt">
+                <input type="checkbox" class="switch-input">
+                <span class="switch-slider" data-checked="On" data-unchecked="Off"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-6">
+          <div class="row">
+            <div class="col-7">
+              <label>Spare 1</label>
+            </div>
+            <div class="col-5 text-right">
+              <label class="switch switch-label switch-outline-secondary-alt">
+                <input type="checkbox" class="switch-input" checked>
+                <span class="switch-slider" data-checked="On" data-unchecked="Off"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-6">
+          <div class="row">
+            <div class="col-7">
+              <label>Spare 2</label>
+            </div>
+            <div class="col-5 text-right">
+              <label class="switch switch-label switch-outline-secondary-alt">
+                <input type="checkbox" class="switch-input">
+                <span class="switch-slider" data-checked="On" data-unchecked="Off"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-lg-4">
+      <div class="row">
+        <div class="col-8">
+          <div class="input-group mt-1">
+            <span class="input-group-prepend">
+              <span class="input-group-text">
+                <i class="fa fa-calendar"></i>
+              </span>
+            </span>
+            <input class="form-control" #drp="bsDaterangepicker" bsDaterangepicker [(ngModel)]="bsRangeValue">
+          </div>
+        </div>
+        <div class="col-4">
+          <button class="btn btn-primary m-1 pull-right">
+            <i class="fa fa-download"></i>
+          </button>
+          <label class="btn btn-primary m-1 pull-right">
+            <i class="fa fa-upload"></i>
+            <input type="file" hidden>
+          </label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col mt-2 p-2" [style.min-height.px]="mapMinHeight" [style.background-color]="'#242f3e'">
+          <agm-map id="map_canvas" *ngIf="loadMap" [zoom]="mapZoom" [streetViewControl]=false [styles]="mapStyle"
+            [latitude]="map_lat" [longitude]="map_lgt">
+            <ng-container *ngIf="(vehicles$ | async) as locations">
+              <agm-marker *ngFor="let loc of locations" [latitude]="loc.latitude" [longitude]="loc.longitude">
+              </agm-marker>
+              <agm-polyline [polylineDraggable]=false [strokeColor]="'red'" [strokeOpacity]="0.5" [strokeWeight]="5">
+                <agm-polyline-point *ngFor="let loc of locations" [latitude]="loc.latitude" [longitude]="loc.longitude">
+                </agm-polyline-point>
+              </agm-polyline>
+            </ng-container>
+          </agm-map>
+        </div>
+      </div>
+      <div class="row table-responsive-lg m-0">
+        <table class="table table-striped table-hover table-outline table-sm mt-1">
+          <thead class="text-white thead-light bg-primary">
+            <tr>
+              <th><small>SPN</small></th>
+              <th><small>Name</small></th>
+              <th><small>PGN</small></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let definition of definitions$ | async">
+              <td>
+                <div class="small">{{ definition.spn }}</div>
+              </td>
+              <td>
+                <div class="small">{{ definition.name }}</div>
+              </td>
+              <td>
+                <div class="small">{{ definition.updated }}</div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

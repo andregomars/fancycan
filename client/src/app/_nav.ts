@@ -7,7 +7,19 @@ export const navItems = [
   {
     name: 'Vehicle',
     url: '/vehicle',
-    icon: 'fa fa-bus'
+    icon: 'fa fa-bus',
+    children: [
+      {
+        name: 'Realtime Monitor',
+        url: '/vehicle/rtm',
+        icon: 'fa fa-angle-right'
+      },
+      {
+        name: 'Playback',
+        url: '/vehicle/playback',
+        icon: 'fa fa-angle-right'
+      }
+    ]
   },
   {
     name: 'Statistic',
@@ -15,7 +27,7 @@ export const navItems = [
     children: [
       {
         name: 'Fleet Malfunction',
-        url: '/statistic/malfunction/fleet/LAMTA',
+        url: '/statistic/malfunction/fleet',
         icon: 'fa fa-flag'
       }
     ]

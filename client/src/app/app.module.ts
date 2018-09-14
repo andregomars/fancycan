@@ -41,6 +41,9 @@ import { environment } from '../environments/environment';
 import { ServicesModule } from './services/services.module';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { AgmCoreModule } from '@agm/core';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 
 @NgModule({
   imports: [
@@ -56,6 +59,9 @@ import { AgmCoreModule } from '@agm/core';
     PerfectScrollbarModule,
     AgmCoreModule.forRoot(environment.agm),
     BsDropdownModule.forRoot(),
+    BsDatepickerModule.forRoot(),
+    TooltipModule.forRoot(),
+    TypeaheadModule.forRoot(),
     TabsModule.forRoot(),
     ButtonsModule.forRoot(),
     ChartsModule,

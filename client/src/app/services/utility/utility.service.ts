@@ -4,7 +4,7 @@ import { map, share } from 'rxjs/operators';
 import { ViewProfile } from '../../model';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class UtilityService {
 
@@ -27,17 +27,31 @@ export class UtilityService {
             map((vehicles: any[]) => vehicles.find(vehicle => vehicle.vcode === vcode)),
             map(vehicle => {
                 return {
-                   fleet_code: vehicle.fcode,
-                   vehicle_code: vehicle.vcode,
+                    fleet_code: vehicle.fcode,
+                    vehicle_code: vehicle.vcode,
                 };
             })
         );
     }
 
     getVehiclesByFleetCode(fcode: string, fleets$: Observable<any>): Observable<any[]> {
-         return this.getFlattedVehicles(fleets$).pipe(
+        return this.getFlattedVehicles(fleets$).pipe(
             map((vehicles: any[]) =>
                 vehicles.filter(vehicle => vehicle.fcode.toUpperCase() === fcode.toUpperCase()))
         );
+    }
+
+    attachMapLabel(vehicles: any): any {
+        return vehicles.map(ve => {
+            return Object.assign(ve, {
+                label: {
+                    color: '#ffffff',
+                    fontFamily: '',
+                    fontSize: '9px',
+                    fontWeight: 'normal',
+                    text: ve.bus_number.toString()
+                }
+            });
+        });
     }
 }

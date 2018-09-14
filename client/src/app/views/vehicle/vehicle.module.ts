@@ -7,12 +7,16 @@ import { NgxGaugeModule } from 'ngx-gauge';
 import { AgmCoreModule } from '@agm/core';
 import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
 import { AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 import { VehicleComponent } from './vehicle.component';
 import { VehicleListComponent } from './vehicle-list.component';
 import { VehicleRoutingModule } from './vehicle-routing.module';
 import { AppPipeModule } from '../../pipes/pipes.module';
 import { ComponentsModule } from './../../components/components.module';
+import { RtmComponent } from './rtm.component';
+import { PlaybackComponent } from './playback.component';
+import { VehicleContainerComponent } from './vehicle-container.component';
 
 @NgModule({
   imports: [
@@ -26,11 +30,15 @@ import { ComponentsModule } from './../../components/components.module';
     AgmCoreModule,
     AgmSnazzyInfoWindowModule,
     AgmJsMarkerClustererModule,
+    BsDatepickerModule,
     ComponentsModule,
   ],
   declarations: [
+    VehicleContainerComponent,
+    VehicleListComponent,
     VehicleComponent,
-    VehicleListComponent
+    RtmComponent,
+    PlaybackComponent
   ],
 })
 export class VehicleModule { }
