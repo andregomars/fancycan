@@ -4,11 +4,13 @@ import { Routes,
 
 import { VehicleComponent } from './vehicle.component';
 import { VehicleListComponent } from './vehicle-list.component';
+import { FleetGuard } from '../../guards/fleet.guard';
 
 const routes: Routes = [
   {
     path: '',
     component: VehicleListComponent,
+    canActivate: [ FleetGuard ],
     data: {
       title: 'Vehicles'
     }
