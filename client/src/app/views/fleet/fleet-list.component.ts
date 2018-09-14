@@ -26,7 +26,7 @@ export class FleetListComponent implements OnInit {
   }
 
   nav(fcode: string) {
-    this.router.navigate(['/fleet/dashboard']);
+    this.router.navigate(['/fleet', fcode]);
     const viewProfile: ViewProfile = {
       fleet_code: fcode,
       vehicle_code: '',

@@ -16,7 +16,7 @@ const routes: Routes = [
     }
   },
   {
-    path: 'dashboard',
+    path: ':id',
     component: FleetDashboardComponent,
     data: {
       title: 'Dashboard'

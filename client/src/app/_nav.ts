@@ -20,9 +20,4 @@ export const navItems = [
       }
     ]
   }
-  // {
-  //   name: 'Alerts',
-  //   url: '/alerts/5001',
-  //   icon: 'fa fa-exclamation-triangle'
-  // }
 ];

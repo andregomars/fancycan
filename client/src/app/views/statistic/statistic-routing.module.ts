@@ -6,6 +6,7 @@ import {
 
 import { StatisticComponent } from './statistic.component';
 import { FleetMalfunctionComponent } from './fleet-malfunction.component';
+import { FleetGuard } from '../../guards/fleet.guard';
 
 const routes: Routes = [
   {
@@ -18,6 +19,7 @@ const routes: Routes = [
       {
         path: 'malfunction/fleet/:id',
         component: FleetMalfunctionComponent,
+        canActivate: [ FleetGuard ],
         data: {
           title: 'Malfunction'
         }
