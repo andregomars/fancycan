@@ -7,7 +7,7 @@ import { DefaultLayoutComponent } from './containers';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'fleet',
+    redirectTo: 'fleet/list',
     pathMatch: 'full',
   },
   {
@@ -28,6 +28,10 @@ export const routes: Routes = [
       {
         path: 'statistic',
         loadChildren: './views/statistic/statistic.module#StatisticModule'
+      },
+      {
+        path: 'setting',
+        loadChildren: './views/setting/setting.module#SettingModule'
       }
     ]
   }

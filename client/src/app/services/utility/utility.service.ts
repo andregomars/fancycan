@@ -41,6 +41,22 @@ export class UtilityService {
         );
     }
 
+    getFlattedSPNSpecs(specs: any[]): any[] {
+        console.log(specs)
+        return specs.map(pgn =>
+            pgn.SPNItems.map(spn =>
+                Object.assign({},
+                    spn,
+                    { TransmissionRate: pgn.TransmissionRate },
+                    { PGNNo: pgn.PGNNo },
+                    { SA: pgn.SA },
+                    { DA: pgn.DA },
+                    { Priority: pgn.Priority }
+                )
+            )
+        );
+    }
+
     attachMapLabel(vehicles: any): any {
         return vehicles.map(ve => {
             return Object.assign(ve, {

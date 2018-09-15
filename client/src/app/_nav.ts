@@ -40,7 +40,18 @@ export const navItems = [
       {
         name: 'Fleet Malfunction',
         url: '/statistic/malfunction/fleet',
-        icon: 'fa fa-flag'
+        icon: 'fa fa-angle-right'
+      }
+    ]
+  },
+  {
+    name: 'Setting',
+    icon: 'fa fa-gear',
+    children: [
+      {
+        name: 'J1939',
+        url: '/setting/j1939',
+        icon: 'fa fa-angle-right'
       }
     ]
   }
