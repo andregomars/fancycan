@@ -13,6 +13,7 @@ import { FleetRoutingModule } from './fleet-routing.module';
 import { AppPipeModule } from '../../pipes/pipes.module';
 import { ComponentsModule } from './../../components/components.module';
 import { FleetListComponent } from './fleet-list.component';
+import { FleetContainerComponent } from './fleet-container.component';
 
 @NgModule({
   imports: [
@@ -31,6 +32,7 @@ import { FleetListComponent } from './fleet-list.component';
   declarations: [
     FleetListComponent,
     FleetDashboardComponent,
+    FleetContainerComponent,
   ],
 })
 export class FleetModule { }

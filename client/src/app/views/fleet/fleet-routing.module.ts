@@ -6,21 +6,38 @@ import {
 
 import { FleetDashboardComponent } from './fleet-dashboard.component';
 import { FleetListComponent } from './fleet-list.component';
+import { FleetContainerComponent } from './fleet-container.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: FleetListComponent,
+    component: FleetContainerComponent,
     data: {
       title: 'Fleet'
-    }
-  },
-  {
-    path: ':id',
-    component: FleetDashboardComponent,
-    data: {
-      title: 'Dashboard'
-    }
+    },
+    children: [
+      {
+        path: 'list',
+        component: FleetListComponent,
+        data: {
+          title: 'Fleet List'
+        }
+      },
+      {
+        path: 'list/:id',
+        component: FleetListComponent,
+        data: {
+          title: 'Fleet List'
+        }
+      },
+      {
+        path: ':id',
+        component: FleetDashboardComponent,
+        data: {
+          title: 'Dashboard'
+        }
+      }
+    ]
   }
 ];
 

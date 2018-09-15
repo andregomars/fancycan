@@ -22,7 +22,7 @@ export class VehicleGuard implements CanActivate {
             this.router.navigate([state.url, profile.vehicle_code]);
           } else {
             console.error('need to choose a vehicle');
-            this.router.navigate(['/vehicle']);
+            this.router.navigate(['/vehicle/list']);
           }
         }),
         map(profile => !!profile.vehicle_code)

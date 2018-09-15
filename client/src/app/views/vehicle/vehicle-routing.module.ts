@@ -21,9 +21,16 @@ const routes: Routes = [
     },
     children: [
       {
-        path: '',
+        path: 'list',
         component: VehicleListComponent,
         canActivate: [FleetGuard],
+        data: {
+          title: 'Vehicles'
+        }
+      },
+      {
+        path: 'list/:id',
+        component: VehicleListComponent,
         data: {
           title: 'Vehicles'
         }

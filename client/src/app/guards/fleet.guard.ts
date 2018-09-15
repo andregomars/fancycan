@@ -19,12 +19,12 @@ export class FleetGuard implements CanActivate {
       return this.storageService.watchViewProfile().pipe(
         tap(profile => {
           if (profile && profile.fleet_code) {
-            if (state.url !== '/vehicle') {
+            // if (state.url !== '/vehicle') {
               this.router.navigate([state.url, profile.fleet_code]);
-            }
+            // }
           } else {
             console.error('need to choose a fleet');
-            this.router.navigate(['/fleet']);
+            this.router.navigate(['/fleet/list']);
           }
         }),
         map(profile => !!profile.fleet_code)
