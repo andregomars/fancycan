@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 })
 export class SpnSpecificationComponent implements OnInit {
   definitions$: Observable<any>;
+  specs$: Observable<any>;
   keyword: string;
 
   constructor(
@@ -27,6 +28,10 @@ export class SpnSpecificationComponent implements OnInit {
 
   private loadData() {
     this.definitions$ = this.dataService.getDefinitions().pipe(
+      share()
+    );
+
+    this.specs$ = this.dataService.getSpnSpecs().pipe(
       map((specs: any[]) =>
         this.utilityService.getFlattedSPNSpecs(specs)),
       tap(x => console.log(x))

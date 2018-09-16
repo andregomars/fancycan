@@ -8,7 +8,13 @@
         </div>
       </div>
       <div class="row mt-2 border border-secondary rounded">
-        spn no
+        <ul class="list-unstyle">
+          <li *ngFor="let spec of specs$ | async">
+            <pre>
+              {{ spec }}
+            </pre>
+          </li>
+        </ul>
       </div>
     </div>
     <div class="col-12 col-lg-4">

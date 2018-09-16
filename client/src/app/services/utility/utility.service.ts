@@ -42,7 +42,7 @@ export class UtilityService {
     }
 
     getFlattedSPNSpecs(specs: any[]): any[] {
-        console.log(specs)
+        console.log(specs[0].SPNItems)
         return specs.map(pgn =>
             pgn.SPNItems.map(spn =>
                 Object.assign({},
