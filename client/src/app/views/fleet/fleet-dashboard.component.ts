@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, timer } from 'rxjs';
-import { share, map, tap, debounce } from 'rxjs/operators';
+import { share, map, tap, debounce, switchMap } from 'rxjs/operators';
 
-import { DataService } from '../../services';
+import { DataService, UtilityService, StorageService } from '../../services';
 import { MapStyle } from './../shared/map-style';
 import { environment } from '../../../environments/environment';
 
@@ -20,12 +20,14 @@ export class FleetDashboardComponent implements OnInit {
   mapStyle = new MapStyle().styler;
   vehicles$: Observable<any>;
   filteredVehicles$: Observable<any>;
-  bus_number: string;
+  vcode: string;
   map_lat = 34.056539;
   map_lgt = -118.237485;
 
   constructor(
-    private dataService: DataService
+    private dataService: DataService,
+    private utilityService: UtilityService,
+    private storageService: StorageService
   ) { }
 
   ngOnInit() {
@@ -34,8 +36,8 @@ export class FleetDashboardComponent implements OnInit {
     this.filteredVehicles$ = this.vehicles$;
   }
 
-  filterVehicles(busno: string) {
-      if (!busno || busno.length === 0) {
+  filterVehicles(vcode: string) {
+      if (!vcode || vcode.length === 0) {
         this.loadData();
         this.filteredVehicles$ = this.vehicles$;
         return;
@@ -44,7 +46,7 @@ export class FleetDashboardComponent implements OnInit {
       this.filteredVehicles$ = this.vehicles$.pipe(
         debounce(() => timer(300)),
         map(vehicles =>
-          vehicles.filter(v => v.bus_number.toString().toUpperCase().indexOf(busno.trim().toUpperCase()) > -1)
+          vehicles.filter(v => v.code.toString().toUpperCase().indexOf(vcode.trim().toUpperCase()) > -1)
         ),
       );
   }
@@ -55,23 +57,14 @@ export class FleetDashboardComponent implements OnInit {
 
   private loadData() {
     this.vehicles$ = this.dataService.getVehicles().pipe(
-      map(vehicles => this.attachMapLabel(vehicles)),
+      switchMap(vehicles =>
+        this.storageService.watchViewProfile().pipe(
+          map(profile => vehicles.filter(vehicle => vehicle.fleet_code === profile.fleet_code))
+        )
+      ),
+      map(vehicles => this.utilityService.attachMapLabel(vehicles)),
       share()
     );
-  }
-
-  private attachMapLabel(vehicles: any): any {
-    return vehicles.map(ve => {
-      return Object.assign(ve, {
-        label: {
-          color: '#ffffff',
-          fontFamily: '',
-          fontSize: '9px',
-          fontWeight: 'normal',
-          text: ve.bus_number.toString()
-        }
-      });
-    });
   }
 
 }

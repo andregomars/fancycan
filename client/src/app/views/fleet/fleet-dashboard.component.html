@@ -28,8 +28,8 @@
         <button class="btn btn-link d-none d-lg-block" (click)="resizeSideInfo()">
           <i class="fa fa-angle-double-right fa-lg"></i>
         </button>
-        <input class="form-control bg-dark input-filter" size="5" [(ngModel)]="bus_number" type="text" placeholder="Filter by vehicle number"
-          (keyup)="filterVehicles(bus_number)" [hidden]="hideSideInfo"/>
+        <input class="form-control bg-dark input-filter" size="5" [(ngModel)]="vcode" type="text" placeholder="Filter by vehicle number"
+          (keyup)="filterVehicles(vcode)" [hidden]="hideSideInfo"/>
       </div>
       <div class="table-responsive-lg" [hidden]="hideSideInfo">
         <table class="table table-striped table-hover table-outline table-sm mt-1">
@@ -44,8 +44,8 @@
           <tbody>
             <tr *ngFor="let vehicle of filteredVehicles$ | async">
               <td>
-                <a class="btn btn-link" [routerLink]="['/vehicle', vehicle.bus_number]">
-                  <small>{{ vehicle.bus_number }}</small>
+                <a class="btn btn-link" [routerLink]="['/vehicle', vehicle.code]">
+                  <small>{{ vehicle.code }}</small>
                 </a>
               </td>
               <td>

@@ -57,14 +57,14 @@ export class UtilityService {
     }
 
     attachMapLabel(vehicles: any): any {
-        return vehicles.map(ve => {
-            return Object.assign(ve, {
+        return vehicles.map(vehicle => {
+            return Object.assign(vehicle, {
                 label: {
                     color: '#ffffff',
                     fontFamily: '',
                     fontSize: '9px',
                     fontWeight: 'normal',
-                    text: ve.bus_number.toString()
+                    text: vehicle.code.toString()
                 }
             });
         });

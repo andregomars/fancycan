@@ -1,6 +1,7 @@
 [
     {
-        "bus_number": 5001,
+        "code": 5001,
+        "fleet_code": "LAMTA",
         "latitude": 34.056539,
         "longitude": -118.237485,
         "soc": 200,
@@ -9,7 +10,8 @@
         "updated": "2018-08-21 13:10:22"
     },
     {
-        "bus_number": 5002,
+        "code": 5002,
+        "fleet_code": "LAMTA",
         "latitude": 34.057623,
         "longitude": -118.240124,
         "soc": 200,
@@ -18,7 +20,8 @@
         "updated": "2018-08-21 13:10:22"
     },
     {
-        "bus_number": 5003,
+        "code": 5003,
+        "fleet_code": "LAMTA",
         "latitude": 34.054716,
         "longitude": -118.241766,
         "soc": 200,

@@ -5,13 +5,15 @@ import { SpnSpecificationComponent } from './spn-specification.component';
 import { SettingRoutingModule } from './setting-routing.module';
 import { FormsModule } from '@angular/forms';
 import { NgStringPipesModule } from 'angular-pipes';
+import { ComponentsModule } from '../../components/components.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     NgStringPipesModule,
-    SettingRoutingModule
+    SettingRoutingModule,
+    ComponentsModule
   ],
   declarations: [
     SettingContainerComponent,

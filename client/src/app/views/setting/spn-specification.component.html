@@ -1,11 +1,12 @@
 <div class="animated fadeIn">
   <div class="row mt-2">
     <div class="col-12 col-lg-8">
-      <div class="row mt-2">
-        <div class="d-flex justify-content-around">
-          <input class="form-control bg-dark input-filter" size="25"  [(ngModel)]="keyword" type="text" placeholder="Filter by SPN, SPN name, PGN"
-            (keyup)="filterSpec(keyword)" />
-        </div>
+      <div class="row mt-1">
+        <app-nav-label></app-nav-label>
+      </div>
+      <div class="row mt-1">
+        <input class="form-control bg-dark input-filter" size="25" [(ngModel)]="keyword" type="text" placeholder="Filter by SPN, SPN name, PGN"
+          (keyup)="filterSpec(keyword)" />
       </div>
       <div class="row fc-spec mt-2 p-2 border border-secondary rounded">
         <ul class="list-unstyled">

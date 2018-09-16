@@ -19,7 +19,7 @@ const routes: Routes = [
         path: 'j1939',
         component: SpnSpecificationComponent,
         data: {
-          title: 'Fleet List'
+          title: 'J1939'
         }
       }
     ]
