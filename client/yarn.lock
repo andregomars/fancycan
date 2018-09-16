@@ -498,6 +498,12 @@ amdefine@>=0.0.4:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
 
+angular-pipes@^8.1.1:
+  version "8.1.1"
+  resolved "https://registry.yarnpkg.com/angular-pipes/-/angular-pipes-8.1.1.tgz#8cfbeb9effea45e5fab59b4d6df3a56650525b61"
+  dependencies:
+    tslib "^1.9.0"
+
 ansi-colors@^3.0.0:
   version "3.0.5"
   resolved "https://registry.yarnpkg.com/ansi-colors/-/ansi-colors-3.0.5.tgz#cb9dc64993b64fd6945485f797fc3853137d9a7b"

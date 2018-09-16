@@ -40,6 +40,7 @@
     "@coreui/icons": "^0.3.0",
     "@nativescript/schematics": "^0.2.5",
     "@ng-select/ng-select": "^2.8.0",
+    "angular-pipes": "^8.1.1",
     "bootstrap": "^4.1.2",
     "chart.js": "^2.7.2",
     "core-js": "^2.5.7",

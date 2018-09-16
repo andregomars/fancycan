@@ -7,12 +7,31 @@
             (keyup)="filterSpec(keyword)" />
         </div>
       </div>
-      <div class="row mt-2 border border-secondary rounded">
-        <ul class="list-unstyle">
-          <li *ngFor="let spec of specs$ | async">
-            <pre>
-              {{ spec }}
-            </pre>
+      <div class="row fc-spec mt-2 p-2 border border-secondary rounded">
+        <ul class="list-unstyled">
+          <li *ngFor="let spec of filteredSpecs$ | async">
+            <div>
+              <span><strong>SPN No: </strong></span>
+              <span>{{ spec.SPNNo }}</span>
+              <span>&nbsp;&nbsp;
+                <button class="btn btn-primary btn-sm">Add to definition</button>
+              </span>
+            </div>
+            <div>
+              <span><strong>SPN Name: </strong></span>
+              <span>{{ spec.SPNName }}</span>
+            </div>
+            <div>
+              <span><strong>SPN Description: </strong></span>
+              <span [innerHtml]="spec.SPNDescription | newlines"></span>
+            </div>
+            <div *ngFor="let prop of spec | keyvalue">
+              <ng-container *ngIf="isSpecDetail(prop.key)">
+                <span><strong>{{ prop.key }}: </strong></span>
+                <span [innerHtml]="prop.value | newlines"></span>
+              </ng-container>
+            </div>
+            <div class="dropdown-divider bg-white"></div>
           </li>
         </ul>
       </div>

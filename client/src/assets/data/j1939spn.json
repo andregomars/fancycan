@@ -104,8 +104,9 @@
       "Priority": "-1"
    },
    {
-      "SPNItems": {
-         "SPN": {
+      "SPNItems": [
+          {
+          
             "UnitType": "1",
             "SPNNo": "3564",
             "SPNName": "Lane Departure Warning Enable Command",
@@ -133,8 +134,8 @@
             "Length": "2",
             "UpperDataRange": "3",
             "LowerDataRange": "0"
-         }
-      },
+        }
+      ],
       "TransmissionRate": "0",
       "PGNNo": "43264",
       "PGNName": "Forward Lane Image Command",
@@ -143,8 +144,8 @@
       "Priority": "-1"
    },
    {
-      "SPNItems": {
-         "SPN": {
+      "SPNItems": [
+         {
             "UnitType": "1",
             "SPNNo": "1487",
             "SPNName": "Illumination Brightness Percent",
@@ -168,7 +169,7 @@
             "UpperDataRange": "100",
             "LowerDataRange": "0"
          }
-      },
+      ],
       "TransmissionRate": "0",
       "PGNNo": "53248",
       "PGNName": "Cab Illumination Message",

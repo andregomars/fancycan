@@ -42,7 +42,6 @@ export class UtilityService {
     }
 
     getFlattedSPNSpecs(specs: any[]): any[] {
-        console.log(specs[0].SPNItems)
         return specs.map(pgn =>
             pgn.SPNItems.map(spn =>
                 Object.assign({},
@@ -54,7 +53,7 @@ export class UtilityService {
                     { Priority: pgn.Priority }
                 )
             )
-        );
+        ).reduce((acc, cur) => [...acc, ...cur], []);
     }
 
     attachMapLabel(vehicles: any): any {
