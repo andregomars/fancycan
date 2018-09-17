@@ -24,24 +24,23 @@
           <label>Engine</label>
         </div>
         <div class="col-4">
-          <label class="switch switch-label switch-outline-secondary-alt">
-            <input type="checkbox" class="switch-input">
-            <span class="switch-slider" data-checked="On" data-unchecked="Off"></span>
-          </label>
+          <app-switch [isSwitchOn]="(vehicle$ | async)?.engine"></app-switch>
         </div>
         <div class="col-3">
-          <img [src]="imgEngineCheck" class="img-fluid" alt="bus" width="35px" height="28px">
+          <img *ngIf="(vehicle$ | async)?.engine_check"
+            [src]="imgEngineCheck" class="img-fluid" alt="bus" width="35px" height="28px">
         </div>
       </div>
       <div class="row mt-2 pt-2 justify-content-around border border-secondary rounded">
         <div class="col-5">
           <label>Transmission</label>
         </div>
-        <div class="col-7">
-          <label class="switch switch-label switch-outline-secondary-alt">
-            <input type="checkbox" class="switch-input">
-            <span class="switch-slider" data-checked="D" data-unchecked="P"></span>
-          </label>
+        <div class="col-4">
+          <app-transmission-switch [shift]="(vehicle$ | async)?.transmission"></app-transmission-switch>
+        </div>
+        <div class="col-3">
+          <img *ngIf="(vehicle$ | async)?.transmission_check"
+            [src]="imgEngineCheck" class="img-fluid" alt="bus" width="35px" height="28px">
         </div>
       </div>
       <div class="row mt-2 py-2 border border-secondary rounded">
@@ -102,14 +101,18 @@
         <div class="col mt-2 p-2" [style.min-height.px]="mapMinHeight" [style.background-color]="'#242f3e'">
           <agm-map id="map_canvas" *ngIf="loadMap" [zoom]="mapZoom" [streetViewControl]=false [styles]="mapStyle"
             [latitude]="map_lat" [longitude]="map_lgt">
-            <ng-container *ngIf="(vehicles$ | async) as locations">
+            <ng-container *ngIf="(vehicle$ | async) as vehicle">
+              <agm-marker [latitude]="vehicle.latitude" [longitude]="vehicle.longitude" iconUrl="assets/img/map/bus.20.png">
+              </agm-marker>
+            </ng-container>
+            <!-- <ng-container *ngIf="(vehicles$ | async) as locations">
               <agm-marker *ngFor="let loc of locations" [latitude]="loc.latitude" [longitude]="loc.longitude">
               </agm-marker>
               <agm-polyline [polylineDraggable]=false [strokeColor]="'red'" [strokeOpacity]="0.5" [strokeWeight]="5">
                 <agm-polyline-point *ngFor="let loc of locations" [latitude]="loc.latitude" [longitude]="loc.longitude">
                 </agm-polyline-point>
               </agm-polyline>
-            </ng-container>
+            </ng-container> -->
           </agm-map>
         </div>
       </div>
@@ -117,23 +120,27 @@
     <div class="col-12 col-lg-4">
       <div class="row no-gutters mt-2">
         <div class="col-6 text-center">
-          <ngx-gauge size="100" foregroundColor="#17a2b8" [type]="gaugeType" [value]="85" [label]="'Speed'" [thick]="gaugeThick"
-            [append]="">
+          <div>Speed</div>
+          <ngx-gauge size="100" [foregroundColor]="gaugeForegroundColor" [type]="gaugeType" 
+            [value]="35" [thick]="gaugeThick">
           </ngx-gauge>
         </div>
         <div class="col-6 text-center">
-          <ngx-gauge size="100" foregroundColor="#17a2b8" [type]="gaugeType" [value]="57" [label]="'RPM'" [thick]="gaugeThick"
-            [append]="">
+          <div>RPM</div>
+          <ngx-gauge size="100" [foregroundColor]="gaugeForegroundColor" [type]="gaugeType" 
+            [value]="85" [thick]="gaugeThick">
           </ngx-gauge>
         </div>
         <div class="col-6 text-center">
-          <ngx-gauge size="100" foregroundColor="#17a2b8" [type]="gaugeType" [value]="68.3" [label]="'Spare 1'" [thick]="gaugeThick"
-            [append]="">
+          <div>Spare 1</div>
+          <ngx-gauge size="100" [foregroundColor]="gaugeForegroundColor" [type]="gaugeType" [value]="0" [thick]="gaugeThick"
+            >
           </ngx-gauge>
         </div>
         <div class="col-6 text-center">
-          <ngx-gauge size="100" foregroundColor="#17a2b8" [type]="gaugeType" [value]="68.3" [label]="'Spare 2'" [thick]="gaugeThick"
-            [append]="">
+          <div>Spare 2</div>
+          <ngx-gauge size="100" [foregroundColor]="gaugeForegroundColor" [type]="gaugeType" [value]="0" [thick]="gaugeThick"
+            >
           </ngx-gauge>
         </div>
       </div>
@@ -141,10 +148,10 @@
       <div class="dropdown-divider"></div>
       <div class="row">
         <div class="col-12 col-md-6">
-          Odometer: {{ odometer }}
+          Odometer: {{ (vehicle$ | async)?.odometer | number:'1.1-2' }} mi
         </div>
         <div class="col-12 col-md-6">
-          VIN: {{ vin }}
+          VIN: {{ (vehicle$ | async)?.vin }}
         </div>
       </div>
       <div class="row px-2">
@@ -160,7 +167,7 @@
             </div>
           </div>
           <div class="progress border border-dark">
-            <div class="progress-bar bg-success" [style.width.%]="'50'">
+            <div class="progress-bar bg-success" [style.width.%]="(vehicle$ | async)?.coolant_level">
             </div>
           </div>
         </div>
@@ -173,7 +180,7 @@
             </div>
           </div>
           <div class="progress border border-dark">
-            <div class="progress-bar bg-success" [style.width.%]="'90'">
+            <div class="progress-bar bg-success" [style.width.%]="(vehicle$ | async)?.coolant_temperature">
             </div>
           </div>
         </div>
@@ -186,7 +193,7 @@
             </div>
           </div>
           <div class="progress border border-dark">
-            <div class="progress-bar bg-success" [style.width.%]="'22'">
+            <div class="progress-bar bg-success" [style.width.%]="'0'">
             </div>
           </div>
         </div>
@@ -199,7 +206,7 @@
             </div>
           </div>
           <div class="progress border border-dark">
-            <div class="progress-bar bg-success" [style.width.%]="'80'">
+            <div class="progress-bar bg-success" [style.width.%]="'0'">
             </div>
           </div>
         </div>
@@ -211,10 +218,7 @@
               <label>Front door</label>
             </div>
             <div class="col-5 text-right">
-              <label class="switch switch-label switch-outline-secondary-alt">
-                <input type="checkbox" class="switch-input" checked>
-                <span class="switch-slider" data-checked="On" data-unchecked="Off"></span>
-              </label>
+              <app-switch [isSwitchOn]="(vehicle$ | async)?.frontdoor"></app-switch>
             </div>
           </div>
         </div>
@@ -224,10 +228,7 @@
               <label>Rear door</label>
             </div>
             <div class="col-5 text-right">
-              <label class="switch switch-label switch-outline-secondary-alt">
-                <input type="checkbox" class="switch-input">
-                <span class="switch-slider" data-checked="On" data-unchecked="Off"></span>
-              </label>
+              <app-switch [isSwitchOn]="(vehicle$ | async)?.reardoor"></app-switch>
             </div>
           </div>
         </div>
@@ -237,10 +238,7 @@
               <label>Spare 1</label>
             </div>
             <div class="col-5 text-right">
-              <label class="switch switch-label switch-outline-secondary-alt">
-                <input type="checkbox" class="switch-input" checked>
-                <span class="switch-slider" data-checked="On" data-unchecked="Off"></span>
-              </label>
+              <app-switch [isSwitchOn]="false"></app-switch>
             </div>
           </div>
         </div>
@@ -250,10 +248,7 @@
               <label>Spare 2</label>
             </div>
             <div class="col-5 text-right">
-              <label class="switch switch-label switch-outline-secondary-alt">
-                <input type="checkbox" class="switch-input">
-                <span class="switch-slider" data-checked="On" data-unchecked="Off"></span>
-              </label>
+              <app-switch [isSwitchOn]="false"></app-switch>
             </div>
           </div>
         </div>

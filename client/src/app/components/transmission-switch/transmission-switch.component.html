@@ -1,0 +1,11 @@
+<label class="switch switch-label switch-outline-primary-alt" >
+  <input type="checkbox" class="switch-input" (click)="clickSwitch($event)" checked/>
+  <ng-container [ngSwitch]="shift">
+    <span *ngSwitchCase="'P'" class="switch-slider" data-checked="P" data-unchecked=""></span>
+    <span *ngSwitchCase="'D'" class="switch-slider" data-checked="D" data-unchecked=""></span>
+    <span *ngSwitchCase="'R'" class="switch-slider" data-checked="R" data-unchecked=""></span>
+    <span *ngSwitchCase="'N'" class="switch-slider" data-checked="N" data-unchecked=""></span>
+    <span *ngSwitchCase="'L'" class="switch-slider" data-checked="L" data-unchecked=""></span>
+    <span *ngSwitchDefault class="switch-slider" data-checked="U" data-unchecked=""></span>
+  </ng-container>
+</label>

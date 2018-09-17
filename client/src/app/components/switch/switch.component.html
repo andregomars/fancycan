@@ -1,0 +1,11 @@
+<label class="switch switch-label switch-outline-primary-alt" >
+  <input type="checkbox" class="switch-input" (click)="clickSwitch($event)" checked/>
+  <ng-container *ngIf="isSwitchOn; then switchOn; else switchOff">
+  </ng-container>
+  <ng-template #switchOn>
+    <span class="switch-slider" data-checked="On" data-unchecked=""></span>
+  </ng-template>
+  <ng-template #switchOff>
+    <span class="switch-slider" data-checked="Off" data-unchecked=""></span>
+  </ng-template>
+</label>

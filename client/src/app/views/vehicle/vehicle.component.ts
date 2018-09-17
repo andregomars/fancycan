@@ -21,7 +21,9 @@ export class VehicleComponent implements OnInit {
   definitions$: Observable<any>;
   decodes$: Observable<any>;
   vehicles$: Observable<any>;
+  vehicle$: Observable<any>;
 
+  // map config
   loadMap = environment.loadMap;
   mapMinHeight = 350;
   mapZoom = 15;
@@ -29,6 +31,9 @@ export class VehicleComponent implements OnInit {
   bus_number: string;
   map_lat = 34.056539;
   map_lgt = -118.237485;
+
+  // gauge config
+  gaugeForegroundColor = '#17a2b8';
   gaugeType = 'semi';
   gaugeThick = 15;
 
@@ -98,7 +103,8 @@ export class VehicleComponent implements OnInit {
 
   ngOnInit() {
     this.initViewProfile();
-    this.loadData();
+    this.loadVehicles();
+    this.loadVehicle();
   }
 
   private initViewProfile() {
@@ -112,10 +118,22 @@ export class VehicleComponent implements OnInit {
     ).subscribe((profile: ViewProfile) => {
       this.storageService.setViewProfile(profile);
     });
-
   }
 
-  private loadData() {
+  private loadVehicle() {
+    this.vehicle$ = this.dataService.getVehicles().pipe(
+      switchMap(vehicles =>
+        this.storageService.watchViewProfile().pipe(
+          map(profile =>
+            vehicles.find(vehicle => vehicle.code === profile.vehicle_code)
+          )
+        )
+      ),
+      share()
+    );
+  }
+
+  private loadVehicles() {
     this.vehicles$ = this.dataService.getVehicles().pipe(
       map(vehicles => this.utilityService.attachMapLabel(vehicles)),
       share()

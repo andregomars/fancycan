@@ -9,6 +9,8 @@ import { BsDatepickerModule  } from 'ngx-bootstrap/datepicker';
 import { TooltipLabelComponent } from './tooltip-label/tooltip-label.component';
 import { DatepickerBarComponent } from './datepicker-bar/datepicker-bar.component';
 import { NavLabelComponent } from './nav-label/nav-label.component';
+import { SwitchComponent } from './switch/switch.component';
+import { TransmissionSwitchComponent } from './transmission-switch/transmission-switch.component';
 
 @NgModule({
   imports: [
@@ -23,11 +25,15 @@ import { NavLabelComponent } from './nav-label/nav-label.component';
       TooltipLabelComponent,
       DatepickerBarComponent,
       NavLabelComponent,
+      SwitchComponent,
+      TransmissionSwitchComponent,
   ],
   exports: [
       TooltipLabelComponent,
       DatepickerBarComponent,
-      NavLabelComponent
+      NavLabelComponent,
+      SwitchComponent,
+      TransmissionSwitchComponent,
   ]
 })
 export class ComponentsModule { }
