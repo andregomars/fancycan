@@ -12,7 +12,8 @@ import { MapStyle } from '../shared/map-style';
   styleUrls: ['./playback.component.scss']
 })
 export class PlaybackComponent implements OnInit {
-  bsValue = new Date();
+  selectedDate = new Date();
+  selectedTime = new Date();
   bsRangeValue: Date[];
   maxDate = new Date();
   rawDataList: any[];
@@ -62,8 +63,8 @@ export class PlaybackComponent implements OnInit {
       share()
     );
 
-    this.maxDate.setDate(this.maxDate.getDate() + 7);
-    this.bsRangeValue = [this.bsValue, this.maxDate];
+    // this.maxDate.setDate(this.maxDate.getDate() + 7);
+    // this.bsRangeValue = [this.bsValue, this.maxDate];
   }
 
 }

@@ -213,8 +213,16 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td *ngFor="let i of [1,2,3,4,5,6,7,8,9]">&nbsp;</td>
-                    <td><button class="btn btn-link"><i class="fa fa-times-circle text-danger"></i></button> </td>
+                    <td width="25">
+                      <input type="text" class="form-control p-1">
+                    </td>
+                    <td width="5" *ngFor="let i of [1,2,3,4,5,6,7,8]">
+                      <input type="text" class="form-control m-0 p-1">
+                    </td>
+                    <td width="5" class="p-0">
+                      <button class="btn btn-link p-0"><i class="fa fa-times-circle text-danger"></i>
+                      </button>
+                    </td>
                   </tr>
                 </tbody>
               </table>

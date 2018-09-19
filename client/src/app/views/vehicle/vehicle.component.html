@@ -122,13 +122,13 @@
         <div class="col-6 text-center">
           <div>Speed</div>
           <ngx-gauge size="100" [foregroundColor]="gaugeForegroundColor" [type]="gaugeType" 
-            [value]="35" [thick]="gaugeThick">
+            [value]="35" [label]="'0 - 100'" [thick]="gaugeThick">
           </ngx-gauge>
         </div>
         <div class="col-6 text-center">
           <div>RPM</div>
           <ngx-gauge size="100" [foregroundColor]="gaugeForegroundColor" [type]="gaugeType" 
-            [value]="85" [thick]="gaugeThick">
+            [value]="85" [label]="'0 - 3500'" [thick]="gaugeThick">
           </ngx-gauge>
         </div>
         <div class="col-6 text-center">
@@ -166,10 +166,8 @@
               <label>Coolant level</label>
             </div>
           </div>
-          <div class="progress border border-dark">
-            <div class="progress-bar bg-success" [style.width.%]="(vehicle$ | async)?.coolant_level">
-            </div>
-          </div>
+          <app-progress-bar [value]="(vehicle$ | async)?.coolant_level"
+            min="0" max="100"></app-progress-bar>
         </div>
       </div>
       <div class="row">
@@ -179,10 +177,8 @@
               <label>Coolant temperature</label>
             </div>
           </div>
-          <div class="progress border border-dark">
-            <div class="progress-bar bg-success" [style.width.%]="(vehicle$ | async)?.coolant_temperature">
-            </div>
-          </div>
+          <app-progress-bar [value]="(vehicle$ | async)?.coolant_temperature"
+            [min]="temperatureMin" [max]="temperatureMax"></app-progress-bar>
         </div>
       </div>
       <div class="row">

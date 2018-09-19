@@ -11,6 +11,7 @@ import { DatepickerBarComponent } from './datepicker-bar/datepicker-bar.componen
 import { NavLabelComponent } from './nav-label/nav-label.component';
 import { SwitchComponent } from './switch/switch.component';
 import { TransmissionSwitchComponent } from './transmission-switch/transmission-switch.component';
+import { ProgressBarComponent } from './progress-bar/progress-bar.component';
 
 @NgModule({
   imports: [
@@ -27,6 +28,7 @@ import { TransmissionSwitchComponent } from './transmission-switch/transmission-
       NavLabelComponent,
       SwitchComponent,
       TransmissionSwitchComponent,
+      ProgressBarComponent,
   ],
   exports: [
       TooltipLabelComponent,
@@ -34,6 +36,7 @@ import { TransmissionSwitchComponent } from './transmission-switch/transmission-
       NavLabelComponent,
       SwitchComponent,
       TransmissionSwitchComponent,
+      ProgressBarComponent,
   ]
 })
 export class ComponentsModule { }

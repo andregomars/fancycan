@@ -5,7 +5,7 @@ import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
 import * as moment from 'moment';
 import { Observable } from 'rxjs';
 import { DataService, UtilityService, StorageService } from '../../services';
-import { share, map, tap, switchMap } from 'rxjs/operators';
+import { share, map, tap, switchMap, take } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { MapStyle } from './../shared/map-style';
 import { ActivatedRoute, ParamMap } from '@angular/router';
@@ -17,6 +17,8 @@ import { ViewProfile } from '../../model';
   styleUrls: ['./vehicle.component.scss']
 })
 export class VehicleComponent implements OnInit {
+  temperatureMax = 300;
+  temperatureMin = -300;
   alerts$: Observable<any>;
   definitions$: Observable<any>;
   decodes$: Observable<any>;
@@ -140,6 +142,7 @@ export class VehicleComponent implements OnInit {
     );
 
     this.alerts$ = this.dataService.getAlerts().pipe(
+      map((alerts: any[]) => alerts.slice(0, 5)),
       share()
     );
 

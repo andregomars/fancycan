@@ -8,8 +8,8 @@
         <div class="col-12 col-md-6">
           Start Time: {{ currentTime | date: 'yyyy-MM-dd hh:mm:ss'}}
         </div>
-        <div class="col-12 col-md-6">
-          <div class="border border-rounded w-25">
+        <div class="col-6 col-md-3">
+          <div class="border border-rounded w-75">
             <button class="btn btn-link btn-sm">
               <i class="fa fa-refresh"></i>
             </button>
@@ -20,6 +20,15 @@
               <i class="fa fa-play"></i>
             </button>
           </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <label class="btn btn-link btn-primary btn-small border-0 pull-right">
+            <i class="fa fa-upload"></i>
+            <input type="file" hidden>
+          </label>
+          <button class="btn btn-link btn-primary btn-small border-0 pull-right">
+            <i class="fa fa-download"></i>
+          </button>
         </div>
       </div>
     </div>
@@ -278,24 +287,18 @@
     </div>
     <div class="col-12 col-lg-4">
       <div class="row">
-        <div class="col-8">
+        <div class="col d-flex flex-column justify-content-center">
           <div class="input-group mt-1">
             <span class="input-group-prepend">
               <span class="input-group-text">
                 <i class="fa fa-calendar"></i>
               </span>
             </span>
-            <input class="form-control" #drp="bsDaterangepicker" bsDaterangepicker [(ngModel)]="bsRangeValue">
+            <input class="form-control" bsDatepicker [bsValue]="selectedDate">
           </div>
         </div>
-        <div class="col-4">
-          <button class="btn btn-primary m-1 pull-right">
-            <i class="fa fa-download"></i>
-          </button>
-          <label class="btn btn-primary m-1 pull-right">
-            <i class="fa fa-upload"></i>
-            <input type="file" hidden>
-          </label>
+        <div class="col">
+          <timepicker [(ngModel)]="selectedTime" [arrowkeys]="'false'"></timepicker>
         </div>
       </div>
       <div class="row">

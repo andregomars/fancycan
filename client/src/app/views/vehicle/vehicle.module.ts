@@ -8,6 +8,8 @@ import { AgmCoreModule } from '@agm/core';
 import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
 import { AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { TimepickerModule } from 'ngx-bootstrap/timepicker';
+
 
 import { VehicleComponent } from './vehicle.component';
 import { VehicleListComponent } from './vehicle-list.component';
@@ -31,6 +33,7 @@ import { VehicleContainerComponent } from './vehicle-container.component';
     AgmSnazzyInfoWindowModule,
     AgmJsMarkerClustererModule,
     BsDatepickerModule,
+    TimepickerModule,
     ComponentsModule,
   ],
   declarations: [

@@ -44,6 +44,7 @@ import { AgmCoreModule } from '@agm/core';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
+import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 
 @NgModule({
   imports: [
@@ -60,6 +61,7 @@ import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
     AgmCoreModule.forRoot(environment.agm),
     BsDropdownModule.forRoot(),
     BsDatepickerModule.forRoot(),
+    TimepickerModule.forRoot(),
     TooltipModule.forRoot(),
     TypeaheadModule.forRoot(),
     TabsModule.forRoot(),
