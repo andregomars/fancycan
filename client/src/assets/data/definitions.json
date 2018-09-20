@@ -1,47 +1,57 @@
-[
-    {
-        "spn": "84",
-        "name": "",
-        "pgn": ""
-    },
-    {
-        "spn": "100",
-        "name": "",
-        "pgn": ""
-    },
-    {
-        "spn": "917",
-        "name": "",
-        "pgn": ""
-    },
-    {
-        "spn": "6002",
-        "name": "",
-        "pgn": ""
-    },
-    {
-        "spn": "6002",
-        "name": "",
-        "pgn": ""
-    },
-    {
-        "spn": "6002",
-        "name": "",
-        "pgn": ""
-    },
-    {
-        "spn": "4005",
-        "name": "",
-        "pgn": ""
-    },
-    {
-        "spn": "84",
-        "name": "",
-        "pgn": ""
-    },
-    {
-        "spn": "84",
-        "name": "",
-        "pgn": ""
-    }
-]
+[ {
+  "name" : "Parking Brake Switch",
+  "pgn" : "65265",
+  "spn" : "70"
+}, {
+  "name" : "Wheel-Based Vehicle Speed",
+  "pgn" : "65265",
+  "spn" : "84"
+}, {
+  "name" : "Engine Oil Pressure",
+  "pgn" : "65263",
+  "spn" : "100"
+}, {
+  "name" : "Engine Coolant Temperature",
+  "pgn" : "65263",
+  "spn" : "110"
+}, {
+  "name" : "Engine Coolant Level",
+  "pgn" : "65263",
+  "spn" : "111"
+}, {
+  "name" : "Transmission Oil Temperature",
+  "pgn" : "65272",
+  "spn" : "177"
+}, {
+  "name" : "Engine Average Fuel Economy",
+  "pgn" : "65266",
+  "spn" : "185"
+}, {
+  "name" : "Engine Speed",
+  "pgn" : "61444",
+  "spn" : "190"
+}, {
+  "name" : "Anti-Lock Braking (ABS) Active",
+  "pgn" : "61441",
+  "spn" : "563"
+}, {
+  "name" : "GPS Latitude",
+  "pgn" : "65267",
+  "spn" : "584"
+}, {
+  "name" : "GPS Longitude",
+  "pgn" : "65267",
+  "spn" : "585"
+}, {
+  "name" : "High Resolution Total Vehicle Distance",
+  "pgn" : "65217",
+  "spn" : "917"
+}, {
+  "name" : "High Resolution Trip Distance",
+  "pgn" : "65217",
+  "spn" : "918"
+}, {
+  "name" : "ABS Fully Operational",
+  "pgn" : "61441",
+  "spn" : "1243"
+} ]

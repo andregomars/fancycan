@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { map, share } from 'rxjs/operators';
 import { ViewProfile } from '../../model';
+import * as moment from 'moment';
 
 @Injectable({
     providedIn: 'root'
@@ -54,6 +55,30 @@ export class UtilityService {
                 )
             )
         ).reduce((acc, cur) => [...acc, ...cur], []);
+    }
+
+    getCurrentData(): Observable<any> {
+        return of(this.randomObject());
+    }
+
+    formatDataTime(data: any) {
+        return {
+            time: moment(data.time).format('hh:mm:ss'),
+            num: data.num
+        };
+    }
+
+    private randomObject(): any {
+        const time = new Date();
+        const num = this.randomNumberRange(20, 80);
+        return {
+            time: time,
+            num: num
+        };
+    }
+
+    private randomNumberRange(min: number, max: number): number {
+        return Math.floor(Math.random() * (max - min) + min);
     }
 
     attachMapLabel(vehicles: any): any {

@@ -44,7 +44,7 @@
         </div>
       </div>
       <div class="row mt-2 py-2 border border-secondary rounded">
-        <div class="col-12 col-lg-6">
+        <div class="col-12 col-lg-8">
           <div class="row">
             <div class="col">
               <app-tooltip-label label="fuel economy"></app-tooltip-label>
@@ -52,26 +52,28 @@
           </div>
           <div class="row">
             <div class="col">
-              <div class="card text-white mb-2">
-                <div class="chart-wrapper mt-0" style="height:70px;">
+              <div class="card mb-0">
+                <app-play-chart [len]="len" [intSec]="intSec"
+                  [labels]="playChartLabels" [data$]="playChartData$"></app-play-chart>
+                <!-- <div class="chart-wrapper mt-0" style="height:70px;">
                   <canvas baseChart class="chart" [datasets]="lineChart3Data" [labels]="lineChart3Labels" [options]="lineChart3Options"
                     [colors]="lineChart3Colours" [legend]="lineChart3Legend" [chartType]="lineChart3Type"></canvas>
-                </div>
+                </div> -->
               </div>
             </div>
           </div>
-          <div class="row">
+          <div class="row text-center">
             <div class="col">
               <small>Latest value:</small>
             </div>
           </div>
-          <div class="row">
+          <div class="row text-center">
             <div class="col">
               <small>Avg:</small>
             </div>
           </div>
         </div>
-        <div class="col-12 col-lg-6">
+        <div class="col-12 col-lg-4">
           <div class="row">
             <div class="col">
               <app-tooltip-label label="engine idle"></app-tooltip-label>
@@ -79,18 +81,18 @@
           </div>
           <div class="row">
             <div class="col mb-2">
-              <div class="chart-wrapper mt-0" style="height:70px;">
+              <div class="chart-wrapper mt-0" style="height:150px;">
                 <canvas baseChart class="chart" [datasets]="lineChart3Data" [labels]="lineChart3Labels" [options]="lineChart3Options"
                   [colors]="lineChart3Colours" [legend]="lineChart3Legend" [chartType]="'pie'"></canvas>
               </div>
             </div>
           </div>
-          <div class="row">
+          <div class="row text-center">
             <div class="col">
               <small>Running: </small>
             </div>
           </div>
-          <div class="row">
+          <div class="row text-center">
             <div class="col">
               <small>Idle:</small>
             </div>
@@ -188,10 +190,7 @@
               <label>Spare 1</label>
             </div>
           </div>
-          <div class="progress border border-dark">
-            <div class="progress-bar bg-success" [style.width.%]="'0'">
-            </div>
-          </div>
+          <app-progress-bar [value]="0" [min]="0" [max]="100"></app-progress-bar>
         </div>
       </div>
       <div class="row">
@@ -201,10 +200,7 @@
               <label>Spare 2</label>
             </div>
           </div>
-          <div class="progress border border-dark">
-            <div class="progress-bar bg-success" [style.width.%]="'0'">
-            </div>
-          </div>
+          <app-progress-bar [value]="0" [min]="0" [max]="100"></app-progress-bar>
         </div>
       </div>
       <div class="row mt-2">
@@ -305,7 +301,7 @@
                       <div class="small">{{ definition.name }}</div>
                     </td>
                     <td>
-                      <div class="small">{{ definition.updated }}</div>
+                      <div class="small">{{ definition.pgn }}</div>
                     </td>
                   </tr>
                 </tbody>

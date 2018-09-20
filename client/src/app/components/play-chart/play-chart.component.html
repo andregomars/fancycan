@@ -1,0 +1,8 @@
+<ng-container *ngIf="source$ | async as source">
+  <!-- <div class="d-block"> -->
+    <canvas baseChart 
+      [data]="source.chartData" [labels]="labels" 
+      [options]="thumbnailChartOptions" [colors]="thumbnailChartColors" 
+      [legend]="lineChartLegend" [chartType]="lineChartType"></canvas>
+  <!-- </div> -->
+</ng-container>

@@ -17,13 +17,18 @@ import { ViewProfile } from '../../model';
   styleUrls: ['./vehicle.component.scss']
 })
 export class VehicleComponent implements OnInit {
+  len = 30;
+  intSec = 1;
   temperatureMax = 300;
   temperatureMin = -300;
+  queue: any[];
   alerts$: Observable<any>;
   definitions$: Observable<any>;
   decodes$: Observable<any>;
   vehicles$: Observable<any>;
   vehicle$: Observable<any>;
+  playChartData$: Observable<any>;
+  playChartLabels: string[];
 
   // map config
   loadMap = environment.loadMap;
@@ -51,11 +56,11 @@ export class VehicleComponent implements OnInit {
    // lineChart3
   public lineChart3Data: Array<any> = [
     {
-      data: [12, 13, 25, 22, 32, 55, 66, 77, 88, 89, 99],
+      data: [12, 28],
       label: 'Series A'
     }
   ];
-  public lineChart3Labels: Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+  public lineChart3Labels: Array<any> = ['Idle', 'Running'];
   public lineChart3Options: any = {
     tooltips: {
       enabled: false,
@@ -107,6 +112,7 @@ export class VehicleComponent implements OnInit {
     this.initViewProfile();
     this.loadVehicles();
     this.loadVehicle();
+    this.loadPlayChartData();
   }
 
   private initViewProfile() {
@@ -153,6 +159,13 @@ export class VehicleComponent implements OnInit {
     this.decodes$ = this.dataService.getDecodes().pipe(
       share()
     );
+  }
+
+  private loadPlayChartData() {
+    this.playChartLabels = Array.from(new Array(this.len), (v, i) =>
+      `${((this.len - i - 1) * this.intSec)}s`
+    );
+    this.playChartData$ = this.utilityService.getCurrentData();
   }
 
 }
