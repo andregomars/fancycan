@@ -114,12 +114,12 @@
       </div>
       <div class="row mt-2 py-2 border border-secondary rounded">
         <ul class="col list-unstyled">
-          <li *ngFor="let item of rawDataList" class="row">
+          <li *ngFor="let item of cans$ | async" class="row">
             <div class="col-4">
               {{ item.id }}
             </div>
             <div class="col-8">
-              {{ item.data }}
+              {{ item.value }}
             </div>
           </li>
         </ul>

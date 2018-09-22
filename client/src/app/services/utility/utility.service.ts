@@ -68,6 +68,13 @@ export class UtilityService {
         };
     }
 
+    formatRawCAN(can: string) {
+        return can.split('').reduce((output, char, i) =>
+            output + char + ((i % 2 !== 0) ? ' ' : '')
+        , '').trim();
+
+    }
+
     private randomObject(): any {
         const time = new Date();
         const num = this.randomNumberRange(20, 80);

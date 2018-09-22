@@ -18,6 +18,7 @@ export class RtmComponent implements OnInit {
   rawDataList: any[];
   vehicles$: Observable<any>;
   definitions$: Observable<any>;
+  cans$: Observable<any>;
 
   loadMap = !environment.loadMap;
   mapMinHeight = 350;
@@ -48,10 +49,10 @@ export class RtmComponent implements OnInit {
   }
 
   private loadData() {
-    this.rawDataList = new Array<any>();
-    for (let i = 0; i < 10; i++) {
-      this.rawDataList.push({ id: 'xxxxxxx', data: 'xx xx xx xx xx xx xx xx' });
-    }
+    // this.rawDataList = new Array<any>();
+    // for (let i = 0; i < 10; i++) {
+    //   this.rawDataList.push({ id: 'xxxxxxx', data: 'xx xx xx xx xx xx xx xx' });
+    // }
 
     this.vehicles$ = this.dataService.getVehicles().pipe(
       map(vehicles => this.utitlityService.attachMapLabel(vehicles)),
@@ -61,6 +62,19 @@ export class RtmComponent implements OnInit {
     this.definitions$ = this.dataService.getDefinitions().pipe(
       share()
     );
+
+    this.cans$ = this.dataService.getCANs().pipe(
+      map((cans: any[]) =>
+        cans.map(can => {
+          return {
+            id: can.id,
+            value: this.utitlityService.formatRawCAN(can.value)
+          };
+        })
+      ),
+      share()
+    );
+
 
     this.maxDate.setDate(this.maxDate.getDate() + 7);
     this.bsRangeValue = [this.bsValue, this.maxDate];
