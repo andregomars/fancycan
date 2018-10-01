@@ -36,7 +36,7 @@
           <thead class="text-white thead-light bg-primary">
             <tr>
               <th class="w-25 text-center"><small>#</small></th>
-              <th><small>SOC/Range</small></th>
+              <th><small>Range</small></th>
               <th><small>Odometer</small></th>
               <th><small>Updated</small></th>
             </tr>
@@ -49,13 +49,13 @@
                 </a>
               </td>
               <td>
-                <div class="small">{{ (vehicle.soc / vehicle.range).toFixed(2) }}</div>
+                <div class="small">{{ vehicle.range }}</div>
               </td>
               <td>
                 <div class="small">{{ vehicle.odometer }}</div>
               </td>
               <td>
-                <div class="small">{{ vehicle.updated | date: 'MM/dd' }}</div>
+                <div class="small">{{ vehicle.updated | date: 'MM/dd hh:mm' }}</div>
               </td>
             </tr>
           </tbody>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService, UtilityService } from '../../services';
+import { DataService, UtilityService, StorageService } from '../../services';
 import { Observable } from 'rxjs';
-import { map, share } from 'rxjs/operators';
+import { map, share, switchMap, tap } from 'rxjs/operators';
 import * as moment from 'moment';
 import { environment } from '../../../environments/environment';
 import { MapStyle } from '../shared/map-style';
@@ -17,13 +17,14 @@ export class PlaybackComponent implements OnInit {
   bsRangeValue: Date[];
   maxDate = new Date();
   rawDataList: any[];
+  vehicle$: Observable<any>;
   vehicles$: Observable<any>;
   definitions$: Observable<any>;
   cans$: Observable<any>;
 
-  loadMap = !environment.loadMap;
+  loadMap = environment.loadMap;
   mapMinHeight = 350;
-  mapZoom = 15;
+  mapZoom = 10;
   mapStyle = new MapStyle().styler;
   bus_number: string;
   map_lat = 34.056539;
@@ -41,11 +42,13 @@ export class PlaybackComponent implements OnInit {
   imgEngineCheck = 'assets/img/vehicle/check_engine.png';
 
   constructor(
+    private storageService: StorageService,
     private dataService: DataService,
     private utitlityService: UtilityService
   ) { }
 
   ngOnInit() {
+    this.loadVehicle();
     this.loadData();
   }
 
@@ -80,5 +83,18 @@ export class PlaybackComponent implements OnInit {
     // this.bsRangeValue = [this.bsValue, this.maxDate];
   }
 
+  private loadVehicle() {
+    this.vehicle$ = this.dataService.getVehicles().pipe(
+      switchMap(vehicles =>
+        this.storageService.watchViewProfile().pipe(
+          map(profile =>
+            vehicles.find(vehicle => vehicle.code === profile.vehicle_code)
+          )
+          ,tap(x => console.log(x))
+        )
+      ),
+      share()
+    );
+  }
 }
 
