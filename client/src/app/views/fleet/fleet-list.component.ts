@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { StorageService, DataService } from '../../services';
+import { Store } from '@ngxs/store';
+import { Navigate } from '@ngxs/router-plugin';
 import { Observable } from 'rxjs';
-import { ViewProfile } from '../../model';
-import { map, share } from 'rxjs/operators';
+import { share } from 'rxjs/operators';
+
+import { DataService } from '../../services';
+import { SetProfile } from '../../actions';
 
 @Component({
   selector: 'app-fleet-list',
@@ -11,28 +13,20 @@ import { map, share } from 'rxjs/operators';
   styleUrls: ['./fleet-list.component.scss']
 })
 export class FleetListComponent implements OnInit {
-  viewProfile$: Observable<ViewProfile>;
   fleets$: Observable<any>;
 
   constructor(
-    private storageService: StorageService,
     private dataService: DataService,
-    private router: Router
+    private store: Store
   ) { }
 
   ngOnInit() {
-    this.viewProfile$ = this.storageService.watchViewProfile();
     this.loadData();
   }
 
   nav(fcode: string) {
-    this.router.navigate(['/fleet', fcode]);
-    const viewProfile: ViewProfile = {
-      fleet_code: fcode,
-      vehicle_code: '',
-    };
-
-    this.storageService.setViewProfile(viewProfile);
+    this.store.dispatch(new SetProfile(fcode, null));
+    this.store.dispatch(new Navigate(['/fleet', fcode]));
   }
 
   private loadData() {

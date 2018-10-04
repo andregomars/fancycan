@@ -2,8 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { StorageService, DataService, UtilityService } from '../../services';
 import { Observable, timer } from 'rxjs';
-import { ViewProfile } from '../../model';
+import { ViewProfile, ViewProfileStateModel } from '../../models';
 import { switchMap, map, share, debounce, tap } from 'rxjs/operators';
+import { Select, Store } from '@ngxs/store';
+import { ViewProfileState } from '../../states';
+import { SetProfile } from '../../actions';
+import { Navigate } from '@ngxs/router-plugin';
 
 @Component({
   selector: 'app-vehicle-list',
@@ -12,31 +16,25 @@ import { switchMap, map, share, debounce, tap } from 'rxjs/operators';
 })
 export class VehicleListComponent implements OnInit {
   bus_number: string;
-  viewProfile$: Observable<ViewProfile>;
   vehicles$: Observable<any>;
   filteredVehicles$: Observable<any>;
+  @Select(ViewProfileState) viewProfile$: Observable<ViewProfileStateModel>;
 
   constructor(
-    private storageService: StorageService,
     private utilityService: UtilityService,
     private dataService: DataService,
-    private router: Router
+    private store: Store
   ) { }
 
   ngOnInit() {
-    this.viewProfile$ = this.storageService.watchViewProfile();
     this.loadData();
     this.filteredVehicles$ = this.vehicles$;
   }
 
   nav(fcode: string, vcode: string) {
-    this.router.navigate(['/vehicle', vcode]);
-    const viewProfile: ViewProfile = {
-      fleet_code: fcode,
-      vehicle_code: vcode,
-    };
+    this.store.dispatch(new SetProfile(fcode, vcode));
+    this.store.dispatch(new Navigate(['/vehicle', vcode]));
 
-    this.storageService.setViewProfile(viewProfile);
   }
 
   filterVehicles(vcode: string) {
@@ -57,7 +55,8 @@ export class VehicleListComponent implements OnInit {
     this.vehicles$ = this.viewProfile$.pipe(
       switchMap(profile => {
         const fleets$ = this.dataService.getFleets();
-        return this.utilityService.getVehiclesByFleetCode(profile.fleet_code, fleets$);
+        // return this.utilityService.getVehiclesByFleetCode(profile.fleet_code, fleets$);
+        return this.utilityService.getVehiclesByFleetCode(profile.fcode, fleets$);
       })
     );
   }

@@ -4,12 +4,14 @@ import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
 
 import * as moment from 'moment';
 import { Observable } from 'rxjs';
-import { DataService, UtilityService, StorageService } from '../../services';
-import { share, map, tap, switchMap, take } from 'rxjs/operators';
+import { DataService, UtilityService } from '../../services';
+import { share, map, tap, switchMap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { MapStyle } from './../shared/map-style';
-import { ActivatedRoute, ParamMap } from '@angular/router';
-import { ViewProfile } from '../../model';
+import { ViewProfile, AppRouterStateSerializer } from '../../models';
+import { Select, Store } from '@ngxs/store';
+import { RouterState } from '@ngxs/router-plugin';
+import { SetProfile } from '../../actions';
 
 @Component({
   selector: 'app-vehicle',
@@ -17,6 +19,7 @@ import { ViewProfile } from '../../model';
   styleUrls: ['./vehicle.component.scss']
 })
 export class VehicleComponent implements OnInit {
+  @Select(RouterState.state) route$: Observable<AppRouterStateSerializer>;
   len = 30;
   intSec = 1;
   temperatureMax = 300;
@@ -99,12 +102,11 @@ export class VehicleComponent implements OnInit {
   ];
   public lineChart3Legend = false;
   public lineChart3Type = 'line';
-
+  private profile$: Observable<ViewProfile>;
 
   constructor(
-    private route: ActivatedRoute,
     private utilityService: UtilityService,
-    private storageService: StorageService,
+    private store: Store,
     private dataService: DataService
   ) { }
 
@@ -116,22 +118,23 @@ export class VehicleComponent implements OnInit {
   }
 
   private initViewProfile() {
-    this.route.paramMap.pipe(
-      map((params: ParamMap) => params.get('id')),
+    this.profile$ = this.route$.pipe(
+      map(route => route['params']['vcode']),
       switchMap((vcode: string) => {
           const fleets$ = this.dataService.getFleets();
           return this.utilityService.getViewProfileByVehicleCode(vcode, fleets$);
         }
-      )
-    ).subscribe((profile: ViewProfile) => {
-      this.storageService.setViewProfile(profile);
-    });
+      ),
+      tap(profile => {
+        this.store.dispatch(new SetProfile(profile.fleet_code, profile.vehicle_code));
+      })
+    );
   }
 
   private loadVehicle() {
     this.vehicle$ = this.dataService.getVehicles().pipe(
       switchMap(vehicles =>
-        this.storageService.watchViewProfile().pipe(
+        this.profile$.pipe(
           map(profile =>
             vehicles.find(vehicle => vehicle.code === profile.vehicle_code)
           )

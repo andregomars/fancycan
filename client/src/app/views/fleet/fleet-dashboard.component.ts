@@ -5,6 +5,8 @@ import { share, map, tap, debounce, switchMap } from 'rxjs/operators';
 import { DataService, UtilityService, StorageService } from '../../services';
 import { MapStyle } from './../shared/map-style';
 import { environment } from '../../../environments/environment';
+import { Select } from '@ngxs/store';
+import { ViewProfileState } from '../../states';
 
 @Component({
   selector: 'app-fleet-dashboard',
@@ -12,8 +14,9 @@ import { environment } from '../../../environments/environment';
   styleUrls: ['./fleet-dashboard.component.scss']
 })
 export class FleetDashboardComponent implements OnInit {
-  hideSideInfo: boolean;
+  @Select(ViewProfileState.fcode) fcode$: Observable<string>;
 
+  hideSideInfo: boolean;
   loadMap = environment.loadMap;
   mapMinHeight = 768;
   mapZoom = 12;
@@ -26,8 +29,7 @@ export class FleetDashboardComponent implements OnInit {
 
   constructor(
     private dataService: DataService,
-    private utilityService: UtilityService,
-    private storageService: StorageService
+    private utilityService: UtilityService
   ) { }
 
   ngOnInit() {
@@ -58,8 +60,8 @@ export class FleetDashboardComponent implements OnInit {
   private loadData() {
     this.vehicles$ = this.dataService.getVehicles().pipe(
       switchMap(vehicles =>
-        this.storageService.watchViewProfile().pipe(
-          map(profile => vehicles.filter(vehicle => vehicle.fleet_code === profile.fleet_code))
+          this.fcode$.pipe(
+            map(fcode => vehicles.filter(vehicle => vehicle.fleet_code === fcode))
         )
       ),
       map(vehicles => this.utilityService.attachMapLabel(vehicles)),

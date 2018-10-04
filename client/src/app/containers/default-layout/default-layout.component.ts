@@ -1,23 +1,29 @@
 import { Component, OnInit } from '@angular/core';
+import { Select, Store } from '@ngxs/store';
+
 import { navItems } from './../../_nav';
 import { Observable } from 'rxjs';
-import { ViewProfile } from '../../model';
-import { StorageService } from '../../services';
-import { share } from 'rxjs/operators';
+import { ViewProfile, AppRouterStateSerializer, ViewProfileStateModel } from '../../models';
+import { ViewProfileState } from '../../states';
+import { ClearProfile } from '../../actions';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './default-layout.component.html'
 })
 export class DefaultLayoutComponent implements OnInit {
-  viewProfile$: Observable<ViewProfile>;
   navItems = navItems;
   sidebarMinimized = true;
   element: HTMLElement = document.body;
+  // @Select(RouterState.url) url$: Observable<string>;
+  // @Select(RouterState.state) route$: Observable<AppRouterStateSerializer>;
+  // @Select(ViewProfileState) viewProfile$: Observable<ViewProfileStateModel>;
+  @Select(ViewProfileState.fcode) fcode$: Observable<string>;
+  @Select(ViewProfileState.vcode) vcode$: Observable<string>;
   private changes: MutationObserver;
 
   constructor(
-    private storageService: StorageService
+    private store: Store
   ) {
 
     this.changes = new MutationObserver((mutations) => {
@@ -30,12 +36,9 @@ export class DefaultLayoutComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.viewProfile$ = this.storageService.watchViewProfile().pipe(
-    );
   }
 
   resetViewProfile() {
-    this.storageService.clearViewProfile();
-    // this.viewProfile$ = this.storageService.watchViewProfile();
+    this.store.dispatch(new ClearProfile());
   }
 }

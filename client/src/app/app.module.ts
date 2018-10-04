@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { LocationStrategy, HashLocationStrategy, PathLocationStrategy } from '@angular/common';
+import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
@@ -29,8 +29,17 @@ import {
   AppSidebarModule,
 } from '@coreui/angular';
 
-// Import routing module
+// Import routing module and serializer providers
 import { AppRoutingModule } from './app.routing';
+import { AppRouterStateSerializer } from './models';
+
+// Import ngxs modules
+import { NgxsModule } from '@ngxs/store';
+import { NgxsRouterPluginModule, RouterStateSerializer } from '@ngxs/router-plugin';
+import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
+import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
+import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
+
 
 // Import 3rd party components
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
@@ -45,12 +54,22 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
+import { ViewProfileState } from './states';
 
 @NgModule({
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    NgxsModule.forRoot([
+      ViewProfileState
+    ]),
+    NgxsRouterPluginModule.forRoot(),
+    NgxsStoragePluginModule.forRoot({
+      key: ['viewprofile.fcode', 'viewprofile.vcode']
+    }),
+    NgxsReduxDevtoolsPluginModule.forRoot(),
+    // NgxsLoggerPluginModule.forRoot(),
     AppRoutingModule,
     AppAsideModule,
     AppBreadcrumbModule.forRoot(),
@@ -75,11 +94,8 @@ import { TimepickerModule } from 'ngx-bootstrap/timepicker';
     ...APP_CONTAINERS,
   ],
   providers: [
-    {
-      provide: LocationStrategy,
-      // useClass: HashLocationStrategy,
-      useClass: PathLocationStrategy
-    }
+    { provide: LocationStrategy, useClass: PathLocationStrategy},
+    { provide: RouterStateSerializer, useClass: AppRouterStateSerializer }
   ],
   bootstrap: [ AppComponent ]
 })

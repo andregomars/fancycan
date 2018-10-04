@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, pipe, Subject, BehaviorSubject } from 'rxjs';
-import { ViewProfile } from '../../model';
+import { ViewProfile } from '../../models';
 
 
 @Injectable({

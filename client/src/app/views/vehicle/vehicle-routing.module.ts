@@ -29,7 +29,7 @@ const routes: Routes = [
         }
       },
       {
-        path: 'list/:id',
+        path: 'list/:vcode',
         component: VehicleListComponent,
         data: {
           title: 'Vehicles'
@@ -44,7 +44,7 @@ const routes: Routes = [
         }
       },
       {
-        path: 'rtm/:id',
+        path: 'rtm/:vcode',
         component: RtmComponent,
         data: {
           title: 'Realtime Monitor'
@@ -59,14 +59,14 @@ const routes: Routes = [
         }
       },
       {
-        path: 'playback/:id',
+        path: 'playback/:vcode',
         component: PlaybackComponent,
         data: {
           title: 'Playback'
         }
       },
       {
-        path: ':id',
+        path: ':vcode',
         component: VehicleComponent,
         data: {
           title: 'Vehicle'
