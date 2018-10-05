@@ -9,30 +9,18 @@
   <ul class="navbar-nav d-md-down-none mr-auto">
     <li class="nav-item px-3">
       <a class="nav-link" [routerLink]="['/fleet/list']">Fleet</a>
-      <!-- <small class="text-warning">{{ (viewProfile$ | async)?.fleet_code }}</small> -->
       <small class="text-warning">{{ fcode$ | async }}</small>
     </li>
-    <!-- <li class="nav-item px-3" *ngIf="(viewProfile$ | async)?.fleet_code"> -->
     <li class="nav-item px-3" *ngIf="fcode$ | async">
       <a class="nav-link" [routerLink]="['/vehicle/list']">Vehicle</a>
-      <!-- <small class="text-warning">{{ (viewProfile$ | async)?.vehicle_code }}</small> -->
       <small class="text-warning">{{ vcode$ | async }}</small>
     </li>
-    <!-- <li class="nav-item px-3" *ngIf="(viewProfile$ | async)?.fleet_code"> -->
     <li class="nav-item px-3" *ngIf="fcode$ | async">
       <a class="nav-link text-warning" [routerLink]="['/fleet/list']" 
         (click)="resetViewProfile()">
         <i class="fa fa-times" title="Reset fleet & vehicle"></i>
       </a>
     </li>
-    <!-- <li>
-      <div>url:</div>
-      {{ url$ | async }}
-    </li>
-    <li>
-      <div>route:</div>
-      {{ (route$ | async)?.params['id'] }}
-    </li> -->
   </ul>
 </app-header>
 <div class="app-body">

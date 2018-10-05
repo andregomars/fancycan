@@ -27,16 +27,5 @@ export class VehicleGuard implements CanActivate {
           this.store.dispatch(new Navigate(navTo));
         })
       );
-      // return this.storageService.watchViewProfile().pipe(
-      //   tap(profile => {
-      //     if (profile && profile.vehicle_code) {
-      //       this.router.navigate([state.url, profile.vehicle_code]);
-      //     } else {
-      //       console.error('need to choose a vehicle');
-      //       this.router.navigate(['/vehicle/list']);
-      //     }
-      //   }),
-      //   map(profile => !!profile.vehicle_code)
-      // );
   }
 }

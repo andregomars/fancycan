@@ -90,7 +90,6 @@ export class PlaybackComponent implements OnInit {
           map(profile =>
             vehicles.find(vehicle => vehicle.code === profile.vehicle_code)
           )
-          ,tap(x => console.log(x))
         )
       ),
       share()

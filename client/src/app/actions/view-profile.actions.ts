@@ -3,6 +3,11 @@ export class SetProfile {
     constructor(public fcode: string, public vcode: string) {}
 }
 
+export class ExtractProfile {
+    static readonly type = '[viewprofile] extract profile';
+    constructor(public fcode: string, public vcode: string) {}
+}
+
 export class ClearProfile {
     static readonly type = '[viewprofile] clear profile';
 }

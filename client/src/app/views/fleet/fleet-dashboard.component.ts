@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable, timer } from 'rxjs';
 import { share, map, tap, debounce, switchMap } from 'rxjs/operators';
 
-import { DataService, UtilityService, StorageService } from '../../services';
+import { DataService, UtilityService } from '../../services';
 import { MapStyle } from './../shared/map-style';
 import { environment } from '../../../environments/environment';
 import { Select } from '@ngxs/store';

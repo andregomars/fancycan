@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
+import { RouterState } from '@ngxs/router-plugin';
+import { Observable } from 'rxjs';
 
 import { navItems } from './../../_nav';
-import { Observable } from 'rxjs';
-import { ViewProfile, AppRouterStateSerializer, ViewProfileStateModel } from '../../models';
+import { AppRouterStateSerializer } from '../../models';
 import { ViewProfileState } from '../../states';
-import { ClearProfile } from '../../actions';
+import { ClearProfile, SetProfile } from '../../actions';
+import { map, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-dashboard',
@@ -18,6 +20,7 @@ export class DefaultLayoutComponent implements OnInit {
   // @Select(RouterState.url) url$: Observable<string>;
   // @Select(RouterState.state) route$: Observable<AppRouterStateSerializer>;
   // @Select(ViewProfileState) viewProfile$: Observable<ViewProfileStateModel>;
+  @Select(RouterState.state) route$: Observable<AppRouterStateSerializer>;
   @Select(ViewProfileState.fcode) fcode$: Observable<string>;
   @Select(ViewProfileState.vcode) vcode$: Observable<string>;
   private changes: MutationObserver;
@@ -36,9 +39,22 @@ export class DefaultLayoutComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.setViewPofileByUrl();
   }
 
   resetViewProfile() {
     this.store.dispatch(new ClearProfile());
+  }
+
+  private setViewPofileByUrl() {
+    this.route$.pipe(
+      map(route => {
+        return {
+          fcode: route['params']['fcode'],
+          vcode: route['params']['vcode']
+        };
+      }),
+      tap(param => this.store.dispatch(new SetProfile(param.fcode, param.vcode)))
+    ).subscribe();
   }
 }

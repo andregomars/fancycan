@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map, share } from 'rxjs/operators';
-import { ViewProfile } from '../../models';
+import { ViewProfile, ViewProfileStateModel } from '../../models';
 import * as moment from 'moment';
 
 @Injectable({
@@ -23,13 +23,13 @@ export class UtilityService {
         );
     }
 
-    getViewProfileByVehicleCode(vcode: string, fleets$: Observable<any>): Observable<ViewProfile> {
+    getViewProfileByVehicleCode(vcode: string, fleets$: Observable<any>): Observable<ViewProfileStateModel> {
         return this.getFlattedVehicles(fleets$).pipe(
             map((vehicles: any[]) => vehicles.find(vehicle => vehicle.vcode === vcode)),
             map(vehicle => {
                 return {
-                    fleet_code: vehicle.fcode,
-                    vehicle_code: vehicle.vcode,
+                    fcode: vehicle.fcode,
+                    vcode: vehicle.vcode,
                 };
             })
         );

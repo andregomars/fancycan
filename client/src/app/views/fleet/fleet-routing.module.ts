@@ -24,14 +24,14 @@ const routes: Routes = [
         }
       },
       {
-        path: 'list/:id',
+        path: 'list/:fcode',
         component: FleetListComponent,
         data: {
           title: 'Fleet List'
         }
       },
       {
-        path: ':id',
+        path: ':fcode',
         component: FleetDashboardComponent,
         data: {
           title: 'Dashboard'

@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { StorageService, DataService, UtilityService } from '../../services';
+import { DataService, UtilityService } from '../../services';
 import { Observable, timer } from 'rxjs';
-import { ViewProfile, ViewProfileStateModel } from '../../models';
-import { switchMap, map, share, debounce, tap } from 'rxjs/operators';
+import { ViewProfileStateModel } from '../../models';
+import { switchMap, map, debounce } from 'rxjs/operators';
 import { Select, Store } from '@ngxs/store';
 import { ViewProfileState } from '../../states';
 import { SetProfile } from '../../actions';
@@ -55,7 +54,6 @@ export class VehicleListComponent implements OnInit {
     this.vehicles$ = this.viewProfile$.pipe(
       switchMap(profile => {
         const fleets$ = this.dataService.getFleets();
-        // return this.utilityService.getVehiclesByFleetCode(profile.fleet_code, fleets$);
         return this.utilityService.getVehiclesByFleetCode(profile.fcode, fleets$);
       })
     );
