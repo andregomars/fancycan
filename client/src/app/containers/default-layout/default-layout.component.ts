@@ -17,9 +17,6 @@ export class DefaultLayoutComponent implements OnInit {
   navItems = navItems;
   sidebarMinimized = true;
   element: HTMLElement = document.body;
-  // @Select(RouterState.url) url$: Observable<string>;
-  // @Select(RouterState.state) route$: Observable<AppRouterStateSerializer>;
-  // @Select(ViewProfileState) viewProfile$: Observable<ViewProfileStateModel>;
   @Select(RouterState.state) route$: Observable<AppRouterStateSerializer>;
   @Select(ViewProfileState.fcode) fcode$: Observable<string>;
   @Select(ViewProfileState.vcode) vcode$: Observable<string>;
@@ -39,7 +36,7 @@ export class DefaultLayoutComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.setViewPofileByUrl();
+    // this.setViewPofileByUrl();
   }
 
   resetViewProfile() {

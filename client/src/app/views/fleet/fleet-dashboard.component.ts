@@ -5,8 +5,10 @@ import { share, map, tap, debounce, switchMap } from 'rxjs/operators';
 import { DataService, UtilityService } from '../../services';
 import { MapStyle } from './../shared/map-style';
 import { environment } from '../../../environments/environment';
-import { Select } from '@ngxs/store';
+import { Select, Store } from '@ngxs/store';
 import { ViewProfileState } from '../../states';
+import { Navigate } from '@ngxs/router-plugin';
+import { SetProfile } from '../../actions';
 
 @Component({
   selector: 'app-fleet-dashboard',
@@ -23,12 +25,12 @@ export class FleetDashboardComponent implements OnInit {
   mapStyle = new MapStyle().styler;
   vehicles$: Observable<any>;
   filteredVehicles$: Observable<any>;
-  vcode: string;
   map_lat = 34.056539;
   map_lgt = -118.237485;
 
   constructor(
     private dataService: DataService,
+    private store: Store,
     private utilityService: UtilityService
   ) { }
 
@@ -49,12 +51,17 @@ export class FleetDashboardComponent implements OnInit {
         debounce(() => timer(300)),
         map(vehicles =>
           vehicles.filter(v => v.code.toString().toUpperCase().indexOf(vcode.trim().toUpperCase()) > -1)
-        ),
+        )
       );
   }
 
   resizeSideInfo() {
     this.hideSideInfo = !this.hideSideInfo;
+  }
+
+  nav(fcode: string, vcode: string) {
+    this.store.dispatch(new SetProfile(fcode, vcode));
+    this.store.dispatch(new Navigate(['/vehicle', vcode]));
   }
 
   private loadData() {

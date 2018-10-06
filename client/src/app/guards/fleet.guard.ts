@@ -21,11 +21,11 @@ export class FleetGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
       return this.fcode$.pipe(
-        map(fcode => !!fcode),
         tap(fcode => {
           const navTo = !!fcode ? [state.url, fcode] : ['/fleet/list'];
           this.store.dispatch(new Navigate(navTo));
-        })
+        }),
+        map(fcode => !!fcode)
       );
   }
 }

@@ -75,6 +75,25 @@ export class UtilityService {
 
     }
 
+    getAggregateData(sourcList: any[], keyName: string, valueName: string): any[] {
+        let output = [];
+        sourcList.forEach(current => {
+        const scannedObj = output.find(sourceObj => sourceObj[keyName] === current[keyName]);
+
+        if (scannedObj) {
+            if (valueName) {
+            scannedObj[valueName] += current[valueName];
+            } else {
+            scannedObj[valueName] += 1;
+            }
+        } else {
+            output = [...output, current];
+        }
+        });
+
+        return output;
+    }
+
     private randomObject(): any {
         const time = new Date();
         const num = this.randomNumberRange(20, 80);

@@ -1,0 +1,57 @@
+[
+    {
+        "fleet_code": "LAMTA",
+        "vehicle_code": "5001",
+        "odometer": 10000,
+        "mileage": 50000,
+        "engine_on": 7,
+        "idle_time": 200,
+        "max_speed": 75,
+        "regeneration": 100, 
+        "updated": "2018-09-01 00:00:00"
+    },
+    {
+        "fleet_code": "LAMTA",
+        "vehicle_code": "5001",
+        "odometer": 10000,
+        "mileage": 50000,
+        "engine_on": 7,
+        "idle_time": 200,
+        "max_speed": 75,
+        "regeneration": 100,
+        "updated": "2018-09-02 00:00:00"
+    },
+    {
+        "fleet_code": "LAMTA",
+        "vehicle_code": "5003",
+        "odometer": 10000,
+        "mileage": 50000,
+        "engine_on": 7,
+        "idle_time": 200,
+        "max_speed": 75,
+        "regeneration": 100,
+        "updated": "2018-09-03 00:00:00"
+    },
+    {
+        "fleet_code": "LAMTA",
+        "vehicle_code": "5004",
+        "odometer": 10000,
+        "mileage": 50000,
+        "engine_on": 7,
+        "idle_time": 200,
+        "max_speed": 75,
+        "regeneration": 100,
+        "updated": "2018-09-04 00:00:00"
+    },
+    {
+        "fleet_code": "LAMTA",
+        "vehicle_code": "5012",
+        "odometer": 10000,
+        "mileage": 50000,
+        "engine_on": 7,
+        "idle_time": 200,
+        "max_speed": 75,
+        "regeneration": 100,
+        "updated": "2018-09-05 00:00:00"
+    }
+]

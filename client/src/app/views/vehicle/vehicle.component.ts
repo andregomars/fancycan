@@ -8,10 +8,9 @@ import { DataService, UtilityService } from '../../services';
 import { share, map, tap, switchMap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { MapStyle } from './../shared/map-style';
-import { ViewProfile, AppRouterStateSerializer } from '../../models';
-import { Select, Store } from '@ngxs/store';
-import { RouterState } from '@ngxs/router-plugin';
-import { SetProfile } from '../../actions';
+import { ViewProfile } from '../../models';
+import { Store, Select } from '@ngxs/store';
+import { ViewProfileState } from '../../states';
 
 @Component({
   selector: 'app-vehicle',
@@ -19,7 +18,7 @@ import { SetProfile } from '../../actions';
   styleUrls: ['./vehicle.component.scss']
 })
 export class VehicleComponent implements OnInit {
-  @Select(RouterState.state) route$: Observable<AppRouterStateSerializer>;
+  @Select(ViewProfileState.vcode) vcode$: Observable<string>;
   len = 30;
   intSec = 1;
   temperatureMax = 300;
@@ -102,41 +101,24 @@ export class VehicleComponent implements OnInit {
   ];
   public lineChart3Legend = false;
   public lineChart3Type = 'line';
-  private profile$: Observable<ViewProfile>;
 
   constructor(
     private utilityService: UtilityService,
-    private store: Store,
     private dataService: DataService
   ) { }
 
   ngOnInit() {
-    this.initViewProfile();
     this.loadVehicles();
     this.loadVehicle();
     this.loadPlayChartData();
   }
 
-  private initViewProfile() {
-    this.profile$ = this.route$.pipe(
-      map(route => route['params']['vcode']),
-      switchMap((vcode: string) => {
-          const fleets$ = this.dataService.getFleets();
-          return this.utilityService.getViewProfileByVehicleCode(vcode, fleets$);
-        }
-      ),
-      tap(profile => {
-        this.store.dispatch(new SetProfile(profile.fleet_code, profile.vehicle_code));
-      })
-    );
-  }
-
   private loadVehicle() {
     this.vehicle$ = this.dataService.getVehicles().pipe(
       switchMap(vehicles =>
-        this.profile$.pipe(
-          map(profile =>
-            vehicles.find(vehicle => vehicle.code === profile.vehicle_code)
+        this.vcode$.pipe(
+          map(vcode =>
+            vehicles.find(vehicle => vehicle.code === vcode)
           )
         )
       ),

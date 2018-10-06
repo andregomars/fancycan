@@ -62,8 +62,9 @@
       <div class="row mt-2">
         <div class="col mt-2">
           <h4 class="text-center">Alert Rate (top {{ topNum }})</h4>
-          <div class="chart-wrapper">
-            <canvas baseChart class="chart" *ngIf="alertRateLabels && alertRateLabels.length > 0" [data]="alertRateValues"
+          <div class="p-4">
+            <canvas baseChart *ngIf="alertRateLabels && alertRateLabels.length > 0" 
+              height="200" [data]="alertRateValues"
               [labels]="alertRateLabels" [chartType]="'pie'" [options]="pieOptions"></canvas>
           </div>
         </div>
@@ -71,8 +72,9 @@
       <div class="row mt-2">
           <div class="col mt-2">
             <h4 class="text-center">Alert Type (top {{ topNum }})</h4>
-            <div class="chart-wrapper">
-              <canvas baseChart class="chart" *ngIf="alertTypeLabels && alertTypeLabels.length > 0" [data]="alertTypeValues"
+            <div class="p-4">
+              <canvas baseChart *ngIf="alertTypeLabels && alertTypeLabels.length > 0" 
+                height="200" [data]="alertTypeValues"
                 [labels]="alertTypeLabels" [chartType]="'pie'" [options]="pieOptions"></canvas>
             </div>
           </div>

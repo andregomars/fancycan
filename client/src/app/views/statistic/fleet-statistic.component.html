@@ -1,0 +1,96 @@
+<div class="animated fadeIn">
+  <div class="row mt-1">
+    <app-nav-label></app-nav-label>
+  </div>
+  <div class="row mt-1">
+    <div class="col">
+      <app-datepicker-bar></app-datepicker-bar>
+    </div>
+  </div>
+  <div class="row mt-1">
+    <div class="col-12 col-lg-6">
+      <div class="table-responsive-lg">
+        <table class="table table-striped table-hover table-outline table-sm mt-1">
+          <thead class="text-white thead-light bg-primary">
+            <tr>
+              <th><small>Vehicle #</small></th>
+              <th><small>Odometer</small></th>
+              <th><small>Mileage</small></th>
+              <th><small>Engine On</small></th>
+              <th><small>Idle Time</small></th>
+              <th><small>Max Speed</small></th>
+              <th><small>Regen</small></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngIf="sumEntry$ | async as item" style="color: yellow">
+              <td>&nbsp;&nbsp;{{ item.vehicle_code }}</td>
+              <td>{{ item.odometer | number: '1.0-2' }}</td>
+              <td>{{ item.mileage | number: '1.0-2' }}</td>
+              <td>{{ item.engine_on | number: '1.0-2' }}</td>
+              <td>{{ item.idle_time | number: '1.0-2' }}</td>
+              <td>{{ item.max_speed | number: '1.0-2' }}</td>
+              <td>{{ item.regeneration | number: '1.0-2' }}</td>
+            </tr>
+            <tr *ngIf="avgEntry$ | async as item" style="color: yellow">
+              <td>&nbsp;&nbsp;{{ item.vehicle_code }}</td>
+              <td>{{ item.odometer | number: '1.0-2' }}</td>
+              <td>{{ item.mileage | number: '1.0-2' }}</td>
+              <td>{{ item.engine_on | number: '1.0-2' }}</td>
+              <td>{{ item.idle_time | number: '1.0-2' }}</td>
+              <td>{{ item.max_speed | number: '1.0-2' }}</td>
+              <td>{{ item.regeneration | number: '1.0-2' }}</td>
+            </tr>
+            <tr *ngFor="let item of stats$ | async">
+              <td>
+                <a class="btn btn-link" [routerLink]="['/vehicle', item.vehicle_code]">
+                  <small>{{ item.vehicle_code }}</small>
+                </a>
+              </td>
+              <td>
+                <div class="small">{{ item.odometer }}</div>
+              </td>
+              <td>
+                <div class="small">{{ item.mileage }}</div>
+              </td>
+              <td>
+                <div class="small">{{ item.engine_on }}</div>
+              </td>
+              <td>
+                <div class="small">{{ item.idle_time }}</div>
+              </td>
+              <td>
+                <div class="small">{{ item.max_speed }}</div>
+              </td>
+              <td>
+                <div class="small">{{ item.regeneration }}</div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="col-12 col-lg-6">
+      <div class="row mt-2">
+        <div class="col mt-2">
+          <h4 class="text-center">Idle time Rate (top {{ topNum }})</h4>
+          <div class="p-4">
+            <canvas baseChart *ngIf="idleTimeLabels && idleTimeLabels.length > 0" 
+              height="200" [data]="idleTimeValues"
+              [labels]="idleTimeLabels" [chartType]="'pie'" [options]="pieOptions"></canvas>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-2">
+          <div class="col mt-2">
+            <h4 class="text-center">Regeneration Rate (top {{ topNum }})</h4>
+            <div class="p-4">
+              <canvas baseChart *ngIf="regenLabels && regenLabels.length > 0" 
+                height="200" [data]="regenValues"
+                [labels]="regenLabels" [chartType]="'pie'" [options]="pieOptions"></canvas>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>

@@ -6,6 +6,7 @@ import { ComponentsModule } from './../../components/components.module';
 import { StatisticComponent } from './statistic.component';
 import { FleetMalfunctionComponent } from './fleet-malfunction.component';
 import { StatisticRoutingModule } from './statistic-routing.module';
+import { FleetStatisticComponent } from './fleet-statistic.component';
 
 @NgModule({
   imports: [
@@ -16,6 +17,7 @@ import { StatisticRoutingModule } from './statistic-routing.module';
   ],
   declarations: [
     StatisticComponent,
+    FleetStatisticComponent,
     FleetMalfunctionComponent
   ]
 })

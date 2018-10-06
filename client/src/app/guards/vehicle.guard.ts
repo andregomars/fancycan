@@ -21,11 +21,11 @@ export class VehicleGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
       return this.vcode$.pipe(
-        map(vcode => !!vcode),
         tap(vcode => {
           const navTo = !!vcode ? [state.url, vcode] : ['/vehicle/list'];
           this.store.dispatch(new Navigate(navTo));
-        })
+        }),
+        map(vcode => !!vcode)
       );
   }
 }

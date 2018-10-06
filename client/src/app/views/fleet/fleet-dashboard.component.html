@@ -44,7 +44,8 @@
           <tbody>
             <tr *ngFor="let vehicle of filteredVehicles$ | async">
               <td>
-                <a class="btn btn-link" [routerLink]="['/vehicle', vehicle.code]">
+                <!-- <a class="btn btn-link" [routerLink]="['/vehicle', vehicle.code]"> -->
+                <a class="btn btn-link text-primary" (click)="nav(vehicle.fleet_code, vehicle.code)">
                   <small>{{ vehicle.code }}</small>
                 </a>
               </td>

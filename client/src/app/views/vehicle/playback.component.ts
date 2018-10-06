@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService, UtilityService, StorageService } from '../../services';
+import { DataService, UtilityService } from '../../services';
 import { Observable } from 'rxjs';
 import { map, share, switchMap, tap } from 'rxjs/operators';
+import { Select } from '@ngxs/store';
 import * as moment from 'moment';
+
 import { environment } from '../../../environments/environment';
 import { MapStyle } from '../shared/map-style';
+import { ViewProfileState } from '../../states';
 
 @Component({
   selector: 'app-vehicle-playback',
@@ -12,6 +15,7 @@ import { MapStyle } from '../shared/map-style';
   styleUrls: ['./playback.component.scss']
 })
 export class PlaybackComponent implements OnInit {
+  @Select(ViewProfileState.vcode) vcode$: Observable<string>;
   selectedDate = new Date();
   selectedTime = new Date();
   bsRangeValue: Date[];
@@ -42,7 +46,6 @@ export class PlaybackComponent implements OnInit {
   imgEngineCheck = 'assets/img/vehicle/check_engine.png';
 
   constructor(
-    private storageService: StorageService,
     private dataService: DataService,
     private utitlityService: UtilityService
   ) { }
@@ -86,9 +89,9 @@ export class PlaybackComponent implements OnInit {
   private loadVehicle() {
     this.vehicle$ = this.dataService.getVehicles().pipe(
       switchMap(vehicles =>
-        this.storageService.watchViewProfile().pipe(
-          map(profile =>
-            vehicles.find(vehicle => vehicle.code === profile.vehicle_code)
+        this.vcode$.pipe(
+          map(vcode =>
+            vehicles.find(vehicle => vehicle.code === vcode)
           )
         )
       ),

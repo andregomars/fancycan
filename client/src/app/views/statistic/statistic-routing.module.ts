@@ -5,6 +5,7 @@ import {
 } from '@angular/router';
 
 import { StatisticComponent } from './statistic.component';
+import { FleetStatisticComponent } from './fleet-statistic.component';
 import { FleetMalfunctionComponent } from './fleet-malfunction.component';
 import { FleetGuard } from '../../guards/fleet.guard';
 
@@ -17,18 +18,33 @@ const routes: Routes = [
     },
     children: [
       {
+        path: 'fleet',
+        component: FleetStatisticComponent,
+        canActivate: [ FleetGuard ],
+        data: {
+          title: 'Fleet Stats'
+        }
+      },
+      {
+        path: 'fleet/:fcode',
+        component: FleetStatisticComponent,
+        data: {
+          title: 'Fleet Stats'
+        }
+      },
+      {
         path: 'malfunction/fleet',
         component: FleetMalfunctionComponent,
         canActivate: [ FleetGuard ],
         data: {
-          title: 'Malfunction'
+          title: 'Malfunction Stats'
         }
       },
       {
-        path: 'malfunction/fleet/:id',
+        path: 'malfunction/fleet/:fcode',
         component: FleetMalfunctionComponent,
         data: {
-          title: 'Malfunction'
+          title: 'Malfunction Stats'
         }
       }
     ]

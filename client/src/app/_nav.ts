@@ -1,7 +1,6 @@
 export const navItems = [
   {
     name: 'Fleet',
-    // url: '/fleet',
     icon: 'fa fa-home',
     children: [
       {
@@ -13,7 +12,6 @@ export const navItems = [
   },
   {
     name: 'Vehicle',
-    // url: '/vehicle',
     icon: 'fa fa-bus',
     children: [
       {
@@ -37,6 +35,11 @@ export const navItems = [
     name: 'Statistic',
     icon: 'fa fa-area-chart',
     children: [
+      {
+        name: 'Fleet',
+        url: '/statistic/fleet',
+        icon: 'fa fa-angle-right'
+      },
       {
         name: 'Fleet Malfunction',
         url: '/statistic/malfunction/fleet',

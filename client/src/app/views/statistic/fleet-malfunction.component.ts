@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from '../../services';
+import { DataService, UtilityService } from '../../services';
 import { Observable } from 'rxjs';
 import { share, map, scan } from 'rxjs/operators';
 
@@ -19,13 +19,20 @@ export class FleetMalfunctionComponent implements OnInit {
   alertTypeValues: number[];
 
   pieOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
     legend: {
-      position: 'right'
+      display: true,
+      position: 'right',
+      labels: {
+        fontColor: '#ffffff'
+      }
     }
   };
 
   constructor(
-    private dataService: DataService
+    private dataService: DataService,
+    private utilityService: UtilityService
   ) { }
 
   ngOnInit() {
@@ -33,35 +40,16 @@ export class FleetMalfunctionComponent implements OnInit {
     this.loadPieCharts();
   }
 
-  private getAggregateData(sourcList: any[], keyName: string, valueName: string): any[] {
-    let output = [];
-    sourcList.forEach(current => {
-      const scannedObj = output.find(sourceObj => sourceObj[keyName] === current[keyName]);
-
-      if (scannedObj) {
-        if (valueName) {
-          scannedObj[valueName] += current[valueName];
-        } else {
-          scannedObj[valueName] += 1;
-        }
-      } else {
-        output = [...output, current];
-      }
-    });
-
-    return output;
-  }
-
   private loadPieCharts() {
     this.alerts$.subscribe((alerts: any[]) => {
-      const aggregated = this.getAggregateData(alerts, 'vehicle_number', 'total_alert');
+      const aggregated = this.utilityService.getAggregateData(alerts, 'vehicle_number', 'total_alert');
       aggregated.sort((a, b) => b.total_alert - a.total_alert).splice(this.topNum);
       this.alertRateLabels = aggregated.map(x => x.vehicle_number);
       this.alertRateValues = aggregated.map(x => x.total_alert);
       }
     );
     this.alerts$.subscribe((alerts: any[]) => {
-      const aggregated = this.getAggregateData(alerts, 'spn', 'total_alert');
+      const aggregated = this.utilityService.getAggregateData(alerts, 'spn', 'total_alert');
       aggregated.sort((a, b) => b.total_alert - a.total_alert).splice(this.topNum);
       this.alertTypeLabels = aggregated.map(x => x.spn);
       this.alertTypeValues = aggregated.map(x => x.total_alert);
