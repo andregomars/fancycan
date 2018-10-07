@@ -1,5 +1,10 @@
 import { ProprietarySpnStateModel } from '../models/proprietary-spn.model';
 
+export class InitProprietarySpnList {
+    static readonly type = '[Prop page] init prop';
+    constructor(public fcode: string) {}
+}
+
 export class AddProprietarySpn {
     static readonly type = '[Prop page] add prop';
     constructor(public propSpn: ProprietarySpnStateModel) {}

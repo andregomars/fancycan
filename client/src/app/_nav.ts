@@ -55,6 +55,11 @@ export const navItems = [
         name: 'J1939',
         url: '/setting/j1939',
         icon: 'fa fa-angle-right'
+      },
+      {
+        name: 'Proprietary',
+        url: '/setting/proprietary',
+        icon: 'fa fa-angle-right'
       }
     ]
   }

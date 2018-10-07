@@ -74,6 +74,11 @@ export class DataService {
       .get<any>(`${this.rootUrl}/j1939spn.json`);
   }
 
+  getProprietarySpnList(): Observable<any> {
+    return this.http
+      .get<any>(`${this.rootUrl}/proprietary-spn.json`);
+  }
+
   getCANs(): Observable<any> {
     return this.http
       .get<any>(`${this.rootUrl}/cans.json`);

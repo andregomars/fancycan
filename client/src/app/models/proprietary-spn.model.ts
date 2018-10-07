@@ -1,8 +1,9 @@
 export interface ProprietarySpnStateModel {
-    SPNItems: SPNItem[];
+    spnItems: SPNItem[];
 }
 
 export interface SPNItem {
+    fleet_code: string;
     PGNNo: string;
     PGNName: string;
     UnitType: string;

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map, share } from 'rxjs/operators';
-import { ViewProfile, ViewProfileStateModel } from '../../models';
+import { ViewProfileStateModel } from '../../models';
 import * as moment from 'moment';
 
 @Injectable({

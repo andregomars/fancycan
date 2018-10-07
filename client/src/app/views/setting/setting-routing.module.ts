@@ -5,6 +5,7 @@ import {
 } from '@angular/router';
 
 import { SpnSpecificationComponent } from './spn-specification.component';
+import { SpnProprietaryComponent } from './spn-proprietary.component';
 import { SettingContainerComponent } from './setting-container.component';
 
 const routes: Routes = [
@@ -20,6 +21,13 @@ const routes: Routes = [
         component: SpnSpecificationComponent,
         data: {
           title: 'J1939'
+        }
+      },
+      {
+        path: 'proprietary',
+        component: SpnProprietaryComponent,
+        data: {
+          title: 'Proprietary'
         }
       }
     ]
