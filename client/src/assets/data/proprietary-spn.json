@@ -1,0 +1,101 @@
+[
+    {
+        "PGNNo": "9001",
+        "PGNName": "Transmission Control 1",
+        "SPNItems": [
+            {
+                "UnitType": "1",
+                "SPNNo": "1487",
+                "SPNName": "Illumination Brightness Percent",
+                "SPNDescription": "",
+                "Status": {
+                    "Name": "Enable",
+                    "Description": [
+                        "Disable",
+                        "Enable",
+                        "Reserved",
+                        "Take no action"
+                    ]
+                },
+                "Unit": "%",
+                "Resolution": "0.4",
+                "Offset": "0",
+                "StartByte": "1",
+                "StartBit": "1",
+                "Length": "8",
+                "UpperDataRange": "100",
+                "LowerDataRange": "0"
+            },
+            {
+                "UnitType": "1",
+                "SPNNo": "1489",
+                "SPNName": "XBR Message Checksum",
+                "SPNDescription": "",
+                "Status": {
+                    "Name": "On",
+                    "Description": [
+                        "Off",
+                        "On",
+                        "Error",
+                        "Not available"
+                    ]
+                },
+                "Unit": "%",
+                "Resolution": "0.4",
+                "Offset": "0",
+                "StartByte": "1",
+                "StartBit": "1",
+                "Length": "8",
+                "UpperDataRange": "100",
+                "LowerDataRange": "0"
+            },
+            {
+                "UnitType": "1",
+                "SPNNo": "1493",
+                "SPNName": "Lane Departure Warning Enable Command",
+                "SPNDescription": "",
+                "Status": {
+                    "Name": "",
+                    "Description": []
+                },
+                "Unit": "%",
+                "Resolution": "0.4",
+                "Offset": "0",
+                "StartByte": "1",
+                "StartBit": "1",
+                "Length": "8",
+                "UpperDataRange": "100",
+                "LowerDataRange": "0"
+            }
+        ]
+    },
+    {
+        "PGNNo": "9003",
+        "PGNName": "Transmission Control 2",
+        "SPNItems": [
+            {
+                "UnitType": "1",
+                "SPNNo": "3001",
+                "SPNName": "Illumination Brightness Percent 2",
+                "SPNDescription": "",
+                "Status": {
+                    "Name": "Enable",
+                    "Description": [
+                        "Disable",
+                        "Enable",
+                        "Reserved",
+                        "Take no action"
+                    ]
+                },
+                "Unit": "%",
+                "Resolution": "0.4",
+                "Offset": "0",
+                "StartByte": "1",
+                "StartBit": "1",
+                "Length": "8",
+                "UpperDataRange": "100",
+                "LowerDataRange": "0"
+            }
+        ]
+    }
+]

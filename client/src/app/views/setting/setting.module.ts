@@ -6,6 +6,7 @@ import { SettingRoutingModule } from './setting-routing.module';
 import { FormsModule } from '@angular/forms';
 import { NgStringPipesModule } from 'angular-pipes';
 import { ComponentsModule } from '../../components/components.module';
+import { SpnProprietaryComponent } from './spn-proprietary.component';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { ComponentsModule } from '../../components/components.module';
   ],
   declarations: [
     SettingContainerComponent,
-    SpnSpecificationComponent
+    SpnSpecificationComponent,
+    SpnProprietaryComponent
   ]
 })
 export class SettingModule { }
