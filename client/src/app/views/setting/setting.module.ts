@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { SettingContainerComponent } from './setting-container.component';
 import { SpnSpecificationComponent } from './spn-specification.component';
 import { SettingRoutingModule } from './setting-routing.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgStringPipesModule } from 'angular-pipes';
 import { ComponentsModule } from '../../components/components.module';
 import { SpnProprietaryComponent } from './spn-proprietary.component';
@@ -12,6 +12,7 @@ import { SpnProprietaryComponent } from './spn-proprietary.component';
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     NgStringPipesModule,
     SettingRoutingModule,
     ComponentsModule

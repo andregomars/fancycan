@@ -1,12 +1,10 @@
 import { NgModule } from '@angular/core';
-import {
-  Routes,
-  RouterModule
-} from '@angular/router';
+import { Routes, RouterModule} from '@angular/router';
 
 import { SpnSpecificationComponent } from './spn-specification.component';
 import { SpnProprietaryComponent } from './spn-proprietary.component';
 import { SettingContainerComponent } from './setting-container.component';
+import { FleetGuard } from '../../guards/fleet.guard';
 
 const routes: Routes = [
   {
@@ -25,6 +23,14 @@ const routes: Routes = [
       },
       {
         path: 'proprietary',
+        component: SpnProprietaryComponent,
+        canActivate: [ FleetGuard ],
+        data: {
+          title: 'Proprietary'
+        }
+      },
+      {
+        path: 'proprietary/:fcode',
         component: SpnProprietaryComponent,
         data: {
           title: 'Proprietary'

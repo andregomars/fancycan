@@ -41,7 +41,7 @@ import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 
 // ngxs states
-import { ViewProfileState, ProprietarySpnState } from './states';
+import { ViewProfileState } from './states';
 
 // Import 3rd party components
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
@@ -63,8 +63,7 @@ import { TimepickerModule } from 'ngx-bootstrap/timepicker';
     BrowserAnimationsModule,
     HttpClientModule,
     NgxsModule.forRoot([
-      ViewProfileState,
-      ProprietarySpnState
+      ViewProfileState
     ]),
     NgxsRouterPluginModule.forRoot(),
     NgxsStoragePluginModule.forRoot({

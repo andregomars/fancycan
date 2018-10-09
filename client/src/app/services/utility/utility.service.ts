@@ -42,6 +42,24 @@ export class UtilityService {
         );
     }
 
+    // 1. add selection field in each entry
+    // 2. translate status description to code based on index
+    getSPNListWithStatusArray(spnList$: Observable<any[]>): Observable<any[]> {
+        return spnList$.pipe(
+            map(spnList => spnList.map(spn => Object.assign({}, spn, { selected: false }))),
+            map(spnList => spnList.map(spn => {
+                if (spn.Status && spn.Status.Description
+                    && spn.Status.Description.length > 0) {
+                    spn['StatusList'] = this.evaluateSPNStatusValue(spn.Status.Description, spn.Status.Name);
+                } else {
+                    spn['StatusList'] = null;
+                }
+                return spn;
+            }))
+        );
+
+    }
+
     getFlattedSPNSpecs(specs: any[]): any[] {
         return specs.map(pgn =>
             pgn.SPNItems.map(spn =>
@@ -105,6 +123,17 @@ export class UtilityService {
 
     private randomNumberRange(min: number, max: number): number {
         return Math.floor(Math.random() * (max - min) + min);
+    }
+
+    private evaluateSPNStatusValue(keys: string[], enabledKey: string): any[] {
+        return keys.map((key, i) => {
+            return {
+                status: key,
+                value: (i).toString(2),
+                enabled: key === enabledKey
+            };
+        });
+
     }
 
     attachMapLabel(vehicles: any): any {
