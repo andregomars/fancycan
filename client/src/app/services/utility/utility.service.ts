@@ -52,7 +52,7 @@ export class UtilityService {
                     && spn.Status.Description.length > 0) {
                     spn['StatusList'] = this.evaluateSPNStatusValue(spn.Status.Description, spn.Status.Name);
                 } else {
-                    spn['StatusList'] = null;
+                    spn['StatusList'] = [];
                 }
                 return spn;
             }))
@@ -125,6 +125,15 @@ export class UtilityService {
         return Math.floor(Math.random() * (max - min) + min);
     }
 
+    /*
+        e.g.
+        input: ['On', 'Off', 'Error'], 'Off'
+        output: [
+            { status: 'On', value: '00', enabled: false },
+            { status: 'Off', value: '01', enabled: true },
+            { status: 'Error', value: '10', enabled: false }
+        ]
+    */
     private evaluateSPNStatusValue(keys: string[], enabledKey: string): any[] {
         return keys.map((key, i) => {
             return {
