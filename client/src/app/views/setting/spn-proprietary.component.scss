@@ -1,3 +1,11 @@
 input {
     font-size: 9pt;
 }
+
+input[type=submit] {
+    width: 200px;
+}
+
+.card-body {
+    height: 550px;
+}

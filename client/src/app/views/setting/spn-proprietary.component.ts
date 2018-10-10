@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Select } from '@ngxs/store';
-import { map, switchMap, share } from 'rxjs/operators';
+import { map, switchMap, share, tap } from 'rxjs/operators';
 
 import { DataService, UtilityService } from '../../services';
 import { ViewProfileState } from '../../states';
@@ -14,9 +14,8 @@ import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 })
 export class SpnProprietaryComponent implements OnInit {
   @Select(ViewProfileState.fcode) fcode$: Observable<string>;
-  spnList$: Observable<any>;
+  spnList$: Observable<any[]>;
   spnForm: FormGroup;
-  defaultStatusIndex = -1;
 
   get statusList(): FormArray {
     return this.spnForm.get('StatusList') as FormArray;
@@ -35,13 +34,35 @@ export class SpnProprietaryComponent implements OnInit {
 
   selectSpn(selectedSpn: any) {
     this.initForms(selectedSpn.StatusList.length);
-    this.defaultStatusIndex = selectedSpn.StatusList.findIndex(status => status.enabled);
     this.spnForm.setValue({
       SPNNo: selectedSpn.SPNNo,
       SPNName: selectedSpn.SPNName,
       PGNNo: selectedSpn.PGNNo,
+      StartBit: selectedSpn.StartBit,
+      Length: selectedSpn.Length,
+      Resolution: selectedSpn.Resolution,
+      Offset: selectedSpn.Offset,
+      Unit: selectedSpn.Unit,
+      LowerDataRange: selectedSpn.LowerDataRange,
+      UpperDataRange: selectedSpn.UpperDataRange,
       StatusList: selectedSpn.StatusList
     });
+  }
+
+  selectAll() {
+    this.spnList$.pipe(
+      map(spnList => {
+        return spnList.map(spn => spn.selected = true);
+      })
+    );
+  }
+
+  deleteSpn() {
+
+  }
+
+  saveSpn() {
+
   }
 
   private loadSpnList() {
@@ -74,6 +95,13 @@ export class SpnProprietaryComponent implements OnInit {
       SPNNo: [''],
       SPNName: [''],
       PGNNo: [''],
+      StartBit: [''],
+      Length: [''],
+      Resolution: [''],
+      Offset: [''],
+      Unit: [''],
+      LowerDataRange: [''],
+      UpperDataRange: [''],
       StatusList: this.buildStatusForms(statusCount)
     });
   }
