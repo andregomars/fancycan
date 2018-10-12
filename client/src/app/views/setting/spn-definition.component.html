@@ -16,13 +16,13 @@
           <tbody>
             <tr *ngFor="let item of spnList$ | async" (click)="selectSpn(item)">
               <td>
-                <div class="small">{{ item.SPNNo }}</div>
+                <div class="small">{{ item.spn }}</div>
               </td>
               <td>
-                <div class="small d-inline-block text-truncate" [title]="item.SPNName">{{ item.SPNName }}</div>
+                <div class="small d-inline-block text-truncate" [title]="item.name">{{ item.name }}</div>
               </td>
               <td>
-                <div class="small">{{ item.PGNNo }}</div>
+                <div class="small">{{ item.pgn }}</div>
               </td>
               <td>
                 <input type="checkbox" [(ngModel)]="item.selected" (click)="$event.stopPropagation()">
@@ -33,7 +33,7 @@
       </div>
       <div class="row mb-2 text-center">
         <div class="col">
-          <input type="submit" class="btn btn-secondary my-2" value="ADD DEFINITION">
+          <input type="submit" class="btn btn-primary my-2" value="REMOVE DEFINITION">
         </div>
       </div>
     </div>
@@ -43,33 +43,33 @@
           <div class="card-body">
             <div class="row h-100">
               <div class="col-12 col-md-6 ">
-                <input type="text" class="form-control w-50 my-1" placeholder="SPN" formControlName="SPNNo">
-                <input type="text" class="form-control w-100 mt-1 mb-3" placeholder="SPN Name" formControlName="SPNName">
+                <input type="text" disabled  class="form-control w-50 my-1" placeholder="SPN" formControlName="SPNNo">
+                <input type="text" disabled  class="form-control w-100 mt-1 mb-3" placeholder="SPN Name" formControlName="SPNName">
                 <div class="row no-gutters">
                   <div class="col-6">
-                    <input type="text" class="form-control my-1" placeholder="PGN" formControlName="PGNNo">
+                    <input type="text" disabled  class="form-control my-1" placeholder="PGN" formControlName="PGNNo">
                   </div>
                   <div class="col-1 text-center align-self-center">
                     Or
                   </div>
                   <div class="col-5">
-                    <input type="text" class="form-control my-1" placeholder="CAN ID">
+                    <input type="text" disabled  class="form-control my-1" placeholder="CAN ID">
                   </div>
                 </div>
-                <input type="text" class="form-control w-50 mb-3" placeholder="Source address">
-                <input type="text" class="form-control w-50 my-1" placeholder="Start Bit" formControlName="StartBit">
-                <input type="text" class="form-control w-50 my-1" placeholder="Length" formControlName="Length">
-                <input type="text" class="form-control w-50 my-1" placeholder="Resolution" formControlName="Resolution">
-                <input type="text" class="form-control w-50 my-1" placeholder="Offset" formControlName="Offset">
-                <input type="text" class="form-control w-50 my-1" placeholder="Unit" formControlName="Unit">
-                <input type="text" class="form-control w-50 my-1" placeholder="Frequency">
+                <input type="text" disabled  class="form-control w-50 mb-3" placeholder="Source address">
+                <input type="text" disabled  class="form-control w-50 my-1" placeholder="Start Bit" formControlName="StartBit">
+                <input type="text" disabled  class="form-control w-50 my-1" placeholder="Length" formControlName="Length">
+                <input type="text" disabled  class="form-control w-50 my-1" placeholder="Resolution" formControlName="Resolution">
+                <input type="text" disabled  class="form-control w-50 my-1" placeholder="Offset" formControlName="Offset">
+                <input type="text" disabled  class="form-control w-50 my-1" placeholder="Unit" formControlName="Unit">
+                <input type="text" disabled  class="form-control w-50 my-1" placeholder="Frequency">
                 <div class="row no-gutters">
                   <div class="col-6">
-                    <input type="text" class="form-control my-1" placeholder="Max Value" formControlName="LowerDataRange">
+                    <input type="text" disabled  class="form-control my-1" placeholder="Max Value" formControlName="LowerDataRange">
                   </div>
                   <div class="col-1"></div>
                   <div class="col-5">
-                    <input type="text" class="form-control my-1" placeholder="Min Value" formControlName="UpperDataRange">
+                    <input type="text" disabled  class="form-control my-1" placeholder="Min Value" formControlName="UpperDataRange">
                   </div>
                 </div>
               </div>
@@ -82,31 +82,21 @@
                           <th><small></small></th>
                           <th width="80"><small>Value</small></th>
                           <th><small>Status</small></th>
-                          <th width="20" class="p-0">
-                            <button class="btn btn-link p-0">
-                              <i class="fa fa-plus"></i>
-                            </button>
-                          </th>
                         </tr>
                       </thead>
                       <tbody>
                         <ng-container formArrayName="StatusList">
                           <tr *ngFor="let item of statusList.controls; let i = index" [formGroupName]="i">
                             <td>
-                              <input type="radio" name="enabled" class="pull-right" formControlName="enabled" [checked]="item.value.enabled">
+                              <input type="radio" disabled name="enabled" class="pull-right" formControlName="enabled" [checked]="item.value.enabled">
                             </td>
                             <td>
                               <div class="small">
-                                <input type="text" class="form-control" formControlName="value">
+                                <input type="text" disabled  class="form-control" formControlName="value">
                               </div>
                             </td>
                             <td>
-                              <input type="text" class="form-control" formControlName="status">
-                            </td>
-                            <td class="p-0">
-                              <button class="btn btn-link p-0">
-                                <i class="fa fa-minus"></i>
-                              </button>
+                              <input type="text" disabled  class="form-control" formControlName="status">
                             </td>
                           </tr>
                         </ng-container>
@@ -114,14 +104,14 @@
                     </table>
                   </div>
                 </div>
-                <div class="row text-right">
+                <!-- <div class="row text-right">
                   <div class="col-12">
                     <input type="submit" class="btn btn-secondary my-2" value="DELETE">
                   </div>
                   <div class="col-12">
                     <input type="submit" class="btn btn-primary my-2" value="SAVE" (click)="saveSpn()">
                   </div>
-                </div>
+                </div> -->
               </div>
             </div>
           </div>
@@ -132,7 +122,6 @@
   <div class="row mt-2">
     <div class="col">
       <div class="border p-1">
-        <small class="text-muted">Operation Log</small>
         <div class="row">
           <div class="col-12 col-md-6">
             <div class="table-responsive-lg">
@@ -147,7 +136,7 @@
                 <tbody>
                   <tr>
                     <th><small>2018-10-02 13:55:00</small></th>
-                    <th><small>update SPN# 2036</small></th>
+                    <th><small>remove SPN# 2036</small></th>
                     <th><small>andre</small></th>
                   </tr>
                 </tbody>

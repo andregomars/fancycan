@@ -42,12 +42,27 @@ export class UtilityService {
         );
     }
 
-    // 1. add selection field in each entry
-    // 2. translate status description to code based on index
     getSPNListWithStatusArray(spnList$: Observable<any[]>): Observable<any[]> {
         return spnList$.pipe(
-            map(spnList => spnList.map(spn => Object.assign({}, spn, { selected: false }))),
-            map(spnList => spnList.map(spn => {
+            map(spnList => this.buildSPNStatusArray(spnList))
+            // map(spnList => spnList.map(spn => Object.assign({}, spn, { selected: false }))),
+            // map(spnList => spnList.map(spn => {
+            //     if (spn.Status && spn.Status.Description
+            //         && spn.Status.Description.length > 0) {
+            //         spn['StatusList'] = this.evaluateSPNStatusValue(spn.Status.Description, spn.Status.Name);
+            //     } else {
+            //         spn['StatusList'] = [];
+            //     }
+            //     return spn;
+            // }))
+        );
+    }
+
+    // 1. add selection field in each entry
+    // 2. translate status description to code based on index
+    private buildSPNStatusArray(spnList: any[]): any[] {
+        return spnList.map(spn => Object.assign({}, spn, { selected: false }))
+            .map(spn => {
                 if (spn.Status && spn.Status.Description
                     && spn.Status.Description.length > 0) {
                     spn['StatusList'] = this.evaluateSPNStatusValue(spn.Status.Description, spn.Status.Name);
@@ -55,9 +70,14 @@ export class UtilityService {
                     spn['StatusList'] = [];
                 }
                 return spn;
-            }))
-        );
+            });
+    }
 
+    getFlattedSPNSpecWithStatusArray(spnSpecs$: Observable<any[]>): Observable<any> {
+        return spnSpecs$.pipe(
+            map(spnSpecs => this.getFlattedSPNSpecs(spnSpecs)),
+            map(flattedSpecs => this.buildSPNStatusArray(flattedSpecs))
+        );
     }
 
     getFlattedSPNSpecs(specs: any[]): any[] {

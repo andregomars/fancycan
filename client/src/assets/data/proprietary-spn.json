@@ -4,8 +4,8 @@
         "PGNNo": "9001",
         "PGNName": "Transmission Control 1",
         "UnitType": "1",
-        "SPNNo": "1487",
-        "SPNName": "Illumination Brightness Percent",
+        "SPNNo": "1432",
+        "SPNName": "Check Temperature",
         "SPNDescription": "",
         "Status": {
             "Name": "Enable",

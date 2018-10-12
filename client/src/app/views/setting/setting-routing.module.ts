@@ -3,6 +3,7 @@ import { Routes, RouterModule} from '@angular/router';
 
 import { SpnSpecificationComponent } from './spn-specification.component';
 import { SpnProprietaryComponent } from './spn-proprietary.component';
+import { SpnDefinitionComponent } from './spn-definition.component';
 import { SettingContainerComponent } from './setting-container.component';
 import { FleetGuard } from '../../guards/fleet.guard';
 
@@ -34,6 +35,21 @@ const routes: Routes = [
         component: SpnProprietaryComponent,
         data: {
           title: 'Proprietary'
+        }
+      },
+      {
+        path: 'definition',
+        component: SpnDefinitionComponent,
+        canActivate: [ FleetGuard ],
+        data: {
+          title: 'Definition'
+        }
+      },
+      {
+        path: 'definition/:fcode',
+        component: SpnDefinitionComponent,
+        data: {
+          title: 'Definition'
         }
       }
     ]

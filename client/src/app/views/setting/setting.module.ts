@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgStringPipesModule } from 'angular-pipes';
 import { ComponentsModule } from '../../components/components.module';
 import { SpnProprietaryComponent } from './spn-proprietary.component';
+import { SpnDefinitionComponent } from './spn-definition.component';
 
 @NgModule({
   imports: [
@@ -20,7 +21,8 @@ import { SpnProprietaryComponent } from './spn-proprietary.component';
   declarations: [
     SettingContainerComponent,
     SpnSpecificationComponent,
-    SpnProprietaryComponent
+    SpnProprietaryComponent,
+    SpnDefinitionComponent
   ]
 })
 export class SettingModule { }

@@ -60,6 +60,11 @@ export const navItems = [
         name: 'Proprietary',
         url: '/setting/proprietary',
         icon: 'fa fa-angle-right'
+      },
+      {
+        name: 'Definition',
+        url: '/setting/definition',
+        icon: 'fa fa-angle-right'
       }
     ]
   }
