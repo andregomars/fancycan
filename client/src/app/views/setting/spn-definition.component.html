@@ -33,7 +33,7 @@
       </div>
       <div class="row mb-2 text-center">
         <div class="col">
-          <input type="submit" class="btn btn-primary my-2" value="REMOVE DEFINITION">
+          <input type="submit" class="btn btn-secondary my-2" value="REMOVE DEFINITION">
         </div>
       </div>
     </div>
@@ -43,33 +43,33 @@
           <div class="card-body">
             <div class="row h-100">
               <div class="col-12 col-md-6 ">
-                <input type="text" disabled  class="form-control w-50 my-1" placeholder="SPN" formControlName="SPNNo">
-                <input type="text" disabled  class="form-control w-100 mt-1 mb-3" placeholder="SPN Name" formControlName="SPNName">
+                <input type="text" class="form-control w-50 my-1" placeholder="SPN" formControlName="SPNNo">
+                <input type="text" class="form-control w-100 mt-1 mb-3" placeholder="SPN Name" formControlName="SPNName">
                 <div class="row no-gutters">
                   <div class="col-6">
-                    <input type="text" disabled  class="form-control my-1" placeholder="PGN" formControlName="PGNNo">
+                    <input type="text" class="form-control my-1" placeholder="PGN" formControlName="PGNNo">
                   </div>
                   <div class="col-1 text-center align-self-center">
                     Or
                   </div>
                   <div class="col-5">
-                    <input type="text" disabled  class="form-control my-1" placeholder="CAN ID">
+                    <input type="text" class="form-control my-1" placeholder="CAN ID" disabled>
                   </div>
                 </div>
-                <input type="text" disabled  class="form-control w-50 mb-3" placeholder="Source address">
-                <input type="text" disabled  class="form-control w-50 my-1" placeholder="Start Bit" formControlName="StartBit">
-                <input type="text" disabled  class="form-control w-50 my-1" placeholder="Length" formControlName="Length">
-                <input type="text" disabled  class="form-control w-50 my-1" placeholder="Resolution" formControlName="Resolution">
-                <input type="text" disabled  class="form-control w-50 my-1" placeholder="Offset" formControlName="Offset">
-                <input type="text" disabled  class="form-control w-50 my-1" placeholder="Unit" formControlName="Unit">
-                <input type="text" disabled  class="form-control w-50 my-1" placeholder="Frequency">
+                <input type="text" class="form-control w-50 mb-3" placeholder="Source address" disabled>
+                <input type="text" class="form-control w-50 my-1" placeholder="Start Bit" formControlName="StartBit">
+                <input type="text" class="form-control w-50 my-1" placeholder="Length" formControlName="Length">
+                <input type="text" class="form-control w-50 my-1" placeholder="Resolution" formControlName="Resolution">
+                <input type="text" class="form-control w-50 my-1" placeholder="Offset" formControlName="Offset">
+                <input type="text" class="form-control w-50 my-1" placeholder="Unit" formControlName="Unit">
+                <input type="text" class="form-control w-50 my-1" placeholder="Frequency" disabled>
                 <div class="row no-gutters">
                   <div class="col-6">
-                    <input type="text" disabled  class="form-control my-1" placeholder="Max Value" formControlName="LowerDataRange">
+                    <input type="text" class="form-control my-1" placeholder="Max Value" formControlName="LowerDataRange">
                   </div>
                   <div class="col-1"></div>
                   <div class="col-5">
-                    <input type="text" disabled  class="form-control my-1" placeholder="Min Value" formControlName="UpperDataRange">
+                    <input type="text" class="form-control my-1" placeholder="Min Value" formControlName="UpperDataRange">
                   </div>
                 </div>
               </div>
@@ -104,14 +104,6 @@
                     </table>
                   </div>
                 </div>
-                <!-- <div class="row text-right">
-                  <div class="col-12">
-                    <input type="submit" class="btn btn-secondary my-2" value="DELETE">
-                  </div>
-                  <div class="col-12">
-                    <input type="submit" class="btn btn-primary my-2" value="SAVE" (click)="saveSpn()">
-                  </div>
-                </div> -->
               </div>
             </div>
           </div>

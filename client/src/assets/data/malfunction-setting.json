@@ -1,0 +1,65 @@
+[
+    {
+        "id": 1,
+        "name": "Temperature",
+        "conditions": [
+            {
+                "spn": "1432",
+                "expression": ">",
+                "value": 32
+            },
+            {
+                "spn": "1489",
+                "expression": "!=",
+                "value": 44
+            }
+        ],
+        "gps_lat": 123.212112,
+        "gps_lng": 123.332432,
+        "gps_expression": ">",
+        "gps_value": "3",
+        "notification": "email"
+    },
+    {
+        "id": 2,
+        "name": "XBR Message",
+        "conditions": [
+            {
+                "spn": "1432",
+                "expression": ">",
+                "value": 32
+            },
+            {
+                "spn": "1489",
+                "expression": "!=",
+                "value": 44
+            }
+        ],
+        "gps_lat": 123.212112,
+        "gps_lng": 123.332432,
+        "gps_expression": ">",
+        "gps_value": "3",
+        "notification": "email"
+    },
+    {
+        "id": 1,
+        "name": "Lane Departure",
+        "conditions": [
+            {
+                "spn": "1493",
+                "expression": ">",
+                "value": 32
+            },
+            {
+                "spn": "1489",
+                "expression": "!=",
+                "value": 44
+            }
+        ],
+        "gps_lat": 123.212112,
+        "gps_lng": 123.332432,
+        "gps_expression": ">",
+        "gps_value": "3",
+        "notification": "email"
+    }
+]

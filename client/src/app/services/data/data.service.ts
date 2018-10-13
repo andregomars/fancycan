@@ -79,6 +79,11 @@ export class DataService {
       .get<any>(`${this.rootUrl}/proprietary-spn.json`);
   }
 
+  getMalfunctionSetting(): Observable<any> {
+    return this.http
+      .get<any>(`${this.rootUrl}/malfunction-setting.json`);
+  }
+
   getCANs(): Observable<any> {
     return this.http
       .get<any>(`${this.rootUrl}/cans.json`);
