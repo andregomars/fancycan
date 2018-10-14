@@ -49,11 +49,11 @@ export class MalfunctinoSettingComponent implements OnInit {
 
   }
 
-  deleteSpn() {
+  deleteEntry() {
 
   }
 
-  saveSpn() {
+  saveEntry() {
 
   }
 
