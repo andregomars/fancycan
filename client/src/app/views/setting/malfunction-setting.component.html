@@ -13,10 +13,10 @@
           <tbody>
             <tr *ngFor="let item of entryList$ | async" (click)="selectEntry(item)">
               <td>
-                <div class="small">{{ item.id }}</div>
+                <div class="small">{{ item.name }}</div>
               </td>
               <td>
-                <div class="small d-inline-block text-truncate">{{ item.spn }}</div>
+                <div class="small d-inline-block text-truncate">{{ getSpns(item.conditions) }}</div>
               </td>
               <td>
                 <div class="small">{{ item.notification }}</div>
@@ -29,108 +29,78 @@
     <div class="col-12 col-lg-8">
       <form [formGroup]="entryForm">
         <div class="card">
-          <div class="card-body">
+          <div class="card-body d-flex flex-column justify-content-between">
             <div class="row h-100">
               <div class="col-12">
-                <input type="text" class="form-control w-25 my-1" placeholder="Alert Name" formControlName="name">
-                <ng-container formArrayName="StatusList">
-                  <tr *ngFor="let item of statusList.controls; let i = index" [formGroupName]="i">
-                    <td>
-                      <input type="radio" name="enabled" class="pull-right" formControlName="enabled" [checked]="item.value.enabled">
-                    </td>
-                    <td>
-                      <div class="small">
-                        <input type="text" class="form-control" formControlName="value">
-                      </div>
-                    </td>
-                    <td>
-                      <input type="text" class="form-control" formControlName="status">
-                    </td>
-                    <td class="p-0">
-                      <button class="btn btn-link p-0">
-                        <i class="fa fa-minus"></i>
-                      </button>
-                    </td>
-                  </tr>
+                <input type="text" class="form-control w-25 my-1" 
+                  placeholder="Alert Name" formControlName="name" name="name">
+                <ng-container formArrayName="conditions">
+                  <div class="row my-1"
+                    *ngFor="let item of conditions.controls; let i = index" [formGroupName]="i">
+                    <div class="col-2 align-self-center">Condition {{ i + 1 }}</div>
+                    <div class="col-1"></div>
+                    <input type="text" class="form-control col-2" formControlName="spn" name="spn">
+                    <select formControlName="expression" name="expression" class="form-control col-3 mx-4">
+                      <option value="">Select</option>
+                      <option *ngFor="let opt of expressionOptions" [value]="opt">{{ opt }}</option>
+                    </select>
+                    <input type="text" class="form-control col-2" formControlName="value" name="value">
+                    <div class="col-2"></div>
+                  </div>
                 </ng-container>
-                <input type="text" class="form-control w-100 mt-1 mb-3" placeholder="SPN Name" formControlName="SPNName">
-                <div class="row no-gutters">
-                  <div class="col-6">
-                    <input type="text" class="form-control my-1" placeholder="PGN" formControlName="PGNNo">
+                <div class="row my-2">
+                  <div class="col">GPS condition</div>
+                </div>
+                <div class="row">
+                  <div class="col-3">
+                    <div class="row">
+                      <div class="col">
+                        <input type="text" class="form-control" placeholder="Latitude"
+                          formControlName="gpslat" name="gpslat">
+                      </div>
+                    </div>
+                    <div class="row mt-1">
+                      <div class="col">
+                        <input type="text" class="form-control" formControlName="gpslgt" placeholder="Longitude">
+                      </div>
+                    </div>
                   </div>
-                  <div class="col-1 text-center align-self-center">
-                    Or
+                  <div class="col-3 align-self-center">
+                    <select formControlName="gpsexpression" name="gpsexpression" class="form-control">
+                      <option value="">Select</option>
+                      <option *ngFor="let opt of expressionOptions" [value]="opt">{{ opt }}</option>
+                    </select>
                   </div>
-                  <div class="col-5">
-                    <input type="text" class="form-control my-1" placeholder="CAN ID">
+                  <div class="col-3 align-self-center">
+                    <input type="text" class="form-control" formControlName="gpsvalue" placeholder="Value (mile)">
+                  </div>
+                  <div class="col-3 align-self-center">
+                    For trigger radius
                   </div>
                 </div>
-                <input type="text" class="form-control w-50 mb-3" placeholder="Source address">
-                <input type="text" class="form-control w-50 my-1" placeholder="Start Bit" formControlName="StartBit">
-                <input type="text" class="form-control w-50 my-1" placeholder="Length" formControlName="Length">
-                <input type="text" class="form-control w-50 my-1" placeholder="Resolution" formControlName="Resolution">
-                <input type="text" class="form-control w-50 my-1" placeholder="Offset" formControlName="Offset">
-                <input type="text" class="form-control w-50 my-1" placeholder="Unit" formControlName="Unit">
-                <input type="text" class="form-control w-50 my-1" placeholder="Frequency">
-                <div class="row no-gutters">
-                  <div class="col-6">
-                    <input type="text" class="form-control my-1" placeholder="Max Value" formControlName="LowerDataRange">
-                  </div>
-                  <div class="col-1"></div>
-                  <div class="col-5">
-                    <input type="text" class="form-control my-1" placeholder="Min Value" formControlName="UpperDataRange">
+                <div class="row my-2">
+                  <div class="col-12 col-md-6">
+                    <div class="row my-2">
+                      <div class="col">Notification</div>
+                    </div>
+                    <div class="row">
+                      <div class="col">
+                        <select formControlName="notification" name="notification" class="form-control">
+                          <option value="">Select</option>
+                          <option *ngFor="let opt of notificationOptions" [value]="opt">{{ opt }}</option>
+                        </select>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-              <div class="col-12 col-md-6 d-flex flex-column justify-content-between">
-                <div class="row">
-                  <div class="col table-responsive-lg">
-                    <table class="table table-striped table-hover table-outline table-sm mt-1">
-                      <thead class="text-white thead-light bg-primary">
-                        <tr>
-                          <th><small></small></th>
-                          <th width="80"><small>Value</small></th>
-                          <th><small>Status</small></th>
-                          <th width="20" class="p-0">
-                            <button class="btn btn-link p-0">
-                              <i class="fa fa-plus"></i>
-                            </button>
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <ng-container formArrayName="StatusList">
-                          <tr *ngFor="let item of statusList.controls; let i = index" [formGroupName]="i">
-                            <td>
-                              <input type="radio" name="enabled" class="pull-right" formControlName="enabled" [checked]="item.value.enabled">
-                            </td>
-                            <td>
-                              <div class="small">
-                                <input type="text" class="form-control" formControlName="value">
-                              </div>
-                            </td>
-                            <td>
-                              <input type="text" class="form-control" formControlName="status">
-                            </td>
-                            <td class="p-0">
-                              <button class="btn btn-link p-0">
-                                <i class="fa fa-minus"></i>
-                              </button>
-                            </td>
-                          </tr>
-                        </ng-container>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-                <div class="row text-right">
-                  <div class="col-12">
-                    <input type="submit" class="btn btn-secondary my-2" value="DELETE" (click)="deleteEntry()">
-                  </div>
-                  <div class="col-12">
-                    <input type="submit" class="btn btn-primary my-2" value="SAVE" (click)="saveEntry()">
-                  </div>
-                </div>
+            </div>
+            <div class="row text-right">
+              <div class="col-12">
+                <input type="submit" class="btn btn-secondary my-2" value="DELETE" (click)="deleteEntry()">
+              </div>
+              <div class="col-12">
+                <input type="submit" class="btn btn-primary my-2" value="SAVE" (click)="saveEntry()">
               </div>
             </div>
           </div>
@@ -149,14 +119,14 @@
                 <thead class="text-white thead-light bg-primary">
                   <tr>
                     <th><small>Date</small></th>
-                    <th><small>SPN</small></th>
+                    <th><small>Malfunction</small></th>
                     <th><small>User</small></th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
                     <th><small>2018-10-02 13:55:00</small></th>
-                    <th><small>update SPN# 2036</small></th>
+                    <th><small>update Alert# 3</small></th>
                     <th><small>andre</small></th>
                   </tr>
                 </tbody>

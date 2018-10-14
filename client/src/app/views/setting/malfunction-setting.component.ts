@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Select } from '@ngxs/store';
-import { map, switchMap, share, tap } from 'rxjs/operators';
 
-import { DataService, UtilityService } from '../../services';
+import { DataService } from '../../services';
 import { ViewProfileState } from '../../states';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
+import { map, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-malfunction-setting',
@@ -16,6 +16,8 @@ export class MalfunctinoSettingComponent implements OnInit {
   @Select(ViewProfileState.fcode) fcode$: Observable<string>;
   entryList$: Observable<any[]>;
   entryForm: FormGroup;
+  expressionOptions = ['>', '=', '<', '!='];
+  notificationOptions = ['email', 'none'];
 
   get conditions(): FormArray {
     return this.entryForm.get('conditions') as FormArray;
@@ -23,26 +25,33 @@ export class MalfunctinoSettingComponent implements OnInit {
 
   constructor(
     private dataService: DataService,
-    private utilityService: UtilityService,
     private fb: FormBuilder
   ) { }
 
   ngOnInit() {
-    this.initForms(0);
-    this.loadConditionList();
+    this.initForms(2);
+    this.loadEntries();
   }
 
   selectEntry(selectedEntry: any) {
     this.initForms(selectedEntry.conditions.length);
     this.entryForm.setValue({
       name: selectedEntry.name,
-      gpslat: selectedEntry.name,
-      gpslgt: selectedEntry.name,
-      gpsexpression: selectedEntry.name,
-      gpsvalue: selectedEntry.name,
-      notification: selectedEntry.name,
+      gpslat: selectedEntry.gpslat,
+      gpslgt: selectedEntry.gpslgt,
+      gpsexpression: selectedEntry.gpsexpression,
+      gpsvalue: selectedEntry.gpsvalue,
+      notification: selectedEntry.notification,
       conditions: selectedEntry.conditions
     });
+  }
+
+  getSpns(conditions: any[]): string {
+    if (conditions && conditions.length > 0) {
+      return conditions.map(el => el.spn).join(',');
+    } else {
+      return '';
+    }
   }
 
   selectAll() {
@@ -57,23 +66,21 @@ export class MalfunctinoSettingComponent implements OnInit {
 
   }
 
-  private loadConditionList() {
-    this.entryList$ = this.dataService.getMalfunctionSetting();
-    // this.entryList$ = this.utilityService.getSPNListWithStatusArray(data$).pipe(
-    //   switchMap(spns =>
-    //       this.fcode$.pipe(
-    //         map(fcode => spns.filter(spn => spn.fleet_code === fcode)),
-    //         share()
-    //     )
-    //   )
-    // );
+  private loadEntries() {
+    this.entryList$ = this.dataService.getMalfunctionSetting().pipe(
+      switchMap(entries =>
+          this.fcode$.pipe(
+            map(fcode => entries.filter(entry => entry.fleet_code === fcode)),
+        )
+      )
+    );
   }
 
   private buildConditionForms(count: number): FormArray {
     const array = [];
     for (let i = 0; i < count; i++) {
       array.push(this.fb.group({
-        condition: [''],
+        spn: [''],
         expression: [''],
         value: [''],
       }));

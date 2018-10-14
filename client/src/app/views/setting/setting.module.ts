@@ -8,6 +8,7 @@ import { NgStringPipesModule } from 'angular-pipes';
 import { ComponentsModule } from '../../components/components.module';
 import { SpnProprietaryComponent } from './spn-proprietary.component';
 import { SpnDefinitionComponent } from './spn-definition.component';
+import { MalfunctinoSettingComponent } from './malfunction-setting.component';
 
 @NgModule({
   imports: [
@@ -22,7 +23,8 @@ import { SpnDefinitionComponent } from './spn-definition.component';
     SettingContainerComponent,
     SpnSpecificationComponent,
     SpnProprietaryComponent,
-    SpnDefinitionComponent
+    SpnDefinitionComponent,
+    MalfunctinoSettingComponent
   ]
 })
 export class SettingModule { }
