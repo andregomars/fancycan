@@ -65,6 +65,11 @@ export const navItems = [
         name: 'Definition',
         url: '/setting/definition',
         icon: 'fa fa-angle-right'
+      },
+      {
+        name: 'Malfunction',
+        url: '/setting/malfunction',
+        icon: 'fa fa-angle-right'
       }
     ]
   }

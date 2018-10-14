@@ -1,6 +1,7 @@
 [
     {
         "id": 1,
+        "fleet_code": "LAMTA",
         "name": "Temperature",
         "conditions": [
             {
@@ -14,14 +15,15 @@
                 "value": 44
             }
         ],
-        "gps_lat": 123.212112,
-        "gps_lng": 123.332432,
-        "gps_expression": ">",
-        "gps_value": "3",
+        "gpslat": 123.212112,
+        "gpslgt": 123.332432,
+        "gpsexpression": ">",
+        "gpsvalue": "3",
         "notification": "email"
     },
     {
         "id": 2,
+        "fleet_code": "LAMTA",
         "name": "XBR Message",
         "conditions": [
             {
@@ -35,14 +37,15 @@
                 "value": 44
             }
         ],
-        "gps_lat": 123.212112,
-        "gps_lng": 123.332432,
-        "gps_expression": ">",
-        "gps_value": "3",
+        "gpslat": 123.212112,
+        "gpslgt": 123.332432,
+        "gpsexpression": ">",
+        "gpsvalue": "3",
         "notification": "email"
     },
     {
         "id": 1,
+        "fleet_code": "AVTA",
         "name": "Lane Departure",
         "conditions": [
             {
@@ -56,10 +59,10 @@
                 "value": 44
             }
         ],
-        "gps_lat": 123.212112,
-        "gps_lng": 123.332432,
-        "gps_expression": ">",
-        "gps_value": "3",
+        "gpslat": 123.212112,
+        "gpslgt": 123.332432,
+        "gpsexpression": ">",
+        "gpsvalue": "3",
         "notification": "email"
     }
 ]

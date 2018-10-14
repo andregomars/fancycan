@@ -5,6 +5,7 @@ import { SpnSpecificationComponent } from './spn-specification.component';
 import { SpnProprietaryComponent } from './spn-proprietary.component';
 import { SpnDefinitionComponent } from './spn-definition.component';
 import { SettingContainerComponent } from './setting-container.component';
+import { MalfunctinoSettingComponent } from './malfunction-setting.component';
 import { FleetGuard } from '../../guards/fleet.guard';
 
 const routes: Routes = [
@@ -50,6 +51,21 @@ const routes: Routes = [
         component: SpnDefinitionComponent,
         data: {
           title: 'Definition'
+        }
+      },
+      {
+        path: 'malfunction',
+        component: MalfunctinoSettingComponent,
+        canActivate: [ FleetGuard ],
+        data: {
+          title: 'Malfunction'
+        }
+      },
+      {
+        path: 'malfunction/:fcode',
+        component: MalfunctinoSettingComponent,
+        data: {
+          title: 'Malfunction'
         }
       }
     ]

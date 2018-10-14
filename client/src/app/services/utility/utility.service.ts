@@ -45,16 +45,6 @@ export class UtilityService {
     getSPNListWithStatusArray(spnList$: Observable<any[]>): Observable<any[]> {
         return spnList$.pipe(
             map(spnList => this.buildSPNStatusArray(spnList))
-            // map(spnList => spnList.map(spn => Object.assign({}, spn, { selected: false }))),
-            // map(spnList => spnList.map(spn => {
-            //     if (spn.Status && spn.Status.Description
-            //         && spn.Status.Description.length > 0) {
-            //         spn['StatusList'] = this.evaluateSPNStatusValue(spn.Status.Description, spn.Status.Name);
-            //     } else {
-            //         spn['StatusList'] = [];
-            //     }
-            //     return spn;
-            // }))
         );
     }
 
