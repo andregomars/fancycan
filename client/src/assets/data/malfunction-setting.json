@@ -27,19 +27,19 @@
         "name": "XBR Message",
         "conditions": [
             {
-                "spn": "1432",
-                "expression": ">",
-                "value": 32
+                "spn": "1530",
+                "expression": "<",
+                "value": 100
             },
             {
-                "spn": "1489",
-                "expression": "!=",
-                "value": 44
+                "spn": "1624",
+                "expression": "=",
+                "value": 0 
             }
         ],
         "gpslat": 123.212112,
         "gpslgt": 123.332432,
-        "gpsexpression": ">",
+        "gpsexpression": "<",
         "gpsvalue": "3",
         "notification": "email"
     },

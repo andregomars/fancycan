@@ -32,12 +32,16 @@
           <div class="card-body d-flex flex-column justify-content-between">
             <div class="row h-100">
               <div class="col-12">
-                <input type="text" class="form-control w-25 my-1" 
-                  placeholder="Alert Name" formControlName="name" name="name">
+                <div class="row">
+                  <div class="col-12 col-md-4">
+                    <input type="text" class="form-control my-1" 
+                      placeholder="Alert Name" formControlName="name" name="name">
+                  </div>
+                </div>
                 <ng-container formArrayName="conditions">
                   <div class="row my-1"
                     *ngFor="let item of conditions.controls; let i = index" [formGroupName]="i">
-                    <div class="col-2 align-self-center">Condition {{ i + 1 }}</div>
+                    <div class="col-12 col-md-2 align-self-center">Condition {{ i + 1 }}</div>
                     <div class="col-1"></div>
                     <input type="text" class="form-control col-2" formControlName="spn" name="spn">
                     <select formControlName="expression" name="expression" class="form-control col-3 mx-4">
@@ -49,10 +53,10 @@
                   </div>
                 </ng-container>
                 <div class="row my-2">
-                  <div class="col">GPS condition</div>
+                  <div class="col">GPS condition (trigger by radius)</div>
                 </div>
                 <div class="row">
-                  <div class="col-3">
+                  <div class="col-4">
                     <div class="row">
                       <div class="col">
                         <input type="text" class="form-control" placeholder="Latitude"
@@ -73,9 +77,6 @@
                   </div>
                   <div class="col-3 align-self-center">
                     <input type="text" class="form-control" formControlName="gpsvalue" placeholder="Value (mile)">
-                  </div>
-                  <div class="col-3 align-self-center">
-                    For trigger radius
                   </div>
                 </div>
                 <div class="row my-2">
