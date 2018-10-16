@@ -4,8 +4,9 @@ import { Select } from '@ngxs/store';
 
 import { DataService, UtilityService } from '../../services';
 import { ViewProfileState } from '../../states';
-import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, FormControl } from '@angular/forms';
 import { map, switchMap, share } from 'rxjs/operators';
+import { formControlBinding } from '@angular/forms/src/directives/reactive_directives/form_control_directive';
 
 @Component({
   selector: 'app-usage-setting',
@@ -16,6 +17,7 @@ export class UsageSettingComponent implements OnInit {
   @Select(ViewProfileState.fcode) fcode$: Observable<string>;
   entryList$: Observable<any[]>;
   entryForm: FormGroup;
+  entry: any;
 
   get types(): FormArray {
     return this.entryForm.get('types') as FormArray;
@@ -33,11 +35,12 @@ export class UsageSettingComponent implements OnInit {
   }
 
   selectEntry(selectedEntry: any) {
-    this.entryForm.setValue({
+    this.entry = {
       name: selectedEntry.name,
       spn: selectedEntry.spn,
       types: this.utilityService.getUsageTypeArray(selectedEntry.types)
-    });
+    };
+    this.buildFormControls();
   }
 
   selectAll() {
@@ -64,11 +67,25 @@ export class UsageSettingComponent implements OnInit {
   }
 
   private initForms() {
-    this.entryForm = this.fb.group({
-      name: [''],
-      spn: [''],
+    this.entry = this.GetDefaultEntry();
+    this.buildFormControls();
+  }
+
+  private GetDefaultEntry(): any {
+    return {
+      name: '',
+      spn: '',
       types: this.utilityService.getDefaultUsage()
-    });
+    };
+  }
+
+  private buildFormControls() {
+    this.entryForm = new FormGroup({});
+      this.entryForm.addControl('name', new FormControl(this.entry.name));
+      this.entryForm.addControl('spn', new FormControl(this.entry.spn));
+      this.entry.types.forEach((type, i) => {
+        this.entryForm.addControl(type.name, new FormControl(type.checked));
+      });
   }
 }
 

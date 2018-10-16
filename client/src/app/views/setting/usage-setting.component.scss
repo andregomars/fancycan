@@ -9,3 +9,7 @@ input[type=submit] {
 .card-body {
     min-height: 500px;
 }
+
+form .form-control:focus{
+  box-shadow: none;
+}

@@ -44,17 +44,20 @@
                       placeholder="SPN" formControlName="spn" name="spn">
                   </div>
                   <div class="col-12 col-md-9">
-                    <ng-container formArrayName="types">
                       <div class="row my-1"
-                        *ngFor="let item of types.controls; let i = index" [formGroupName]="i">
-                        <div class="col-12 col-md-2 align-self-center">{{ name }}</div>
+                        *ngFor="let item of entry.types">
+                        <div class="col-12 col-md-3 align-self-center">
+                          <small>{{ item.name }}</small>
+                        </div>
+                        <div class="col-1">
+                          <input type="checkbox" class="form-control border border-0" style="width: 15px" 
+                            [formControlName]="item.name"> 
+                        </div>
                         <div class="col-1"></div>
-                        <input type="checkbox" class="form-control col-2" formControlName="checked" name="checked">
-                        <div class="col-2"></div>
-                        <div class="col-12 col-md-3 align-self-center">{{ hint }}</div>
-                        <div class="col-2"></div>
+                        <div class="col-12 col-md-5 align-self-center">
+                          <small>{{ item.hint }}</small>
+                        </div>
                       </div>
-                    </ng-container>
                   </div>
                 </div>
               </div>
@@ -90,7 +93,7 @@
                 <tbody>
                   <tr>
                     <th><small>2018-10-02 13:55:00</small></th>
-                    <th><small>update Alert# 3</small></th>
+                    <th><small>update Usage# 3</small></th>
                     <th><small>andre</small></th>
                   </tr>
                 </tbody>

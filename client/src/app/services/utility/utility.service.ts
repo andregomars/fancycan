@@ -109,7 +109,7 @@ export class UtilityService {
             },
             {
                 name: 'Usage time',
-                value: 'times',
+                value: 'time',
                 hint: 'For Engine, HVAC, etc.',
                 checked: false
             },
