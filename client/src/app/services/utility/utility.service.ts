@@ -85,6 +85,55 @@ export class UtilityService {
         ).reduce((acc, cur) => [...acc, ...cur], []);
     }
 
+    getUsageTypeArray(types: any[]): any[] {
+        const formArray = this.getDefaultUsage();
+        return formArray.map(form => {
+            const checked = types.includes(form.value);
+            return {
+                name: form.name,
+                value: form.value,
+                hint: form.hint,
+                checked: checked
+            };
+        });
+
+    }
+
+    getDefaultUsage(): any[] {
+        return [
+            {
+                name: 'Usage Times',
+                value: 'times',
+                hint: 'For Door, Wiper, Ramp, HVAC, etc.',
+                checked: false
+            },
+            {
+                name: 'Usage time',
+                value: 'times',
+                hint: 'For Engine, HVAC, etc.',
+                checked: false
+            },
+            {
+                name: 'Cumulative',
+                value: 'cumulative',
+                hint: 'For Odometer, etc.',
+                checked: false
+            },
+            {
+                name: 'Increment',
+                value: 'increment',
+                hint: 'For Re-gen, etc.',
+                checked: false
+            },
+            {
+                name: 'Decrement',
+                value: 'decrement',
+                hint: 'For Energy usage, etc',
+                checked: false
+            }
+        ];
+    }
+
     getCurrentData(): Observable<any> {
         return of(this.randomObject());
     }

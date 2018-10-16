@@ -70,6 +70,11 @@ export const navItems = [
         name: 'Malfunction',
         url: '/setting/malfunction',
         icon: 'fa fa-angle-right'
+      },
+      {
+        name: 'Usage',
+        url: '/setting/usage',
+        icon: 'fa fa-angle-right'
       }
     ]
   }

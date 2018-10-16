@@ -1,0 +1,23 @@
+[
+    {
+        "id": 1,
+        "fleet_code": "LAMTA",
+        "name": "Door",
+        "spn": "1483",
+        "types": ["time", "culmulative"]
+    },
+    {
+        "id": 2,
+        "fleet_code": "LAMTA",
+        "name": "Odometer",
+        "spn": "1485",
+        "types": ["times"]
+    },
+    {
+        "id": 3,
+        "fleet_code": "AVTA",
+        "name": "Energy",
+        "spn": "1590",
+        "types": ["increment", "decrement"]
+    }
+]
