@@ -1,0 +1,43 @@
+<div class="animated fadeIn">
+  <div class="row mt-2">
+    <div class="col-6">
+      <div class="row">
+        <div class="col-12 col-md-6 d-flex flex-column justify-content-center">
+          <div class="input-group mt-1">
+            <span class="input-group-prepend">
+              <span class="input-group-text">
+                <i class="fa fa-calendar"></i>
+              </span>
+            </span>
+            <input class="form-control" bsDatepicker [bsValue]="selectedDate">
+          </div>
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="col-12 col-lg-5 d-flex justify-content-between">
+          <div class="align-self-center m-2">From:</div>
+          <timepicker [(ngModel)]="selectedTimeBegin" [arrowkeys]="'false'"></timepicker>
+        </div>
+        <div class="col-12 col-lg-5 d-flex justify-content-between">
+          <div class="align-self-center m-2">To:</div>
+          <timepicker [(ngModel)]="selectedTimeEnd" [arrowkeys]="'false'"></timepicker>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-2">
+    <div class="col-6 col-md-3">
+      <ng-select
+        class="bootstrap"
+        placeholder="Choose Vehicle"
+        [options]="vehicleOpts$ | async"
+        [allowClear]="true">
+      </ng-select>
+    </div>
+  </div>
+  <div class="row mt-2" style="min-height: 100px">
+    <div class="col-6 col-md-3 align-self-end">
+      <button class="btn btn-primary">DOWNLOAD</button>
+    </div>
+  </div>
+</div>

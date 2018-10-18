@@ -48,6 +48,11 @@ export const navItems = [
     ]
   },
   {
+    name: 'Archive',
+    url: '/archive',
+    icon: 'fa fa-archive'
+  },
+  {
     name: 'Setting',
     icon: 'fa fa-gear',
     children: [

@@ -30,6 +30,10 @@ export const routes: Routes = [
         loadChildren: './views/statistic/statistic.module#StatisticModule'
       },
       {
+        path: 'archive',
+        loadChildren: './views/archive/archive.module#ArchiveModule'
+      },
+      {
         path: 'setting',
         loadChildren: './views/setting/setting.module#SettingModule'
       }
