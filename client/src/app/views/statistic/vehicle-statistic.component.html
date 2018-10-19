@@ -13,7 +13,7 @@
         <table class="table table-striped table-hover table-outline table-sm mt-1">
           <thead class="text-white thead-light bg-primary">
             <tr>
-              <th><small>Vehicle #</small></th>
+              <th><small>Date</small></th>
               <th><small>Odometer</small></th>
               <th><small>Mileage</small></th>
               <th><small>Engine On</small></th>
@@ -24,7 +24,7 @@
           </thead>
           <tbody>
             <tr *ngIf="sumEntry$ | async as item" style="color: yellow">
-              <td>&nbsp;&nbsp;{{ item.vehicle_code }}</td>
+              <td>&nbsp;&nbsp;{{ item.updated }}</td>
               <td>{{ item.odometer | number: '1.0-2' }}</td>
               <td>{{ item.mileage | number: '1.0-2' }}</td>
               <td>{{ item.engine_on | number: '1.0-2' }}</td>
@@ -33,7 +33,7 @@
               <td>{{ item.regeneration | number: '1.0-2' }}</td>
             </tr>
             <tr *ngIf="avgEntry$ | async as item" style="color: yellow">
-              <td>&nbsp;&nbsp;{{ item.vehicle_code }}</td>
+              <td>&nbsp;&nbsp;{{ item.updated }}</td>
               <td>{{ item.odometer | number: '1.0-2' }}</td>
               <td>{{ item.mileage | number: '1.0-2' }}</td>
               <td>{{ item.engine_on | number: '1.0-2' }}</td>
@@ -43,9 +43,9 @@
             </tr>
             <tr *ngFor="let item of stats$ | async">
               <td>
-                <a class="btn btn-link text-primary" (click)="nav(item.fleet_code, item.vehicle_code)"> 
-                  <small>{{ item.vehicle_code }}</small>
-                </a>
+                <!-- <a class="btn btn-link" [routerLink]="['/vehicle', item.vehicle_code]"> -->
+                  <div class="small">{{ item.updated | date:'MM/dd' }}</div>
+                <!-- </a> -->
               </td>
               <td>
                 <div class="small">{{ item.odometer }}</div>

@@ -2,16 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { DataService, UtilityService } from '../../services';
 import { Observable } from 'rxjs';
 import { share, map, scan } from 'rxjs/operators';
-import { Store } from '@ngxs/store';
-import { SetProfile } from '../../actions';
-import { Navigate } from '@ngxs/router-plugin';
+import * as moment from 'moment';
 
 @Component({
-  selector: 'app-fleet-statistic',
-  templateUrl: './fleet-statistic.component.html',
-  styleUrls: ['./fleet-statistic.component.scss']
+  selector: 'app-vehicle-statistic',
+  templateUrl: './vehicle-statistic.component.html',
+  styleUrls: ['./vehicle-statistic.component.scss']
 })
-export class FleetStatisticComponent implements OnInit {
+export class VehicleStatisticComponent implements OnInit {
   stats$: Observable<any>;
   sumEntry$: Observable<any>;
   avgEntry$: Observable<any>;
@@ -35,7 +33,6 @@ export class FleetStatisticComponent implements OnInit {
 
   constructor(
     private dataService: DataService,
-    private store: Store,
     private utilityService: UtilityService
   ) { }
 
@@ -44,39 +41,38 @@ export class FleetStatisticComponent implements OnInit {
     this.loadPieCharts();
   }
 
-  nav(fcode: string, vcode: string) {
-    this.store.dispatch(new SetProfile(fcode, vcode));
-    this.store.dispatch(new Navigate(['statistic/vehicle', vcode]));
-  }
-
   private loadPieCharts() {
     this.stats$.subscribe((stats: any[]) => {
-      const key = 'vehicle_code';
+      const key = 'updated';
       const value = 'idle_time';
       const aggregated = this.utilityService.getAggregateData(stats, key, value);
       aggregated.sort((a, b) => b[value] - a[value]).splice(this.topNum);
-      this.idleTimeLabels = aggregated.map(x => x[key]);
+      this.idleTimeLabels = aggregated.map(x => x[key]).map(this.formatDateForChart);
       this.idleTimeValues = aggregated.map(x => x[value]);
       }
     );
     this.stats$.subscribe((stats: any[]) => {
-      const key = 'vehicle_code';
+      const key = 'updated';
       const value = 'regeneration';
       const aggregated = this.utilityService.getAggregateData(stats, key, value);
       aggregated.sort((a, b) => b[value] - a[value]).splice(this.topNum);
-      this.regenLabels = aggregated.map(x => x[key]);
+      this.regenLabels = aggregated.map(x => x[key]).map(this.formatDateForChart);
       this.regenValues = aggregated.map(x => x[value]);
       }
     );
   }
 
+  private formatDateForChart(date: string): string {
+    return moment(date).format('MM/DD');
+  }
+
   private loadTable() {
-    this.stats$ = this.dataService.getFleetStats().pipe(
+    this.stats$ = this.dataService.getVehicleStats().pipe(
       share()
     );
 
     const sumEntryInitial = {
-      vehicle_code: null,
+      updated: null,
       odometer: 0,
       mileage: 0,
       engine_on: 0,
@@ -90,7 +86,7 @@ export class FleetStatisticComponent implements OnInit {
       map((stats: any[]) => {
         return stats.reduce((sum, cur) => {
           return {
-            vehicle_code: 'SUM',
+            updated: 'SUM',
             odometer: sum.odometer + cur.odometer,
             mileage: sum.mileage + cur.mileage,
             engine_on: sum.engine_on + cur.engine_on,
@@ -107,7 +103,7 @@ export class FleetStatisticComponent implements OnInit {
     this.avgEntry$ = this.sumEntry$.pipe(
       map(sum => {
           return {
-            vehicle_code: 'AVG',
+            updated: 'AVG',
             odometer: sum.odometer / sum.count,
             mileage: sum.mileage / sum.count,
             engine_on: sum.engine_on / sum.count,

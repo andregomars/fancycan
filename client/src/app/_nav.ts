@@ -48,6 +48,11 @@ export const navItems = [
         name: 'Playback',
         url: '/vehicle/playback',
         icon: 'fa fa-angle-right'
+      },
+      {
+        name: 'Statistic',
+        url: '/statistic/vehicle',
+        icon: 'fa fa-angle-right'
       }
     ]
   },
@@ -63,6 +68,11 @@ export const navItems = [
       {
         name: 'Fleet Malfunction',
         url: '/statistic/malfunction/fleet',
+        icon: 'fa fa-angle-right'
+      },
+      {
+        name: 'Vehicle',
+        url: '/statistic/vehicle',
         icon: 'fa fa-angle-right'
       }
     ]
