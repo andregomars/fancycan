@@ -53,6 +53,11 @@ export const navItems = [
         name: 'Statistic',
         url: '/statistic/vehicle',
         icon: 'fa fa-angle-right'
+      },
+      {
+        name: 'Malfunction Statistic',
+        url: '/statistic/malfunction/vehicle',
+        icon: 'fa fa-angle-right'
       }
     ]
   },
@@ -73,6 +78,11 @@ export const navItems = [
       {
         name: 'Vehicle',
         url: '/statistic/vehicle',
+        icon: 'fa fa-angle-right'
+      },
+      {
+        name: 'Vehicle Malfunction',
+        url: '/statistic/malfunction/vehicle',
         icon: 'fa fa-angle-right'
       }
     ]

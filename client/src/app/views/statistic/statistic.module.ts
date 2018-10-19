@@ -8,6 +8,7 @@ import { StatisticComponent } from './statistic.component';
 import { FleetStatisticComponent } from './fleet-statistic.component';
 import { FleetMalfunctionComponent } from './fleet-malfunction.component';
 import { VehicleStatisticComponent } from './vehicle-statistic.component';
+import { VehicleMalfunctionComponent } from './vehicle-malfunction.component';
 
 @NgModule({
   imports: [
@@ -20,7 +21,8 @@ import { VehicleStatisticComponent } from './vehicle-statistic.component';
     StatisticComponent,
     FleetStatisticComponent,
     FleetMalfunctionComponent,
-    VehicleStatisticComponent
+    VehicleStatisticComponent,
+    VehicleMalfunctionComponent
   ]
 })
 export class StatisticModule { }

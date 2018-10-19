@@ -8,6 +8,7 @@ import { StatisticComponent } from './statistic.component';
 import { FleetStatisticComponent } from './fleet-statistic.component';
 import { FleetMalfunctionComponent } from './fleet-malfunction.component';
 import { VehicleStatisticComponent } from './vehicle-statistic.component';
+import { VehicleMalfunctionComponent } from './vehicle-malfunction.component';
 import { FleetGuard } from '../../guards/fleet.guard';
 import { VehicleGuard } from '../../guards/vehicle.guard';
 
@@ -63,7 +64,22 @@ const routes: Routes = [
         data: {
           title: 'Vehicle Stats'
         }
-      }
+      },
+      {
+        path: 'malfunction/vehicle',
+        component: VehicleMalfunctionComponent,
+        canActivate: [ VehicleGuard ],
+        data: {
+          title: 'Malfunction Stats'
+        }
+      },
+      {
+        path: 'malfunction/vehicle/:fcode',
+        component: VehicleMalfunctionComponent,
+        data: {
+          title: 'Malfunction Stats'
+        }
+      },
     ]
   }
 ];

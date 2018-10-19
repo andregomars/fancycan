@@ -1,122 +1,134 @@
 [
     {
         "name": "Low Power",
+        "fleet_code": "LAMTA",
         "vehicle_number": 5001,
         "odometer": 10000,
         "total_alert": 5,
         "critical": 3,
         "general": 2,
         "spn": "A2353",
-        "updated": "2018-08-27 13:23:33"
+        "updated": "2018-08-27 00:00:00"
     },
     {
         "name": "Left Gun",
+        "fleet_code": "LAMTA",
         "vehicle_number": 5001,
         "odometer": 10000,
         "total_alert": 5,
         "critical": 3,
         "general": 2,
         "spn": "A2353",
-        "updated": "2018-08-29 13:23:33"
+        "updated": "2018-08-29 00:00:00"
     },
     {
         "name": "Engine Fail",
+        "fleet_code": "LAMTA",
         "vehicle_number": 5003,
         "odometer": 10000,
         "total_alert": 5,
         "critical": 3,
         "general": 2,
         "spn": "A2353",
-        "updated": "2018-08-27 13:23:33"
+        "updated": "2018-08-28 00:00:00"
     },
     {
         "name": "Low Power",
+        "fleet_code": "LAMTA",
         "vehicle_number": 5003,
         "odometer": 10000,
         "total_alert": 5,
         "critical": 3,
         "general": 2,
         "spn": "B2355",
-        "updated": "2018-08-27 13:23:33"
+        "updated": "2018-08-27 00:00:00"
     },
     {
         "name": "Low Power",
+        "fleet_code": "LAMTA",
         "vehicle_number": 5008,
         "odometer": 10000,
         "total_alert": 5,
         "critical": 3,
         "general": 2,
         "spn": "B2355",
-        "updated": "2018-08-27 13:23:33"
+        "updated": "2018-08-27 00:00:00"
     },
     {
         "name": "Low Power",
+        "fleet_code": "LAMTA",
         "vehicle_number": 5012,
         "odometer": 10000,
         "total_alert": 5,
         "critical": 2,
         "general": 3,
         "spn": "C3533",
-        "updated": "2018-08-27 13:23:33"
+        "updated": "2018-08-24 00:00:00"
     },
     {
         "name": "Low Power",
+        "fleet_code": "LAMTA",
         "vehicle_number": 5011,
         "odometer": 10000,
         "total_alert": 5,
         "critical": 3,
         "general": 2,
         "spn": "D1211",
-        "updated": "2018-08-27 13:23:33"
+        "updated": "2018-08-24 00:00:00"
     },
     {
         "name": "Low Power",
+        "fleet_code": "LAMTA",
         "vehicle_number": 5001,
         "odometer": 10000,
         "total_alert": 5,
         "critical": 3,
         "general": 2,
         "spn": "D2503",
-        "updated": "2018-08-27 13:23:33"
+        "updated": "2018-08-27 00:00:00"
     },
     {
         "name": "Low Power",
+        "fleet_code": "LAMTA",
         "vehicle_number": 5001,
         "odometer": 10000,
         "total_alert": 5,
         "critical": 2,
         "general": 3,
         "spn": "D2503",
-        "updated": "2018-08-27 13:23:33"
+        "updated": "2018-08-25 00:00:00"
     },
     {
         "name": "Low Power",
+        "fleet_code": "LAMTA",
         "vehicle_number": 5001,
         "odometer": 10000,
         "total_alert": 5,
         "critical": 3,
         "general": 2,
         "spn": "D2503",
-        "updated": "2018-08-27 13:23:33"
+        "updated": "2018-08-26 00:00:00"
     },
     {
         "name": "Low Power",
+        "fleet_code": "LAMTA",
         "vehicle_number": 5001,
         "odometer": 10000,
         "total_alert": 5,
         "critical": 3,
         "general": 2,
         "spn": "D2503",
-        "updated": "2018-08-27 13:23:33"
+        "updated": "2018-08-27 00:00:00"
     },
     {
         "name": "Low Power",
+        "fleet_code": "LAMTA",
         "vehicle_number": 5001,
         "odometer": 10000,
         "total_alert": 5,
         "critical": 2,
         "general": 3,
         "spn": "D2503",
-        "updated": "2018-08-27 13:23:33"
+        "updated": "2018-08-27 00:00:00"
     }
 ]
