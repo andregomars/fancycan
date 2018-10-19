@@ -7,6 +7,7 @@ import {
 import { FleetDashboardComponent } from './fleet-dashboard.component';
 import { FleetListComponent } from './fleet-list.component';
 import { FleetContainerComponent } from './fleet-container.component';
+import { FleetGuard } from '../../guards/fleet.guard';
 
 const routes: Routes = [
   {
@@ -31,7 +32,15 @@ const routes: Routes = [
         }
       },
       {
-        path: ':fcode',
+        path: 'dashboard',
+        component: FleetDashboardComponent,
+        canActivate: [FleetGuard],
+        data: {
+          title: 'Dashboard'
+        }
+      },
+      {
+        path: 'dashboard/:fcode',
         component: FleetDashboardComponent,
         data: {
           title: 'Dashboard'

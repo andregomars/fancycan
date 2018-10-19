@@ -66,7 +66,15 @@ const routes: Routes = [
         }
       },
       {
-        path: ':vcode',
+        path: 'dashboard',
+        component: VehicleComponent,
+        canActivate: [VehicleGuard],
+        data: {
+          title: 'Vehicle'
+        }
+      },
+      {
+        path: 'dashboard/:vcode',
         component: VehicleComponent,
         data: {
           title: 'Vehicle'

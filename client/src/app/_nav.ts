@@ -8,6 +8,21 @@ export const navItems = [
         url: '/fleet/list',
         icon: 'fa fa-angle-right'
       },
+      {
+        name: 'Dashboard',
+        url: '/fleet/dashboard',
+        icon: 'fa fa-angle-right'
+      },
+      {
+        name: 'Statistic',
+        url: '/statistic/fleet',
+        icon: 'fa fa-angle-right'
+      },
+      {
+        name: 'Malfunction',
+        url: '/statistic/malfunction/fleet',
+        icon: 'fa fa-angle-right'
+      }
     ]
   },
   {
@@ -17,6 +32,11 @@ export const navItems = [
       {
         name: 'Choose Vehicle',
         url: '/vehicle/list',
+        icon: 'fa fa-angle-right'
+      },
+      {
+        name: 'Dashboard',
+        url: '/vehicle/dashboard',
         icon: 'fa fa-angle-right'
       },
       {

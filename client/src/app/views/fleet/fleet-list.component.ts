@@ -26,7 +26,7 @@ export class FleetListComponent implements OnInit {
 
   nav(fcode: string) {
     this.store.dispatch(new SetProfile(fcode, null));
-    this.store.dispatch(new Navigate(['/fleet', fcode]));
+    this.store.dispatch(new Navigate(['/fleet/dashboard', fcode]));
   }
 
   private loadData() {
