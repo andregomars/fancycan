@@ -132,7 +132,7 @@ export class VehicleComponent implements OnInit {
       share()
     );
 
-    this.alerts$ = this.dataService.getAlerts().pipe(
+    this.alerts$ = this.dataService.getAlertStats().pipe(
       map((alerts: any[]) => alerts.slice(0, 5)),
       share()
     );

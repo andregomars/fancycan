@@ -63,7 +63,7 @@ export class VehicleMalfunctionComponent implements OnInit {
   }
 
   private loadTable() {
-    this.alerts$ = this.dataService.getAlerts().pipe(
+    this.alerts$ = this.dataService.getAlertStats().pipe(
       share()
     );
 

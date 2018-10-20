@@ -67,7 +67,7 @@ export class FleetMalfunctionComponent implements OnInit {
   }
 
   private loadTable() {
-    this.alerts$ = this.dataService.getAlerts().pipe(
+    this.alerts$ = this.dataService.getAlertStats().pipe(
       share()
     );
 
