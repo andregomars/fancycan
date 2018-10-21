@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService, UtilityService } from '../../services';
 import { Observable } from 'rxjs';
-import { map, share, switchMap, tap } from 'rxjs/operators';
+import { map, share, switchMap, tap, timeout } from 'rxjs/operators';
 import { Select } from '@ngxs/store';
 import * as moment from 'moment';
 
 import { environment } from '../../../environments/environment';
 import { MapStyle } from '../shared/map-style';
 import { ViewProfileState } from '../../states';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-vehicle-playback',
@@ -16,8 +17,7 @@ import { ViewProfileState } from '../../states';
 })
 export class PlaybackComponent implements OnInit {
   @Select(ViewProfileState.vcode) vcode$: Observable<string>;
-  selectedDate = new Date();
-  selectedTime = new Date();
+  selectedTime: Date = new Date();
   bsRangeValue: Date[];
   maxDate = new Date();
   rawDataList: any[];
@@ -37,7 +37,7 @@ export class PlaybackComponent implements OnInit {
   gaugeThick = 15;
 
   lastUpdated = '2018-08-28 23:32:55';
-  currentTime = moment().toDate();
+  startTime$: Observable<Date>;
   engineRunning = 45;
   engineIdle = 60;
   odometer = 27026.8;
@@ -47,20 +47,29 @@ export class PlaybackComponent implements OnInit {
 
   constructor(
     private dataService: DataService,
+    private route: ActivatedRoute,
     private utitlityService: UtilityService
   ) { }
 
   ngOnInit() {
+    this.loadTime();
     this.loadVehicle();
     this.loadData();
   }
 
-  private loadData() {
-    // this.rawDataList = new Array<any>();
-    // for (let i = 0; i < 10; i++) {
-    //   this.rawDataList.push({ id: 'xxxxxxx', data: 'xx xx xx xx xx xx xx xx' });
-    // }
+  private loadTime() {
+    this.startTime$ = this.route.queryParamMap.pipe(
+      map(params => params.get('time') || null),
+      map(time => time ? new Date(time) : new Date()),
+      tap(time => {
+        setTimeout(() => {
+          this.selectedTime = time;
+        }, 100);
+      })
+    );
+  }
 
+  private loadData() {
     this.vehicles$ = this.dataService.getVehicles().pipe(
       map(vehicles => this.utitlityService.attachMapLabel(vehicles)),
       share()

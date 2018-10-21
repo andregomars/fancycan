@@ -6,7 +6,7 @@
     <div class="col-12 col-md-8">
       <div class="row">
         <div class="col-12 col-md-6">
-          Start Time: {{ currentTime | date: 'yyyy-MM-dd hh:mm:ss'}}
+          Start Time: {{ startTime$ | async | date: 'yyyy-MM-dd HH:mm:ss'}}
         </div>
         <div class="col-6 col-md-3">
           <div class="border border-rounded w-75">
@@ -294,7 +294,7 @@
                 <i class="fa fa-calendar"></i>
               </span>
             </span>
-            <input class="form-control" bsDatepicker [bsValue]="selectedDate">
+            <input class="form-control" bsDatepicker [bsValue]="selectedTime">
           </div>
         </div>
         <div class="col">

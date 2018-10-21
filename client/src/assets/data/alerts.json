@@ -1,0 +1,52 @@
+[
+    {
+        "id": 1,
+        "fleet_code": "LAMTA",
+        "vehicle_number": 5001,
+        "spn": "525",
+        "name": "Low Power",
+        "type": "critical",
+        "updated_time": "2018-10-15 03:20:29",
+        "notified_time": "2018-10-15 03:21:00"
+    },
+    {
+        "id": 2,
+        "fleet_code": "LAMTA",
+        "vehicle_number": 5001,
+        "spn": "525",
+        "name": "Low Power",
+        "type": "critical",
+        "updated_time": "2018-10-16 13:31:22",
+        "notified_time": "2018-10-16 13:32:00"
+    },
+    {
+        "id": 3,
+        "fleet_code": "LAMTA",
+        "vehicle_number": 5001,
+        "spn": "525",
+        "name": "Low Power",
+        "type": "critical",
+        "updated_time": "2018-10-17 14:02:58",
+        "notified_time": "2018-10-17 14:03:00"
+    },
+    {
+        "id": 4,
+        "fleet_code": "LAMTA",
+        "vehicle_number": 5001,
+        "spn": "525",
+        "name": "Low Power",
+        "type": "critical",
+        "updated_time": "2018-10-17 15:09:22",
+        "notified_time": "2018-10-17 13:10:00"
+    },
+    {
+        "id": 5,
+        "fleet_code": "LAMTA",
+        "vehicle_number": 5001,
+        "spn": "525",
+        "name": "Low Power",
+        "type": "critical",
+        "updated_time": "2018-10-18 20:55:01",
+        "notified_time": "2018-10-18 20:56:00"
+    }
+]

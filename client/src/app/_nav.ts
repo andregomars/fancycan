@@ -45,6 +45,11 @@ export const navItems = [
         icon: 'fa fa-angle-right'
       },
       {
+        name: 'Malfunctions',
+        url: '/vehicle/malfunctions',
+        icon: 'fa fa-angle-right'
+      },
+      {
         name: 'Playback',
         url: '/vehicle/playback',
         icon: 'fa fa-angle-right'

@@ -37,7 +37,6 @@
             </tr>
             <tr *ngFor="let item of alerts$ | async">
               <td>
-                <!-- <a class="btn btn-link" [routerLink]="['/vehicle', item.vehicle_number]"> -->
                 <a class="btn btn-link text-primary" (click)="nav(item.fleet_code, item.vehicle_number)"> 
                   <small>{{ item.vehicle_number }}</small>
                 </a>

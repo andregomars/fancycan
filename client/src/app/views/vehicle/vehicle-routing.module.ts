@@ -11,6 +11,7 @@ import { VehicleContainerComponent } from './vehicle-container.component';
 import { RtmComponent } from './rtm.component';
 import { VehicleGuard } from '../../guards/vehicle.guard';
 import { PlaybackComponent } from './playback.component';
+import { MalfunctionListComponent } from './malfunction-list.component';
 
 const routes: Routes = [
   {
@@ -78,6 +79,21 @@ const routes: Routes = [
         component: VehicleComponent,
         data: {
           title: 'Vehicle'
+        }
+      },
+      {
+        path: 'malfunctions',
+        component: MalfunctionListComponent,
+        canActivate: [VehicleGuard],
+        data: {
+          title: 'Malfunctions'
+        }
+      },
+      {
+        path: 'malfunctions/:vcode',
+        component: MalfunctionListComponent,
+        data: {
+          title: 'Malfunctions'
         }
       }
     ]

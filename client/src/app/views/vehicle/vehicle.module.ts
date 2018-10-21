@@ -19,6 +19,7 @@ import { ComponentsModule } from './../../components/components.module';
 import { RtmComponent } from './rtm.component';
 import { PlaybackComponent } from './playback.component';
 import { VehicleContainerComponent } from './vehicle-container.component';
+import { MalfunctionListComponent } from './malfunction-list.component';
 
 @NgModule({
   imports: [
@@ -41,7 +42,8 @@ import { VehicleContainerComponent } from './vehicle-container.component';
     VehicleListComponent,
     VehicleComponent,
     RtmComponent,
-    PlaybackComponent
+    PlaybackComponent,
+    MalfunctionListComponent
   ],
 })
 export class VehicleModule { }
