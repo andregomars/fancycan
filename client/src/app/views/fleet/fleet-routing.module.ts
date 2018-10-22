@@ -6,6 +6,7 @@ import {
 
 import { FleetDashboardComponent } from './fleet-dashboard.component';
 import { FleetListComponent } from './fleet-list.component';
+import { CompareStatisticComponent } from './compare-statistic.component';
 import { FleetContainerComponent } from './fleet-container.component';
 import { FleetGuard } from '../../guards/fleet.guard';
 
@@ -44,6 +45,21 @@ const routes: Routes = [
         component: FleetDashboardComponent,
         data: {
           title: 'Dashboard'
+        }
+      },
+      {
+        path: 'compare',
+        component: CompareStatisticComponent,
+        canActivate: [FleetGuard],
+        data: {
+          title: 'Compare'
+        }
+      },
+      {
+        path: 'compare/:fcode',
+        component: CompareStatisticComponent,
+        data: {
+          title: 'Compare'
         }
       }
     ]

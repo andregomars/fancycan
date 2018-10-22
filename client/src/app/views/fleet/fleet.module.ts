@@ -7,6 +7,7 @@ import { NgxGaugeModule } from 'ngx-gauge';
 import { AgmCoreModule } from '@agm/core';
 import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
 import { AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
+import { SelectModule } from 'ng-select';
 
 import { FleetDashboardComponent } from './fleet-dashboard.component';
 import { FleetRoutingModule } from './fleet-routing.module';
@@ -14,6 +15,7 @@ import { AppPipeModule } from '../../pipes/pipes.module';
 import { ComponentsModule } from './../../components/components.module';
 import { FleetListComponent } from './fleet-list.component';
 import { FleetContainerComponent } from './fleet-container.component';
+import { CompareStatisticComponent } from './compare-statistic.component';
 
 @NgModule({
   imports: [
@@ -23,6 +25,7 @@ import { FleetContainerComponent } from './fleet-container.component';
     BsDropdownModule,
     NgxGaugeModule,
     FleetRoutingModule,
+    SelectModule,
     AppPipeModule,
     AgmCoreModule,
     AgmSnazzyInfoWindowModule,
@@ -33,6 +36,7 @@ import { FleetContainerComponent } from './fleet-container.component';
     FleetListComponent,
     FleetDashboardComponent,
     FleetContainerComponent,
+    CompareStatisticComponent,
   ],
 })
 export class FleetModule { }

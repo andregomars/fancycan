@@ -22,6 +22,11 @@ export const navItems = [
         name: 'Malfunction',
         url: '/statistic/malfunction/fleet',
         icon: 'fa fa-angle-right'
+      },
+      {
+        name: 'Compare',
+        url: '/fleet/compare',
+        icon: 'fa fa-angle-right'
       }
     ]
   },
