@@ -26,4 +26,15 @@ h2 {
     background: darkgrey; 
 }
 
+/* ng-select section */
+:host /deep/ ng-select .below {
+    background-color: #343a40;
+}
 
+:host /deep/ ng-select .below .single .placeholder {
+    color: #ffffff;
+}
+
+:host /deep/ select-dropdown .selected {
+    background-color: #343a40;
+}

@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService, UtilityService } from '../../services';
 import { Observable } from 'rxjs';
-import { share, map, scan } from 'rxjs/operators';
+import { share, map, scan, switchMap } from 'rxjs/operators';
 import * as moment from 'moment';
+import { Select } from '@ngxs/store';
+import { ViewProfileState } from '../../states';
 
 @Component({
   selector: 'app-vehicle-statistic',
@@ -10,6 +12,7 @@ import * as moment from 'moment';
   styleUrls: ['./vehicle-statistic.component.scss']
 })
 export class VehicleStatisticComponent implements OnInit {
+  @Select(ViewProfileState.vcode) vcode$: Observable<string>;
   stats$: Observable<any>;
   sumEntry$: Observable<any>;
   avgEntry$: Observable<any>;
@@ -68,6 +71,13 @@ export class VehicleStatisticComponent implements OnInit {
 
   private loadTable() {
     this.stats$ = this.dataService.getVehicleStats().pipe(
+      switchMap(stats =>
+        this.vcode$.pipe(
+          map(vcode => stats.filter(stat =>
+            stat.vehicle_code === vcode)
+          )
+        )
+      ),
       share()
     );
 

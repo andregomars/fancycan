@@ -17,7 +17,7 @@
             </div>
             <div class="col-8">
               <ng-select [options]="vehicleOptions$ | async"
-                class="bootstrap"
+                [(ngModel)] = "vcode1"
                 placeholder="Select Vehicle"></ng-select>
             </div>
           </div>
@@ -27,7 +27,7 @@
             </div>
             <div class="col-8">
               <ng-select [options]="vehicleOptions$ | async"
-                class="bootstrap"
+                [(ngModel)] = "vcode2"
                 placeholder="Select Vehicle"></ng-select>
             </div>
           </div>
@@ -55,7 +55,28 @@
           </div>
         </div>
         <div class="col-12 col-lg-2 d-flex">
-          <button class="btn btn-primary align-self-center">Compare</button>
+          <button class="btn btn-primary align-self-center"
+            (click)="compare()">Compare</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="chart-wrapper">
+            <canvas baseChart class="chart" *ngIf="chartData1.length > 0" 
+              [datasets]="chartData1" [labels]="chartLabels" 
+              [options]="chartOptions" [colors]="chartColors"
+              [chartType]="'bar'"></canvas>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="chart-wrapper">
+            <canvas baseChart class="chart" *ngIf="chartData2.length > 0" 
+              [datasets]="chartData2" [labels]="chartLabels" 
+              [options]="chartOptions" [colors]="chartColors"
+              [chartType]="'bar'"></canvas>
+          </div>
         </div>
       </div>
     </div>
