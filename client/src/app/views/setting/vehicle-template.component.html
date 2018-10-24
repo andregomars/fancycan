@@ -1,0 +1,67 @@
+<div class="animated fadeIn">
+  <div class="row mt-1">
+    <app-nav-label></app-nav-label>
+  </div>
+  <div class="row mt-2">
+    <div class="col-12 col-lg-9">
+      <form [formGroup]="rootForm">
+        <ng-container formArrayName="sets"
+          *ngFor="let set of rootForm.get('sets').controls; let i = index;">
+          <div class="row" [formGroupName]="i">
+            <button class="btn btn-primary" (click)="debug(set)">debug</button>
+            <table class="table table-striped table-hover table-outline table-sm mt-1">
+              <thead class="text-white thead-light bg-primary">
+                <tr>
+                  <th><small>{{ set.get('type').value | titlecase }}</small></th>
+                  <th><small>SPN</small></th>
+                  <th><small>Description</small></th>
+                  <th><small>Max Value</small></th>
+                  <th><small>Min Value</small></th>
+                  <th><small>Color</small></th>
+                  <th><small>Enabled</small></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th><small>Spare 1</small></th>
+                  <th><small></small></th>
+                  <th><small></small></th>
+                  <th><small></small></th>
+                  <th><small></small></th>
+                  <th><small></small></th>
+                  <th><small>false</small></th>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </ng-container>
+      </form>
+    </div>
+    <div class="col-12 col-lg-3">
+      <div class="row table-responsive-lg m-0">
+        <table class="table table-striped table-hover table-outline table-sm mt-1">
+          <thead class="text-white thead-light bg-primary">
+            <tr>
+              <th><small>SPN</small></th>
+              <th><small>Name</small></th>
+              <th><small>PGN</small></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let definition of definitions$ | async">
+              <td>
+                <div class="small">{{ definition.spn }}</div>
+              </td>
+              <td>
+                <div class="small">{{ definition.name }}</div>
+              </td>
+              <td>
+                <div class="small">{{ definition.pgn }}</div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

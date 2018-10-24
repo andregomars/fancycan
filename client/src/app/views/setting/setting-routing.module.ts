@@ -8,6 +8,7 @@ import { SettingContainerComponent } from './setting-container.component';
 import { MalfunctinoSettingComponent } from './malfunction-setting.component';
 import { UsageSettingComponent } from './usage-setting.component';
 import { FleetGuard } from '../../guards/fleet.guard';
+import { VehicleTemplateComponent } from './vehicle-template.component';
 
 const routes: Routes = [
   {
@@ -82,6 +83,21 @@ const routes: Routes = [
         component: UsageSettingComponent,
         data: {
           title: 'Usage'
+        }
+      },
+      {
+        path: 'vehicle-template',
+        component: VehicleTemplateComponent,
+        canActivate: [ FleetGuard ],
+        data: {
+          title: 'Vehicle Template'
+        }
+      },
+      {
+        path: 'vehicle-template/:fcode',
+        component: VehicleTemplateComponent,
+        data: {
+          title: 'Vehicle Template'
         }
       }
     ]

@@ -1,0 +1,68 @@
+[
+    {
+        "id": 1,
+        "type": "guage",
+        "fleet_code": "LAMTA",
+        "spn": null,
+        "description": null,
+        "max": null,
+        "min": null,
+        "color": null,
+        "enabled": false
+    },
+    {
+        "id": 2,
+        "type": "guage",
+        "fleet_code": "LAMTA",
+        "spn": null,
+        "description": null,
+        "max": null,
+        "min": null,
+        "color": null,
+        "enabled": false
+    },
+    {
+        "id": 3,
+        "type": "bar",
+        "fleet_code": "LAMTA",
+        "spn": null,
+        "description": null,
+        "max": null,
+        "min": null,
+        "color": null,
+        "enabled": false
+    },
+    {
+        "id": 4,
+        "type": "bar",
+        "fleet_code": "LAMTA",
+        "spn": null,
+        "description": null,
+        "max": null,
+        "min": null,
+        "color": null,
+        "enabled": false
+    },
+    {
+        "id": 5,
+        "type": "switch",
+        "fleet_code": "LAMTA",
+        "spn": null,
+        "description": null,
+        "max": null,
+        "min": null,
+        "color": null,
+        "enabled": false
+    },
+    {
+        "id": 6,
+        "type": "switch",
+        "fleet_code": "LAMTA",
+        "spn": null,
+        "description": null,
+        "max": null,
+        "min": null,
+        "color": null,
+        "enabled": false
+    }
+]

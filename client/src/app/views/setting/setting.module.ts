@@ -10,6 +10,7 @@ import { SpnProprietaryComponent } from './spn-proprietary.component';
 import { SpnDefinitionComponent } from './spn-definition.component';
 import { MalfunctinoSettingComponent } from './malfunction-setting.component';
 import { UsageSettingComponent } from './usage-setting.component';
+import { VehicleTemplateComponent } from './vehicle-template.component';
 
 @NgModule({
   imports: [
@@ -26,7 +27,8 @@ import { UsageSettingComponent } from './usage-setting.component';
     SpnProprietaryComponent,
     SpnDefinitionComponent,
     MalfunctinoSettingComponent,
-    UsageSettingComponent
+    UsageSettingComponent,
+    VehicleTemplateComponent
   ]
 })
 export class SettingModule { }

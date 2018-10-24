@@ -130,6 +130,11 @@ export const navItems = [
         name: 'Usage',
         url: '/setting/usage',
         icon: 'fa fa-angle-right'
+      },
+      {
+        name: 'Template',
+        url: '/setting/vehicle-template',
+        icon: 'fa fa-angle-right'
       }
     ]
   }

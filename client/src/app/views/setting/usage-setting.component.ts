@@ -4,9 +4,8 @@ import { Select } from '@ngxs/store';
 
 import { DataService, UtilityService } from '../../services';
 import { ViewProfileState } from '../../states';
-import { FormBuilder, FormGroup, FormArray, FormControl } from '@angular/forms';
+import { FormGroup, FormArray, FormControl } from '@angular/forms';
 import { map, switchMap, share } from 'rxjs/operators';
-import { formControlBinding } from '@angular/forms/src/directives/reactive_directives/form_control_directive';
 
 @Component({
   selector: 'app-usage-setting',
@@ -26,7 +25,6 @@ export class UsageSettingComponent implements OnInit {
   constructor(
     private dataService: DataService,
     private utilityService: UtilityService,
-    private fb: FormBuilder
   ) { }
 
   ngOnInit() {
@@ -81,11 +79,11 @@ export class UsageSettingComponent implements OnInit {
 
   private buildFormControls() {
     this.entryForm = new FormGroup({});
-      this.entryForm.addControl('name', new FormControl(this.entry.name));
-      this.entryForm.addControl('spn', new FormControl(this.entry.spn));
-      this.entry.types.forEach((type, i) => {
-        this.entryForm.addControl(type.name, new FormControl(type.checked));
-      });
+    this.entryForm.addControl('name', new FormControl(this.entry.name));
+    this.entryForm.addControl('spn', new FormControl(this.entry.spn));
+    this.entry.types.forEach((type, i) => {
+      this.entryForm.addControl(type.name, new FormControl(type.checked));
+    });
   }
 }
 
