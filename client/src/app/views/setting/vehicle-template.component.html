@@ -5,36 +5,60 @@
   <div class="row mt-2">
     <div class="col-12 col-lg-9">
       <form [formGroup]="rootForm">
-        <ng-container formArrayName="sets"
-          *ngFor="let set of rootForm.get('sets').controls; let i = index;">
+        <ng-container formArrayName="sets" *ngFor="let set of rootForm.get('sets').controls; let i = index;">
           <div class="row" [formGroupName]="i">
-            <button class="btn btn-primary" (click)="debug(set)">debug</button>
             <table class="table table-striped table-hover table-outline table-sm mt-1">
               <thead class="text-white thead-light bg-primary">
                 <tr>
-                  <th><small>{{ set.get('type').value | titlecase }}</small></th>
-                  <th><small>SPN</small></th>
-                  <th><small>Description</small></th>
-                  <th><small>Max Value</small></th>
-                  <th><small>Min Value</small></th>
-                  <th><small>Color</small></th>
-                  <th><small>Enabled</small></th>
+                  <th>{{ set.get('type').value | titlecase }}</th>
+                  <th width="100">SPN</th>
+                  <th>Description</th>
+                  <th width="75">Max</th>
+                  <th width="75">Min</th>
+                  <th width="100">Color</th>
+                  <th width="75">Enabled</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <th><small>Spare 1</small></th>
-                  <th><small></small></th>
-                  <th><small></small></th>
-                  <th><small></small></th>
-                  <th><small></small></th>
-                  <th><small></small></th>
-                  <th><small>false</small></th>
-                </tr>
+                <ng-container formArrayName="entries"
+                  *ngFor="let entry of set.get('entries').controls; let j = index;">
+                  <tr [formGroupName]="j">
+                    <td>Spare {{ j+1 }}</td>
+                    <td> 
+                      <input type="text" class="form-control" 
+                        formControlName="spn" name="spn">
+                    </td>
+                    <td> 
+                      <input type="text" class="form-control" 
+                        formControlName="description" name="description">
+                    </td>
+                    <td> 
+                      <input type="text" class="form-control" 
+                        formControlName="max" name="max">
+                    </td>
+                    <td> 
+                      <input type="text" class="form-control" 
+                        formControlName="min" name="min">
+                    </td>
+                    <td>
+                      <select name="color" class="form-control"
+                        formControlName="color">
+                        <option value="null">Select</option>
+                        <option *ngFor="let opt of colorOptions" [value]="opt">{{ opt | titlecase }}</option>
+                      </select>
+                    </td>
+                    <td class="text-center"> 
+                      <input type="checkbox" 
+                        formControlName="enabled" name="enabled">
+                    </td>
+                  </tr>
+                </ng-container>
               </tbody>
             </table>
           </div>
         </ng-container>
+        <input type="submit" class="btn btn-primary pull-right" style="width:150px"
+          value="Save" (click)="save()">
       </form>
     </div>
     <div class="col-12 col-lg-3">

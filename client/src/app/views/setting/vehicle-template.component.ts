@@ -3,8 +3,8 @@ import { Select } from '@ngxs/store';
 import { ViewProfileState } from '../../states';
 import { Observable } from 'rxjs';
 import { DataService } from '../../services';
-import { share } from 'rxjs/operators';
-import { FormBuilder, Form, FormGroup, FormControl } from '@angular/forms';
+import { share, map, switchMap } from 'rxjs/operators';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-vehicle-template',
@@ -16,6 +16,7 @@ export class VehicleTemplateComponent implements OnInit {
   definitions$: Observable<any[]>;
   templates$: Observable<any[]>;
   rootForm: FormGroup;
+  colorOptions = ['red', 'blue', 'yellow', 'black', 'white', 'green'];
 
   constructor(
     private fb: FormBuilder,
@@ -25,6 +26,7 @@ export class VehicleTemplateComponent implements OnInit {
   ngOnInit() {
     this.loadData();
     this.initForms();
+    this.loadForm();
   }
 
   private loadData() {
@@ -32,9 +34,21 @@ export class VehicleTemplateComponent implements OnInit {
       share()
     );
 
-    this.templates$ = this.dataService.getVehicleTemplate().pipe(
+    this.templates$ = this.fcode$.pipe(
+      switchMap(fcode =>
+        this.dataService.getVehicleTemplate().pipe(
+          map((templates: any[]) =>
+            templates.filter(template => template.fleet_code === fcode))
+        )),
       share()
     );
+  }
+
+  private loadForm() {
+    const formData$ = this.templates$.pipe(
+      map(templates => this.buildFormData(templates))
+    );
+    formData$.subscribe(data => this.rootForm.setValue(data));
   }
 
   /*
@@ -74,28 +88,65 @@ export class VehicleTemplateComponent implements OnInit {
     this.rootForm = this.fb.group({
       sets: this.fb.array([
        this.fb.group({
-            type: 'guage',
-            entries: this.fb.array([
-              this.fb.group({
-                spn: '1111',
-                description: 'left guage'
-              }),
-              this.fb.group({
-                spn: '2222',
-                description: 'right guage'
-              })
-            ])
+          type: 'guage',
+          entries: this.fb.array([
+            this.fb.group({
+              spn: null,
+              description: null,
+              max: null,
+              min: null,
+              color: null,
+              enabled: false
+            }),
+            this.fb.group({
+              spn: null,
+              description: null,
+              max: null,
+              min: null,
+              color: null,
+              enabled: true
+            })
+          ])
         }),
         this.fb.group({
           type: 'bar',
           entries: this.fb.array([
             this.fb.group({
-              spn: '1111',
-              description: 'left bar'
+              spn: null,
+              description: null,
+              max: null,
+              min: null,
+              color: null,
+              enabled: true
             }),
             this.fb.group({
-              spn: '2222',
-              description: 'right bar'
+              spn: null,
+              description: null,
+              max: null,
+              min: null,
+              color: null,
+              enabled: false
+            })
+          ])
+        }),
+        this.fb.group({
+          type: 'switch',
+          entries: this.fb.array([
+            this.fb.group({
+              spn: null,
+              description: null,
+              max: null,
+              min: null,
+              color: null,
+              enabled: true
+            }),
+            this.fb.group({
+              spn: null,
+              description: null,
+              max: null,
+              min: null,
+              color: null,
+              enabled: false
             })
           ])
         }),
@@ -104,9 +155,104 @@ export class VehicleTemplateComponent implements OnInit {
 
   }
 
-  debug(obj: FormGroup) {
-    console.log(obj);
-    console.log((obj.get('type')));
-    // console.log(obj);
+
+  save() {
+    console.log(this.rootForm.value);
+  }
+
+  private buildFormData(data: any[]): any {
+    const groups = this.groupBy(data, 'type');
+    const sets = Object.keys(groups).map(key => {
+      return {
+        type: key,
+        entries: this.filterFields(groups[key])
+      };
+    });
+    const output = {
+      sets: sets
+    };
+    return output;
+  }
+
+  private groupBy(list: any[], key: string) {
+    return list.reduce((acc: any[], cur: any) => {
+      acc[cur[key]] = acc[cur[key]] || [];
+      acc[cur[key]].push(cur);
+      return acc;
+    }, {});
+  }
+
+  private filterFields(entries: any[]) {
+    return entries.map(entry => {
+      return {
+        spn: entry.spn,
+        description: entry.description,
+        max: entry.max,
+        min: entry.min,
+        color: entry.color,
+        enabled: entry.enabled
+      };
+    });
   }
 }
+
+/* example data
+  private updateForms() {
+    this.rootForm.setValue({
+      sets: [
+        {
+          type: "guage",
+          entries: [
+            {
+              spn: "xxxx",
+              description: "left guage",
+              color: "white",
+              enabled: false
+            },
+            {
+              spn: "yyyy",
+              description: "right guage",
+              color: "red",
+              enabled: true
+            }
+          ]
+        },
+        {
+          type: "bar",
+          entries: [
+            {
+              spn: "zzzz",
+              description: "left bar",
+              color: "blue",
+              enabled: true
+            },
+            {
+              spn: "2222",
+              description: "right bar",
+              color: "yellow",
+              enabled: false
+            }
+          ]
+        },
+        {
+          type: "switch",
+          entries: [
+            {
+              spn: "zzzz",
+              description: "left bar",
+              color: "blue",
+              enabled: true
+            },
+            {
+              spn: "2222",
+              description: "right bar",
+              color: "yellow",
+              enabled: false
+            }
+          ]
+        }
+      ]
+    });
+
+  }
+*/
