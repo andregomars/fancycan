@@ -135,6 +135,11 @@ export const navItems = [
         name: 'Template',
         url: '/setting/vehicle-template',
         icon: 'fa fa-angle-right'
+      },
+      {
+        name: 'Fleet',
+        url: '/setting/fleet',
+        icon: 'fa fa-angle-right'
       }
     ]
   }

@@ -11,6 +11,7 @@ import { SpnDefinitionComponent } from './spn-definition.component';
 import { MalfunctinoSettingComponent } from './malfunction-setting.component';
 import { UsageSettingComponent } from './usage-setting.component';
 import { VehicleTemplateComponent } from './vehicle-template.component';
+import { FleetSettingComponent } from './fleet-setting.component';
 
 @NgModule({
   imports: [
@@ -28,7 +29,8 @@ import { VehicleTemplateComponent } from './vehicle-template.component';
     SpnDefinitionComponent,
     MalfunctinoSettingComponent,
     UsageSettingComponent,
-    VehicleTemplateComponent
+    VehicleTemplateComponent,
+    FleetSettingComponent
   ]
 })
 export class SettingModule { }

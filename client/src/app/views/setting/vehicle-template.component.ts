@@ -25,7 +25,7 @@ export class VehicleTemplateComponent implements OnInit {
 
   ngOnInit() {
     this.loadData();
-    this.initForms();
+    this.initForm();
     this.loadForm();
   }
 
@@ -50,7 +50,7 @@ export class VehicleTemplateComponent implements OnInit {
         this.buildFormData(templates) : null)
     );
     formData$.subscribe(data => data ?
-      this.rootForm.setValue(data) : this.initForms());
+      this.rootForm.setValue(data) : this.initForm());
   }
 
   /*
@@ -86,7 +86,7 @@ export class VehicleTemplateComponent implements OnInit {
           - entry.description
           - ...
   */
-  private initForms() {
+  private initForm() {
     this.rootForm = this.fb.group({
       sets: this.fb.array([
        this.fb.group({

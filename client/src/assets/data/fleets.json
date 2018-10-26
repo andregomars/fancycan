@@ -1,41 +1,102 @@
 [
     {
         "code": "OMNIT",
+        "name": "Omni Transit",
+        "icon": "https://s3.aws.com/fpic.png",
+        "latitude": 34.095072,
+        "longitude": -117.907717,
+        "zoom": 12,
+        "address": "",
+        "phone": "",
+        "email": "",
+        "note": "",
+        "created": "2018-10-20 15:32:41",
         "vehicles": [
             {
-                "code": "5001"
+                "code": "5001",
+                "vin": "1ZW21312312231",
+                "mac": "F2C2525",
+                "picture": "https://s3.aws.com/vpic.png",
+                "note": "",
+                "created": "2018-10-20 15:32:41"
             },
             {
-                "code": "5002"
+                "code": "5002",
+                "vin": "1ZW21312312231",
+                "mac": "F2C2525",
+                "picture": "https://s3.aws.com/vpic.png",
+                "note": "",
+                "created": "2018-10-20 15:32:41"
             },
             {
-                "code": "5003"
+                "code": "5003",
+                "vin": "1ZW21312312231",
+                "mac": "F2C2525",
+                "picture": "https://s3.aws.com/vpic.png",
+                "note": "",
+                "created": "2018-10-20 15:32:41"
             },
             {
-                "code": "5004"
+                "code": "5004",
+                "vin": "1ZW21312312231",
+                "mac": "F2C2525",
+                "picture": "https://s3.aws.com/vpic.png",
+                "note": "",
+                "created": "2018-10-20 15:32:41"
             },
             {
-                "code": "5005"
+                "code": "5005",
+                "vin": "1ZW21312312231",
+                "mac": "F2C2525",
+                "picture": "https://s3.aws.com/vpic.png",
+                "note": "",
+                "created": "2018-10-20 15:32:41"
             },
             {
-                "code": "5006"
+                "code": "5006",
+                "vin": "1ZW21312312231",
+                "mac": "F2C2525",
+                "picture": "https://s3.aws.com/vpic.png",
+                "note": "",
+                "created": "2018-10-20 15:32:41"
             },
             {
-                "code": "5007"
+                "code": "5007",
+                "vin": "1ZW21312312231",
+                "mac": "F2C2525",
+                "picture": "https://s3.aws.com/vpic.png",
+                "note": "",
+                "created": "2018-10-20 15:32:41"
             },
             {
-                "code": "5008"
+                "code": "5008",
+                "vin": "1ZW21312312231",
+                "mac": "F2C2525",
+                "picture": "https://s3.aws.com/vpic.png",
+                "note": "",
+                "created": "2018-10-20 15:32:41"
             },
             {
-                "code": "5009"
+                "code": "5009",
+                "vin": "1ZW21312312231",
+                "mac": "F2C2525",
+                "picture": "https://s3.aws.com/vpic.png",
+                "note": "",
+                "created": "2018-10-20 15:32:41"
             },
             {
-                "code": "5010"
+                "code": "5010",
+                "vin": "1ZW21312312231",
+                "mac": "F2C2525",
+                "picture": "https://s3.aws.com/vpic.png",
+                "note": "",
+                "created": "2018-10-20 15:32:41"
             }
         ]
     },
     {
         "code": "FTT",
+        "name": "FTT",
         "vehicles": [
             {
                 "code": "A5001"
@@ -56,6 +117,7 @@
     },
     {
         "code": "LBT",
+        "name": "LBT",
         "vehicles": [
             {
                 "code": "6001"
@@ -76,6 +138,7 @@
     },
     {
         "code": "BYD",
+        "name": "BYD",
         "vehicles": [
             {
                 "code": "6001"
@@ -87,6 +150,7 @@
     },
     {
         "code": "RTD",
+        "name": "RTD",
         "vehicles": [
             {
                 "code": "8001"
@@ -101,6 +165,7 @@
     },
     {
         "code": "Soltran",
+        "name": "Soltran",
         "vehicles": [
             {
                 "code": "7001"
