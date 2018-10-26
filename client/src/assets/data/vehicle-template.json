@@ -2,7 +2,7 @@
     {
         "id": 1,
         "type": "guage",
-        "fleet_code": "LAMTA",
+        "fleet_code": "OMNIT",
         "spn": "3754",
         "description": "Speed",
         "max": 120,
@@ -13,7 +13,7 @@
     {
         "id": 2,
         "type": "guage",
-        "fleet_code": "LAMTA",
+        "fleet_code": "OMNIT",
         "spn": "3556",
         "description": "Mileage",
         "max": 10000,
@@ -24,7 +24,7 @@
     {
         "id": 3,
         "type": "bar",
-        "fleet_code": "LAMTA",
+        "fleet_code": "OMNIT",
         "spn": "4556",
         "description": "temperature",
         "max": -356,
@@ -35,7 +35,7 @@
     {
         "id": 4,
         "type": "bar",
-        "fleet_code": "LAMTA",
+        "fleet_code": "OMNIT",
         "spn": "4335",
         "description": "voltage",
         "max": 500,
@@ -46,7 +46,7 @@
     {
         "id": 5,
         "type": "switch",
-        "fleet_code": "LAMTA",
+        "fleet_code": "OMNIT",
         "spn": "5886",
         "description": "Left Door",
         "max": 1,
@@ -57,7 +57,7 @@
     {
         "id": 6,
         "type": "switch",
-        "fleet_code": "LAMTA",
+        "fleet_code": "OMNIT",
         "spn": "5733",
         "description": "Right Door",
         "max": 1,

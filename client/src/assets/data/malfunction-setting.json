@@ -1,7 +1,7 @@
 [
     {
         "id": 1,
-        "fleet_code": "LAMTA",
+        "fleet_code": "OMNIT",
         "name": "Temperature",
         "conditions": [
             {
@@ -23,7 +23,7 @@
     },
     {
         "id": 2,
-        "fleet_code": "LAMTA",
+        "fleet_code": "OMNIT",
         "name": "XBR Message",
         "conditions": [
             {

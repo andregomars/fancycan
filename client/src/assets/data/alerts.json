@@ -1,7 +1,7 @@
 [
     {
         "id": 1,
-        "fleet_code": "LAMTA",
+        "fleet_code": "OMNIT",
         "vehicle_number": 5001,
         "spn": "525",
         "name": "Low Power",
@@ -11,7 +11,7 @@
     },
     {
         "id": 2,
-        "fleet_code": "LAMTA",
+        "fleet_code": "OMNIT",
         "vehicle_number": 5001,
         "spn": "525",
         "name": "Low Power",
@@ -21,7 +21,7 @@
     },
     {
         "id": 3,
-        "fleet_code": "LAMTA",
+        "fleet_code": "OMNIT",
         "vehicle_number": 5001,
         "spn": "525",
         "name": "Low Power",
@@ -31,7 +31,7 @@
     },
     {
         "id": 4,
-        "fleet_code": "LAMTA",
+        "fleet_code": "OMNIT",
         "vehicle_number": 5001,
         "spn": "525",
         "name": "Low Power",
@@ -41,7 +41,7 @@
     },
     {
         "id": 5,
-        "fleet_code": "LAMTA",
+        "fleet_code": "OMNIT",
         "vehicle_number": 5001,
         "spn": "525",
         "name": "Low Power",

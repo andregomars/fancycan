@@ -1,6 +1,6 @@
 [
     {
-        "fleet_code": "LAMTA",
+        "fleet_code": "OMNIT",
         "PGNNo": "9001",
         "PGNName": "Transmission Control 1",
         "UnitType": "1",
@@ -26,7 +26,7 @@
         "LowerDataRange": "0"
     },
     {
-        "fleet_code": "LAMTA",
+        "fleet_code": "OMNIT",
         "PGNNo": "9001",
         "PGNName": "Transmission Control 1",
         "UnitType": "1",
@@ -52,7 +52,7 @@
         "LowerDataRange": "0"
     },
     {
-        "fleet_code": "LAMTA",
+        "fleet_code": "OMNIT",
         "PGNNo": "9001",
         "PGNName": "Transmission Control 1",
         "UnitType": "1",

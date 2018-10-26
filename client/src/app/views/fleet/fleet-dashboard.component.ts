@@ -65,7 +65,7 @@ export class FleetDashboardComponent implements OnInit {
   }
 
   private loadData() {
-    this.vehicles$ = this.dataService.getVehicles().pipe(
+    this.vehicles$ = this.dataService.getSnapshots().pipe(
       switchMap(vehicles =>
           this.fcode$.pipe(
             map(fcode => vehicles.filter(vehicle => vehicle.fleet_code === fcode))

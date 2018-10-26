@@ -3,35 +3,35 @@
     "pgn" : "9001",
     "spn" : "1432",
     "name": "Check Temperature",
-    "fleet_code": "LAMTA",
+    "fleet_code": "OMNIT",
     "type": "Proprietary"
   }, 
   {
     "pgn" : "9001",
     "spn" : "1489",
     "name": "XBR Message Checksum",
-    "fleet_code": "LAMTA",
+    "fleet_code": "OMNIT",
     "type": "Proprietary"
   }, 
   {
     "pgn" : "9001",
     "spn" : "1493",
     "name": "Lane Departure Warning Enable Command",
-    "fleet_code": "LAMTA",
+    "fleet_code": "OMNIT",
     "type": "Proprietary"
   }, 
   {
     "pgn" : "53248",
     "spn" : "1487",
     "name": "Illumination Brightness Percent",
-    "fleet_code": "AVTA",
+    "fleet_code": "LBT",
     "type": "J1939"
   }, 
   {
     "pgn" : "43264",
     "spn" : "3564",
     "name": "Lane Departure Warning Enable Command",
-    "fleet_code": "LAMTA",
+    "fleet_code": "OMNIT",
     "type": "J1939"
   }
 ]

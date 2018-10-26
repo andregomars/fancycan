@@ -54,7 +54,7 @@ export class RtmComponent implements OnInit {
     //   this.rawDataList.push({ id: 'xxxxxxx', data: 'xx xx xx xx xx xx xx xx' });
     // }
 
-    this.vehicles$ = this.dataService.getVehicles().pipe(
+    this.vehicles$ = this.dataService.getSnapshots().pipe(
       map(vehicles => this.utitlityService.attachMapLabel(vehicles)),
       share()
     );

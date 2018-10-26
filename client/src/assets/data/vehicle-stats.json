@@ -1,6 +1,6 @@
 [
     {
-        "fleet_code": "LAMTA",
+        "fleet_code": "OMNIT",
         "vehicle_code": "5001",
         "odometer": 10000,
         "mileage": 50000,
@@ -15,7 +15,7 @@
         "updated": "2018-09-01 00:00:00"
     },
     {
-        "fleet_code": "LAMTA",
+        "fleet_code": "OMNIT",
         "vehicle_code": "5001",
         "odometer": 10000,
         "mileage": 50000,
@@ -30,7 +30,7 @@
         "updated": "2018-09-02 00:00:00"
     },
     {
-        "fleet_code": "LAMTA",
+        "fleet_code": "OMNIT",
         "vehicle_code": "5003",
         "odometer": 10000,
         "mileage": 50000,
@@ -45,7 +45,7 @@
         "updated": "2018-09-03 00:00:00"
     },
     {
-        "fleet_code": "LAMTA",
+        "fleet_code": "OMNIT",
         "vehicle_code": "5004",
         "odometer": 10000,
         "mileage": 50000,
@@ -60,7 +60,7 @@
         "updated": "2018-09-04 00:00:00"
     },
     {
-        "fleet_code": "LAMTA",
+        "fleet_code": "OMNIT",
         "vehicle_code": "5001",
         "odometer": 10000,
         "mileage": 50000,
@@ -75,7 +75,7 @@
         "updated": "2018-09-04 00:00:00"
     },
     {
-        "fleet_code": "LAMTA",
+        "fleet_code": "OMNIT",
         "vehicle_code": "5001",
         "odometer": 10000,
         "mileage": 50000,
@@ -90,7 +90,7 @@
         "updated": "2018-09-05 00:00:00"
     },
     {
-        "fleet_code": "LAMTA",
+        "fleet_code": "OMNIT",
         "vehicle_code": "5012",
         "odometer": 10000,
         "mileage": 50000,

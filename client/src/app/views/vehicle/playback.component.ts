@@ -70,7 +70,7 @@ export class PlaybackComponent implements OnInit {
   }
 
   private loadData() {
-    this.vehicles$ = this.dataService.getVehicles().pipe(
+    this.vehicles$ = this.dataService.getSnapshots().pipe(
       map(vehicles => this.utitlityService.attachMapLabel(vehicles)),
       share()
     );
@@ -96,7 +96,7 @@ export class PlaybackComponent implements OnInit {
   }
 
   private loadVehicle() {
-    this.vehicle$ = this.dataService.getVehicles().pipe(
+    this.vehicle$ = this.dataService.getSnapshots().pipe(
       switchMap(vehicles =>
         this.vcode$.pipe(
           map(vcode =>

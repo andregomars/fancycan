@@ -1,7 +1,7 @@
 [
     {
         "name": "Low Power",
-        "fleet_code": "LAMTA",
+        "fleet_code": "OMNIT",
         "vehicle_number": 5001,
         "odometer": 10000,
         "total_alert": 5,
@@ -12,7 +12,7 @@
     },
     {
         "name": "Left Gun",
-        "fleet_code": "LAMTA",
+        "fleet_code": "OMNIT",
         "vehicle_number": 5001,
         "odometer": 10000,
         "total_alert": 5,
@@ -23,7 +23,7 @@
     },
     {
         "name": "Engine Fail",
-        "fleet_code": "LAMTA",
+        "fleet_code": "OMNIT",
         "vehicle_number": 5003,
         "odometer": 10000,
         "total_alert": 5,
@@ -34,7 +34,7 @@
     },
     {
         "name": "Low Power",
-        "fleet_code": "LAMTA",
+        "fleet_code": "OMNIT",
         "vehicle_number": 5003,
         "odometer": 10000,
         "total_alert": 5,
@@ -45,7 +45,7 @@
     },
     {
         "name": "Low Power",
-        "fleet_code": "LAMTA",
+        "fleet_code": "OMNIT",
         "vehicle_number": 5008,
         "odometer": 10000,
         "total_alert": 5,
@@ -56,7 +56,7 @@
     },
     {
         "name": "Low Power",
-        "fleet_code": "LAMTA",
+        "fleet_code": "OMNIT",
         "vehicle_number": 5012,
         "odometer": 10000,
         "total_alert": 5,
@@ -67,7 +67,7 @@
     },
     {
         "name": "Low Power",
-        "fleet_code": "LAMTA",
+        "fleet_code": "OMNIT",
         "vehicle_number": 5011,
         "odometer": 10000,
         "total_alert": 5,
@@ -78,7 +78,7 @@
     },
     {
         "name": "Low Power",
-        "fleet_code": "LAMTA",
+        "fleet_code": "OMNIT",
         "vehicle_number": 5001,
         "odometer": 10000,
         "total_alert": 5,
@@ -89,7 +89,7 @@
     },
     {
         "name": "Low Power",
-        "fleet_code": "LAMTA",
+        "fleet_code": "OMNIT",
         "vehicle_number": 5001,
         "odometer": 10000,
         "total_alert": 5,
@@ -100,7 +100,7 @@
     },
     {
         "name": "Low Power",
-        "fleet_code": "LAMTA",
+        "fleet_code": "OMNIT",
         "vehicle_number": 5001,
         "odometer": 10000,
         "total_alert": 5,
@@ -111,7 +111,7 @@
     },
     {
         "name": "Low Power",
-        "fleet_code": "LAMTA",
+        "fleet_code": "OMNIT",
         "vehicle_number": 5001,
         "odometer": 10000,
         "total_alert": 5,
@@ -122,7 +122,7 @@
     },
     {
         "name": "Low Power",
-        "fleet_code": "LAMTA",
+        "fleet_code": "OMNIT",
         "vehicle_number": 5001,
         "odometer": 10000,
         "total_alert": 5,

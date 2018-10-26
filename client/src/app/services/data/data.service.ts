@@ -39,9 +39,9 @@ export class DataService {
       .get<any>(`${this.rootUrl}/fleets.json`);
   }
 
-  getVehicles(): Observable<any> {
+  getSnapshots(): Observable<any> {
     return this.http
-      .get<any>(`${this.rootUrl}/vehicles.json`);
+      .get<any>(`${this.rootUrl}/snapshots.json`);
   }
 
   getAlertStats(): Observable<any> {

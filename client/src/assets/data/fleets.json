@@ -1,6 +1,6 @@
 [
     {
-        "code": "LAMTA",
+        "code": "OMNIT",
         "vehicles": [
             {
                 "code": "5001"
@@ -16,11 +16,26 @@
             },
             {
                 "code": "5005"
+            },
+            {
+                "code": "5006"
+            },
+            {
+                "code": "5007"
+            },
+            {
+                "code": "5008"
+            },
+            {
+                "code": "5009"
+            },
+            {
+                "code": "5010"
             }
         ]
     },
     {
-        "code": "AVTA",
+        "code": "FTT",
         "vehicles": [
             {
                 "code": "A5001"
