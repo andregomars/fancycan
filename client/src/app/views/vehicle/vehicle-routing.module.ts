@@ -67,7 +67,7 @@ const routes: Routes = [
         }
       },
       {
-        path: 'dashboard',
+        path: 'snapshot',
         component: VehicleComponent,
         canActivate: [VehicleGuard],
         data: {
@@ -75,7 +75,7 @@ const routes: Routes = [
         }
       },
       {
-        path: 'dashboard/:vcode',
+        path: 'snapshot/:vcode',
         component: VehicleComponent,
         data: {
           title: 'Vehicle'

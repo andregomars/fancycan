@@ -40,8 +40,8 @@ export const navItems = [
         icon: 'fa fa-angle-right'
       },
       {
-        name: 'Dashboard',
-        url: '/vehicle/dashboard',
+        name: 'Snapshot',
+        url: '/vehicle/snapshot',
         icon: 'fa fa-angle-right'
       },
       {

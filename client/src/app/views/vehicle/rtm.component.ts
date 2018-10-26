@@ -65,7 +65,7 @@ export class RtmComponent implements OnInit {
 
     this.cans$ = this.dataService.getCANs().pipe(
       map((cans: any[]) =>
-        cans.map(can => {
+        cans.slice(0, 15).map(can => {
           return {
             id: can.id,
             value: this.utitlityService.formatRawCAN(can.value)

@@ -1,11 +1,11 @@
 [
     {
         "fleet_code": "OMNIT",
-        "PGNNo": "9001",
-        "PGNName": "Transmission Control 1",
+        "PGNNo": "65265",
+        "PGNName": "Transmission",
         "UnitType": "1",
-        "SPNNo": "1432",
-        "SPNName": "Check Temperature",
+        "SPNNo": "70",
+        "SPNName": "Parking Brake Switch",
         "SPNDescription": "",
         "Status": {
             "Name": "Enable",
@@ -27,11 +27,11 @@
     },
     {
         "fleet_code": "OMNIT",
-        "PGNNo": "9001",
-        "PGNName": "Transmission Control 1",
+        "PGNNo": "65263",
+        "PGNName": "Engine",
         "UnitType": "1",
-        "SPNNo": "1489",
-        "SPNName": "XBR Message Checksum",
+        "SPNNo": "100",
+        "SPNName": "Engine Oil Pressure",
         "SPNDescription": "",
         "Status": {
             "Name": "On",
@@ -53,11 +53,11 @@
     },
     {
         "fleet_code": "OMNIT",
-        "PGNNo": "9001",
-        "PGNName": "Transmission Control 1",
+        "PGNNo": "65263",
+        "PGNName": "Engine",
         "UnitType": "1",
-        "SPNNo": "1493",
-        "SPNName": "Lane Departure Warning Enable Command",
+        "SPNNo": "110",
+        "SPNName": "Engine Coolant Temperature",
         "SPNDescription": "",
         "Status": {
             "Name": "",
@@ -73,12 +73,12 @@
         "LowerDataRange": "0"
     },
     {
-        "fleet_code": "AVTA",
-        "PGNNo": "9003",
+        "fleet_code": "OMNIT",
+        "PGNNo": "65263",
         "PGNName": "Transmission Control 2",
         "UnitType": "1",
-        "SPNNo": "3001",
-        "SPNName": "Illumination Brightness Percent 2",
+        "SPNNo": "111",
+        "SPNName": "Engine Coolant Level",
         "SPNDescription": "",
         "Status": {
             "Name": "Enable",

@@ -36,21 +36,24 @@ export class SpnDefinitionComponent implements OnInit {
     const spnNo = selectedSpn.spn;
     const sourceType = selectedSpn.type;
     this.getSpn(spnNo, sourceType).subscribe(spn => {
-      // console.log(spn)
-      this.initForms(spn.StatusList.length);
-      this.spnForm.setValue({
-        SPNNo: spn.SPNNo,
-        SPNName: spn.SPNName,
-        PGNNo: spn.PGNNo,
-        StartBit: spn.StartBit,
-        Length: spn.Length,
-        Resolution: spn.Resolution,
-        Offset: spn.Offset,
-        Unit: spn.Unit,
-        LowerDataRange: spn.LowerDataRange,
-        UpperDataRange: spn.UpperDataRange,
-        StatusList: spn.StatusList
-      });
+      if (spn) {
+        this.initForms(spn.StatusList.length);
+        this.spnForm.setValue({
+          SPNNo: spn.SPNNo,
+          SPNName: spn.SPNName,
+          PGNNo: spn.PGNNo,
+          StartBit: spn.StartBit,
+          Length: spn.Length,
+          Resolution: spn.Resolution,
+          Offset: spn.Offset,
+          Unit: spn.Unit,
+          LowerDataRange: spn.LowerDataRange,
+          UpperDataRange: spn.UpperDataRange,
+          StatusList: spn.StatusList
+        });
+      } else {
+        this.initForms(0);
+      }
     });
   }
 

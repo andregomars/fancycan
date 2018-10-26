@@ -1,54 +1,235 @@
-[
-    {
-        "id": "18FC0AF4",
-        "value": "D4004B0198004C01"
-    },
-    {
-        "id": "18FC0AF4",
-        "value": "D4004B0198004C01"
-    },
-    {
-        "id": "18FC0AF4",
-        "value": "D4004B0198004C01"
-    },
-    {
-        "id": "18FC0AF4",
-        "value": "D4004B0198004C01"
-    },
-    {
-        "id": "18FC0AF4",
-        "value": "D4004B0198004C01"
-    },
-    {
-        "id": "18FC0AF4",
-        "value": "D4004B0198004C01"
-    },
-    {
-        "id": "18FC0AF4",
-        "value": "D4004B0198004C01"
-    },
-    {
-        "id": "18FC0AF4",
-        "value": "D4004B0198004C01"
-    },
-    {
-        "id": "18FC0AF4",
-        "value": "D4004B0198004C01"
-    },
-    {
-        "id": "18FC0AF4",
-        "value": "D4004B0198004C01"
-    },
-    {
-        "id": "18FC0AF4",
-        "value": "D4004B0198004C01"
-    },
-    {
-        "id": "18FC0AF4",
-        "value": "D4004B0198004C01"
-    },
-    {
-        "id": "18FC0AF4",
-        "value": "D4004B0198004C01"
-    }
-]
+[ {
+  "id" : "14FC9800",
+  "value" : "FF000000000000FF"
+}, {
+  "id" : "0CF03900",
+  "value" : "E803FFFFFFFFFFFF"
+}, {
+  "id" : "18A74221",
+  "value" : "00FCFFFFFFFFFFFF"
+}, {
+  "id" : "0CF00203",
+  "value" : "C0000000FF6818FF"
+}, {
+  "id" : "18F00C03",
+  "value" : "0000FFFFFFFFFFFF"
+}, {
+  "id" : "18FEDF00",
+  "value" : "85A0287DFBFFFFF5"
+}, {
+  "id" : "0CF00A00",
+  "value" : "4100C802FFFFFFFF"
+}, {
+  "id" : "10FDA300",
+  "value" : "FFFFFFFFFFFFFFFF"
+}, {
+  "id" : "18FCF200",
+  "value" : "29FFFFFFFFFFFFFF"
+}, {
+  "id" : "18FF6000",
+  "value" : "0000249101320001"
+}, {
+  "id" : "0C1DFF00",
+  "value" : "3C67FFFFFFFFFFFF"
+}, {
+  "id" : "0CF00300",
+  "value" : "D1000A4CFFFFAE7D"
+}, {
+  "id" : "18FF6000",
+  "value" : "000007EC0075238B"
+}, {
+  "id" : "0CF00203",
+  "value" : "C0000000FF7818FF"
+}, {
+  "id" : "0C010300",
+  "value" : "FFFFFFFFFFFFFFFF"
+}, {
+  "id" : "1CFE9200",
+  "value" : "FF407DFF2E000000"
+}, {
+  "id" : "18F00F00",
+  "value" : "FFFF0000FFFFFFFF"
+}, {
+  "id" : "0CF00400",
+  "value" : "307D84FB18000485"
+}, {
+  "id" : "18FF6000",
+  "value" : "0000362E00116408"
+}, {
+  "id" : "18FF6000",
+  "value" : "0000362F000F3519"
+}, {
+  "id" : "0C00000B",
+  "value" : "FCFFFAFAFFFFFFFF"
+}, {
+  "id" : "0CF03900",
+  "value" : "E803FFFFFFFFFFFF"
+}, {
+  "id" : "18EF4221",
+  "value" : "80FE00FFFFFFFFFF"
+}, {
+  "id" : "0CF00203",
+  "value" : "C0000000FF7818FF"
+}, {
+  "id" : "18FEF021",
+  "value" : "FFFFFFFFFFF3FFFF"
+}, {
+  "id" : "18F00C03",
+  "value" : "0000FFFFFFFFFFFF"
+}, {
+  "id" : "18FCDC00",
+  "value" : "FFFFFFFFFFFF0000"
+}, {
+  "id" : "18FEDF00",
+  "value" : "85A0287DFBFFFFF5"
+}, {
+  "id" : "18FD9400",
+  "value" : "0000FFFFFFFFFFFF"
+}, {
+  "id" : "10F01A00",
+  "value" : "6E19FFFF0000FFFF"
+}, {
+  "id" : "18FF6000",
+  "value" : "0000249101310001"
+}, {
+  "id" : "0CF00300",
+  "value" : "D1000A4CFFFFAE7D"
+}, {
+  "id" : "18F00121",
+  "value" : "FFFFFFFCFFFFFFFF"
+}, {
+  "id" : "18F0D621",
+  "value" : "FFFFFFFF3C3C7FFF"
+}, {
+  "id" : "18FF6000",
+  "value" : "000007EC0075238B"
+}, {
+  "id" : "0CF00203",
+  "value" : "C0000000FF7818FF"
+}, {
+  "id" : "0CF00400",
+  "value" : "307D84F718000485"
+}, {
+  "id" : "18FF6000",
+  "value" : "0000362E001165A2"
+}, {
+  "id" : "18FF6000",
+  "value" : "0000362F000F367F"
+}, {
+  "id" : "18F0D75A",
+  "value" : "0000FFFFFFFFE1FF"
+}, {
+  "id" : "18EBFF5A",
+  "value" : "15FFFFFFFFFFFFFF"
+}, {
+  "id" : "0CF03900",
+  "value" : "E803FFFFFFFFFFFF"
+}, {
+  "id" : "18FC9600",
+  "value" : "0000FFFFFFFFFFFF"
+}, {
+  "id" : "0C00100B",
+  "value" : "FCFFFA00FFFFFFFF"
+}, {
+  "id" : "0CF00203",
+  "value" : "C0000000FF7818FF"
+}, {
+  "id" : "18F00503",
+  "value" : "7EFFFF7E20442044"
+}, {
+  "id" : "18FE4A03",
+  "value" : "3FCCFFFFFFFFFFFF"
+}, {
+  "id" : "18F00C03",
+  "value" : "0000FFFFFFFFFFFF"
+}, {
+  "id" : "18F00010",
+  "value" : "F07D7DFCFFFF007D"
+}, {
+  "id" : "18FEE000",
+  "value" : "9700000098000000"
+}, {
+  "id" : "18FEFD00",
+  "value" : "FF8C06FFFFFFFFFF"
+}, {
+  "id" : "18FEDF00",
+  "value" : "85A0287DFBFFFFF5"
+}, {
+  "id" : "18FED921",
+  "value" : "5FF003FFFFFFFFFF"
+}, {
+  "id" : "0C000F0B",
+  "value" : "FCFFFA00FFFFFFFF"
+}, {
+  "id" : "18F00E00",
+  "value" : "FFFFFFFAFFFFFFFF"
+}, {
+  "id" : "18E0FF21",
+  "value" : "FFFFFFFFFFFCFFFF"
+}, {
+  "id" : "18FF6000",
+  "value" : "0000249101320001"
+}, {
+  "id" : "0CF00300",
+  "value" : "D1000A4CFFFFAE7D"
+}, {
+  "id" : "10FCFD00",
+  "value" : "FFFFFFFFFFFFFFFF"
+}, {
+  "id" : "0C00290B",
+  "value" : "FCFFFA00FFFFFFFF"
+}, {
+  "id" : "18FF6000",
+  "value" : "000007EC0074238B"
+}, {
+  "id" : "0CF00203",
+  "value" : "C0000000FF7818FF"
+}, {
+  "id" : "0CF00A00",
+  "value" : "3800C802FFFFFFFF"
+}, {
+  "id" : "0CF00400",
+  "value" : "307D840319000485"
+}, {
+  "id" : "18FF6000",
+  "value" : "0000362E0011621E"
+}, {
+  "id" : "18FF6000",
+  "value" : "0000362F000F336C"
+}, {
+  "id" : "18FEBF0B",
+  "value" : "00007D7D7D7DFFFF"
+}, {
+  "id" : "18FEF121",
+  "value" : "F3FFFFDFFFFFFF3F"
+}, {
+  "id" : "0CF03900",
+  "value" : "E803FFFFFFFFFFFF"
+}, {
+  "id" : "0C1DFF00",
+  "value" : "2868FFFFFFFFFFFF"
+}, {
+  "id" : "1CFE8B00",
+  "value" : "D511FFFFFFFFFFFF"
+}, {
+  "id" : "18FEF200",
+  "value" : "3700000031002925"
+}, {
+  "id" : "0CF00203",
+  "value" : "C0000000FF7818FF"
+}, {
+  "id" : "18F00C03",
+  "value" : "0000FFFFFFFFFFFF"
+}, {
+  "id" : "0C010300",
+  "value" : "FFFFFFFFFFFFFFFF"
+}, {
+  "id" : "18FEDF00",
+  "value" : "85A0287DFBFFFFF5"
+}, {
+  "id" : "18F00F00",
+  "value" : "FFFF0000FFFFFFFF"
+}, {
+  "id" : "18FF6000",
+  "value" : "0000249101310001"
+} ]

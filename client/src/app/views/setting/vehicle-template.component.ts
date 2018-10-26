@@ -3,7 +3,7 @@ import { Select } from '@ngxs/store';
 import { ViewProfileState } from '../../states';
 import { Observable } from 'rxjs';
 import { DataService } from '../../services';
-import { share, map, switchMap } from 'rxjs/operators';
+import { share, map, switchMap, tap } from 'rxjs/operators';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
@@ -46,9 +46,11 @@ export class VehicleTemplateComponent implements OnInit {
 
   private loadForm() {
     const formData$ = this.templates$.pipe(
-      map(templates => this.buildFormData(templates))
+      map(templates => templates && templates.length > 0 ?
+        this.buildFormData(templates) : null)
     );
-    formData$.subscribe(data => this.rootForm.setValue(data));
+    formData$.subscribe(data => data ?
+      this.rootForm.setValue(data) : this.initForms());
   }
 
   /*

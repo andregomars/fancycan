@@ -1,52 +1,52 @@
 [
     {
+        "fleet_code": "OMNIT",
         "id": 1,
-        "fleet_code": "OMNIT",
-        "vehicle_number": 5001,
-        "spn": "525",
-        "name": "Low Power",
+        "name": "Transmission Fault code",
+        "notified_time": "2018-7-15 03:21:00",
+        "spn": "2561",
         "type": "critical",
-        "updated_time": "2018-10-15 03:20:29",
-        "notified_time": "2018-10-15 03:21:00"
+        "updated_time": "2018-7-15 03:20:29",
+        "vehicle_number": 5001
     },
     {
+        "fleet_code": "OMNIT",
         "id": 2,
-        "fleet_code": "OMNIT",
-        "vehicle_number": 5001,
-        "spn": "525",
-        "name": "Low Power",
-        "type": "critical",
-        "updated_time": "2018-10-16 13:31:22",
-        "notified_time": "2018-10-16 13:32:00"
+        "name": "Speedy",
+        "notified_time": "2018-7-16 13:32:00",
+        "spn": "84",
+        "type": "General",
+        "updated_time": "2018-7-16 13:31:22",
+        "vehicle_number": 5001
     },
     {
+        "fleet_code": "OMNIT",
         "id": 3,
-        "fleet_code": "OMNIT",
-        "vehicle_number": 5001,
-        "spn": "525",
-        "name": "Low Power",
+        "name": "Check Engine",
+        "notified_time": "2018-7-17 14:03:00",
+        "spn": "624",
         "type": "critical",
-        "updated_time": "2018-10-17 14:02:58",
-        "notified_time": "2018-10-17 14:03:00"
+        "updated_time": "2018-7-17 14:02:58",
+        "vehicle_number": 5001
     },
     {
+        "fleet_code": "OMNIT",
         "id": 4,
-        "fleet_code": "OMNIT",
-        "vehicle_number": 5001,
-        "spn": "525",
-        "name": "Low Power",
-        "type": "critical",
-        "updated_time": "2018-10-17 15:09:22",
-        "notified_time": "2018-10-17 13:10:00"
+        "name": "Speedy",
+        "notified_time": "2018-7-17 13:10:00",
+        "spn": "84",
+        "type": "General",
+        "updated_time": "2018-7-17 15:09:22",
+        "vehicle_number": 5001
     },
     {
-        "id": 5,
         "fleet_code": "OMNIT",
-        "vehicle_number": 5001,
-        "spn": "525",
-        "name": "Low Power",
+        "id": 5,
+        "name": "Check Engine",
+        "notified_time": "2018-7-18 20:56:00",
+        "spn": "624",
         "type": "critical",
-        "updated_time": "2018-10-18 20:55:01",
-        "notified_time": "2018-10-18 20:56:00"
+        "updated_time": "2018-7-18 20:55:01",
+        "vehicle_number": 5001
     }
 ]

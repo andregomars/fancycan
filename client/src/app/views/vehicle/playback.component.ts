@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService, UtilityService } from '../../services';
 import { Observable } from 'rxjs';
-import { map, share, switchMap, tap, timeout } from 'rxjs/operators';
+import { map, share, switchMap, tap, timeout, take } from 'rxjs/operators';
 import { Select } from '@ngxs/store';
 import * as moment from 'moment';
 
@@ -81,7 +81,7 @@ export class PlaybackComponent implements OnInit {
 
     this.cans$ = this.dataService.getCANs().pipe(
       map((cans: any[]) =>
-        cans.map(can => {
+        cans.slice(0, 15).map(can => {
           return {
             id: can.id,
             value: this.utitlityService.formatRawCAN(can.value)

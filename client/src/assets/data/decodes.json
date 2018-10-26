@@ -1,32 +1,71 @@
-[
-    {
-        "spn": "84",
-        "name": "",
-        "value": "",
-        "unit": ""
-    },
-    {
-        "spn": "190",
-        "name": "",
-        "value": "",
-        "unit": ""
-    },
-    {
-        "spn": "917",
-        "name": "",
-        "value": "",
-        "unit": ""
-    },
-    {
-        "spn": "9000",
-        "name": "",
-        "value": "",
-        "unit": ""
-    },
-    {
-        "spn": "9002",
-        "name": "",
-        "value": "",
-        "unit": ""
-    }
-]
+[ {
+  "name" : "Parking Brake Switch",
+  "spn" : "70",
+  "unit" : "bit",
+  "value" : "1"
+}, {
+  "name" : "Wheel-Based Vehicle Speed",
+  "spn" : "84",
+  "unit" : "mph",
+  "value" : "0"
+}, {
+  "name" : "Engine Oil Pressure",
+  "spn" : "100",
+  "unit" : "psi",
+  "value" : "51.6"
+}, {
+  "name" : "Engine Coolant Temperature",
+  "spn" : "110",
+  "unit" : "F",
+  "value" : "199.4"
+}, {
+  "name" : "Engine Coolant Level",
+  "spn" : "111",
+  "unit" : "%",
+  "value" : "100"
+}, {
+  "name" : "Transmission Oil Temperature",
+  "spn" : "177",
+  "unit" : "F",
+  "value" : "194"
+}, {
+  "name" : "Engine Average Fuel Economy",
+  "spn" : "185",
+  "unit" : "m/g",
+  "value" : "2.4"
+}, {
+  "name" : "Engine Speed",
+  "spn" : "190",
+  "unit" : "rpm",
+  "value" : "1,110.9"
+}, {
+  "name" : "Anti-Lock Braking (ABS) Active",
+  "spn" : "563",
+  "unit" : "bit",
+  "value" : "0"
+}, {
+  "name" : "GPS Latitude",
+  "spn" : "584",
+  "unit" : "deg",
+  "value" : "34.1"
+}, {
+  "name" : "GPS Longitude",
+  "spn" : "585",
+  "unit" : "deg",
+  "value" : "-118.2"
+}, {
+  "name" : "High Resolution Total Vehicle Distance",
+  "spn" : "917",
+  "unit" : "mile",
+  "value" : "34.1"
+}, {
+  "name" : "High Resolution Trip Distance",
+  "spn" : "918",
+  "unit" : "mile",
+  "value" : "17025.1"
+}, {
+  "name" : "ABS Fully Operational",
+  "spn" : "1243",
+  "unit" : "bit",
+  "value" : "0"
+} ]
