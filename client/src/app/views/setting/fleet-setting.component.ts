@@ -15,6 +15,7 @@ export class FleetSettingComponent implements OnInit {
   @Select(ViewProfileState.fcode) fcode$: Observable<string>;
   fleet$: Observable<any>;
   rootForm: FormGroup;
+  zoomOptions = [8, 9, 10, 11, 12];
 
   constructor(
     private dataService: DataService,
@@ -23,7 +24,7 @@ export class FleetSettingComponent implements OnInit {
 
   ngOnInit() {
     this.loadData();
-    this.initForm();
+    this.initForm(10);
     this.loadForm();
   }
 
@@ -38,7 +39,16 @@ export class FleetSettingComponent implements OnInit {
     );
   }
 
-  private initForm() {
+  private initForm(vehicleCounts: number) {
+    const vehicles = Array.from(Array(vehicleCounts).keys()).map(() =>
+      this.fb.group({
+        code: null,
+        vin: null,
+        mac: null,
+        picture: null,
+        created: null,
+        note: null
+      }));
     this.rootForm = this.fb.group({
       code: null,
       name: null,
@@ -52,16 +62,7 @@ export class FleetSettingComponent implements OnInit {
       phone: null,
       email: null,
       note: null,
-      vehicles: this.fb.array([
-        this.fb.group({
-          code: null,
-          vin: null,
-          mac: null,
-          picture: null,
-          created: null,
-          note: null
-        })
-      ])
+      vehicles: this.fb.array(vehicles)
     });
   }
 
@@ -72,7 +73,7 @@ export class FleetSettingComponent implements OnInit {
     );
 
     formData$.subscribe(data => data ?
-      this.rootForm.setValue(data) : this.initForm());
+      this.rootForm.setValue(data) : this.initForm(10));
   }
 
   private buildFormData(data: any): any {
