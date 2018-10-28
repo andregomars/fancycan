@@ -2,7 +2,7 @@
     {
         "code": "OMNIT",
         "name": "Omni Transit",
-        "icon": "https://s3.aws.com/fpic.png",
+        "icon": "https://fancycandemo.firebaseapp.com/assets/img/brand/fc.white.svg",
         "latitude": 34.095072,
         "longitude": -117.907717,
         "zoom": 12,

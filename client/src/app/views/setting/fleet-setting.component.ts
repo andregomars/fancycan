@@ -3,7 +3,7 @@ import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { ViewProfileState } from '../../states';
 import { DataService } from '../../services';
-import { switchMap, share, map } from 'rxjs/operators';
+import { switchMap, share, map, tap } from 'rxjs/operators';
 import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
@@ -41,6 +41,7 @@ export class FleetSettingComponent implements OnInit {
   private initForm() {
     this.rootForm = this.fb.group({
       code: null,
+      name: null,
       icon: null,
       latitude: null,
       longitude: null,
@@ -49,13 +50,23 @@ export class FleetSettingComponent implements OnInit {
       phone: null,
       email: null,
       note: null,
-      vehicles: this.fb.array([])
+      vehicles: this.fb.array([
+        this.fb.group({
+          code: null,
+          vin: null,
+          mac: null,
+          picture: null,
+          created: null,
+          note: null
+        })
+      ])
     });
   }
 
   private loadForm() {
     const formData$ = this.fleet$.pipe(
-      map(fleet => fleet ? this.buildFormData(fleet) : null)
+      map(fleet => fleet ? this.buildFormData(fleet) : null),
+      tap(x => console.log(x))
     );
 
     formData$.subscribe(data => data ?
@@ -65,15 +76,16 @@ export class FleetSettingComponent implements OnInit {
   private buildFormData(data: any): any {
     return {
       code: data.code,
+      name: data.name,
       icon: data.icon,
       latitude: data.latitude,
       longitude: data.longitude,
       zoom: data.zoom,
       address: data.address,
-      phone: data.phon,
+      phone: data.phone,
       email: data.email,
       note: data.note,
-      vhiecles: this.filterVehicleFields(data.vehicles)
+      vehicles: this.filterVehicleFields(data.vehicles)
     };
 
   }
