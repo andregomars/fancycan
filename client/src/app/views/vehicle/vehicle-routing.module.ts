@@ -67,7 +67,7 @@ const routes: Routes = [
         }
       },
       {
-        path: 'snapshot',
+        path: 'panel',
         component: VehicleComponent,
         canActivate: [VehicleGuard],
         data: {
@@ -75,7 +75,7 @@ const routes: Routes = [
         }
       },
       {
-        path: 'snapshot/:vcode',
+        path: 'panel/:vcode',
         component: VehicleComponent,
         data: {
           title: 'Vehicle'

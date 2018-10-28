@@ -40,12 +40,12 @@ export const navItems = [
         icon: 'fa fa-angle-right'
       },
       {
-        name: 'Snapshot',
-        url: '/vehicle/snapshot',
+        name: 'Panel',
+        url: '/vehicle/panel',
         icon: 'fa fa-angle-right'
       },
       {
-        name: 'Realtime Monitor',
+        name: 'Data Monitor',
         url: '/vehicle/rtm',
         icon: 'fa fa-angle-right'
       },

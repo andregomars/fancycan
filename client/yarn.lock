@@ -315,12 +315,6 @@
     "@angular-devkit/schematics" "^0.8.0"
     "@schematics/angular" "^0.8.0"
 
-"@ng-select/ng-select@^2.10.5":
-  version "2.10.5"
-  resolved "https://registry.yarnpkg.com/@ng-select/ng-select/-/ng-select-2.10.5.tgz#2752ee76b48f0c56c0d567e2da1c779d3b7427f2"
-  dependencies:
-    tslib "^1.9.0"
-
 "@ngtools/webpack@6.2.5":
   version "6.2.5"
   resolved "https://registry.yarnpkg.com/@ngtools/webpack/-/webpack-6.2.5.tgz#cbaef09ada2ddfb8c84042485377f0682cd5752b"

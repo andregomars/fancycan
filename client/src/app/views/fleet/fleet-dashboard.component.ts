@@ -61,11 +61,11 @@ export class FleetDashboardComponent implements OnInit {
 
   nav(fcode: string, vcode: string) {
     this.store.dispatch(new SetProfile(fcode, vcode));
-    this.store.dispatch(new Navigate(['/vehicle/snapshot', vcode]));
+    this.store.dispatch(new Navigate(['/vehicle/panel', vcode]));
   }
 
   private loadData() {
-    this.vehicles$ = this.dataService.getSnapshots().pipe(
+    this.vehicles$ = this.dataService.getPanels().pipe(
       switchMap(vehicles =>
           this.fcode$.pipe(
             map(fcode => vehicles.filter(vehicle => vehicle.fleet_code === fcode))

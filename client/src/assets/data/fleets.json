@@ -6,6 +6,8 @@
         "latitude": 34.095072,
         "longitude": -117.907717,
         "zoom": 12,
+        "timezone": "PDT",
+        "mode": "K11M",
         "address": "",
         "phone": "",
         "email": "",

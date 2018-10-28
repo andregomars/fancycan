@@ -6,25 +6,82 @@
     <form [formGroup]="rootForm" class="w-100">
       <div class="col-12 col-lg-6">
         <div class="row mt-2">
-          <div class="col-12 col-lg-3 align-self-center">
+          <div class="col-6 col-lg-3 align-self-center">
             Fleet Name:
           </div>
-          <div class="col-12 col-lg-3">
+          <div class="col-6 col-lg-3">
             <input type="text" class="form-control" formControlName="name" name="name">
           </div>
         </div>
         <div class="row mt-2">
-          <div class="col-12 col-lg-3 align-self-center">
+          <div class="col-6 col-lg-3 align-self-center">
             Fleet Icon:
           </div>
-          <div class="col-12 col-lg-3">
+          <div class="col-3 col-lg-3">
             <img width="25" height="25" class="align-self-center" 
               [src]="rootForm.get('icon').value" />
           </div>
-          <div class="col-12 col-lg-3">
+          <div class="col-3 col-lg-3">
             <label class="btn btn-primary">
               Upload<input type="file" hidden>
             </label>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-6 col-lg-3 align-self-center">
+            Fleet Map Center:
+          </div>
+          <div class="col-2 col-lg-3">
+            <input type="text" class="form-control" placeholder="Latitude"
+              formControlName="latitude" name="latitude">
+          </div>
+          <div class="col-2 col-lg-3">
+            <input type="text" class="form-control" placeholder="Longitude"
+              formControlName="longitude" name="longitude">
+          </div>
+          <div class="col-1 col-lg-2">
+            <input type="text" class="form-control" placeholder="Zoom"
+              formControlName="zoom" name="zoom">
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-6 col-lg-3 align-self-center">
+            Fleet Time Zone:
+          </div>
+          <div class="col-6 col-lg-3">
+            <input type="text" class="form-control" formControlName="timezone" name="timezone">
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-6 col-lg-3 align-self-center">
+            Vehicle Address:
+          </div>
+          <div class="col-6 col-lg-3">
+            <input type="text" class="form-control" formControlName="address" name="address">
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-6 col-lg-3 align-self-center">
+            Vehicle Phone:
+          </div>
+          <div class="col-6 col-lg-3">
+            <input type="text" class="form-control" formControlName="phone" name="phone">
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-6 col-lg-3 align-self-center">
+            Vehicle Email:
+          </div>
+          <div class="col-6 col-lg-3">
+            <input type="text" class="form-control" formControlName="email" name="email">
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-6 col-lg-3 align-self-center">
+            Other Information:
+          </div>
+          <div class="col-6 col-lg-3">
+            <input type="text" class="form-control" formControlName="note" name="note">
           </div>
         </div>
       </div>

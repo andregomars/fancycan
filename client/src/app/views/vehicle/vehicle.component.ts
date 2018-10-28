@@ -114,7 +114,7 @@ export class VehicleComponent implements OnInit {
   }
 
   private loadVehicle() {
-    this.vehicle$ = this.dataService.getSnapshots().pipe(
+    this.vehicle$ = this.dataService.getPanels().pipe(
       switchMap(vehicles =>
         this.vcode$.pipe(
           map(vcode =>
@@ -127,7 +127,7 @@ export class VehicleComponent implements OnInit {
   }
 
   private loadVehicles() {
-    this.vehicles$ = this.dataService.getSnapshots().pipe(
+    this.vehicles$ = this.dataService.getPanels().pipe(
       map(vehicles => this.utilityService.attachMapLabel(vehicles)),
       share()
     );

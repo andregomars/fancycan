@@ -32,7 +32,7 @@ export class VehicleListComponent implements OnInit {
 
   nav(fcode: string, vcode: string) {
     this.store.dispatch(new SetProfile(fcode, vcode));
-    this.store.dispatch(new Navigate(['/vehicle/snapshot', vcode]));
+    this.store.dispatch(new Navigate(['/vehicle/panel', vcode]));
   }
 
   filterVehicles(vcode: string) {
