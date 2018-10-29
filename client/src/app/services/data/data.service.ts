@@ -104,6 +104,11 @@ export class DataService {
       .get<any>(`${this.rootUrl}/vehicle-template.json`);
   }
 
+  getDiagnosisSetting(): Observable<any> {
+    return this.http
+      .get<any>(`${this.rootUrl}/diagnosis-setting.json`);
+  }
+
   getToolTips(): Observable<any> {
     if (this.tooltips$) {
       return this.tooltips$;

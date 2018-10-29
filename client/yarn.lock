@@ -632,6 +632,12 @@ angular-pipes@^8.1.1:
   dependencies:
     tslib "^1.9.0"
 
+angularx-qrcode@1.2.4:
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/angularx-qrcode/-/angularx-qrcode-1.2.4.tgz#3dc501e4f17e0d7a9fa7abaaa016c273d7aa6010"
+  dependencies:
+    qrcodejs2 "0.0.2"
+
 ansi-colors@^3.0.0:
   version "3.0.5"
   resolved "https://registry.yarnpkg.com/ansi-colors/-/ansi-colors-3.0.5.tgz#cb9dc64993b64fd6945485f797fc3853137d9a7b"
@@ -4899,6 +4905,10 @@ q@^1.4.1:
 qjobs@^1.1.4:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/qjobs/-/qjobs-1.2.0.tgz#c45e9c61800bd087ef88d7e256423bdd49e5d071"
+
+qrcodejs2@0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/qrcodejs2/-/qrcodejs2-0.0.2.tgz#465afe5e39f19facecb932c11f7a186109146ae1"
 
 qs@6.5.1:
   version "6.5.1"

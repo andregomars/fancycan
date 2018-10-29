@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { QRCodeModule } from 'angularx-qrcode';
+
 import { SettingContainerComponent } from './setting-container.component';
 import { SpnSpecificationComponent } from './spn-specification.component';
 import { SettingRoutingModule } from './setting-routing.module';
@@ -12,6 +14,7 @@ import { MalfunctinoSettingComponent } from './malfunction-setting.component';
 import { UsageSettingComponent } from './usage-setting.component';
 import { VehicleTemplateComponent } from './vehicle-template.component';
 import { FleetSettingComponent } from './fleet-setting.component';
+import { DiagnosisSettingComponent } from './diagnosis-setting.component';
 
 @NgModule({
   imports: [
@@ -20,6 +23,7 @@ import { FleetSettingComponent } from './fleet-setting.component';
     ReactiveFormsModule,
     NgStringPipesModule,
     SettingRoutingModule,
+    QRCodeModule,
     ComponentsModule
   ],
   declarations: [
@@ -30,7 +34,8 @@ import { FleetSettingComponent } from './fleet-setting.component';
     MalfunctinoSettingComponent,
     UsageSettingComponent,
     VehicleTemplateComponent,
-    FleetSettingComponent
+    FleetSettingComponent,
+    DiagnosisSettingComponent
   ]
 })
 export class SettingModule { }

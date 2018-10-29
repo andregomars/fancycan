@@ -24,7 +24,7 @@ export class FleetSettingComponent implements OnInit {
 
   ngOnInit() {
     this.loadData();
-    this.initForm(10);
+    this.initForm(0);
     this.loadForm();
   }
 
@@ -71,8 +71,14 @@ export class FleetSettingComponent implements OnInit {
       map(fleet => fleet ? this.buildFormData(fleet) : null)
     );
 
-    formData$.subscribe(data => data && data.vehicles ?
-      this.rootForm.setValue(data) : this.initForm(data.vehicles.length));
+    formData$.subscribe(data => {
+      if (data && data.vehicles) {
+        this.initForm(data.vehicles.length);
+        this.rootForm.setValue(data);
+      } else {
+        this.initForm(0);
+      }
+    });
   }
 
   private buildFormData(data: any): any {

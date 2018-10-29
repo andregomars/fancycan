@@ -1,9 +1,47 @@
 [
     {
         "id": 1,
+        "fleet_code": "OMNIT",
         "item": "tire",
         "location": "front right",
-        "type": null,
-        "picture": null
+        "type": "value",
+        "picture": "https://s3.aws.com/pic.png",
+        "note": null
+    },
+    {
+        "id": 2,
+        "fleet_code": "OMNIT",
+        "item": "tire2",
+        "location": "rear left",
+        "type": "value",
+        "picture": "https://s3.aws.com/pic.png",
+        "note": null
+    },
+    {
+        "id": 3,
+        "fleet_code": "OMNIT",
+        "item": "tire2",
+        "location": "rear left",
+        "type": "value",
+        "picture": "https://s3.aws.com/pic.png",
+        "note": null
+    },
+    {
+        "id": 4,
+        "fleet_code": "OMNIT",
+        "item": "tire2",
+        "location": "rear left",
+        "type": "value",
+        "picture": "https://s3.aws.com/pic.png",
+        "note": null
+    },
+    {
+        "id": 5,
+        "fleet_code": "OMNIT",
+        "item": "break",
+        "location": "rear right",
+        "type": "status",
+        "picture": "https://s3.aws.com/pic.png",
+        "note": null
     }
 ]

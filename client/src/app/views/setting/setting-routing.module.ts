@@ -10,6 +10,7 @@ import { UsageSettingComponent } from './usage-setting.component';
 import { FleetGuard } from '../../guards/fleet.guard';
 import { VehicleTemplateComponent } from './vehicle-template.component';
 import { FleetSettingComponent } from './fleet-setting.component';
+import { DiagnosisSettingComponent } from './diagnosis-setting.component';
 
 const routes: Routes = [
   {
@@ -114,6 +115,21 @@ const routes: Routes = [
         component: FleetSettingComponent,
         data: {
           title: 'Fleet'
+        }
+      },
+      {
+        path: 'diagnosis',
+        component: DiagnosisSettingComponent,
+        canActivate: [ FleetGuard ],
+        data: {
+          title: 'Diagnosis'
+        }
+      },
+      {
+        path: 'diagnosis/:fcode',
+        component: DiagnosisSettingComponent,
+        data: {
+          title: 'Diagnosis'
         }
       }
     ]
