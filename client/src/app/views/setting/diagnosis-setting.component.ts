@@ -45,7 +45,6 @@ export class DiagnosisSettingComponent implements OnInit {
     );
 
     formData$.subscribe(data => {
-    console.log(data)
       if (data && data.entries) {
         this.initForm(data.entries.length);
         this.rootForm.setValue(data);

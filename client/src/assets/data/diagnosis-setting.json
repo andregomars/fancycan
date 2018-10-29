@@ -6,7 +6,7 @@
         "location": "front right",
         "type": "value",
         "picture": "https://s3.aws.com/pic.png",
-        "note": null
+        "note": ""
     },
     {
         "id": 2,
@@ -15,7 +15,7 @@
         "location": "rear left",
         "type": "value",
         "picture": "https://s3.aws.com/pic.png",
-        "note": null
+        "note": ""
     },
     {
         "id": 3,
@@ -24,7 +24,7 @@
         "location": "rear left",
         "type": "value",
         "picture": "https://s3.aws.com/pic.png",
-        "note": null
+        "note": ""
     },
     {
         "id": 4,
@@ -33,7 +33,7 @@
         "location": "rear left",
         "type": "value",
         "picture": "https://s3.aws.com/pic.png",
-        "note": null
+        "note": ""
     },
     {
         "id": 5,
@@ -42,6 +42,6 @@
         "location": "rear right",
         "type": "status",
         "picture": "https://s3.aws.com/pic.png",
-        "note": null
+        "note": ""
     }
 ]
