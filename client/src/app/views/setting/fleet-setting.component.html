@@ -13,7 +13,8 @@
             <input type="text" class="form-control" formControlName="name" name="name">
           </div>
           <div class="col-6 col-md-1">
-            <img width="25" height="25" class="align-self-center" [src]="rootForm.get('icon').value" />
+            <img width="25" height="25" class="align-self-center" 
+              [src]="rootForm.get('icon').value" />
           </div>
           <div class="col-6 col-md-3">
             <label class="btn btn-primary">
@@ -88,12 +89,13 @@
         <table class="table table-striped table-hover table-outline table-sm mt-1">
           <thead class="text-white thead-light bg-primary">
             <tr>
-              <th>Vehicle #</th>
-              <th width="100">VIN</th>
-              <th>Identification</th>
-              <th width="100">Create Time</th>
-              <th width="50">Picture</th>
-              <th width="100">Note</th>
+              <th width="100">Vehicle #</th>
+              <th width="150">VIN</th>
+              <th width="150">Identification</th>
+              <th width="180">Create Time</th>
+              <th width="200">Picture</th>
+              <th>Note</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -117,6 +119,9 @@
                 <td class="text-center">
                   <input type="text" class="form-control" formControlName="note" name="note">
                 </td>
+                <td width="15" class="text-center">
+                  <button class="btn btn-link "><i class="fa fa-times"></i></button>
+                </td>
               </tr>
             </ng-container>
           </tbody>
@@ -124,7 +129,10 @@
       </div>
     </div>
   </form>
-  <div class="row mt-2 justify-content-end">
+  <div class="row justify-content-end">
+    <div class="col-2 text-right w-100">
+      <button class="btn btn-primary w-100">Add</button>
+    </div>
     <div class="col-2 text-right w-100">
       <button class="btn btn-primary w-100">Save</button>
     </div>

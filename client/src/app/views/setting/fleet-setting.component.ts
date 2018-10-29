@@ -52,7 +52,7 @@ export class FleetSettingComponent implements OnInit {
     this.rootForm = this.fb.group({
       code: null,
       name: null,
-      icon: null,
+      icon: '',
       latitude: null,
       longitude: null,
       zoom: null,
@@ -68,12 +68,11 @@ export class FleetSettingComponent implements OnInit {
 
   private loadForm() {
     const formData$ = this.fleet$.pipe(
-      map(fleet => fleet ? this.buildFormData(fleet) : null),
-      tap(x => console.log(x))
+      map(fleet => fleet ? this.buildFormData(fleet) : null)
     );
 
-    formData$.subscribe(data => data ?
-      this.rootForm.setValue(data) : this.initForm(10));
+    formData$.subscribe(data => data && data.vehicles ?
+      this.rootForm.setValue(data) : this.initForm(data.vehicles.length));
   }
 
   private buildFormData(data: any): any {
