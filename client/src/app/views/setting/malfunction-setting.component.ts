@@ -17,7 +17,7 @@ export class MalfunctinoSettingComponent implements OnInit {
   entryList$: Observable<any[]>;
   entryForm: FormGroup;
   expressionOptions = ['>', '=', '<', '!='];
-  notificationOptions = ['email', 'none'];
+  notificationOptions = ['email', 'app'];
 
   get conditions(): FormArray {
     return this.entryForm.get('conditions') as FormArray;
@@ -74,6 +74,16 @@ export class MalfunctinoSettingComponent implements OnInit {
         )
       )
     );
+  }
+
+  private buildNotificationForms(notifications: string[]): FormArray {
+    const array = [];
+    for (const item of notifications) {
+      array.push(this.fb.group({
+      }));
+    }
+
+    return this.fb.array(array);
   }
 
   private buildConditionForms(count: number): FormArray {

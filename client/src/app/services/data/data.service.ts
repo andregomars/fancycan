@@ -109,6 +109,11 @@ export class DataService {
       .get<any>(`${this.rootUrl}/checklist-setting.json`);
   }
 
+  getChecklist(): Observable<any> {
+    return this.http
+      .get<any>(`${this.rootUrl}/checklist.json`);
+  }
+
   getToolTips(): Observable<any> {
     if (this.tooltips$) {
       return this.tooltips$;

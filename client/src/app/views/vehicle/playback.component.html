@@ -305,7 +305,7 @@
         <div class="col mt-2 p-2" [style.min-height.px]="mapMinHeight" [style.background-color]="'#242f3e'">
           <agm-map id="map_canvas" *ngIf="loadMap" [zoom]="mapZoom" [streetViewControl]=false [styles]="mapStyle"
             [latitude]="map_lat" [longitude]="map_lgt">
-             <ng-container *ngIf="(vehicle$ | async) as vehicle">
+            <ng-container *ngIf="(vehicle$ | async) as vehicle">
               <agm-marker [latitude]="vehicle.latitude" [longitude]="vehicle.longitude" iconUrl="assets/img/map/bus.20.png">
               </agm-marker>
             </ng-container>
@@ -317,33 +317,85 @@
                 </agm-polyline-point>
               </agm-polyline>
             </ng-container> -->
-          </agm-map> 
+          </agm-map>
         </div>
       </div>
-      <div class="row table-responsive-lg mt-2">
-        <table class="table table-striped table-hover table-outline table-sm mt-1">
-          <thead class="text-white thead-light bg-primary">
-            <tr>
-              <th><small>SPN</small></th>
-              <th><small>Name</small></th>
-              <th><small>PGN</small></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let definition of definitions$ | async">
-              <td>
-                <div class="small">{{ definition.spn }}</div>
-              </td>
-              <td>
-                <div class="small">{{ definition.name }}</div>
-              </td>
-              <td>
-                <div class="small">{{ definition.updated }}</div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="row mt-2">
+        <div class="col">
+          <div id="carousel-side-info" class="carousel slide" data-ride="carousel" data-interval="0" data-wrap="false">
+            <div class="d-flex justify-content-between px-2">
+              <a class="" href="#carousel-side-info" data-slide="prev">
+                <i class="fa fa-chevron-left"></i>
+              </a>
+              <a class="" href="#carousel-side-info" data-slide="next">
+                <i class="fa fa-chevron-right"></i>
+              </a>
+            </div>
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                  <table class="table table-striped table-hover table-outline table-sm mt-1">
+                    <thead class="text-white thead-light bg-primary">
+                      <tr>
+                        <th><small>Check Item</small></th>
+                        <th><small>Checked By</small></th>
+                        <th><small>Value</small></th>
+                        <th><small>Status</small></th>
+                        <th><small>Note</small></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let item of checklist$ | async">
+                        <td>
+                          <div class="small">{{ item.item }}</div>
+                        </td>
+                        <td>
+                          <div class="small">{{ item.user }}</div>
+                        </td>
+                        <td>
+                          <div class="small">{{ item.value }}</div>
+                        </td>
+                        <td>
+                          <div class="small">{{ item.status }}</div>
+                        </td>
+                        <td>
+                          <div class="small">{{ item.note }}</div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+              </div>
+              <div class="carousel-item">
+                <div class="row table-responsive-lg m-0">
+                  <table class="table table-striped table-hover table-outline table-sm mt-1">
+                    <thead class="text-white thead-light bg-primary">
+                      <tr>
+                        <th><small>SPN</small></th>
+                        <th><small>Name</small></th>
+                        <th><small>PGN</small></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let definition of definitions$ | async">
+                        <td>
+                          <div class="small">{{ definition.spn }}</div>
+                        </td>
+                        <td>
+                          <div class="small">{{ definition.name }}</div>
+                        </td>
+                        <td>
+                          <div class="small">{{ definition.updated }}</div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
+
+
     </div>
   </div>
 </div>

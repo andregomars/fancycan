@@ -19,7 +19,7 @@
         "gpslgt": 123.332432,
         "gpsexpression": ">",
         "gpsvalue": "3",
-        "notification": "email"
+        "notification": [ "email", "app" ]
     },
     {
         "id": 2,
@@ -41,7 +41,7 @@
         "gpslgt": 123.332432,
         "gpsexpression": "<",
         "gpsvalue": "3",
-        "notification": "email"
+        "notification": [ "email" ]
     },
     {
         "id": 3,
@@ -63,6 +63,6 @@
         "gpslgt": 123.332432,
         "gpsexpression": ">",
         "gpsvalue": "3",
-        "notification": "email"
+        "notification": []
     }
 ]

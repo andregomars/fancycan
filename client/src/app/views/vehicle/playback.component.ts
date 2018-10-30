@@ -3,7 +3,6 @@ import { DataService, UtilityService } from '../../services';
 import { Observable } from 'rxjs';
 import { map, share, switchMap, tap, timeout, take } from 'rxjs/operators';
 import { Select } from '@ngxs/store';
-import * as moment from 'moment';
 
 import { environment } from '../../../environments/environment';
 import { MapStyle } from '../shared/map-style';
@@ -25,6 +24,7 @@ export class PlaybackComponent implements OnInit {
   vehicles$: Observable<any>;
   definitions$: Observable<any>;
   cans$: Observable<any>;
+  checklist$: Observable<any>;
 
   loadMap = environment.loadMap;
   mapMinHeight = 350;
@@ -55,6 +55,18 @@ export class PlaybackComponent implements OnInit {
     this.loadTime();
     this.loadVehicle();
     this.loadData();
+    this.loadChecklist();
+  }
+
+  private loadChecklist() {
+    this.checklist$ = this.vcode$.pipe(
+      switchMap(vcode =>
+        this.dataService.getChecklist().pipe(
+          map((items: any[]) =>
+            items.filter(item => item.vehicle_code === vcode))
+        )),
+      share()
+    );
   }
 
   private loadTime() {

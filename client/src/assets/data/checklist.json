@@ -1,0 +1,57 @@
+[
+    {
+        "id": 1,
+        "vehicle_code": "5001",
+        "fleet_code": "OMNIT",
+        "item": "tire",
+        "user": "andre",
+        "value": "35 psi",
+        "status": "",
+        "note": "",
+        "updated": "2018-10-11 16:24:32"
+    },
+    {
+        "id": 2,
+        "vehicle_code": "5001",
+        "fleet_code": "OMNIT",
+        "item": "door",
+        "user": "andre",
+        "value": "",
+        "status": "closed",
+        "note": "",
+        "updated": "2018-10-11 17:24:32"
+    },
+    {
+        "id": 3,
+        "vehicle_code": "5003",
+        "fleet_code": "OMNIT",
+        "item": "break",
+        "user": "andre",
+        "value": "",
+        "status": "good",
+        "note": "",
+        "updated": "2018-10-11 17:24:32"
+    },
+    {
+        "id": 4,
+        "vehicle_code": "5005",
+        "fleet_code": "OMNIT",
+        "item": "tire",
+        "user": "andre",
+        "value": "25 psi",
+        "status": "",
+        "note": "",
+        "updated": "2018-10-12 16:24:32"
+    },
+    {
+        "id": 5,
+        "vehicle_code": "5006",
+        "fleet_code": "OMNIT",
+        "item": "tire",
+        "user": "andre",
+        "value": "35 psi",
+        "status": "",
+        "note": "",
+        "updated": "2018-10-13 11:24:32"
+    }
+]
