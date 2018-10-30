@@ -104,9 +104,9 @@ export class DataService {
       .get<any>(`${this.rootUrl}/vehicle-template.json`);
   }
 
-  getDiagnosisSetting(): Observable<any> {
+  getChecklistSetting(): Observable<any> {
     return this.http
-      .get<any>(`${this.rootUrl}/diagnosis-setting.json`);
+      .get<any>(`${this.rootUrl}/checklist-setting.json`);
   }
 
   getToolTips(): Observable<any> {

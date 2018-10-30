@@ -14,7 +14,7 @@ import { MalfunctinoSettingComponent } from './malfunction-setting.component';
 import { UsageSettingComponent } from './usage-setting.component';
 import { VehicleTemplateComponent } from './vehicle-template.component';
 import { FleetSettingComponent } from './fleet-setting.component';
-import { DiagnosisSettingComponent } from './diagnosis-setting.component';
+import { ChecklistSettingComponent } from './checklist-setting.component';
 
 @NgModule({
   imports: [
@@ -35,7 +35,7 @@ import { DiagnosisSettingComponent } from './diagnosis-setting.component';
     UsageSettingComponent,
     VehicleTemplateComponent,
     FleetSettingComponent,
-    DiagnosisSettingComponent
+    ChecklistSettingComponent
   ]
 })
 export class SettingModule { }

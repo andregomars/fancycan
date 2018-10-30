@@ -142,8 +142,8 @@ export const navItems = [
         icon: 'fa fa-angle-right'
       },
       {
-        name: 'Diagnosis',
-        url: '/setting/diagnosis',
+        name: 'Checklist',
+        url: '/setting/checklist',
         icon: 'fa fa-angle-right'
       }
     ]

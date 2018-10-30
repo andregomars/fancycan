@@ -8,11 +8,11 @@ import { switchMap, map, share, tap } from 'rxjs/operators';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
-  selector: 'app-diagnosis-setting',
-  templateUrl: './diagnosis-setting.component.html',
-  styleUrls: ['./diagnosis-setting.component.scss']
+  selector: 'app-checklist-setting',
+  templateUrl: './checklist-setting.component.html',
+  styleUrls: ['./checklist-setting.component.scss']
 })
-export class DiagnosisSettingComponent implements OnInit {
+export class ChecklistSettingComponent implements OnInit {
   @Select(ViewProfileState.fcode) fcode$: Observable<string>;
   entries$: Observable<any[]>;
   rootForm: FormGroup;
@@ -31,7 +31,7 @@ export class DiagnosisSettingComponent implements OnInit {
   private loadData() {
     this.entries$ = this.fcode$.pipe(
       switchMap(fcode =>
-        this.dataService.getDiagnosisSetting().pipe(
+        this.dataService.getChecklistSetting().pipe(
           map((entries: any[]) =>
             entries.filter(fleet => fleet.fleet_code === fcode))
         )),

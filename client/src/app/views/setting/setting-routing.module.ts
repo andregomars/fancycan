@@ -10,7 +10,7 @@ import { UsageSettingComponent } from './usage-setting.component';
 import { FleetGuard } from '../../guards/fleet.guard';
 import { VehicleTemplateComponent } from './vehicle-template.component';
 import { FleetSettingComponent } from './fleet-setting.component';
-import { DiagnosisSettingComponent } from './diagnosis-setting.component';
+import { ChecklistSettingComponent } from './checklist-setting.component';
 
 const routes: Routes = [
   {
@@ -118,18 +118,18 @@ const routes: Routes = [
         }
       },
       {
-        path: 'diagnosis',
-        component: DiagnosisSettingComponent,
+        path: 'checklist',
+        component: ChecklistSettingComponent,
         canActivate: [ FleetGuard ],
         data: {
-          title: 'Diagnosis'
+          title: 'Checklist'
         }
       },
       {
-        path: 'diagnosis/:fcode',
-        component: DiagnosisSettingComponent,
+        path: 'checklist/:fcode',
+        component: ChecklistSettingComponent,
         data: {
-          title: 'Diagnosis'
+          title: 'Checklist'
         }
       }
     ]
