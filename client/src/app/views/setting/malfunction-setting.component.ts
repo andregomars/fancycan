@@ -41,7 +41,9 @@ export class MalfunctinoSettingComponent implements OnInit {
       gpslgt: selectedEntry.gpslgt,
       gpsexpression: selectedEntry.gpsexpression,
       gpsvalue: selectedEntry.gpsvalue,
-      notification: selectedEntry.notification,
+      notification: this.convertSelectOptions(
+        this.notificationOptions,
+        selectedEntry.notification),
       conditions: selectedEntry.conditions
     });
   }
@@ -63,7 +65,7 @@ export class MalfunctinoSettingComponent implements OnInit {
   }
 
   saveEntry() {
-
+    console.log(this.entryForm.value);
   }
 
   private loadEntries() {
@@ -76,14 +78,24 @@ export class MalfunctinoSettingComponent implements OnInit {
     );
   }
 
-  private buildNotificationForms(notifications: string[]): FormArray {
-    const array = [];
-    for (const item of notifications) {
-      array.push(this.fb.group({
-      }));
-    }
+  private buildSelectionForms(options: string[]): FormArray {
+    const array = options.map(opt => {
+      return this.fb.group({
+        name: opt,
+        selected: false
+      });
+    });
 
     return this.fb.array(array);
+  }
+
+  private convertSelectOptions(options: string[], values: string[]): any[] {
+    return options.map(opt => {
+      return {
+        name: opt,
+        selected: values.includes(opt)
+      };
+    });
   }
 
   private buildConditionForms(count: number): FormArray {
@@ -106,7 +118,7 @@ export class MalfunctinoSettingComponent implements OnInit {
       gpslgt: [''],
       gpsexpression: [''],
       gpsvalue: [''],
-      notification: [''],
+      notification: this.buildSelectionForms(this.notificationOptions),
       conditions: this.buildConditionForms(conditionsCount)
     });
   }

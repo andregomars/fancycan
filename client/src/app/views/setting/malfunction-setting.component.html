@@ -85,13 +85,12 @@
                       <div class="col">Notification</div>
                     </div>
                     <div class="row">
-                      <div class="col">
-                        <select formControlName="notification" name="notification" class="form-control">
-                          <option value="">Select</option>
-                          <option *ngFor="let opt of notificationOptions" [value]="opt">{{ opt }}</option>
-                        </select>
-
-                      </div>
+                      <ng-container formArrayName="notification"
+                        *ngFor="let item of entryForm.get('notification')['controls']; let i = index;">
+                        <div class="col-3" [formGroupName]="i">
+                          <input type="checkbox" formControlName="selected" />&nbsp;{{ item.value.name | titlecase }}
+                        </div>
+                      </ng-container>
                     </div>
                   </div>
                 </div>
