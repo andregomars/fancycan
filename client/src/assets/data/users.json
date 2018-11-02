@@ -1,0 +1,29 @@
+[
+    {
+        "uid": "xxx",
+        "email": "andre@test.com",
+        "name": "andre",
+        "roles": {
+            "admin": true,
+            "viewer": true
+        }
+    },
+    {
+        "uid": "yyy",
+        "email": "robin@test.com",
+        "name": "robin",
+        "roles": {
+            "admin": true,
+            "viewer": true
+        }
+    },
+    {
+        "uid": "zzz",
+        "email": "guest@test.com",
+        "name": "guest",
+        "roles": {
+            "admin": false,
+            "viewer": true
+        }
+    }
+]

@@ -48,6 +48,10 @@ export const routes: Routes = [
       {
         path: 'setting',
         loadChildren: './views/setting/setting.module#SettingModule'
+      },
+      {
+        path: 'admin',
+        loadChildren: './views/admin/admin.module#AdminModule'
       }
     ]
   }

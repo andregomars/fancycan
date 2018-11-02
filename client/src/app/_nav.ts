@@ -147,5 +147,16 @@ export const navItems = [
         icon: 'fa fa-angle-right'
       }
     ]
+  },
+  {
+    name: 'Admin',
+    icon: 'fa fa-users',
+    children: [
+      {
+        name: 'Users',
+        url: '/admin/users',
+        icon: 'fa fa-angle-right'
+      }
+    ]
   }
 ];
