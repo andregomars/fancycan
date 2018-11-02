@@ -8,6 +8,7 @@ import { FleetDashboardComponent } from './fleet-dashboard.component';
 import { FleetListComponent } from './fleet-list.component';
 import { CompareStatisticComponent } from './compare-statistic.component';
 import { FleetContainerComponent } from './fleet-container.component';
+import { ChecklistLogComponent } from './checklist-log.component';
 import { FleetGuard } from '../../guards/fleet.guard';
 
 const routes: Routes = [
@@ -60,6 +61,21 @@ const routes: Routes = [
         component: CompareStatisticComponent,
         data: {
           title: 'Compare'
+        }
+      },
+      {
+        path: 'checklist',
+        component: ChecklistLogComponent,
+        canActivate: [FleetGuard],
+        data: {
+          title: 'Checklist'
+        }
+      },
+      {
+        path: 'checklist/:fcode',
+        component: ChecklistLogComponent,
+        data: {
+          title: 'Checklist'
         }
       }
     ]

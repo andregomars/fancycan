@@ -27,6 +27,11 @@ export const navItems = [
         name: 'Compare',
         url: '/fleet/compare',
         icon: 'fa fa-angle-right'
+      },
+      {
+        name: 'Checklist',
+        url: '/fleet/checklist',
+        icon: 'fa fa-angle-right'
       }
     ]
   },
@@ -97,11 +102,11 @@ export const navItems = [
       }
     ]
   },
-  {
-    name: 'Archive',
-    url: '/archive',
-    icon: 'fa fa-archive'
-  },
+  // {
+  //   name: 'Archive',
+  //   url: '/archive',
+  //   icon: 'fa fa-archive'
+  // },
   {
     name: 'Setting',
     icon: 'fa fa-gear',

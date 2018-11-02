@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { NgxGaugeModule } from 'ngx-gauge';
 import { AgmCoreModule } from '@agm/core';
 import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
@@ -16,6 +17,7 @@ import { ComponentsModule } from './../../components/components.module';
 import { FleetListComponent } from './fleet-list.component';
 import { FleetContainerComponent } from './fleet-container.component';
 import { CompareStatisticComponent } from './compare-statistic.component';
+import { ChecklistLogComponent } from './checklist-log.component';
 
 @NgModule({
   imports: [
@@ -23,6 +25,7 @@ import { CompareStatisticComponent } from './compare-statistic.component';
     FormsModule,
     ChartsModule,
     BsDropdownModule,
+    BsDatepickerModule,
     NgxGaugeModule,
     FleetRoutingModule,
     SelectModule,
@@ -37,6 +40,7 @@ import { CompareStatisticComponent } from './compare-statistic.component';
     FleetDashboardComponent,
     FleetContainerComponent,
     CompareStatisticComponent,
+    ChecklistLogComponent,
   ],
 })
 export class FleetModule { }
