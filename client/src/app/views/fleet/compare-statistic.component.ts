@@ -82,8 +82,13 @@ export class CompareStatisticComponent implements OnInit {
 
   chartColors: Array<any> = [
     {
-      backgroundColor: hexToRgba(getStyle('--info'), 50),
-      borderColor: getStyle('--info'),
+      backgroundColor: hexToRgba(getStyle('--warning'), 50),
+      borderColor: getStyle('--warning'),
+      pointHoverBackgroundColor: '#fff'
+    },
+    {
+      backgroundColor: hexToRgba(getStyle('--primary'), 50),
+      borderColor: getStyle('--primary'),
       pointHoverBackgroundColor: '#fff'
     }
   ];
@@ -149,28 +154,30 @@ export class CompareStatisticComponent implements OnInit {
           return {
             date: r.updated,
             soc_charged: r.soc_charged,
-            soc_used: r.soc_used,
+            // soc_used: r.soc_used,
             energy_charged: r.energy_charged,
-            energy_used: r.energy_used,
+            // energy_used: r.energy_used,
           };
         });
       this.chartData1 =
         this.fillChartData(this.chartLabels, dateFormatedData1,
-          'date', ['soc_charged', 'soc_used', 'energy_charged', 'energy_used']);
+          // 'date', ['soc_charged', 'soc_used', 'energy_charged', 'energy_used']);
+          'date', ['soc_charged', 'energy_charged']);
 
       const dateFormatedData2 = data.filter(s => s.vehicle_code === this.vcode2)
         .map(r => {
           return {
             date: r.updated,
             soc_charged: r.soc_charged,
-            soc_used: r.soc_used,
+            // soc_used: r.soc_used,
             energy_charged: r.energy_charged,
-            energy_used: r.energy_used,
+            // energy_used: r.energy_used,
           };
         });
       this.chartData2 =
         this.fillChartData(this.chartLabels, dateFormatedData2,
-          'date', ['soc_charged', 'soc_used', 'energy_charged', 'energy_used']);
+          // 'date', ['soc_charged', 'soc_used', 'energy_charged', 'energy_used']);
+          'date', ['soc_charged', 'energy_charged']);
     });
   }
 
