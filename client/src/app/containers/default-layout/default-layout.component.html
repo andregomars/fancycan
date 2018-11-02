@@ -28,9 +28,9 @@
         <img src="assets/img/avatar/guest_male.png" class="img-avatar" alt="Welcome"/>
       </a>
       <div class="dropdown-menu dropdown-menu-right" *dropdownMenu aria-labelledby="simple-dropdown">
-        <a class="dropdown-item" href="#"><i class="fa fa-user"></i> Profile</a>
+        <a class="dropdown-item" [routerLink]="['/user/profile/andre']"><i class="fa fa-user"></i> Profile</a>
         <div class="divider"></div>
-        <a class="dropdown-item" href="#"><i class="fa fa-lock"></i> Logout</a>
+        <a class="dropdown-item" [routerLink]="['/login']"><i class="fa fa-lock"></i> Logout</a>
       </div>
     </li>
   </ul>

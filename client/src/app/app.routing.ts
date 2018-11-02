@@ -3,12 +3,20 @@ import { Routes, RouterModule } from '@angular/router';
 
 // Import Containers
 import { DefaultLayoutComponent } from './containers';
+import { LoginComponent } from './views/common/login.component';
 
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'fleet/list',
+    redirectTo: 'login',
     pathMatch: 'full',
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+    data: {
+      title: 'Login'
+    },
   },
   {
     path: '',
@@ -17,6 +25,10 @@ export const routes: Routes = [
       title: ''
     },
     children: [
+      {
+        path: 'user',
+        loadChildren: './views/user/user.module#UserModule'
+      },
       {
         path: 'fleet',
         loadChildren: './views/fleet/fleet.module#FleetModule'

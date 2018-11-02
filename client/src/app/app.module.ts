@@ -56,6 +56,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
+import { LoginComponent } from './views/common/login.component';
 
 @NgModule({
   imports: [
@@ -93,6 +94,7 @@ import { TimepickerModule } from 'ngx-bootstrap/timepicker';
   declarations: [
     AppComponent,
     ...APP_CONTAINERS,
+    LoginComponent,
   ],
   providers: [
     { provide: LocationStrategy, useClass: PathLocationStrategy},
