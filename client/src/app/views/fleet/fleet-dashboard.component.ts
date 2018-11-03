@@ -65,15 +65,30 @@ export class FleetDashboardComponent implements OnInit {
   }
 
   private loadData() {
-    this.vehicles$ = this.dataService.getPanels().pipe(
-      switchMap(vehicles =>
-          this.fcode$.pipe(
-            map(fcode => vehicles.filter(vehicle => vehicle.fleet_code === fcode))
+    this.vehicles$ = this.dataService.getRealtimeStates().pipe(
+      switchMap(states =>
+        this.fcode$.pipe(
+          map(fcode =>
+            states.filter(state => state.fleet_code === fcode)
+          )
         )
+      ),
+      map((vehicles: any[]) =>
+        vehicles.filter((el, idx, arr) =>
+          idx === arr.findIndex(item => item.code === el.code))
       ),
       map(vehicles => this.utilityService.attachMapLabel(vehicles)),
       share()
     );
+    // this.vehicles$ = this.dataService.getPanels().pipe(
+    //   switchMap(vehicles =>
+    //       this.fcode$.pipe(
+    //         map(fcode => vehicles.filter(vehicle => vehicle.fleet_code === fcode))
+    //     )
+    //   ),
+    //   map(vehicles => this.utilityService.attachMapLabel(vehicles)),
+    //   share()
+    // );
   }
 
 }

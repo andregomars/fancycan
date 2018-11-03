@@ -15,20 +15,8 @@ export class RtmComponent implements OnInit {
   bsValue = new Date();
   bsRangeValue: Date[];
   maxDate = new Date();
-  rawDataList: any[];
-  vehicles$: Observable<any>;
   definitions$: Observable<any>;
   cans$: Observable<any>;
-
-  loadMap = !environment.loadMap;
-  mapMinHeight = 350;
-  mapZoom = 15;
-  mapStyle = new MapStyle().styler;
-  bus_number: string;
-  map_lat = 34.056539;
-  map_lgt = -118.237485;
-  gaugeType = 'semi';
-  gaugeThick = 15;
 
   lastUpdated = '2018-08-28 23:32:55';
   currentTime = moment().toDate();
@@ -49,16 +37,6 @@ export class RtmComponent implements OnInit {
   }
 
   private loadData() {
-    // this.rawDataList = new Array<any>();
-    // for (let i = 0; i < 10; i++) {
-    //   this.rawDataList.push({ id: 'xxxxxxx', data: 'xx xx xx xx xx xx xx xx' });
-    // }
-
-    this.vehicles$ = this.dataService.getPanels().pipe(
-      map(vehicles => this.utitlityService.attachMapLabel(vehicles)),
-      share()
-    );
-
     this.definitions$ = this.dataService.getDefinitions().pipe(
       share()
     );

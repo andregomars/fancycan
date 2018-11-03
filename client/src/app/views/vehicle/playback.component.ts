@@ -48,13 +48,13 @@ export class PlaybackComponent implements OnInit {
   constructor(
     private dataService: DataService,
     private route: ActivatedRoute,
-    private utitlityService: UtilityService
+    private utilityService: UtilityService
   ) { }
 
   ngOnInit() {
     this.loadTime();
-    this.loadVehicle();
     this.loadData();
+    this.loadVehicle();
     this.loadChecklist();
   }
 
@@ -82,8 +82,15 @@ export class PlaybackComponent implements OnInit {
   }
 
   private loadData() {
-    this.vehicles$ = this.dataService.getPanels().pipe(
-      map(vehicles => this.utitlityService.attachMapLabel(vehicles)),
+    this.vehicles$ = this.dataService.getRealtimeStates().pipe(
+      switchMap(states =>
+        this.vcode$.pipe(
+          map(vcode =>
+            states.filter(state => state.code === vcode)
+          )
+        )
+      ),
+      map(vehicles => this.utilityService.attachMapLabel(vehicles)),
       share()
     );
 
@@ -96,7 +103,7 @@ export class PlaybackComponent implements OnInit {
         cans.slice(0, 15).map(can => {
           return {
             id: can.id,
-            value: this.utitlityService.formatRawCAN(can.value)
+            value: this.utilityService.formatRawCAN(can.value)
           };
         })
       ),
@@ -108,16 +115,19 @@ export class PlaybackComponent implements OnInit {
   }
 
   private loadVehicle() {
-    this.vehicle$ = this.dataService.getPanels().pipe(
-      switchMap(vehicles =>
-        this.vcode$.pipe(
-          map(vcode =>
-            vehicles.find(vehicle => vehicle.code === vcode)
-          )
-        )
-      ),
-      share()
+    this.vehicle$ = this.vehicles$.pipe(
+      map(vehicles => vehicles[0])
     );
+    // this.vehicle$ = this.dataService.getPanels().pipe(
+    //   switchMap(vehicles =>
+    //     this.vcode$.pipe(
+    //       map(vcode =>
+    //         vehicles.find(vehicle => vehicle.code === vcode)
+    //       )
+    //     )
+    //   ),
+    //   share()
+    // );
   }
 }
 

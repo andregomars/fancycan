@@ -54,6 +54,7 @@ export class VehicleComponent implements OnInit {
   vin = 'V12W132456107';
   imgBus = 'assets/img/vehicle/bus.png';
   imgEngineCheck = 'assets/img/vehicle/check_engine.png';
+  imgTransmissionCheck = 'assets/img/vehicle/check_transmission.png';
 
    // lineChart3
   public lineChart3Data: Array<any> = [
@@ -108,26 +109,36 @@ export class VehicleComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.loadVehicles();
+    this.loadVehicleStates();
     this.loadVehicle();
     this.loadPlayChartData();
   }
 
   private loadVehicle() {
-    this.vehicle$ = this.dataService.getPanels().pipe(
-      switchMap(vehicles =>
+    this.vehicle$ = this.vehicles$.pipe(
+      map(vehicles => vehicles[0])
+    );
+    // this.vehicle$ = this.dataService.getPanels().pipe(
+    //   switchMap(vehicles =>
+    //     this.vcode$.pipe(
+    //       map(vcode =>
+    //         vehicles.find(vehicle => vehicle.code === vcode)
+    //       )
+    //     )
+    //   ),
+    //   share()
+    // );
+  }
+
+  private loadVehicleStates() {
+    this.vehicles$ = this.dataService.getRealtimeStates().pipe(
+      switchMap(states =>
         this.vcode$.pipe(
           map(vcode =>
-            vehicles.find(vehicle => vehicle.code === vcode)
+            states.filter(state => state.code === vcode)
           )
         )
       ),
-      share()
-    );
-  }
-
-  private loadVehicles() {
-    this.vehicles$ = this.dataService.getPanels().pipe(
       map(vehicles => this.utilityService.attachMapLabel(vehicles)),
       share()
     );

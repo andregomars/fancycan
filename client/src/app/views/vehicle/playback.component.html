@@ -306,7 +306,8 @@
           <agm-map id="map_canvas" *ngIf="loadMap" [zoom]="mapZoom" [streetViewControl]=false [styles]="mapStyle"
             [latitude]="map_lat" [longitude]="map_lgt">
             <ng-container *ngIf="(vehicle$ | async) as vehicle">
-              <agm-marker [latitude]="vehicle.latitude" [longitude]="vehicle.longitude" iconUrl="assets/img/map/bus.20.png">
+              <agm-marker [latitude]="vehicle.latitude" [longitude]="vehicle.longitude" 
+                iconUrl="assets/img/map/arrow_orange.20.png">
               </agm-marker>
             </ng-container>
             <!-- <ng-container *ngIf="(vehicles$ | async) as locations">
