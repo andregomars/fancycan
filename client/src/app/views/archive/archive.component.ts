@@ -27,7 +27,7 @@ export class ArchiveComponent implements OnInit {
     const fleets$ = this.dataService.getFleets();
     const vehicleProfiles$ = this.fcode$.pipe(
       switchMap(fcode =>
-        this.utilityService.getVehiclesByFleetCode(fcode, fleets$))
+        this.utilityService.getViewProfileByFleetCode(fcode, fleets$))
     );
     this.vehicleOpts$ = vehicleProfiles$.pipe(
       map(profiles => profiles.map(profile => {

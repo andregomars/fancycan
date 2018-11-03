@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DataService, UtilityService } from '../../services';
 import { Observable, timer } from 'rxjs';
 import { ViewProfileStateModel } from '../../models';
-import { switchMap, map, debounce } from 'rxjs/operators';
+import { switchMap, map, debounce, tap } from 'rxjs/operators';
 import { Select, Store } from '@ngxs/store';
 import { ViewProfileState } from '../../states';
 import { SetProfile } from '../../actions';
@@ -14,10 +14,11 @@ import { Navigate } from '@ngxs/router-plugin';
   styleUrls: ['./vehicle-list.component.scss']
 })
 export class VehicleListComponent implements OnInit {
+  @Select(ViewProfileState) viewProfile$: Observable<ViewProfileStateModel>;
   bus_number: string;
   vehicles$: Observable<any>;
   filteredVehicles$: Observable<any>;
-  @Select(ViewProfileState) viewProfile$: Observable<ViewProfileStateModel>;
+  isListView = true;
 
   constructor(
     private utilityService: UtilityService,
@@ -35,6 +36,10 @@ export class VehicleListComponent implements OnInit {
     this.store.dispatch(new Navigate(['/vehicle/panel', vcode]));
   }
 
+  navSetting() {
+    this.store.dispatch(new Navigate(['/setting/fleet']));
+  }
+
   filterVehicles(vcode: string) {
       if (!vcode || vcode.length === 0) {
         this.loadData();
@@ -44,7 +49,7 @@ export class VehicleListComponent implements OnInit {
       this.filteredVehicles$ = this.vehicles$.pipe(
         debounce(() => timer(300)),
         map(vehicles =>
-          vehicles.filter(v => v.vcode.toUpperCase().indexOf(vcode.trim().toUpperCase()) > -1)
+          vehicles.filter(v => v.code.toUpperCase().indexOf(vcode.trim().toUpperCase()) > -1)
         ),
       );
   }
@@ -54,7 +59,7 @@ export class VehicleListComponent implements OnInit {
       switchMap(profile => {
         const fleets$ = this.dataService.getFleets();
         return this.utilityService.getVehiclesByFleetCode(profile.fcode, fleets$);
-      })
+      }),
     );
   }
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { map, share } from 'rxjs/operators';
+import { map, share, tap } from 'rxjs/operators';
 import { ViewProfileStateModel } from '../../models';
 import * as moment from 'moment';
 
@@ -35,10 +35,21 @@ export class UtilityService {
         );
     }
 
-    getVehiclesByFleetCode(fcode: string, fleets$: Observable<any>): Observable<any[]> {
+    getViewProfileByFleetCode(fcode: string, fleets$: Observable<any>): Observable<any[]> {
         return this.getFlattedVehicles(fleets$).pipe(
             map((vehicles: any[]) =>
                 vehicles.filter(vehicle => vehicle.fcode.toUpperCase() === fcode.toUpperCase()))
+        );
+    }
+
+    getVehiclesByFleetCode(fcode: string, fleets$: Observable<any>) {
+        return fleets$.pipe(
+            map((fleets: any[]) =>
+                fleets.find(fleet => fleet.code.toUpperCase() === fcode.toUpperCase())
+                    .vehicles.map(vehicle => {
+                        return {...vehicle, fcode: fcode};
+                    })
+            )
         );
     }
 
