@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Select } from '@ngxs/store';
 
-import { DataService, UtilityService } from '../../services';
+import { DataService } from '../../services';
 import { ViewProfileState } from '../../states';
-import { FormGroup, FormArray, FormControl } from '@angular/forms';
+import { FormGroup, FormArray, FormBuilder } from '@angular/forms';
 import { map, switchMap, share } from 'rxjs/operators';
 
 @Component({
@@ -24,21 +24,22 @@ export class UsageSettingComponent implements OnInit {
 
   constructor(
     private dataService: DataService,
-    private utilityService: UtilityService,
+    private fb: FormBuilder
   ) { }
 
   ngOnInit() {
-    this.initForms();
     this.loadEntries();
+    this.buildFormControls();
   }
 
   selectEntry(selectedEntry: any) {
-    this.entry = {
+    const types = this.getTypesOfChecked(selectedEntry.type);
+    const entryData = {
       name: selectedEntry.name,
       spn: selectedEntry.spn,
-      types: this.utilityService.getUsageTypeArray(selectedEntry.types)
+      types: types
     };
-    this.buildFormControls();
+    this.entryForm.setValue(entryData);
   }
 
   selectAll() {
@@ -55,7 +56,6 @@ export class UsageSettingComponent implements OnInit {
 
   private loadEntries() {
     this.entryList$ = this.dataService.getUsageSetting().pipe(
-      share(),
       switchMap(entries =>
           this.fcode$.pipe(
             map(fcode => entries.filter(entry => entry.fleet_code === fcode)),
@@ -64,26 +64,73 @@ export class UsageSettingComponent implements OnInit {
     );
   }
 
-  private initForms() {
-    this.entry = this.GetDefaultEntry();
-    this.buildFormControls();
-  }
-
-  private GetDefaultEntry(): any {
-    return {
-      name: '',
-      spn: '',
-      types: this.utilityService.getDefaultUsage()
-    };
-  }
-
   private buildFormControls() {
-    this.entryForm = new FormGroup({});
-    this.entryForm.addControl('name', new FormControl(this.entry.name));
-    this.entryForm.addControl('spn', new FormControl(this.entry.spn));
-    this.entry.types.forEach((type, i) => {
-      this.entryForm.addControl(type.name, new FormControl(type.checked));
+    const usages = this.getDefaultUsage();
+    this.entryForm = this.fb.group({
+      name: '' ,
+      spn: '',
+      types: this.buildUsageTypeForms(usages)
     });
   }
+
+  private buildUsageTypeForms(options: any[]): FormArray {
+    const array = options.map(opt => {
+      return this.fb.group({
+        name: opt.name,
+        value: opt.value,
+        hint: opt.hint,
+        checked: opt.checked
+      });
+    });
+
+    return this.fb.array(array);
+  }
+
+  private getTypesOfChecked(type: string): any[] {
+    const types = this.getDefaultUsage();
+    return types.map(item => {
+      return {
+        name: item.name,
+        value: item.value,
+        hint: item.hint,
+        checked: item.value === type
+      };
+    });
+  }
+
+  getDefaultUsage(): any[] {
+        return [
+            {
+                name: 'Usage Times',
+                value: 'times',
+                hint: 'For Door, Wiper, Ramp, HVAC, etc.',
+                checked: false
+            },
+            {
+                name: 'Usage time',
+                value: 'time',
+                hint: 'For Engine, HVAC, etc.',
+                checked: false
+            },
+            {
+                name: 'Cumulative',
+                value: 'cumulative',
+                hint: 'For Odometer, etc.',
+                checked: false
+            },
+            {
+                name: 'Increment',
+                value: 'increment',
+                hint: 'For Re-gen, etc.',
+                checked: false
+            },
+            {
+                name: 'Decrement',
+                value: 'decrement',
+                hint: 'For Energy usage, etc',
+                checked: false
+            }
+        ];
+    }
 }
 

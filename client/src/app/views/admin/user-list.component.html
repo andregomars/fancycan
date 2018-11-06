@@ -6,6 +6,9 @@
           <tr>
             <th>User Name</th>
             <th>Email</th>
+            <th>Cell Phone</th>
+            <th>Carrier</th>
+            <th>Notification</th>
             <th>Roles</th>
             <th></th>
           </tr>
@@ -19,10 +22,20 @@
               <div>{{ item.email }}</div>
             </td>
             <td>
+              <div>{{ item.phone }}</div>
+            </td>
+            <td>
+              <div>{{ item.carrier }}</div>
+            </td>
+            <td>
               <div>
-                <span *ngFor="let role of item.roles | keyvalue; let i = index">
-                  {{ i > 0 ? ' | ' : ''}} {{role.key}}
-                </span></div>
+                <span>{{ item.notification.join(' | ') }}</span>
+              </div>
+            </td>
+            <td>
+              <div>
+                <span>{{ item.roles.join(' | ') }}</span>
+              </div>
             </td>
             <td>
               <div class="d-flex justify-content-around">

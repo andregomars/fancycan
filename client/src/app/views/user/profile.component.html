@@ -24,12 +24,42 @@
               </div>
               <input type="password" class="form-control" placeholder="Password" autocomplete="new-password" required>
             </div>
-            <div class="input-group mb-4">
+            <div class="input-group mb-3">
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="icon-lock"></i></span>
               </div>
               <input type="password" class="form-control" placeholder="Repeat password" autocomplete="new-password"
                 required>
+            </div>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="icon-phone"></i></span>
+              </div>
+              <input type="text" class="form-control" placeholder="Cell Phone">
+            </div>
+            <div class="input-group mb-3 row no-gutters">
+              <div class="col-12 col-md-3 input-group-prepend">
+                <span class="input-group-text w-100">
+                  <i class="fa fa-signal"></i>&nbsp;&nbsp;Carrier
+                </span>
+              </div>
+              <div class="col-12 col-md-9 d-flex justify-content-around align-items-center border rounded-right">
+                <span class="input-group-addon"><input type="radio" name="carrier">&nbsp;Verizon</span>
+                <span class="input-group-addon"><input type="radio" name="carrier">&nbsp;AT&T</span>
+                <span class="input-group-addon"><input type="radio" name="carrier">&nbsp;T-Mobile</span>
+                <span class="input-group-addon"><input type="radio" name="carrier">&nbsp;Sprint</span>
+              </div>
+            </div>
+            <div class="input-group mb-3 row no-gutters">
+              <div class="col-12 col-md-6 input-group-prepend">
+                <span class="input-group-text w-100">
+                  <i class="fa fa-bell-o"></i>&nbsp;&nbsp;Malfunction Notification
+                </span>
+              </div>
+              <div class="col-12 col-md-6 d-flex justify-content-around align-items-center border rounded-right">
+                <span class="input-group-addon"><input type="checkbox" name="notification">&nbsp;Email</span>
+                <span class="input-group-addon"><input type="checkbox" name="notification">&nbsp;App</span>
+              </div>
             </div>
             <button type="button" class="btn btn-block btn-primary">Submit</button>
           </form>

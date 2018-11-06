@@ -4,20 +4,20 @@
         "fleet_code": "OMNIT",
         "name": "Door",
         "spn": "1483",
-        "types": ["time", "cumulative"]
+        "type": "cumulative"
     },
     {
         "id": 2,
         "fleet_code": "OMNIT",
         "name": "Odometer",
         "spn": "1485",
-        "types": ["times"]
+        "type": "times"
     },
     {
         "id": 3,
         "fleet_code": "LBT",
         "name": "Energy",
         "spn": "1590",
-        "types": ["increment", "decrement"]
+        "type": "increment"
     }
 ]

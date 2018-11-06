@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Select } from '@ngxs/store';
 
-import { DataService } from '../../services';
+import { DataService, UtilityService } from '../../services';
 import { ViewProfileState } from '../../states';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import { map, switchMap } from 'rxjs/operators';
@@ -25,6 +25,7 @@ export class MalfunctinoSettingComponent implements OnInit {
 
   constructor(
     private dataService: DataService,
+    private utilityService: UtilityService,
     private fb: FormBuilder
   ) { }
 
@@ -41,7 +42,7 @@ export class MalfunctinoSettingComponent implements OnInit {
       gpslgt: selectedEntry.gpslgt,
       gpsexpression: selectedEntry.gpsexpression,
       gpsvalue: selectedEntry.gpsvalue,
-      notification: this.convertSelectOptions(
+      notification: this.utilityService.convertSelectOptions(
         this.notificationOptions,
         selectedEntry.notification),
       conditions: selectedEntry.conditions
@@ -89,14 +90,6 @@ export class MalfunctinoSettingComponent implements OnInit {
     return this.fb.array(array);
   }
 
-  private convertSelectOptions(options: string[], values: string[]): any[] {
-    return options.map(opt => {
-      return {
-        name: opt,
-        selected: values.includes(opt)
-      };
-    });
-  }
 
   private buildConditionForms(count: number): FormArray {
     const array = [];

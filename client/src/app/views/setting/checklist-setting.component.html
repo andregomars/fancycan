@@ -7,12 +7,12 @@
         <table class="table table-striped table-hover table-outline table-sm mt-1">
           <thead class="text-white thead-light bg-primary">
             <tr>
-              <th width="100">Check Item #</th>
+              <th width="100">Check Item </th>
               <th width="150">Location</th>
-              <th width="150">Type</th>
+              <th width="300">Type</th>
               <th width="200">Picture</th>
               <th width="150" class="text-center">QR Code</th>
-              <th>Note</th>
+              <th>Description</th>
               <th></th>
             </tr>
           </thead>
@@ -26,17 +26,20 @@
                 <td>
                   <input type="text" class="form-control" formControlName="location" name="location">
                 </td>
-                <td>
-                  <input type="text" class="form-control" formControlName="type" name="type">
+                <td class="d-flex justify-content-around">
+                  <ng-container formArrayName="type"
+                    *ngFor="let item of rootForm.get('entries')['controls'][i].get('type')['controls']; let j = index;">
+                    <div [formGroupName]="j">
+                      <input type="checkbox" formControlName="selected" />&nbsp;{{ item.value.name | titlecase }}
+                    </div>
+                  </ng-container>
                 </td>
                 <td>
                   <input type="text" class="form-control" formControlName="picture" name="picture">
                 </td>
                 <td width="50" height="50" class="text-center">
-                  <!-- <div class="col qr-code text-center"> -->
-                    <qrcode [qrdata]="entry.get('item').value" [usesvg]="'true'" 
-                       [level]="'M'"></qrcode>
-                  <!-- </div> -->
+                  <qrcode [qrdata]="entry.get('item').value" [usesvg]="'true'" 
+                    [level]="'M'"></qrcode>
                 </td>
                 <td class="text-center">
                   <input type="text" class="form-control" formControlName="note" name="note">

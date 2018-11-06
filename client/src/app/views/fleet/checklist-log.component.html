@@ -22,10 +22,11 @@
         <thead class="text-white thead-light bg-primary">
           <tr>
             <th><small>Check Item</small></th>
-            <th><small>Checked By</small></th>
             <th><small>Value</small></th>
             <th><small>Status</small></th>
-            <th><small>Note</small></th>
+            <th><small>Condition</small></th>
+            <th><small>Checked By</small></th>
+            <th><small>Check Time</small></th>
           </tr>
         </thead>
         <tbody>
@@ -34,16 +35,19 @@
               <div class="small">{{ item.item }}</div>
             </td>
             <td>
-              <div class="small">{{ item.user }}</div>
-            </td>
-            <td>
               <div class="small">{{ item.value }}</div>
             </td>
             <td>
               <div class="small">{{ item.status }}</div>
             </td>
             <td>
-              <div class="small">{{ item.note }}</div>
+              <div class="small">{{ item.condition }}</div>
+            </td>
+            <td>
+              <div class="small">{{ item.user }}</div>
+            </td>
+            <td>
+              <div class="small">{{ item.updated | date:'MM/dd HH:mm' }}</div>
             </td>
           </tr>
         </tbody>

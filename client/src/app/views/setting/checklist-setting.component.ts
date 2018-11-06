@@ -3,9 +3,9 @@ import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 
 import { ViewProfileState } from '../../states';
-import { DataService } from '../../services';
+import { DataService, UtilityService } from '../../services';
 import { switchMap, map, share, tap } from 'rxjs/operators';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 
 @Component({
   selector: 'app-checklist-setting',
@@ -16,9 +16,11 @@ export class ChecklistSettingComponent implements OnInit {
   @Select(ViewProfileState.fcode) fcode$: Observable<string>;
   entries$: Observable<any[]>;
   rootForm: FormGroup;
+  checkTypeOptions = ['status', 'value', 'condition'];
 
   constructor(
     private dataService: DataService,
+    private utilityService: UtilityService,
     private fb: FormBuilder
   ) { }
 
@@ -54,13 +56,24 @@ export class ChecklistSettingComponent implements OnInit {
     });
   }
 
+  private buildSelectionForms(options: string[]): FormArray {
+    const array = options.map(opt => {
+      return this.fb.group({
+        name: opt,
+        selected: false
+      });
+    });
+
+    return this.fb.array(array);
+  }
 
   private initForm(entryCounts: number) {
     const entries = Array.from(Array(entryCounts).keys()).map(() =>
       this.fb.group({
         item: null,
         location: null,
-        type: null,
+        // type: null,
+        type: this.buildSelectionForms(this.checkTypeOptions),
         picture: null,
         note: null
       }));
@@ -74,7 +87,7 @@ export class ChecklistSettingComponent implements OnInit {
       return {
         item: e.item,
         location: e.location,
-        type: e.type,
+        type: this.utilityService.convertSelectOptions(this.checkTypeOptions, e.type),
         picture: e.picture,
         note: e.note
       };

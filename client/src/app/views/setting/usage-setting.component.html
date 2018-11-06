@@ -19,7 +19,7 @@
                 <div class="small">{{ item.spn }}</div>
               </td>
               <td>
-                <div class="small">{{ item.types.join(', ') }}</div>
+                <div class="small">{{ item.type }}</div>
               </td>
             </tr>
           </tbody>
@@ -44,19 +44,21 @@
                       placeholder="SPN" formControlName="spn" name="spn">
                   </div>
                   <div class="col-12 col-md-9">
-                      <div class="row my-1"
-                        *ngFor="let item of entry.types">
-                        <div class="col-12 col-md-3 align-self-center">
-                          <small>{{ item.name }}</small>
-                        </div>
-                        <div class="col-1">
-                          <input type="checkbox" class="form-control border border-0" style="width: 15px" 
-                            [formControlName]="item.name"> 
-                        </div>
-                        <div class="col-1"></div>
-                        <div class="col-12 col-md-5 align-self-center">
-                          <small>{{ item.hint }}</small>
-                        </div>
+                      <div formArrayName="types" class="row my-1"
+                        *ngFor="let type of types.controls; let i = index;">
+                        <ng-container [formGroupName]="i">
+                          <div class="col-12 col-md-3 align-self-center">
+                            <small>{{ type.value.name }}</small>
+                          </div>
+                          <div class="col-1">
+                            <input type="radio" class="form-control border border-0" style="width: 15px" 
+                              formControlName="checked" name="checked"> 
+                          </div>
+                          <div class="col-1"></div>
+                          <div class="col-12 col-md-5 align-self-center">
+                            <small>{{ type.value.hint }}</small>
+                          </div>
+                        </ng-container>
                       </div>
                   </div>
                 </div>

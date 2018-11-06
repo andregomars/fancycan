@@ -3,27 +3,27 @@
         "uid": "xxx",
         "email": "andre@test.com",
         "name": "andre",
-        "roles": {
-            "admin": true,
-            "viewer": true
-        }
+        "phone": "(626)111-2222",
+        "carrier": "AT&T",
+        "notification": ["email", "app"],
+        "roles": ["admin", "viewer"] 
     },
     {
         "uid": "yyy",
         "email": "robin@test.com",
         "name": "robin",
-        "roles": {
-            "admin": true,
-            "viewer": true
-        }
+        "phone": "(626)333-4444",
+        "carrier": "Verizon",
+        "notification": ["email"],
+        "roles": ["admin", "viewer"] 
     },
     {
         "uid": "zzz",
         "email": "guest@test.com",
         "name": "guest",
-        "roles": {
-            "admin": false,
-            "viewer": true
-        }
+        "phone": "(909)555-6666",
+        "carrier": "Sprint",
+        "notification": [],
+        "roles": ["viewer"] 
     }
 ]

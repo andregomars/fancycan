@@ -4,7 +4,7 @@
         "fleet_code": "OMNIT",
         "item": "tire",
         "location": "front right",
-        "type": "value",
+        "type": ["status", "value", "condition"],
         "picture": "https://s3.aws.com/pic.png",
         "note": ""
     },
@@ -13,7 +13,7 @@
         "fleet_code": "OMNIT",
         "item": "tire2",
         "location": "rear left",
-        "type": "value",
+        "type": ["status", "value" ],
         "picture": "https://s3.aws.com/pic.png",
         "note": ""
     },
@@ -22,7 +22,7 @@
         "fleet_code": "OMNIT",
         "item": "tire2",
         "location": "rear left",
-        "type": "value",
+        "type": ["condition"],
         "picture": "https://s3.aws.com/pic.png",
         "note": ""
     },
@@ -31,7 +31,7 @@
         "fleet_code": "OMNIT",
         "item": "tire2",
         "location": "rear left",
-        "type": "value",
+        "type": ["value", "condition"],
         "picture": "https://s3.aws.com/pic.png",
         "note": ""
     },
@@ -40,7 +40,7 @@
         "fleet_code": "OMNIT",
         "item": "break",
         "location": "rear right",
-        "type": "status",
+        "type": ["status" ],
         "picture": "https://s3.aws.com/pic.png",
         "note": ""
     }

@@ -96,55 +96,6 @@ export class UtilityService {
         ).reduce((acc, cur) => [...acc, ...cur], []);
     }
 
-    getUsageTypeArray(types: any[]): any[] {
-        const formArray = this.getDefaultUsage();
-        return formArray.map(form => {
-            const checked = types.includes(form.value);
-            return {
-                name: form.name,
-                value: form.value,
-                hint: form.hint,
-                checked: checked
-            };
-        });
-
-    }
-
-    getDefaultUsage(): any[] {
-        return [
-            {
-                name: 'Usage Times',
-                value: 'times',
-                hint: 'For Door, Wiper, Ramp, HVAC, etc.',
-                checked: false
-            },
-            {
-                name: 'Usage time',
-                value: 'time',
-                hint: 'For Engine, HVAC, etc.',
-                checked: false
-            },
-            {
-                name: 'Cumulative',
-                value: 'cumulative',
-                hint: 'For Odometer, etc.',
-                checked: false
-            },
-            {
-                name: 'Increment',
-                value: 'increment',
-                hint: 'For Re-gen, etc.',
-                checked: false
-            },
-            {
-                name: 'Decrement',
-                value: 'decrement',
-                hint: 'For Energy usage, etc',
-                checked: false
-            }
-        ];
-    }
-
     getCurrentData(): Observable<any> {
         return of(this.randomObject());
     }
@@ -182,6 +133,29 @@ export class UtilityService {
         return output;
     }
 
+    attachMapLabel(vehicles: any): any {
+        return vehicles.map(vehicle => {
+            return Object.assign(vehicle, {
+                label: {
+                    color: '#ffffff',
+                    fontFamily: '',
+                    fontSize: '9px',
+                    fontWeight: 'normal',
+                    text: vehicle.code.toString()
+                }
+            });
+        });
+    }
+
+    public convertSelectOptions(options: string[], values: string[]): any[] {
+        return options.map(opt => {
+            return {
+                name: opt,
+                selected: values.includes(opt)
+            };
+        });
+    }
+
     private randomObject(): any {
         const time = new Date();
         const num = this.randomNumberRange(20, 80);
@@ -215,17 +189,4 @@ export class UtilityService {
 
     }
 
-    attachMapLabel(vehicles: any): any {
-        return vehicles.map(vehicle => {
-            return Object.assign(vehicle, {
-                label: {
-                    color: '#ffffff',
-                    fontFamily: '',
-                    fontSize: '9px',
-                    fontWeight: 'normal',
-                    text: vehicle.code.toString()
-                }
-            });
-        });
-    }
 }

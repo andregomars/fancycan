@@ -7,6 +7,7 @@
         "user": "andre",
         "value": "35 psi",
         "status": "",
+        "condition": "good",
         "note": "",
         "updated": "2018-10-11 16:24:32"
     },
@@ -17,7 +18,8 @@
         "item": "door",
         "user": "andre",
         "value": "",
-        "status": "closed",
+        "status": "off",
+        "condition": "poor",
         "note": "",
         "updated": "2018-10-11 17:24:32"
     },
@@ -28,7 +30,8 @@
         "item": "break",
         "user": "andre",
         "value": "",
-        "status": "good",
+        "status": "on",
+        "condition": "new",
         "note": "",
         "updated": "2018-10-11 17:24:32"
     },
@@ -40,6 +43,7 @@
         "user": "andre",
         "value": "25 psi",
         "status": "",
+        "condition": "excellent",
         "note": "",
         "updated": "2018-10-12 16:24:32"
     },
@@ -51,6 +55,7 @@
         "user": "andre",
         "value": "35 psi",
         "status": "",
+        "condition": "good",
         "note": "",
         "updated": "2018-10-13 11:24:32"
     }
