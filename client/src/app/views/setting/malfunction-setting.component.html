@@ -43,12 +43,14 @@
                     *ngFor="let item of conditions.controls; let i = index" [formGroupName]="i">
                     <div class="col-12 col-md-2 align-self-center">Condition {{ i + 1 }}</div>
                     <div class="col-1"></div>
-                    <input type="text" class="form-control col-2" formControlName="spn" name="spn">
+                    <input type="text" class="form-control col-2" placeholder="SPN"
+                      formControlName="spn" name="spn">
                     <select formControlName="expression" name="expression" class="form-control col-3 mx-4">
                       <option value="">Select</option>
                       <option *ngFor="let opt of expressionOptions" [value]="opt">{{ opt }}</option>
                     </select>
-                    <input type="text" class="form-control col-2" formControlName="value" name="value">
+                    <input type="text" class="form-control col-2" placeholder="Value"
+                      formControlName="value" name="value">
                     <div class="col-2"></div>
                   </div>
                 </ng-container>
