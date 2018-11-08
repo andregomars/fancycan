@@ -16,6 +16,7 @@ export class FleetSettingComponent implements OnInit {
   fleet$: Observable<any>;
   rootForm: FormGroup;
   zoomOptions = [8, 9, 10, 11, 12];
+  timezoneOptions = ['PST', 'MST', 'CST', 'EST'];
 
   constructor(
     private dataService: DataService,

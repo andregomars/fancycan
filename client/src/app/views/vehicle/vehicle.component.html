@@ -109,7 +109,10 @@
             </ng-container> -->
             <ng-container *ngIf="(vehicles$ | async) as locations">
               <ng-container *ngFor="let loc of locations; let i = index; let isFirst = first; let isLast = last;" >
-                <agm-marker *ngIf="isFirst || isLast" iconUrl="assets/img/map/arrow_orange.20.png"
+                <agm-marker *ngIf="isLast" iconUrl="assets/img/map/arrow_orange.20.png"
+                  [latitude]="loc.latitude" [longitude]="loc.longitude">
+                </agm-marker>
+                <agm-marker *ngIf="!isLast" iconUrl="assets/img/map/fa-circle.10.png"
                   [latitude]="loc.latitude" [longitude]="loc.longitude">
                 </agm-marker>
               </ng-container>

@@ -3,83 +3,90 @@
     <app-nav-label></app-nav-label>
   </div>
   <form [formGroup]="rootForm" class="w-100">
-    <div class="row mt-2">
-      <div class="col">
-        <div class="row mt-2">
-          <div class="col-6 col-md-1 px-1 align-self-center">
-            Fleet Name:
-          </div>
-          <div class="col-6 col-md-2">
+    <div class="row">
+      <div class="col-12 col-md-4 mt-2">
+        <div class="row no-gutters">
+          <div class="col-4 align-self-center">Fleet Name:</div>
+          <div class="col-8">
             <input type="text" class="form-control" formControlName="name" name="name">
           </div>
-          <div class="col-6 col-md-1">
+        </div>
+        <div class="row no-gutters mt-2">
+          <div class="col-4 align-self-center">Fleet Icon:</div>
+          <div class="col-4 align-self-center">
             <img width="25" height="25" class="align-self-center" 
               [src]="rootForm.get('icon').value" />
           </div>
-          <div class="col-6 col-md-3">
+          <div class="col-4 text-right">
             <label class="btn btn-primary">
               Change Icon<input type="file" hidden>
             </label>
           </div>
-          <div class="col-6 col-md-1 px-1 align-self-center">
-            Vehicle Mode:
-          </div>
-          <div class="col-6 col-md-2">
+        </div>
+        <div class="row no-gutters">
+          <div class="col-4 align-self-center">Vehicle Mode:</div>
+          <div class="col-8">
             <input type="text" class="form-control" formControlName="mode" name="mode">
           </div>
         </div>
-        <div class="row mt-2">
-          <div class="col-6 col-md-1 px-1 align-self-center">
-            Map Center:
+        <div class="row no-gutters mt-2">
+          <div class="col-4 align-self-center">Other Info:</div>
+          <div class="col-8">
+            <input type="text" class="form-control" formControlName="note" name="note">
           </div>
-          <div class="col-12 col-md-2">
-            <input type="text" class="form-control" placeholder="Latitude" formControlName="latitude" name="latitude">
+        </div>
+      </div>
+      <div class="col-12 col-md-4 mt-2">
+        <div class="row no-gutters">
+          <div class="col-4 align-self-center">Fleet Address:</div>
+          <div class="col-8">
+            <input type="text" class="form-control" formControlName="address" name="address">
           </div>
-          <div class="col-12 col-md-2">
-            <input type="text" class="form-control" placeholder="Longitude" formControlName="longitude" name="longitude">
+        </div>
+        <div class="row no-gutters mt-2">
+          <div class="col-4 align-self-center">Contact Phone:</div>
+          <div class="col-8">
+            <input type="text" class="form-control" formControlName="phone" name="phone">
           </div>
-          <div class="col-6 col-md-1 px-1 align-self-center">
-            Zoom:
+        </div>
+        <div class="row no-gutters mt-2">
+          <div class="col-4 align-self-center">Contact Email:</div>
+          <div class="col-8">
+            <input type="text" class="form-control" formControlName="email" name="email">
           </div>
-          <div class="col-6 col-md-1">
+        </div>
+      </div>
+      <div class="col-12 col-md-4 mt-2">
+        <div class="row no-gutters">
+          <div class="col-4 align-self-center">Map Center:</div>
+          <div class="col-8">
+            <input type="text" class="form-control" placeholder="Latitude"
+              formControlName="latitude" name="latitude">
+          </div>
+        </div>
+        <div class="row no-gutters mt-2">
+          <div class="col-4 align-self-center"></div>
+          <div class="col-8">
+            <input type="text" class="form-control" placeholder="Longitude"
+              formControlName="longitude" name="longitude">
+          </div>
+        </div>
+        <div class="row no-gutters mt-2">
+          <div class="col-4 align-self-center">Zoom:</div>
+          <div class="col-8">
             <select name="zoom" class="form-control" formControlName="zoom">
               <option value="null">Select</option>
               <option *ngFor="let opt of zoomOptions" [value]="opt">{{ opt }}</option>
             </select>
           </div>
-          <div class="col-6 col-md-1 px-1 align-self-center">
-            Time Zone:
-          </div>
-          <div class="col-6 col-md-2">
-            <input type="text" class="form-control" formControlName="timezone" name="timezone">
-          </div>
         </div>
-        <div class="row mt-2">
-          <div class="col-6 col-md-1 px-1 align-self-center">
-            Fleet Address:
-          </div>
-          <div class="col-6 col-md-2">
-            <input type="text" class="form-control" formControlName="address" name="address">
-          </div>
-          <div class="col-6 col-md-2 px-1 align-self-center">
-            Contact Phone:
-          </div>
-          <div class="col-6 col-md-2">
-            <input type="text" class="form-control" formControlName="phone" name="phone">
-          </div>
-          <div class="col-6 col-md-1 px-1 align-self-center">
-            Contact Email:
-          </div>
-          <div class="col-6 col-md-2">
-            <input type="text" class="form-control" formControlName="email" name="email">
-          </div>
-        </div>
-        <div class="row mt-2">
-          <div class="col-6 col-md-1 px-1 align-self-center">
-            Other Info:
-          </div>
-          <div class="col-6 col-md-4">
-            <input type="text" class="form-control" formControlName="note" name="note">
+        <div class="row no-gutters mt-2">
+          <div class="col-4 align-self-center">Time Zone:</div>
+          <div class="col-8">
+            <select name="zoom" class="form-control" formControlName="timezone">
+              <option value="null">Select</option>
+              <option *ngFor="let opt of timezoneOptions" [value]="opt">{{ opt }}</option>
+            </select>
           </div>
         </div>
       </div>
