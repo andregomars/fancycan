@@ -1,180 +1,92 @@
 [
-   {
-      "SPNItems": [
-         {
-            "UnitType": "1",
-            "SPNNo": "525",
-            "SPNName": "Transmission Requested Gear",
-            "SPNDescription": "Gear requested by the operator, ABS, or engine.\n\n        Negative values are reverse gears, positive values are forward gears, zero is neutral, parameter specific indicators are listed below.\n\n        Parameter specific values for this parameter are as follows:\n        0xFD (253 dec) = Hold current gear\n        0xFC (252 dec) = Forward Drive Position\n        0xFB (251 dec) = ‘Park’ position\n        0xFA (250 dec) = Forward ‘Low’ position\n        0xF9 (249 dec) = Upshift 1 gear from current position\n        0xF8 (248 dec) = Upshift 2 gears from current position\n        0xF7 (247 dec) = Downshift 1 gear from current position\n        0xF6 (246 dec) = Downshift 2 gears from current position\n        0xF5 (245 dec) = D-1: 1st forward selector position referenced from ‘Drive’\n        0xF4 (244 dec) = D-2: 2nd forward selector position referenced from ‘Drive’\n        0xF3 (243 dec) = D-3: 3rd forward selector position referenced from ‘Drive’\n        0xF2 (242 dec) = D-4: 4th forward selector position referenced from ‘Drive’\n        0xF1 (241 dec) = D-5: 5th forward selector position referenced from ‘Drive’\n        0xF0 (240",
-            "Status": {
-               "Name": [],
-               "Description": []
-            },
-            "Unit_USA": "gear value",
-            "Unit_Metric": "gear value",
-            "Unit": "gear value",
-            "Resolution_USA": "1",
-            "Resolution_Metric": "1",
-            "Resolution": "1",
-            "Offset_USA": "-125",
-            "Offset_Metric": "-125",
-            "Offset": "-125",
-            "StartByte": "3",
-            "StartBit": "1",
-            "Length": "8",
-            "UpperDataRange": "125",
-            "LowerDataRange": "-125"
-         },
-         {
-            "UnitType": "1",
-            "SPNNo": "681",
-            "SPNName": "Transmission Gear Shift Inhibit Request",
-            "SPNDescription": "Command signal to inhibit gear shifts.\n\n        00 Gear shifts are allowed  (disable function)\n        01 Gear shifts are inhibited  (enable function)\n        10 Reserved\n        11 Take no action  (leave function as is)",
-            "Status": {
-               "Name": "Enable",
-               "Description": [
-                  "Disable",
-                  "Enable",
-                  "Reserved",
-                  "Take no action"
-               ]
-            },
-            "Unit_USA": "bit",
-            "Unit_Metric": "bit",
-            "Unit": "bit",
-            "Resolution_USA": "1",
-            "Resolution_Metric": "1",
-            "Resolution": "1",
-            "Offset_USA": "0",
-            "Offset_Metric": "0",
-            "Offset": "0",
-            "StartByte": "1",
-            "StartBit": "1",
-            "Length": "2",
-            "UpperDataRange": "3",
-            "LowerDataRange": "0"
-         },
-         {
-            "UnitType": "1",
-            "SPNNo": "4255",
-            "SPNName": "Transmission Requested Launch Gear",
-            "SPNDescription": "Initial gear for the transmission to start out in when the vehicle is launched from a standing stop, as specified by the vehicle operator or vehicle system.  Automatic transmissions typically default to starting out in 1st gear.  However, in applications such as those with very low gearing, it is desirable to launch the vehicle in a range higher than 1st.   For example, when the vehicle has little or no payload, the operator may wish to launch from 2nd or 3rd gear to avoid stacked, unnecessary shifts in the lower ranges.\n\n\n\n        0000 = No specific launch gear requested; use default launch gear\n\n        0001 = Launch the vehicle in 1st gear\n\n        0010 = Launch the vehicle in 2nd gear\n\n        0011 = Launch the vehicle in 3rd gear\n\n        0100 = Launch the vehicle in 4th gear\n\n        0101 = Launch the vehicle in 5th gear\n\n        0110 = Launch the vehicle in 6th gear\n\n        0111 = Launch the vehicle in 7th gear\n\n        1000 = Launch the vehicle in 8th gear\n\n        1001 = Launch the vehicle in Reverse 1\n\n        1010 = Launch the vehicle in Reverse 2\n\n        1011 = Launch the vehicle in Revers",
-            "Status": {
-               "Name": "Gear select",
-               "Description": [
-                  "Default gear",
-                  "1st gear",
-                  "2nd gear",
-                  "3rd gear",
-                  "4th gear",
-                  "5th gear",
-                  "6th gear",
-                  "7th gear",
-                  "8th gear",
-                  "Reverse 1",
-                  "Reverse 2",
-                  "Reverse 3",
-                  "Reverse 4",
-                  "Reserved",
-                  "Error",
-                  "Not available"
-               ]
-            },
-            "Unit_USA": "bit",
-            "Unit_Metric": "bit",
-            "Unit": "bit",
-            "Resolution_USA": "1",
-            "Resolution_Metric": "1",
-            "Resolution": "1",
-            "Offset_USA": "0",
-            "Offset_Metric": "0",
-            "Offset": "0",
-            "StartByte": "7",
-            "StartBit": "3",
-            "Length": "4",
-            "UpperDataRange": "15",
-            "LowerDataRange": "0"
-         }
-      ],
-      "TransmissionRate": "0",
-      "PGNNo": "256",
-      "PGNName": "Transmission Control 1",
-      "SA": "-1",
-      "DA": "-1",
-      "Priority": "-1"
-   },
-   {
-      "SPNItems": [
-          {
-          
-            "UnitType": "1",
-            "SPNNo": "3564",
-            "SPNName": "Lane Departure Warning Enable Command",
-            "SPNDescription": "Command to enable/disable Lane Departure Indication\n\n        00   Disable Lane Departure Warning\n        01   Enable Lane Departure Warning\n        10   Reserved\n        11   Don´t care",
-            "Status": {
-               "Name": "Enable",
-               "Description": [
-                  "Disable",
-                  "Enable",
-                  "Reserved",
-                  "Take no action"
-               ]
-            },
-            "Unit_USA": "bit",
-            "Unit_Metric": "bit",
-            "Unit": "bit",
-            "Resolution_USA": "1",
-            "Resolution_Metric": "1",
-            "Resolution": "1",
-            "Offset_USA": "0",
-            "Offset_Metric": "0",
-            "Offset": "0",
-            "StartByte": "1",
-            "StartBit": "1",
-            "Length": "2",
-            "UpperDataRange": "3",
-            "LowerDataRange": "0"
-        }
-      ],
-      "TransmissionRate": "0",
-      "PGNNo": "43264",
-      "PGNName": "Forward Lane Image Command",
-      "SA": "-1",
-      "DA": "-1",
-      "Priority": "-1"
-   },
-   {
-      "SPNItems": [
-         {
-            "UnitType": "1",
-            "SPNNo": "1487",
-            "SPNName": "Illumination Brightness Percent",
-            "SPNDescription": "Commanded backlight brightness level for all cab displays",
-            "Status": {
-               "Name": [],
-               "Description": []
-            },
-            "Unit_USA": "%",
-            "Unit_Metric": "%",
-            "Unit": "%",
-            "Resolution_USA": "0.4",
-            "Resolution_Metric": "0.4",
-            "Resolution": "0.4",
-            "Offset_USA": "0",
-            "Offset_Metric": "0",
-            "Offset": "0",
-            "StartByte": "1",
-            "StartBit": "1",
-            "Length": "8",
-            "UpperDataRange": "100",
-            "LowerDataRange": "0"
-         }
-      ],
-      "TransmissionRate": "0",
-      "PGNNo": "53248",
-      "PGNName": "Cab Illumination Message",
-      "SA": "-1",
-      "DA": "-1",
-      "Priority": "-1"
-   }
+  {
+    "DA": "-1",
+    "PGNName": "Cruise Control/Vehicle Speed",
+    "PGNNo": "65265",
+    "Priority": "-1",
+    "SA": "-1",
+    "TransmissionRate": "100",
+    "SPNItems": [
+      {
+        "Length": "16",
+        "LowerDataRange": "0",
+        "Offset": "0",
+        "Offset_Metric": "0",
+        "Offset_USA": "0",
+        "Resolution": "0.00242956061",
+        "Resolution_Metric": "0.00391",
+        "Resolution_USA": "0.00242956061",
+        "SPNDescription": "Speed of the vehicle as calculated from wheel or tailshaft speed.",
+        "SPNName": "Wheel-Based Vehicle Speed",
+        "SPNNo": "84",
+        "StartBit": "1",
+        "StartByte": "3",
+        "Unit": "mph",
+        "UnitType": "1",
+        "Unit_Metric": "Km/h",
+        "Unit_USA": "mph",
+        "UpperDataRange": "156"
+      }
+    ]
+  },
+  {
+    "DA": "-1",
+    "PGNName": "Electronic Engine Controller 1",
+    "PGNNo": "61444",
+    "Priority": "-1",
+    "SA": "-1",
+    "TransmissionRate": "100",
+    "SPNItems": [
+      {
+        "Length": "16",
+        "LowerDataRange": "0",
+        "Offset": "0",
+        "Offset_Metric": "0",
+        "Offset_USA": "0",
+        "Resolution": "0.125",
+        "Resolution_Metric": "0.125",
+        "Resolution_USA": "0.125",
+        "SPNDescription": "Actual engine speed which is calculated over a minimum crankshaft angle of 720 degrees divided by the number of cylinders.",
+        "SPNName": "Engine Speed",
+        "SPNNo": "190",
+        "StartBit": "1",
+        "StartByte": "4",
+        "Unit": "rpm",
+        "UnitType": "1",
+        "Unit_Metric": "rpm",
+        "Unit_USA": "rpm",
+        "UpperDataRange": "8031.875"
+      }
+    ]
+  },
+  {
+    "DA": "-1",
+    "PGNName": "High Resolution Vehicle Distance",
+    "PGNNo": "65217",
+    "Priority": "-1",
+    "SA": "-1",
+    "TransmissionRate": "1000",
+    "SPNItems": [
+      {
+        "Length": "32",
+        "LowerDataRange": "0",
+        "Offset": "0",
+        "Offset_Metric": "0",
+        "Offset_USA": "0",
+        "Resolution": "5",
+        "Resolution_Metric": "5",
+        "Resolution_USA": "5",
+        "SPNDescription": "Accumulated distance traveled by the vehicle during its operation.",
+        "SPNName": "High Resolution Total Vehicle Distance",
+        "SPNNo": "917",
+        "StartBit": "1",
+        "StartByte": "1",
+        "Unit": "m",
+        "UnitType": "1",
+        "Unit_Metric": "m",
+        "Unit_USA": "m",
+        "UpperDataRange": "21055405"
+      }
+    ]
+  }
 ]

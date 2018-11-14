@@ -1,0 +1,101 @@
+[
+    {
+        "fleet_code": "OMNIT",
+        "PGNNo": "65265",
+        "PGNName": "Transmission",
+        "UnitType": "1",
+        "SPNNo": "70",
+        "SPNName": "Parking Brake Switch",
+        "SPNDescription": "",
+        "Status": {
+            "Name": "Enable",
+            "Description": [
+                "Disable",
+                "Enable",
+                "Reserved",
+                "Take no action"
+            ]
+        },
+        "Unit": "%",
+        "Resolution": "0.4",
+        "Offset": "0",
+        "StartByte": "1",
+        "StartBit": "1",
+        "Length": "8",
+        "UpperDataRange": "100",
+        "LowerDataRange": "0"
+    },
+    {
+        "fleet_code": "OMNIT",
+        "PGNNo": "65263",
+        "PGNName": "Engine",
+        "UnitType": "1",
+        "SPNNo": "100",
+        "SPNName": "Engine Oil Pressure",
+        "SPNDescription": "",
+        "Status": {
+            "Name": "On",
+            "Description": [
+                "Off",
+                "On",
+                "Error",
+                "Not available"
+            ]
+        },
+        "Unit": "%",
+        "Resolution": "0.4",
+        "Offset": "0",
+        "StartByte": "1",
+        "StartBit": "1",
+        "Length": "8",
+        "UpperDataRange": "100",
+        "LowerDataRange": "0"
+    },
+    {
+        "fleet_code": "OMNIT",
+        "PGNNo": "65263",
+        "PGNName": "Engine",
+        "UnitType": "1",
+        "SPNNo": "110",
+        "SPNName": "Engine Coolant Temperature",
+        "SPNDescription": "",
+        "Status": {
+            "Name": "",
+            "Description": []
+        },
+        "Unit": "%",
+        "Resolution": "0.4",
+        "Offset": "0",
+        "StartByte": "1",
+        "StartBit": "1",
+        "Length": "8",
+        "UpperDataRange": "100",
+        "LowerDataRange": "0"
+    },
+    {
+        "fleet_code": "OMNIT",
+        "PGNNo": "65263",
+        "PGNName": "Transmission Control 2",
+        "UnitType": "1",
+        "SPNNo": "111",
+        "SPNName": "Engine Coolant Level",
+        "SPNDescription": "",
+        "Status": {
+            "Name": "Enable",
+            "Description": [
+                "Disable",
+                "Enable",
+                "Reserved",
+                "Take no action"
+            ]
+        },
+        "Unit": "%",
+        "Resolution": "0.4",
+        "Offset": "0",
+        "StartByte": "1",
+        "StartBit": "1",
+        "Length": "8",
+        "UpperDataRange": "100",
+        "LowerDataRange": "0"
+    }
+]

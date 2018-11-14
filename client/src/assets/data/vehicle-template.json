@@ -1,68 +1,68 @@
 [
-    {
-        "id": 1,
-        "type": "guage",
-        "fleet_code": "OMNIT",
-        "spn": "3754",
-        "description": "Speed",
-        "max": 120,
-        "min": 0,
-        "color": "white",
-        "enabled": true
-    },
-    {
-        "id": 2,
-        "type": "guage",
-        "fleet_code": "OMNIT",
-        "spn": "3556",
-        "description": "Mileage",
-        "max": 10000,
-        "min": 0,
-        "color": "red",
-        "enabled": false
-    },
-    {
-        "id": 3,
-        "type": "bar",
-        "fleet_code": "OMNIT",
-        "spn": "4556",
-        "description": "temperature",
-        "max": -356,
-        "min": 300,
-        "color": "white",
-        "enabled": true
-    },
-    {
-        "id": 4,
-        "type": "bar",
-        "fleet_code": "OMNIT",
-        "spn": "4335",
-        "description": "voltage",
-        "max": 500,
-        "min": 0,
-        "color": "red",
-        "enabled": false
-    },
-    {
-        "id": 5,
-        "type": "switch",
-        "fleet_code": "OMNIT",
-        "spn": "5886",
-        "description": "Left Door",
-        "max": 1,
-        "min": 0,
-        "color": "blue",
-        "enabled": false
-    },
-    {
-        "id": 6,
-        "type": "switch",
-        "fleet_code": "OMNIT",
-        "spn": "5733",
-        "description": "Right Door",
-        "max": 1,
-        "min": 0,
-        "color": "blue",
-        "enabled": true
-    }
+  {
+    "color": "white",
+    "description": "Battery Current",
+    "enabled": true,
+    "fleet_code": "BYD",
+    "id": 1,
+    "max": 300,
+    "min": -300,
+    "spn": "9003",
+    "type": "guage"
+  },
+  {
+    "color": "red",
+    "description": "Battery Voltage",
+    "enabled": true,
+    "fleet_code": "BYD",
+    "id": 2,
+    "max": 800,
+    "min": 0,
+    "spn": "9002",
+    "type": "guage"
+  },
+  {
+    "color": "white",
+    "description": "L-C Battery Temp",
+    "enabled": true,
+    "fleet_code": "BYD",
+    "id": 3,
+    "max": 220,
+    "min": 0,
+    "spn": "9005",
+    "type": "bar"
+  },
+  {
+    "color": "red",
+    "description": "H-C Battery Temp",
+    "enabled": true,
+    "fleet_code": "BYD",
+    "id": 4,
+    "max": 220,
+    "min": 0,
+    "spn": "9006",
+    "type": "bar"
+  },
+  {
+    "color": "blue",
+    "description": "Left Door",
+    "enabled": true,
+    "fleet_code": "BYD",
+    "id": 5,
+    "max": 1,
+    "min": 0,
+    "spn": "9007",
+    "type": "switch"
+  },
+  {
+    "color": "blue",
+    "description": "Right Door",
+    "enabled": false,
+    "fleet_code": "BYD",
+    "id": 6,
+    "max": 1,
+    "min": 0,
+    "spn": "5733",
+    "type": "switch"
+  }
 ]

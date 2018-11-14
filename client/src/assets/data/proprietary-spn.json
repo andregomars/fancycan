@@ -1,101 +1,230 @@
 [
-    {
-        "fleet_code": "OMNIT",
-        "PGNNo": "65265",
-        "PGNName": "Transmission",
-        "UnitType": "1",
-        "SPNNo": "70",
-        "SPNName": "Parking Brake Switch",
-        "SPNDescription": "",
-        "Status": {
-            "Name": "Enable",
-            "Description": [
-                "Disable",
-                "Enable",
-                "Reserved",
-                "Take no action"
-            ]
-        },
-        "Unit": "%",
-        "Resolution": "0.4",
-        "Offset": "0",
-        "StartByte": "1",
-        "StartBit": "1",
-        "Length": "8",
-        "UpperDataRange": "100",
-        "LowerDataRange": "0"
+  {
+    "Length": "16",
+    "LowerDataRange": "0",
+    "Offset": "0",
+    "PGNName": "SOC",
+    "PGNNo": "64519",
+    "Resolution": "0.1",
+    "SPNDescription": "",
+    "SPNName": "State Of Charge",
+    "SPNNo": "9000",
+    "StartBit": "1",
+    "StartByte": "5",
+    "Status": {
+      "Description": [],
+      "Name": ""
     },
-    {
-        "fleet_code": "OMNIT",
-        "PGNNo": "65263",
-        "PGNName": "Engine",
-        "UnitType": "1",
-        "SPNNo": "100",
-        "SPNName": "Engine Oil Pressure",
-        "SPNDescription": "",
-        "Status": {
-            "Name": "On",
-            "Description": [
-                "Off",
-                "On",
-                "Error",
-                "Not available"
-            ]
-        },
-        "Unit": "%",
-        "Resolution": "0.4",
-        "Offset": "0",
-        "StartByte": "1",
-        "StartBit": "1",
-        "Length": "8",
-        "UpperDataRange": "100",
-        "LowerDataRange": "0"
+    "Unit": "%",
+    "UnitType": "1",
+    "UpperDataRange": "100",
+    "fleet_code": "BYD"
+  },
+  {
+    "Length": "16",
+    "LowerDataRange": "0",
+    "Offset": "0",
+    "PGNName": "Battery Energy",
+    "PGNNo": "64527",
+    "Resolution": "0.1",
+    "SPNDescription": "Battery Remain Energy",
+    "SPNName": "Battery Energy",
+    "SPNNo": "9001",
+    "StartBit": "1",
+    "StartByte": "6",
+    "Status": {
+      "Description": [],
+      "Name": ""
     },
-    {
-        "fleet_code": "OMNIT",
-        "PGNNo": "65263",
-        "PGNName": "Engine",
-        "UnitType": "1",
-        "SPNNo": "110",
-        "SPNName": "Engine Coolant Temperature",
-        "SPNDescription": "",
-        "Status": {
-            "Name": "",
-            "Description": []
-        },
-        "Unit": "%",
-        "Resolution": "0.4",
-        "Offset": "0",
-        "StartByte": "1",
-        "StartBit": "1",
-        "Length": "8",
-        "UpperDataRange": "100",
-        "LowerDataRange": "0"
+    "Unit": "kWh",
+    "UnitType": "1",
+    "UpperDataRange": "500",
+    "fleet_code": "BYD"
+  },
+  {
+    "Length": "16",
+    "LowerDataRange": "0",
+    "Offset": "0",
+    "PGNName": "Voltage and Current",
+    "PGNNo": "64520",
+    "Resolution": "1",
+    "SPNDescription": "Battery Voltage",
+    "SPNName": "Battery Voltage",
+    "SPNNo": "9002",
+    "StartBit": "1",
+    "StartByte": "1",
+    "Status": {
+      "Description": [],
+      "Name": ""
     },
-    {
-        "fleet_code": "OMNIT",
-        "PGNNo": "65263",
-        "PGNName": "Transmission Control 2",
-        "UnitType": "1",
-        "SPNNo": "111",
-        "SPNName": "Engine Coolant Level",
-        "SPNDescription": "",
-        "Status": {
-            "Name": "Enable",
-            "Description": [
-                "Disable",
-                "Enable",
-                "Reserved",
-                "Take no action"
-            ]
-        },
-        "Unit": "%",
-        "Resolution": "0.4",
-        "Offset": "0",
-        "StartByte": "1",
-        "StartBit": "1",
-        "Length": "8",
-        "UpperDataRange": "100",
-        "LowerDataRange": "0"
-    }
+    "Unit": "V",
+    "UnitType": "1",
+    "UpperDataRange": "800",
+    "fleet_code": "BYD"
+  },
+  {
+    "Length": "16",
+    "LowerDataRange": "-300",
+    "Offset": "-1600",
+    "PGNName": "Voltage and Current",
+    "PGNNo": "64520",
+    "Resolution": "0.1",
+    "SPNDescription": "Battery Current",
+    "SPNName": "Battery Current",
+    "SPNNo": "9003",
+    "StartBit": "1",
+    "StartByte": "3",
+    "Status": {
+      "Description": [],
+      "Name": ""
+    },
+    "Unit": "A",
+    "UnitType": "1",
+    "UpperDataRange": "300",
+    "fleet_code": "BYD"
+  },
+  {
+    "Length": "16",
+    "LowerDataRange": "0",
+    "Offset": "0",
+    "PGNName": "Motor Voltage",
+    "PGNNo": "64534",
+    "Resolution": "1",
+    "SPNDescription": "Motor Voltage",
+    "SPNName": "Motor Voltage",
+    "SPNNo": "9004",
+    "StartBit": "1",
+    "StartByte": "5",
+    "Status": {
+      "Description": [],
+      "Name": ""
+    },
+    "Unit": "V",
+    "UnitType": "1",
+    "UpperDataRange": "800",
+    "fleet_code": "BYD"
+  },
+  {
+    "Length": "8",
+    "LowerDataRange": "0",
+    "Offset": "-40",
+    "PGNName": "Battery Temperature",
+    "PGNNo": "64523",
+    "Resolution": "1.8",
+    "SPNDescription": "Lowest Cell Battery Temperature",
+    "SPNName": "L-C Battery Temp",
+    "SPNNo": "9005",
+    "StartBit": "1",
+    "StartByte": "3",
+    "Status": {
+      "Description": [],
+      "Name": ""
+    },
+    "Unit": "F",
+    "UnitType": "1",
+    "UpperDataRange": "220",
+    "fleet_code": "BYD"
+  },
+  {
+    "Length": "8",
+    "LowerDataRange": "0",
+    "Offset": "-40",
+    "PGNName": "Battery Temperature",
+    "PGNNo": "64523",
+    "Resolution": "1.8",
+    "SPNDescription": "Highest Cell Battery Temperature",
+    "SPNName": "H-C Battery Temp",
+    "SPNNo": "9006",
+    "StartBit": "1",
+    "StartByte": "7",
+    "Status": {
+      "Description": [],
+      "Name": ""
+    },
+    "Unit": "F",
+    "UnitType": "1",
+    "UpperDataRange": "220",
+    "fleet_code": "BYD"
+  },
+  {
+    "Length": "2",
+    "LowerDataRange": "0",
+    "Offset": "0",
+    "PGNName": "High Voltage",
+    "PGNNo": "64516",
+    "Resolution": "1",
+    "SPNDescription": "High Voltage Status",
+    "SPNName": "High Voltage Status",
+    "SPNNo": "9007",
+    "StartBit": "1",
+    "StartByte": "2",
+    "Status": {
+      "Description": [
+        "Disable",
+        "Enable",
+        "Reserved"
+      ],
+      "Name": "Enable"
+    },
+    "Unit": "bit",
+    "UnitType": "1",
+    "UpperDataRange": "3",
+    "fleet_code": "BYD"
+  },
+  {
+    "Length": "4",
+    "LowerDataRange": "0",
+    "Offset": "0",
+    "PGNName": "Left Charge",
+    "PGNNo": "64538",
+    "Resolution": "1",
+    "SPNDescription": "Left Charge Status",
+    "SPNName": "Left Charge Status",
+    "SPNNo": "9008",
+    "StartBit": "3",
+    "StartByte": "1",
+    "Status": {
+      "Description": [
+        "Disconnected",
+        "Connected",
+        "Charging",
+        "Charging Stop",
+        "Charging Complete",
+        "Charging Error"
+      ],
+      "Name": "Enable"
+    },
+    "Unit": "bit",
+    "UnitType": "1",
+    "UpperDataRange": "10",
+    "fleet_code": "BYD"
+  },
+  {
+    "Length": "4",
+    "LowerDataRange": "0",
+    "Offset": "0",
+    "PGNName": "Right Charge",
+    "PGNNo": "64537",
+    "Resolution": "1",
+    "SPNDescription": "Right Charge Status",
+    "SPNName": "Right Charge Status",
+    "SPNNo": "9009",
+    "StartBit": "3",
+    "StartByte": "1",
+    "Status": {
+      "Description": [
+        "Disconnected",
+        "Connected",
+        "Charging",
+        "Charging Stop",
+        "Charging Complete",
+        "Charging Error"
+      ],
+      "Name": "Enable"
+    },
+    "Unit": "bit",
+    "UnitType": "1",
+    "UpperDataRange": "10",
+    "fleet_code": "BYD"
+  }
 ]
