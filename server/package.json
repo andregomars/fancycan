@@ -1,0 +1,21 @@
+{
+  "name": "fc-server",
+  "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    "start": "node dist/app.js",
+    "serve": "tsc && node dist/app.js",
+    "build": "tsc",
+    "tslint": "tslint -c tslint.json -p tsconfig.json",
+    "watch-ts": "tsc -w",
+    "serve-debug": "nodemon --inspect dist/app.js",
+    "watch-debug": "concurrently -k -p \"[{name}]\" \"npm run watch-ts\" \"npm run serve-debug\"",
+    "debug": "npm run build && npm run watch-debug"
+  },
+  "devDependencies": {
+    "concurrently": "^4.1.0",
+    "nodemon": "^1.18.6",
+    "tslint": "^5.11.0",
+    "typescript": "^3.1.6"
+  }
+}
