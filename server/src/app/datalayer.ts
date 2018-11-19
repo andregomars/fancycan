@@ -9,7 +9,7 @@ export class DataLayer {
         this.client = new MongoClient(this.url, { useNewUrlParser: true });
     }
 
-    public insertDocs(buffer: Buffer) {
+    public insertDocs(buffer: Buffer, ip: string) {
         console.log('start insert docs');
         try {
             this.client.connect((err) => {
@@ -17,7 +17,11 @@ export class DataLayer {
                 console.log('connected to mongodb instance');
                 const db = this.client.db('mydb');
                 const collection = db.collection('customers');
-                const docs = [{raw: buffer }];
+                const docs = [{
+                    raw: buffer,
+                    ip: ip,
+                    time: new Date(),
+                }];
                 collection.insertMany(docs, (inerr, result) => {
                     assert.equal(inerr, null);
                     console.log('insert docs into collection customers');
