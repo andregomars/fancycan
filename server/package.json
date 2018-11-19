@@ -12,7 +12,14 @@
     "watch-debug": "concurrently -k -p \"[{name}]\" \"npm run watch-ts\" \"npm run serve-debug\"",
     "debug": "npm run build && npm run watch-debug"
   },
+  "dependencies": {
+    "mongodb": "^3.1.10",
+    "shortid": "^2.2.14"
+  },
   "devDependencies": {
+    "@types/mongodb": "^3.1.14",
+    "@types/node": "^10.12.9",
+    "@types/shortid": "^0.0.29",
     "concurrently": "^4.1.0",
     "nodemon": "^1.18.6",
     "tslint": "^5.11.0",
