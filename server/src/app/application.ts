@@ -1,6 +1,7 @@
 import shortid from 'shortid';
 import net from 'net';
 import fs from 'fs';
+import { DataLayer } from './datalayer';
 
 export class Application {
     public static start() {
@@ -10,25 +11,33 @@ export class Application {
         }
 
         const tcpServer = net.createServer();
+        const db = new DataLayer();
         tcpServer.on('connection', (socket) => {
             console.log('start connection');
             console.log(socket.remoteAddress!);
 
             try {
                 socket.on('data', (data) => {
+                    // write file
                     fs.writeFile(`${dir}/data-${shortid.generate()}.bin`, data, (error) => {
                         if (error) {
                             throw error;
                         }
+
                         console.log('data written');
                     });
+
+                    // write db
+                    db.insertDocs(data);
                 });
             } catch (error) {
                 console.log(error);
             }
         });
 
-        tcpServer.listen(5888);
+        const port = 5888;
+        tcpServer.listen(port);
+        console.log('start listening on port ' + port);
     }
 
 }
