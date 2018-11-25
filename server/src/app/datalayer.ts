@@ -31,9 +31,10 @@ export class DataLayer {
                 });
             });
         } catch (error) {
+            if (this.client && this.client.isConnected) {
+                this.client.close();
+            }
             console.log(error);
-        } finally {
-            this.client.close();
         }
     }
 }
