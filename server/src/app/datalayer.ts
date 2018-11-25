@@ -1,5 +1,6 @@
 import assert from 'assert';
 import { MongoClient } from 'mongodb';
+import { ICanData } from './models/ICanData';
 
 export class DataLayer {
     // private url = 'mongodb://localhost:27017';
@@ -10,22 +11,23 @@ export class DataLayer {
         this.client = new MongoClient(this.url, { useNewUrlParser: true });
     }
 
-    public insertDocs(buffer: Buffer, ip: string) {
+    public insertDocs(buffer: Buffer, localPort: number, remotePort: number) {
         console.log('start insert docs');
         try {
             this.client.connect((err) => {
                 assert.equal(null, err);
                 console.log('connected to mongodb instance');
-                const db = this.client.db('mydb');
-                const collection = db.collection('customers');
-                const docs = [{
+                const db = this.client.db('main');
+                const collection = db.collection('can');
+                const docs: ICanData[] = [{
                     raw: buffer,
-                    ip: ip,
+                    localPort: localPort,
+                    remotePort: remotePort,
                     time: new Date(),
                 }];
                 collection.insertMany(docs, (inerr, result) => {
                     assert.equal(inerr, null);
-                    console.log('insert docs into collection customers');
+                    console.log('insert docs into collection can');
                 });
             });
         } catch (error) {

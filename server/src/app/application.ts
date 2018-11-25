@@ -17,7 +17,8 @@ export class Application {
             console.log(socket.remoteAddress!);
 
             try {
-                const ipAddr = socket.remoteAddress!;
+                const remotePort = socket.remotePort!;
+                const localPort = socket.localPort!;
                 socket.on('data', (data) => {
                     // write file
                     fs.writeFile(`${dir}/data-${shortid.generate()}.bin`, data, (error) => {
@@ -29,7 +30,7 @@ export class Application {
                     });
 
                     // write db
-                    db.insertDocs(data, ipAddr);
+                    db.insertDocs(data, localPort, remotePort);
                 });
             } catch (error) {
                 console.log(error);
