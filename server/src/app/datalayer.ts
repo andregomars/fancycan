@@ -1,8 +1,9 @@
 import assert from 'assert';
-import { MongoClient, Db } from 'mongodb';
+import { MongoClient } from 'mongodb';
 
 export class DataLayer {
-    private url = 'mongodb://localhost:27017';
+    // private url = 'mongodb://localhost:27017';
+    private url = 'mongodb://127.0.0.1:27017';
     private client: MongoClient;
 
     constructor() {
