@@ -13,6 +13,7 @@
     "debug": "npm run build && npm run watch-debug"
   },
   "dependencies": {
+    "buffer-split": "^1.0.0",
     "mongodb": "^3.1.10",
     "shortid": "^2.2.14"
   },

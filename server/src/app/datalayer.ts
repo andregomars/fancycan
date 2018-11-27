@@ -1,4 +1,6 @@
 import assert from 'assert';
+// import { bsplit } from 'buffer-split';
+const bsplit = require('buffer-split');
 import { MongoClient } from 'mongodb';
 import { ICanData } from './models/ICanData';
 
@@ -13,6 +15,7 @@ export class DataLayer {
 
     public insertDocs(buffer: Buffer, localPort: number, remotePort: number) {
         console.log('start insert docs');
+        console.log(bsplit(buffer, Buffer.from('88', 'hex')));
         try {
             this.client.connect((err) => {
                 assert.equal(null, err);
