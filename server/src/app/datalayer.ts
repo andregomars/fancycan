@@ -2,7 +2,7 @@ import assert from 'assert';
 const bsplit = require('buffer-split');
 // import bsplit from './types/buffer-split';
 import { MongoClient } from 'mongodb';
-import { ICanRaw } from './models/ICanData';
+import { ICanRaw } from './models/ICanRaw';
 
 export class DataLayer {
     // private url = 'mongodb://localhost:27017';
