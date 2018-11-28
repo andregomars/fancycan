@@ -1,7 +1,5 @@
-export interface ICan {
+export interface ICanRaw {
     raw: Buffer;
-    canID: Buffer;
-    canData: Buffer;
     localPort: number;
     remotePort: number;
     time: Date;
