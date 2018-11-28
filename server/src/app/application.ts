@@ -21,13 +21,13 @@ export class Application {
                 const localPort = socket.localPort!;
                 socket.on('data', (data) => {
                     // write file
-                    fs.writeFile(`${dir}/data-${shortid.generate()}.bin`, data, (error) => {
-                        if (error) {
-                            throw error;
-                        }
+                    // fs.writeFile(`${dir}/data-${shortid.generate()}.bin`, data, (error) => {
+                    //     if (error) {
+                    //         throw error;
+                    //     }
 
-                        console.log('data written');
-                    });
+                    //     console.log('data written');
+                    // });
 
                     // write db
                     db.insertDocs(data, localPort, remotePort);
