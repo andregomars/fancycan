@@ -3,6 +3,7 @@ const bsplit = require('buffer-split');
 // import bsplit from './types/buffer-split';
 import { MongoClient } from 'mongodb';
 import { ICanRaw } from './models/ICanRaw';
+import { ICan } from './models/ICanData';
 
 export class DataLayer {
     // private url = 'mongodb://localhost:27017';
@@ -13,7 +14,7 @@ export class DataLayer {
         this.client = new MongoClient(this.url, { useNewUrlParser: true });
     }
 
-    public insertDocs(rawBuffer: Buffer, localPort: number, remotePort: number) {
+    public insertBufferIntoDocs(rawBuffer: Buffer, localPort: number, remotePort: number) {
         console.log('start insert docs');
         const rawBuffers: Buffer[] = bsplit(rawBuffer, Buffer.from('88', 'hex'));
         const buffers = (rawBuffers.filter((buf) => buf.length > 0));
@@ -33,10 +34,34 @@ export class DataLayer {
 
                 collection.insertMany(docs, (inerr, result) => {
                     assert.equal(inerr, null);
+                    console.log('insert docs into collection can_raw');
+                });
+
+            });
+        } catch (error) {
+            if (this.client && this.client.isConnected) {
+                this.client.close();
+            }
+            console.log(error);
+        }
+    }
+
+    public insertDocs(docs: ICan[]) {
+        console.log('start insert docs');
+
+        try {
+            this.client.connect((err) => {
+                assert.equal(null, err);
+                const db = this.client.db('main');
+                const collection = db.collection('can');
+
+                collection.insertMany(docs, (inerr, result) => {
+                    assert.equal(inerr, null);
                     console.log('insert docs into collection can');
                 });
 
             });
+
         } catch (error) {
             if (this.client && this.client.isConnected) {
                 this.client.close();

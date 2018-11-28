@@ -15,7 +15,8 @@
   "dependencies": {
     "buffer-split": "^1.0.0",
     "mongodb": "^3.1.10",
-    "shortid": "^2.2.14"
+    "shortid": "^2.2.14",
+    "split-frames": "^2.4.1"
   },
   "devDependencies": {
     "@types/mongodb": "^3.1.14",
