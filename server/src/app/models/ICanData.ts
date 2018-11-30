@@ -1,8 +1,10 @@
+import { ObjectID } from 'bson';
+
 export interface ICan {
-    raw: Buffer;
+    rawID: ObjectID;
+    delimiter: Buffer;
     canID: Buffer;
     canData: Buffer;
     localPort: number;
     remotePort: number;
-    time: Date;
 }

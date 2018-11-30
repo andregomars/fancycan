@@ -1,12 +1,14 @@
 import assert from 'assert';
-const bsplit = require('buffer-split');
+import { ObjectID } from 'bson';
+// const bsplit = require('buffer-split');
 // import bsplit from './types/buffer-split';
 import { MongoClient } from 'mongodb';
 import { ICanRaw } from './models/ICanRaw';
 import { ICan } from './models/ICanData';
 
+type InsertCallBack = (id: ObjectID) => any;
+
 export class DataLayer {
-    // private url = 'mongodb://localhost:27017';
     private url = 'mongodb://127.0.0.1:27017';
     private client: MongoClient;
 
@@ -14,59 +16,25 @@ export class DataLayer {
         this.client = new MongoClient(this.url, { useNewUrlParser: true });
     }
 
-    public insertBufferIntoDocs(rawBuffer: Buffer, localPort: number, remotePort: number) {
+    public insertCanRaw(doc: ICanRaw, callback: InsertCallBack) {
         console.log('start insert docs');
-        const rawBuffers: Buffer[] = bsplit(rawBuffer, Buffer.from('88', 'hex'));
-        const buffers = (rawBuffers.filter((buf) => buf.length > 0));
-
-        try {
-            this.client.connect((err) => {
-                assert.equal(null, err);
-                console.log('connected to mongodb instance');
-                const db = this.client.db('main');
-                const collection = db.collection('can_raw');
-                const docs: ICanRaw[] = [{
-                    raw: rawBuffer,
-                    localPort: localPort,
-                    remotePort: remotePort,
-                    time: new Date(),
-                }];
-
-                collection.insertMany(docs, (inerr, result) => {
-                    assert.equal(inerr, null);
-                    console.log('insert docs into collection can_raw');
-                });
-
+        // const rawBuffers: Buffer[] = bsplit(rawBuffer, Buffer.from('88', 'hex'));
+        // const buffers = (rawBuffers.filter((buf) => buf.length > 0));
+        this.client.connect().then((conn) => {
+            conn.db('main').collection('can_raw').insertOne(doc, (inerr, result) => {
+                assert.equal(inerr, null);
+                console.log('insert doc into collection can_raw');
+                callback(result.insertedId);
             });
-        } catch (error) {
-            if (this.client && this.client.isConnected) {
-                this.client.close();
-            }
-            console.log(error);
-        }
+        });
     }
 
-    public insertDocs(docs: ICan[]) {
-        console.log('start insert docs');
-
-        try {
-            this.client.connect((err) => {
-                assert.equal(null, err);
-                const db = this.client.db('main');
-                const collection = db.collection('can');
-
-                collection.insertMany(docs, (inerr, result) => {
-                    assert.equal(inerr, null);
-                    console.log('insert docs into collection can');
-                });
-
+    public insertCans(docs: ICan[]) {
+        this.client.connect().then((conn) => {
+            conn.db('main').collection('can').insertMany(docs, (inerr, result) => {
+                assert.equal(inerr, null);
+                console.log('insert docs into collection can');
             });
-
-        } catch (error) {
-            if (this.client && this.client.isConnected) {
-                this.client.close();
-            }
-            console.log(error);
-        }
+        });
     }
 }

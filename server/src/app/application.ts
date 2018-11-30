@@ -1,4 +1,5 @@
 import net from 'net';
+import { ObjectID } from 'bson';
 import { Readable } from 'stream';
 // import fs from 'fs';
 const Splitter = require('split-frames');
@@ -20,7 +21,7 @@ export class Application {
         const docs: ICan[] = [];
 
         const tcpServer = net.createServer();
-        const db = new DataLayer();
+        const dbo = new DataLayer();
         const docService = new DocService();
 
         tcpServer.on('connection', (socket) => {
@@ -29,25 +30,26 @@ export class Application {
             try {
                 const remotePort = socket.remotePort!;
                 const localPort = socket.localPort!;
+                let rawID: ObjectID;
 
                 stream.pipe(new Splitter({
                     startWith: STX,
                 })).on('data', (chunk: Buffer) => {
-                    // buffers.push(chunk);
-                    const doc = docService.buildDoc(chunk, localPort, remotePort);
+                    const doc = docService.buildCan(chunk, rawID, localPort, remotePort);
                     docs.push(doc);
                     if (docs.length >= MAX_BUFFERS) {
-                        // console.log(docs);
-                        db.insertDocs(docs);
+                        dbo.insertCans(docs);
                         docs.length = 0;
                     }
                 });
 
                 socket.on('data', (data) => {
-                    // write local db
-                    // db.insertDocs(data, localPort, remotePort);
-
-                    stream.push(data);
+                    // write raw data into local db
+                    const doc = docService.buildCanRaw(data);
+                    dbo.insertCanRaw(doc, (id) => {
+                        rawID = id;
+                        stream.push(data);
+                    });
                 });
             } catch (error) {
                 console.log(error);
