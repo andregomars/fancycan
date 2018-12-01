@@ -7,9 +7,9 @@ export class DocService {
     public buildCan(buffer: Buffer, rawID: ObjectID, localPort: number, remotePort: number): ICan {
         return {
             rawID: rawID,
-            delimiter: Buffer.from('88', 'hex'),
-            canID: Buffer.from('00', 'hex'),
-            canData: Buffer.from('00', 'hex'),
+            delimiter: buffer.slice(0, 1),
+            canID: buffer.slice(1, 5),
+            canData: buffer.slice(-8),
             localPort: localPort,
             remotePort: remotePort,
         };
