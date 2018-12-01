@@ -33,7 +33,7 @@ export class DataLayer {
         this.client.connect().then((conn) => {
             conn.db('main').collection('can').insertMany(docs, (inerr, result) => {
                 assert.equal(inerr, null);
-                console.log('insert docs into collection can');
+                console.log(`insert ${docs.length} entries of doc into collection can`);
             });
         });
     }
