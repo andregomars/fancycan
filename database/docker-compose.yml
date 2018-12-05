@@ -22,14 +22,28 @@ services:
       networks:
          - backend
       ports:
-         - "8080:8080"
+         - 8080:8080
       ### Uncoment below if you want to mount a local configuration folder
       ### to overwrite default restheart.yml and/or security.yml
       #volumes:
       #   - ./etc:/opt/restheart/etc:ro
 
+   mongo-express:
+      image: mongo-express
+      container_name: mongoexpress
+      depends_on:
+         - mongodb
+      networks:
+         - backend
+      ports:
+         - 8081:8081
+      environment:
+        ME_CONFIG_MONGODB_SERVER: mongodb
+        ME_CONFIG_MONGODB_ADMINUSERNAME: restheart
+        ME_CONFIG_MONGODB_ADMINPASSWORD: R3ste4rt!
+
    mongodb:
-      image: mongo:3.6
+      image: mongo
       container_name: restheart-mongo
       environment:
             # Be sure this credentials match with those in etc/restheart.yml
@@ -44,4 +58,4 @@ services:
          - backend
       ### Uncoment below if you want to map mongodb port
       ports:
-        - "27017:27017"
+        - 27017:27017
