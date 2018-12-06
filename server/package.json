@@ -14,11 +14,13 @@
   },
   "dependencies": {
     "buffer-split": "^1.0.0",
+    "config": "^3.0.0",
     "mongodb": "^3.1.10",
     "shortid": "^2.2.14",
     "split-frames": "^2.4.1"
   },
   "devDependencies": {
+    "@types/config": "^0.0.34",
     "@types/mongodb": "^3.1.14",
     "@types/node": "^10.12.9",
     "@types/shortid": "^0.0.29",

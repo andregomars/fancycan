@@ -1,17 +1,17 @@
 import net from 'net';
 import assert from 'assert';
 import { ObjectID } from 'bson';
-import { Readable, Stream } from 'stream';
+import { Readable } from 'stream';
 import { MongoClient } from 'mongodb';
 const Splitter = require('split-frames');
 
 import { DataLayer } from './datalayer';
 import { DocService } from './services/doc.service';
 import { ICan } from './models/ICanData';
+import { Utility } from './services/utility';
 
 export class Application {
     public static start() {
-        const url = 'mongodb://127.0.0.1:27017';
         const STX = 0x88;
         const MAX_BUFFERS = 100;
         const stream = Application.createReadStream();
@@ -19,6 +19,8 @@ export class Application {
 
         const tcpServer = net.createServer();
         const docService = new DocService();
+        const utility = new Utility();
+        const url = utility.getConnectionString();
 
         MongoClient.connect(url, { useNewUrlParser: true }, (error, client) => {
             assert.equal(error, null);
