@@ -1,0 +1,7 @@
+version: '2'
+
+services:
+   restheart:
+      volumes:
+        - ${pwd}/etc:/opt/restheart/etc:ro
+
