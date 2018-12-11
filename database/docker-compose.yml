@@ -12,6 +12,8 @@ networks:
 # See: https://docs.docker.com/engine/userguide/containers/dockervolumes/#mount-a-shared-storage-volume-as-a-data-volume
 volumes:
    restheart-datadb:
+      external:
+         name: vol-mongo
 
 services:
    restheart:
