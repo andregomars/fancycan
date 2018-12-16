@@ -1,7 +1,5 @@
 import assert from 'assert';
 import { ObjectID } from 'bson';
-// const bsplit = require('buffer-split');
-// import bsplit from './types/buffer-split';
 import { MongoClient } from 'mongodb';
 import { ICanRaw } from './models/ICanRaw';
 import { ICan } from './models/ICanData';

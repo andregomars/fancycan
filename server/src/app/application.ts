@@ -3,9 +3,12 @@ import assert from 'assert';
 import { ObjectID } from 'bson';
 import { Readable } from 'stream';
 import { MongoClient } from 'mongodb';
+import * as mqtt from 'mqtt';
+import { MqttClient } from 'mqtt';
 const Splitter = require('split-frames');
 
 import { DataLayer } from './datalayer';
+import { QueueLayer } from './queuelayer';
 import { DocService } from './services/doc.service';
 import { ICan } from './models/ICanData';
 import { Utility } from './services/utility';
@@ -20,20 +23,24 @@ export class Application {
         const tcpServer = net.createServer();
         const docService = new DocService();
         const utility = new Utility();
-        const url = utility.getConnectionString();
+        const urlDbConn = utility.getDbConnectionString();
+        const urlMqConn = utility.getMqConnectionString();
+        const mqClient: MqttClient = mqtt.connect(urlMqConn);
 
-        MongoClient.connect(url, { useNewUrlParser: true }, (error, client) => {
+        MongoClient.connect(urlDbConn, { useNewUrlParser: true }, (error, client) => {
             assert.equal(error, null);
             const dbo = new DataLayer(client);
+            const mqo = new QueueLayer(mqClient);
 
             tcpServer.on('connection', (socket) => {
-                console.log('start connection');
+                console.log('start db connection');
 
                 try {
                     const remotePort = socket.remotePort!;
                     const localPort = socket.localPort!;
                     let rawID: ObjectID;
 
+                    // put data into buffer cache while fetching data from splitter stream
                     stream.pipe(new Splitter({
                         startWith: STX,
                     })).on('data', (chunk: Buffer) => {
@@ -41,17 +48,21 @@ export class Application {
                         docs.push(doc);
                         if (docs.length >= MAX_BUFFERS) {
                             dbo.insertCans(docs);
+                            mqo.publishCans(docs);
                             docs.length = 0;
                         }
                     });
 
+                    // insert remained docs in buffer cache
                     setInterval(() => {
                         if (docs.length > 0) {
                             dbo.insertCans(docs);
+                            mqo.publishCans(docs);
                             docs.length = 0;
                         }
                     }, 500);
 
+                    // push into splitter stream while fetching data from TCP socket
                     socket.on('data', (data) => {
                         const doc = docService.buildCanRaw(data);
                         dbo.insertCanRaw(doc, (id) => {

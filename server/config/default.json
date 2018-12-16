@@ -5,5 +5,13 @@
         "user": "admin",
         "password": "fccdbo123!",
         "auth": "DEFAULT"
+    },
+    "mqConfig": {
+        "host": "127.0.0.1",
+        "scheme": "mqtt",
+        "port": 1883,
+        "topics": {
+            "default": "tCan"
+        }
     }
 }
