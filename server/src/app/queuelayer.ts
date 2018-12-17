@@ -12,9 +12,11 @@ export class QueueLayer {
     }
 
     public publishCans(docs: ICan[]) {
-        const topic = this.utility.getTopicName();
-        const message = JSON.stringify(docs);
-        this.queue.publish(topic, message);
+        if (docs && docs.length > 0) {
+            const topic = this.utility.getTopicName();
+            const message = JSON.stringify(docs[0]);
+            this.queue.publish(topic, message);
+        }
     }
 
 }
