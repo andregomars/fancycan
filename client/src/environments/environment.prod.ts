@@ -14,6 +14,14 @@ export const environment = {
     storageBucket: 'fancycandemo.appspot.com',
     messagingSenderId: '459557828534'
   },
+  mqtt: {
+    connectOnCreate: false,
+    protocol: 'ws',
+    // hostname: '52.32.76.180',
+    hostname: 'localhost',
+    port: 9001
+  },
+  topic: 'tCan',
   apiRootLocal: 'assets/data',
   reportFallbackMonths: 3,
   delayEmulatorTimer: 2000,

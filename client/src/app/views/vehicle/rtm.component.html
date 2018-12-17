@@ -114,12 +114,13 @@
       </div>
       <div class="row mt-2 py-2 border border-secondary rounded">
         <ul class="col list-unstyled">
-          <li *ngFor="let item of cans$ | async" class="row">
+          <!-- <li *ngFor="let item of cans$ | async" class="row"> -->
+          <li *ngFor="let item of messages" class="row">
             <div class="col-4">
-              {{ item.id }}
+              {{ item['id'] | uppercase }}
             </div>
             <div class="col-8">
-              {{ item.value }}
+              {{ item['value'] | uppercase }}
             </div>
           </li>
         </ul>

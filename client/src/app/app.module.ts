@@ -3,7 +3,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-
+import { MqttModule, IMqttServiceOptions } from 'ngx-mqtt';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
@@ -17,6 +17,7 @@ import { AppComponent } from './app.component';
 // Import containers
 import { DefaultLayoutComponent } from './containers';
 
+const MQTT_PROXY_OPTIONS = environment.mqtt as IMqttServiceOptions;
 const APP_CONTAINERS = [
   DefaultLayoutComponent,
 ];
@@ -88,6 +89,7 @@ import { LoginComponent } from './views/common/login.component';
     TabsModule.forRoot(),
     ButtonsModule.forRoot(),
     ChartsModule,
+    MqttModule.forRoot(MQTT_PROXY_OPTIONS),
     ServicesModule.forRoot(),
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
