@@ -27,9 +27,9 @@ export class Application {
         const urlMqConn = utility.getMqConnectionString();
         const mqClient: MqttClient = mqtt.connect(urlMqConn);
 
-        MongoClient.connect(urlDbConn, { useNewUrlParser: true }, (error, client) => {
+        MongoClient.connect(urlDbConn, { useNewUrlParser: true }, (error, dbClient) => {
             assert.equal(error, null);
-            const dbo = new DataLayer(client);
+            const dbo = new DataLayer(dbClient);
             const mqo = new QueueLayer(mqClient);
 
             tcpServer.on('connection', (socket) => {
@@ -46,21 +46,13 @@ export class Application {
                     })).on('data', (chunk: Buffer) => {
                         const doc = docService.buildCan(chunk, rawID, localPort, remotePort);
                         docs.push(doc);
+                        mqo.publishCans(docs);
                         if (docs.length >= MAX_BUFFERS) {
                             dbo.insertCans(docs);
-                            mqo.publishCans(docs);
+                            // mqo.publishCans(docs);
                             docs.length = 0;
                         }
                     });
-
-                    // insert remained docs in buffer cache
-                    setInterval(() => {
-                        if (docs.length > 0) {
-                            dbo.insertCans(docs);
-                            mqo.publishCans(docs);
-                            docs.length = 0;
-                        }
-                    }, 500);
 
                     // push into splitter stream while fetching data from TCP socket
                     socket.on('data', (data) => {
@@ -80,8 +72,14 @@ export class Application {
             console.log('start listening on port ' + port);
 
             process.on('SIGINT', () => {
-                console.info('SIGINT signal received.');
+                tcpServer.close();
                 console.log('docs in stream remains before exit: ' + docs.length);
+                if (docs.length > 0) {
+                    dbo.insertCans(docs);
+                    // mqo.publishCans(docs);
+                }
+                console.log('remained data stream are all stored.');
+                dbClient.close();
                 process.exit(0);
             });
         });

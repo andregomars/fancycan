@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { DataService, UtilityService } from '../../services';
 import { Observable, Subscription } from 'rxjs';
-import { map, share } from 'rxjs/operators';
+import { map, share, shareReplay, tap, take } from 'rxjs/operators';
 import * as moment from 'moment';
 import { MqttService, IMqttMessage } from 'ngx-mqtt';
 import { Buffer } from 'buffer/';
@@ -50,21 +50,38 @@ export class RtmComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
+  // private subscribe() {
+  //   this.mqttService.connect();
+  //   this.subscription =
+  //     this.mqttService.observe(this.topic).subscribe(
+  //       (message: IMqttMessage) => {
+  //         const canMsg: ICan = JSON.parse(message.payload.toString());
+  //         const can = {
+  //           id: Buffer.from(canMsg.canID).toString('hex'),
+  //           value: Buffer.from(canMsg.canData).toString('hex'),
+  //         };
+  //         if (this.messages.length > 20) {
+  //           this.messages.shift();
+  //         }
+  //         this.messages.push(can);
+  //     });
+  // }
+
   private subscribe() {
     this.mqttService.connect();
-    this.subscription =
-      this.mqttService.observe(this.topic).subscribe(
-        (message: IMqttMessage) => {
+    this.cans$ =
+    // this.subscription =
+      this.mqttService.observe(this.topic).pipe(
+        map((message: IMqttMessage) => {
           const canMsg: ICan = JSON.parse(message.payload.toString());
-          const can = {
+          return {
             id: Buffer.from(canMsg.canID).toString('hex'),
             value: Buffer.from(canMsg.canData).toString('hex'),
           };
-          if (this.messages.length > 20) {
-            this.messages.shift();
-          }
-          this.messages.push(can);
-      });
+        }),
+        shareReplay(5),
+        tap(x => console.log(x)),
+      );
   }
 
   private initMqtt() {
@@ -82,17 +99,17 @@ export class RtmComponent implements OnInit, OnDestroy {
       share()
     );
 
-    this.cans$ = this.dataService.getCANs().pipe(
-      map((cans: any[]) =>
-        cans.slice(0, 15).map(can => {
-          return {
-            id: can.id,
-            value: this.utitlityService.formatRawCAN(can.value)
-          };
-        })
-      ),
-      share()
-    );
+    // this.cans$ = this.dataService.getCANs().pipe(
+    //   map((cans: any[]) =>
+    //     cans.slice(0, 15).map(can => {
+    //       return {
+    //         id: can.id,
+    //         value: this.utitlityService.formatRawCAN(can.value)
+    //       };
+    //     })
+    //   ),
+    //   share()
+    // );
 
 
     this.maxDate.setDate(this.maxDate.getDate() + 7);

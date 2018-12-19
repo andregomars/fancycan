@@ -7,11 +7,9 @@ import { ICan } from './models/ICanData';
 type InsertCallBack = (id: ObjectID) => any;
 
 export class DataLayer {
-    // private url = 'mongodb://127.0.0.1:27017';
     private conn: MongoClient;
 
     constructor(client: MongoClient) {
-        // this.client = new MongoClient(this.url, { useNewUrlParser: true });
         this.conn = client;
     }
 
@@ -29,6 +27,7 @@ export class DataLayer {
     public insertCans(docs: ICan[]) {
         this.conn.db('main').collection('can').insertMany(docs, (error, result) => {
             assert.equal(error, null);
+            console.log(`docs count: ${docs.length} `);
             console.log(`insert ${result.insertedCount} entries of doc into collection can`);
         });
     }
