@@ -66,7 +66,6 @@ export class RtmComponent implements OnInit, OnDestroy {
           queue.unshift(can);
           return queue;
         }),
-        tap(x => console.log(x)),
       );
   }
 
