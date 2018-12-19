@@ -1,3 +1,5 @@
+ssl/
+
 lib-cov
 *.seed
 *.log
