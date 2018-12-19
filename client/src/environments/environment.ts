@@ -21,6 +21,7 @@ export const environment = {
     hostname: 'localhost',
     port: 9001
   },
+  rtmMessagesMaxCount: 15,
   topic: 'tCan',
   apiRootLocal: 'assets/data',
   reportFallbackMonths: 3,
