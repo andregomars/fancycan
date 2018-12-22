@@ -16,9 +16,9 @@ export const environment = {
   },
   mqtt: {
     connectOnCreate: false,
-    protocol: 'ws',
-    // hostname: '52.32.76.180',
-    hostname: 'localhost',
+    protocol: 'wss',
+    hostname: 'app.fancycan.com',
+    path: '/mqtt',
     port: 9001
   },
   rtmMessagesMaxCount: 20,
