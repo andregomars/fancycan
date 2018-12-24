@@ -1,3 +1,4 @@
+
 input {
     font-size: 9pt;
 }
@@ -8,4 +9,8 @@ input[type=submit] {
 
 .card-body {
     min-height: 500px;
+}
+
+.sd-input-group span {
+    width: 110px !important;
 }
