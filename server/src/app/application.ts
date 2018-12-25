@@ -10,8 +10,10 @@ const Splitter = require('split-frames');
 import { DataLayer } from './datalayer';
 import { QueueLayer } from './queuelayer';
 import { DocService } from './services/doc.service';
+import { TransformService } from './services/transform.services';
 import { ICan } from './models/ICanData';
 import { Utility } from './services/utility';
+import { FireLayer } from './firelayer';
 
 export class Application {
     public static start() {
@@ -31,6 +33,8 @@ export class Application {
             assert.equal(error, null);
             const dbo = new DataLayer(dbClient);
             const mqo = new QueueLayer(mqClient);
+            const fbo = new FireLayer();
+            const transformService = new TransformService(dbo, fbo);
 
             tcpServer.on('connection', (socket) => {
                 console.log('start db connection');
@@ -47,9 +51,9 @@ export class Application {
                         const doc = docService.buildCan(chunk, rawID, localPort, remotePort);
                         docs.push(doc);
                         mqo.publishCans(docs);
+                        transformService.importCanStates(docs);
                         if (docs.length >= MAX_BUFFERS) {
                             dbo.insertCans(docs);
-                            // mqo.publishCans(docs);
                             docs.length = 0;
                         }
                     });
@@ -73,10 +77,9 @@ export class Application {
 
             process.on('SIGINT', () => {
                 tcpServer.close();
-                console.log('docs in stream remains before exit: ' + docs.length);
+                console.log(`docs in stream remains ${docs.length} before exit: `);
                 if (docs.length > 0) {
                     dbo.insertCans(docs);
-                    // mqo.publishCans(docs);
                 }
                 console.log('remained data stream are all stored.');
                 dbClient.close();

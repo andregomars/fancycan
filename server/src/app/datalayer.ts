@@ -15,8 +15,6 @@ export class DataLayer {
 
     public insertCanRaw(doc: ICanRaw, callback: InsertCallBack) {
         console.log('start insert docs');
-        // const rawBuffers: Buffer[] = bsplit(rawBuffer, Buffer.from('88', 'hex'));
-        // const buffers = (rawBuffers.filter((buf) => buf.length > 0));
         this.conn.db('main').collection('can_raw').insertOne(doc, (error, result) => {
             assert.equal(error, null);
             console.log('insert doc into collection can_raw');
@@ -30,5 +28,12 @@ export class DataLayer {
             console.log(`docs count: ${docs.length} `);
             console.log(`insert ${result.insertedCount} entries of doc into collection can`);
         });
+    }
+
+    public insertCanStates(docs: ICan[]) {
+        // this.conn.db('main').collection('can_state').insertMany(docs, (error, result) => {
+        //     assert.equal(error, null);
+        //     console.log(`${result.insertedCount} docs were parsed and stored as can states`);
+        // });
     }
 }

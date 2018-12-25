@@ -25,6 +25,10 @@ export class Utility {
         return url;
     }
 
+    public getFbConnectionString(): string {
+        return config.get('fbConfig.url');
+    }
+
     public getTopicName(name: string = 'default'): string {
         const defaultTopic = 'tCan';
         return config.get(`mqConfig.topics.${name}`) || defaultTopic;

@@ -13,5 +13,8 @@
         "topics": {
             "default": "tCan"
         }
+    },
+    "fbConfig": {
+        "url": "https://fancycandemo.firebaseio.com"
     }
 }

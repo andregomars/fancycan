@@ -13,11 +13,12 @@
     "debug": "npm run build && npm run watch-debug"
   },
   "dependencies": {
+    "@akanass/rx-http-request": "^3.1.0",
     "@types/mqtt": "^2.5.0",
-    "buffer-split": "^1.0.0",
     "config": "^3.0.0",
     "mongodb": "^3.1.10",
     "mqtt": "^2.18.8",
+    "rxjs": "^6.3.3",
     "shortid": "^2.2.14",
     "split-frames": "^2.4.1"
   },
