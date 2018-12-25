@@ -7,12 +7,12 @@ export const environment = {
   production: false,
   agm: { apiKey: 'AIzaSyCjplxp6Vku_R6LtWskqd0K7tSb0wLISPY' },
   firebase: {
-    apiKey: 'AIzaSyCjplxp6Vku_R6LtWskqd0K7tSb0wLISPY',
-    authDomain: 'fancycandemo.firebaseapp.com',
+    apiKey: 'xxx',
+    authDomain: 'xxx',
     databaseURL: 'https://fancycandemo.firebaseio.com',
-    projectId: 'fancycandemo',
-    storageBucket: 'fancycandemo.appspot.com',
-    messagingSenderId: '459557828534'
+    projectId: 'xxx',
+    storageBucket: 'xxx',
+    messagingSenderId: 'xxx'
   },
   mqtt: {
     connectOnCreate: false,
