@@ -1,17 +1,20 @@
 import assert from 'assert';
-import { RxHR as http } from '@akanass/rx-http-request';
+import { Rxios } from 'rxios';
 import { Observable } from 'rxjs';
 import { Utility } from './services/utility';
 
 export class FireLayer {
-    private rootUrl: string;
+    private http: Rxios;
 
     constructor() {
-        this.rootUrl = new Utility().getFbConnectionString();
+        const rootUrl = new Utility().getFbConnectionString();
+        this.http = new Rxios({
+            baseURL: rootUrl,
+        });
     }
 
     public getDefinitions(): Observable<any> {
-        return http
-            .get<any>(`${this.rootUrl}/definitions.json`);
+        return this.http
+            .get<any>(`/definitions.json`);
     }
 }
