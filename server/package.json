@@ -14,12 +14,12 @@
     "debug": "npm run build && npm run watch-debug"
   },
   "dependencies": {
-    "@akanass/rx-http-request": "^3.1.0",
     "@types/mqtt": "^2.5.0",
     "axios": "^0.18.0",
     "config": "^3.0.0",
     "mongodb": "^3.1.10",
     "mqtt": "^2.18.8",
+    "node-cache": "^4.2.0",
     "rxios": "^1.1.2",
     "rxjs": "^6.3.3",
     "rxjs-compat": "^6.3.3",

@@ -9,6 +9,7 @@ const Splitter = require('split-frames');
 
 import { DataLayer } from './datalayer';
 import { QueueLayer } from './queuelayer';
+import { CacheLayer } from './cachelayer';
 import { DocService } from './services/doc.service';
 import { TransformService } from './services/transform.services';
 import { ICan } from './models/ICanData';
@@ -17,73 +18,80 @@ import { FireLayer } from './firelayer';
 
 export class Application {
     public static start() {
-        const STX = 0x88;
-        const MAX_BUFFERS = 100;
-        const stream = Application.createReadStream();
-        const docs: ICan[] = [];
+        const fire = new FireLayer();
+        fire.getDefinitions().subscribe((defs: any) => {
+            const cache = CacheLayer.getInstance();
+            cache.set('defs', defs);
+            console.log(defs);
 
-        const tcpServer = net.createServer();
-        const docService = new DocService();
-        const utility = new Utility();
-        const urlDbConn = utility.getDbConnectionString();
-        const urlMqConn = utility.getMqConnectionString();
-        const mqClient: MqttClient = mqtt.connect(urlMqConn);
+            const STX = 0x88;
+            const MAX_BUFFERS = 100;
+            const stream = Application.createReadStream();
+            const docs: ICan[] = [];
 
-        MongoClient.connect(urlDbConn, { useNewUrlParser: true }, (error, dbClient) => {
-            assert.equal(error, null);
-            const dbo = new DataLayer(dbClient);
-            const mqo = new QueueLayer(mqClient);
-            const fbo = new FireLayer();
-            const transformService = new TransformService(dbo, fbo);
+            const tcpServer = net.createServer();
+            const docService = new DocService();
+            const utility = new Utility();
+            const urlDbConn = utility.getDbConnectionString();
+            const urlMqConn = utility.getMqConnectionString();
+            const mqClient: MqttClient = mqtt.connect(urlMqConn);
 
-            tcpServer.on('connection', (socket) => {
-                console.log('start db connection');
+            MongoClient.connect(urlDbConn, { useNewUrlParser: true }, (error, dbClient) => {
+                assert.equal(error, null);
+                const dbo = new DataLayer(dbClient);
+                const mqo = new QueueLayer(mqClient);
+                const fbo = new FireLayer();
+                const transformService = new TransformService(dbo, fbo);
 
-                try {
-                    const remotePort = socket.remotePort!;
-                    const localPort = socket.localPort!;
-                    let rawID: ObjectID;
+                tcpServer.on('connection', (socket) => {
+                    console.log('start db connection');
 
-                    // put data into buffer cache while fetching data from splitter stream
-                    stream.pipe(new Splitter({
-                        startWith: STX,
-                    })).on('data', (chunk: Buffer) => {
-                        const doc = docService.buildCan(chunk, rawID, localPort, remotePort);
-                        docs.push(doc);
-                        mqo.publishCans(docs);
-                        transformService.importCanStates(docs);
-                        if (docs.length >= MAX_BUFFERS) {
-                            dbo.insertCans(docs);
-                            docs.length = 0;
-                        }
-                    });
+                    try {
+                        const remotePort = socket.remotePort!;
+                        const localPort = socket.localPort!;
+                        let rawID: ObjectID;
 
-                    // push into splitter stream while fetching data from TCP socket
-                    socket.on('data', (data) => {
-                        const doc = docService.buildCanRaw(data);
-                        dbo.insertCanRaw(doc, (id) => {
-                            rawID = id;
-                            stream.push(data);
+                        // put data into buffer cache while fetching data from splitter stream
+                        stream.pipe(new Splitter({
+                            startWith: STX,
+                        })).on('data', (chunk: Buffer) => {
+                            const doc = docService.buildCan(chunk, rawID, localPort, remotePort);
+                            docs.push(doc);
+                            mqo.publishCans(docs);
+                            transformService.importCanStates(docs);
+                            if (docs.length >= MAX_BUFFERS) {
+                                dbo.insertCans(docs);
+                                docs.length = 0;
+                            }
                         });
-                    });
-                } catch (error) {
-                    console.log(error);
-                }
-            });
 
-            const port = 5888;
-            tcpServer.listen(port);
-            console.log('start listening on port ' + port);
+                        // push into splitter stream while fetching data from TCP socket
+                        socket.on('data', (data) => {
+                            const doc = docService.buildCanRaw(data);
+                            dbo.insertCanRaw(doc, (id) => {
+                                rawID = id;
+                                stream.push(data);
+                            });
+                        });
+                    } catch (error) {
+                        console.log(error);
+                    }
+                });
 
-            process.on('SIGINT', () => {
-                tcpServer.close();
-                console.log(`docs in stream remains ${docs.length} before exit: `);
-                if (docs.length > 0) {
-                    dbo.insertCans(docs);
-                }
-                console.log('remained data stream are all stored.');
-                dbClient.close();
-                process.exit(0);
+                const port = 5888;
+                tcpServer.listen(port);
+                console.log('start listening on port ' + port);
+
+                process.on('SIGINT', () => {
+                    tcpServer.close();
+                    console.log(`docs in stream remains ${docs.length} before exit: `);
+                    if (docs.length > 0) {
+                        dbo.insertCans(docs);
+                    }
+                    console.log('remained data stream are all stored.');
+                    dbClient.close();
+                    process.exit(0);
+                });
             });
         });
     }
@@ -95,4 +103,5 @@ export class Application {
             },
         });
     }
+
 }
