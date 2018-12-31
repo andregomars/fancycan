@@ -63,7 +63,8 @@ describe('When test transform', () => {
     };
 
     const sample9004: ICan = {
-        rawID: new ObjectID(121212121),
+        _id: new ObjectID(),
+        rawID: new ObjectID(),
         delimiter: Buffer.from('88', 'hex'),
         canID: Buffer.from('GPwWIQ==', 'base64'),
         canData: Buffer.from('BAQAAFQCACA=', 'base64'),
@@ -72,7 +73,8 @@ describe('When test transform', () => {
     };
 
     const sample2911: ICan = {
-        rawID: new ObjectID(121212121),
+        _id: new ObjectID(),
+        rawID: new ObjectID(),
         delimiter: Buffer.from('88', 'hex'),
         canID: Buffer.from('GPABCw==', 'base64'),
         canData: Buffer.from('z//w//8BC/8=', 'base64'),
