@@ -1,21 +1,47 @@
-import { DataLayer } from '../datalayer';
-import { FireLayer } from '../firelayer';
 import { ICan } from '../models/ICanData';
 import { ICanState } from '../models/ICanState';
 import { IJ1939 } from '../models/IJ1939';
+import { Utility } from './utility';
 
 export class TransformService {
-    private dataLayer: DataLayer;
-    private fireLayer: FireLayer;
-    constructor(dataLayer: DataLayer, fireLayer: FireLayer) {
-        this.dataLayer = dataLayer;
-        this.fireLayer = fireLayer;
+    private utility: Utility;
+
+    constructor() {
+        this.utility = new Utility();
     }
 
-    public importCanStates(cans: ICan[]) {
+    public getCanStates(cans: ICan[]): ICanState[] {
+        // return cans.map(this.getCanState).reduce((pre, cur) => [...pre, ...cur]);
+        return cans.map((can: ICan) => this.getCanState(can)).reduce((pre, cur) => [...pre, ...cur]);
+    }
+
+    public getCanState(can: ICan): ICanState[] {
         console.log('import CAN state...');
-        this.fireLayer.getDefinitions().subscribe((resp: any) =>
-            console.log(resp));
+        const pgnID = this.decodePGN(can.canID);
+        const spns = this.utility.retrieveSpnsByPgnFromCache(pgnID);
+
+        if (!spns) {
+            return [];
+        }
+
+        const canStates = new Array<ICanState>();
+        for (const spn of spns!) {
+            const val = this.decodeData(can.canData, spn);
+            const state: ICanState = {
+                rawID: can.rawID,
+                spnNo: spn.SPNNo,
+                spnName: spn.SPNName,
+                pgnNo: pgnID,
+                pgnName: spn.PGNName,
+                value: val,
+                unit: spn.Unit,
+                min: spn.LowerDataRange,
+                max: spn.UpperDataRange,
+            };
+            canStates.push(state);
+        }
+
+        return canStates;
     }
 
     // public trans(can: ICan): ICanState {

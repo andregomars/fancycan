@@ -9,20 +9,20 @@ const Splitter = require('split-frames');
 
 import { DataLayer } from './datalayer';
 import { QueueLayer } from './queuelayer';
-import { CacheLayer } from './cachelayer';
 import { DocService } from './services/doc.service';
 import { TransformService } from './services/transform.services';
 import { ICan } from './models/ICanData';
 import { Utility } from './services/utility';
 import { FireLayer } from './firelayer';
+import { IJ1939 } from './models/IJ1939';
 
 export class Application {
     public static start() {
         const fire = new FireLayer();
-        fire.getDefinitions().subscribe((defs: any) => {
-            const cache = CacheLayer.getInstance();
-            cache.set('defs', defs);
-            console.log(defs);
+        const utility = new Utility();
+
+        fire.getDefinitionWithSpecs().subscribe((spns: IJ1939[]) => {
+            utility.storeSpnsIntoCacheGroupedByPgn(spns);
 
             const STX = 0x88;
             const MAX_BUFFERS = 100;
@@ -31,7 +31,6 @@ export class Application {
 
             const tcpServer = net.createServer();
             const docService = new DocService();
-            const utility = new Utility();
             const urlDbConn = utility.getDbConnectionString();
             const urlMqConn = utility.getMqConnectionString();
             const mqClient: MqttClient = mqtt.connect(urlMqConn);
@@ -40,8 +39,7 @@ export class Application {
                 assert.equal(error, null);
                 const dbo = new DataLayer(dbClient);
                 const mqo = new QueueLayer(mqClient);
-                const fbo = new FireLayer();
-                const transformService = new TransformService(dbo, fbo);
+                const transformService = new TransformService();
 
                 tcpServer.on('connection', (socket) => {
                     console.log('start db connection');
@@ -58,7 +56,8 @@ export class Application {
                             const doc = docService.buildCan(chunk, rawID, localPort, remotePort);
                             docs.push(doc);
                             mqo.publishCans(docs);
-                            transformService.importCanStates(docs);
+                            const states = transformService.getCanStates(docs);
+                            dbo.insertCanStates(states);
                             if (docs.length >= MAX_BUFFERS) {
                                 dbo.insertCans(docs);
                                 docs.length = 0;

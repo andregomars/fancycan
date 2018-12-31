@@ -24,4 +24,7 @@ export class CacheLayer {
     public del(key: string) {
         return this.rootCache.del(key);
     }
+    public keys(): string[] {
+        return this.rootCache.keys();
+    }
 }

@@ -6,9 +6,9 @@ export interface ICanState {
     spnName: string;
     pgnNo: number;
     pgnName: string;
-    value: string;
+    value: number;
     unit: string;
-    min: string;
-    max: string;
+    min: number;
+    max: number;
 
 }

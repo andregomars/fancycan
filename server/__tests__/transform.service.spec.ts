@@ -1,25 +1,27 @@
 import { TransformService } from './../src/app/services/transform.services';
-import { DataLayer } from '../src/app/datalayer';
-import { FireLayer } from '../src/app/firelayer';
-import { MongoClient, ObjectID } from 'mongodb';
+import { ObjectID } from 'mongodb';
 import { ICan } from '../src/app/models/ICanData';
 import { IJ1939 } from '../src/app/models/IJ1939';
+import { ICanState } from '../src/app/models/ICanState';
+import { Utility } from '../src/app/services/utility';
 
 jest.mock('mongodb');
 jest.mock('../src/app/firelayer');
 
 describe('When test transform', () => {
-    const MongoClientMock = jest.fn<MongoClient>(() => ({
+    // const MongoClientMock = jest.fn<MongoClient>(() => ({
         // send: jest.fn(),
-    }));
-    const mongoClient = new MongoClientMock();
-    const dataLayer = new DataLayer(mongoClient);
-    const fireLayer = new FireLayer();
-    const transformService = new TransformService(dataLayer, fireLayer);
+    // }));
+    const transformService = new TransformService();
+    const utility = new Utility();
+
+    beforeAll(() => {
+        utility.storeSpnsIntoCacheGroupedByPgn([def9004, def2911]);
+    });
 
     const def9004: IJ1939 = {
         SPNNo: 9004,
-        SPNName: '',
+        SPNName: 'Motor Voltage',
         PGNNo: 64534,
         PGNName: '',
         StartByte: 5,
@@ -91,5 +93,10 @@ describe('When test transform', () => {
     it('get value from sample spn# 2911', () => {
         const actual = transformService.decodeData(sample2911.canData, def2911);
         expect(actual).toBe(3);
+    });
+
+    it('should get CAN state', () => {
+        const actual: ICanState[] = transformService.getCanState(sample9004);
+        expect(actual.length).toBe(1);
     });
 });
