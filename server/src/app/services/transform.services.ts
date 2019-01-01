@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { ICan } from '../models/ICanData';
 import { ICanState } from '../models/ICanState';
 import { IJ1939 } from '../models/IJ1939';
@@ -11,8 +12,8 @@ export class TransformService {
     }
 
     public getCanStates(cans: ICan[]): ICanState[] {
-        // return cans.map(this.getCanState).reduce((pre, cur) => [...pre, ...cur]);
-        return cans.map((can: ICan) => this.getCanState(can)).reduce((pre, cur) => [...pre, ...cur]);
+        return cans.map(this.getCanState).reduce((pre, cur) => [...pre, ...cur]);
+        // return cans.map((can: ICan) => this.getCanState(can)).reduce((pre, cur) => [...pre, ...cur]);
     }
 
     public getCanState(can: ICan): ICanState[] {
@@ -45,11 +46,6 @@ export class TransformService {
         return canStates;
     }
 
-    // public trans(can: ICan): ICanState {
-    //     const data = can.canData;
-    //     return null;
-    // }
-
     public decodePGN(canID: Buffer): number {
         return canID.readUInt16BE(1);
     }
@@ -79,6 +75,6 @@ export class TransformService {
         }
 
         const val = Buffer.from(parsedValues).readUIntLE(0, bytesCount);
-        return val * definition.Resolution + definition.Offset;
+        return _.round(val * definition.Resolution, 2) + definition.Offset;
     }
 }

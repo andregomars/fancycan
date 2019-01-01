@@ -17,6 +17,7 @@
     "@types/mqtt": "^2.5.0",
     "axios": "^0.18.0",
     "config": "^3.0.0",
+    "lodash": "^4.17.11",
     "mongodb": "^3.1.10",
     "mqtt": "^2.18.8",
     "node-cache": "^4.2.0",
@@ -29,6 +30,7 @@
   "devDependencies": {
     "@types/config": "^0.0.34",
     "@types/jest": "^23.3.10",
+    "@types/lodash": "^4.14.119",
     "@types/mongodb": "^3.1.14",
     "@types/node": "^10.12.9",
     "@types/shortid": "^0.0.29",
