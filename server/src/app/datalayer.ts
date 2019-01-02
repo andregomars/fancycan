@@ -33,13 +33,7 @@ export class DataLayer {
         });
     }
 
-    public insertCanStates(docs: ICanState[]) {
-        if (!docs || docs.length < 1) {
-            return;
-        }
-        this.conn.db('main').collection('can_state').insertMany(docs, (error, result) => {
-            assert.equal(error, null);
-            console.log(`${result.insertedCount} docs were stored into can_states`);
-        });
+    public async insertCanStates(docs: ICanState[]) {
+        await this.conn.db('main').collection('can_state').insertMany(docs);
     }
 }

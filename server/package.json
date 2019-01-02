@@ -14,9 +14,12 @@
     "debug": "npm run build && npm run watch-debug"
   },
   "dependencies": {
+    "@types/exit-hook": "^1.1.0",
     "@types/mqtt": "^2.5.0",
+    "async-exit-hook": "^2.0.1",
     "axios": "^0.18.0",
     "config": "^3.0.0",
+    "exit-hook": "^2.0.0",
     "lodash": "^4.17.11",
     "mongodb": "^3.1.10",
     "mqtt": "^2.18.8",

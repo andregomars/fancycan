@@ -30,6 +30,11 @@
   resolved "https://registry.yarnpkg.com/@types/config/-/config-0.0.34.tgz#123f91bdb5afdd702294b9de9ca04d9ea11137b0"
   integrity sha512-jWi9DXx77hnzN4kHCNEvP/kab+nchRLTg9yjXYxjTcMBkuc5iBb3QuwJ4sPrb+nzy1GQjrfyfMqZOdR4i7opRQ==
 
+"@types/exit-hook@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@types/exit-hook/-/exit-hook-1.1.0.tgz#de9d0fdb8a333ef70109920b0f908db41ffe425d"
+  integrity sha512-NS3odMpm3Qpm+C5cmBGlyIvOsE9W05uYUXmqpO69kXuJR91UKg/ORmVgVJxNR72dlrVzsZM2SUGgmpsu80G1Yw==
+
 "@types/jest@^23.3.10":
   version "23.3.10"
   resolved "https://registry.yarnpkg.com/@types/jest/-/jest-23.3.10.tgz#4897974cc317bf99d4fe6af1efa15957fa9c94de"
@@ -245,6 +250,11 @@ async-each@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/async-each/-/async-each-1.0.1.tgz#19d386a1d9edc6e7c1c85d388aedbcc56d33602d"
   integrity sha1-GdOGodntxufByF04iu28xW0zYC0=
+
+async-exit-hook@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/async-exit-hook/-/async-exit-hook-2.0.1.tgz#8bd8b024b0ec9b1c01cccb9af9db29bd717dfaf3"
+  integrity sha512-NW2cX8m1Q7KPA7a5M2ULQeZ2wR5qI5PAbw5L0UOMxdioVk9PMZ0h1TmyZEkPYrCvYjDlFICusOu1dlEKAAeXBw==
 
 async-limiter@~1.0.0:
   version "1.0.0"
@@ -1220,6 +1230,11 @@ execa@^0.7.0:
     p-finally "^1.0.0"
     signal-exit "^3.0.0"
     strip-eof "^1.0.0"
+
+exit-hook@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/exit-hook/-/exit-hook-2.0.0.tgz#b89f6f69b7d080efc2807c66a85957722637db92"
+  integrity sha512-usCR1VCwZTqwnGjf2tZ4RlkM+E8W7sss2DXjXEBLpd5A9gOY9z/iJhVr2mFkk0o816tZqpuXCkcSTVzAdVXAXw==
 
 exit@^0.1.2:
   version "0.1.2"

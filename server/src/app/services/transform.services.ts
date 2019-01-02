@@ -12,12 +12,10 @@ export class TransformService {
     }
 
     public getCanStates(cans: ICan[]): ICanState[] {
-        // return cans.map(this.getCanState).reduce((pre, cur) => [...pre, ...cur]);
         return cans.map((can: ICan) => this.getCanState(can)).reduce((pre, cur) => [...pre, ...cur]);
     }
 
     public getCanState(can: ICan): ICanState[] {
-        console.log('import CAN state...');
         const pgnID = this.decodePGN(can.canID);
         const spns = this.utility.retrieveSpnsByPgnFromCache(pgnID);
 

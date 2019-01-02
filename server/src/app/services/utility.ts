@@ -1,6 +1,9 @@
 import config from 'config';
 import { IJ1939 } from '../models/IJ1939';
 import { CacheLayer } from '../cachelayer';
+import { DataLayer } from '../datalayer';
+import { TransformService } from './transform.services';
+import { ICan } from '../models/ICanData';
 
 export class Utility {
     public getDbConnectionString(): string {
@@ -49,13 +52,17 @@ export class Utility {
                 cache.set<IJ1939[]>(key, [spn]);
             }
         }
-
-        // console.log(CacheLayer.getInstance().keys())
     }
 
     public retrieveSpnsByPgnFromCache(pgnNo: number): IJ1939[] | undefined {
         const key = this.buildPgnKey(pgnNo);
         return CacheLayer.getInstance().get<IJ1939[]>(key);
+    }
+
+    public async saveCanDocs(docs: ICan[], dbo: DataLayer, transformService: TransformService) {
+        dbo.insertCans(docs);
+        const states = transformService.getCanStates(docs);
+        await dbo.insertCanStates(states);
     }
 
     private buildPgnKey(pgnNo: number) {

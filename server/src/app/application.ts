@@ -1,5 +1,6 @@
 import net from 'net';
 import assert from 'assert';
+import exitHook from 'exit-hook';
 import { ObjectID } from 'bson';
 import { Readable } from 'stream';
 import { MongoClient } from 'mongodb';
@@ -17,7 +18,7 @@ import { FireLayer } from './firelayer';
 import { IJ1939 } from './models/IJ1939';
 
 export class Application {
-    public static start() {
+    public start() {
         const fire = new FireLayer();
         const utility = new Utility();
 
@@ -26,7 +27,7 @@ export class Application {
 
             const STX = 0x88;
             const MAX_BUFFERS = 100;
-            const stream = Application.createReadStream();
+            const stream = this.createReadStream();
             const docs: ICan[] = [];
 
             const tcpServer = net.createServer();
@@ -56,11 +57,11 @@ export class Application {
                             const doc = docService.buildCan(chunk, rawID, localPort, remotePort);
                             docs.push(doc);
                             mqo.publishCans(docs);
-                            const states = transformService.getCanStates(docs);
-                            dbo.insertCanStates(states);
                             if (docs.length >= MAX_BUFFERS) {
-                                dbo.insertCans(docs);
-                                docs.length = 0;
+                                (async () => {
+                                    utility.saveCanDocs(docs, dbo, transformService);
+                                    docs.length = 0;
+                                })();
                             }
                         });
 
@@ -81,26 +82,25 @@ export class Application {
                 tcpServer.listen(port);
                 console.log('start listening on port ' + port);
 
-                process.on('SIGINT', () => {
+                // process.on('SIGINT', async () => {
+                exitHook(async () => {
                     tcpServer.close();
-                    console.log(`docs in stream remains ${docs.length} before exit: `);
+                    console.log(`docs in stream remains ${docs.length} before exit`);
                     if (docs.length > 0) {
-                        dbo.insertCans(docs);
+                        await utility.saveCanDocs(docs, dbo, transformService);
+                        console.log('remained data stream are all stored.');
                     }
-                    console.log('remained data stream are all stored.');
                     dbClient.close();
-                    process.exit(0);
                 });
             });
         });
     }
 
-    public static createReadStream() {
+    public createReadStream() {
         return new Readable({
             read() {
                 return;
             },
         });
     }
-
 }
