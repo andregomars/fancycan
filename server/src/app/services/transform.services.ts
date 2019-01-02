@@ -73,6 +73,6 @@ export class TransformService {
         }
 
         const val = Buffer.from(parsedValues).readUIntLE(0, bytesCount);
-        return _.round(val * definition.Resolution, 2) + definition.Offset;
+        return _.round(val * definition.Resolution + definition.Offset, 4);
     }
 }

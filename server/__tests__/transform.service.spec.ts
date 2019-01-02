@@ -38,6 +38,25 @@ describe('When test transform', () => {
         },
       };
 
+    const def9006: IJ1939 = {
+        SPNNo: 9006,
+        SPNName: 'H-C Battery Temp',
+        PGNNo: 64523,
+        PGNName: '',
+        StartByte: 7,
+        StartBit: 1,
+        Length: 8,
+        Resolution: 1.8,
+        Offset: -40,
+        Unit: 'F',
+        LowerDataRange: 0,
+        UpperDataRange: 220,
+        Status: {
+          Name: '',
+          Description: [],
+        },
+      };
+
     const def2911 = {
         SPNNo: 2911,
         SPNName: 'Halt brake switch',
@@ -70,6 +89,17 @@ describe('When test transform', () => {
         canData: Buffer.from('BAQAAFQCACA=', 'base64'),
         localPort: 5888,
         remotePort: 6005,
+
+    };
+
+    const sample9006: ICan = {
+        _id: new ObjectID(),
+        rawID: new ObjectID(),
+        delimiter: Buffer.from('88', 'hex'),
+        canID: Buffer.from('GPwL9A==', 'base64'),
+        canData: Buffer.from('YABF/hcAUXM=', 'base64'),
+        localPort: 5888,
+        remotePort: 6005,
     };
 
     const sample2911: ICan = {
@@ -87,12 +117,17 @@ describe('When test transform', () => {
         expect(actual).toBe(64534);
     });
 
-    it('get value from sample spn# 9004', () => {
+    it('get correct value from sample spn# 9004', () => {
         const actual = transformService.decodeData(sample9004.canData, def9004);
         expect(actual).toBe(596);
     });
 
-    it('get value from sample spn# 2911', () => {
+    it('get correct value from sample spn# 9006', () => {
+        const actual = transformService.decodeData(sample9006.canData, def9006);
+        expect(actual).toBe(105.8);
+    });
+
+    it('get correct value from sample spn# 2911', () => {
         const actual = transformService.decodeData(sample2911.canData, def2911);
         expect(actual).toBe(3);
     });
