@@ -26,12 +26,12 @@ export class Application {
             utility.storeSpnsIntoCacheGroupedByPgn(spns);
 
             const STX = 0x88;
-            const MAX_BUFFERS = 100;
             const stream = this.createReadStream();
             const docs: ICan[] = [];
 
             const tcpServer = net.createServer();
             const docService = new DocService();
+            const MAX_BUFFERS = +utility.getCommonConfig('rawParsingBuffer');
             const urlDbConn = utility.getDbConnectionString();
             const urlMqConn = utility.getMqConnectionString();
             const mqClient: MqttClient = mqtt.connect(urlMqConn);

@@ -16,5 +16,8 @@
     },
     "fbConfig": {
         "url": "https://fancycandemo.firebaseio.com"
+    },
+    "common": {
+        "rawParsingBuffer": 1
     }
 }

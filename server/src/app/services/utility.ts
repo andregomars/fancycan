@@ -30,6 +30,10 @@ export class Utility {
         return url;
     }
 
+    public getCommonConfig(key: string): string {
+        return config.get(`common.${key}`);
+    }
+
     public getFbConnectionString(): string {
         return config.get('fbConfig.url');
     }
