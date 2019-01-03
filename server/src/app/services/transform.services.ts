@@ -28,7 +28,7 @@ export class TransformService {
             const val = this.decodeData(can.canData, spn);
             const state: ICanState = {
                 canObjID: can._id,
-                vid: 6001,
+                vcode: 6001,
                 spnNo: spn.SPNNo,
                 spnName: spn.SPNName,
                 pgnNo: pgnID,

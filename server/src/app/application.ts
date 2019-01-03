@@ -59,7 +59,7 @@ export class Application {
                             mqo.publishCans(docs);
                             if (docs.length >= MAX_BUFFERS) {
                                 (async () => {
-                                    utility.saveCanDocs(docs, dbo, transformService);
+                                    await utility.saveCanDocs(docs, dbo, transformService);
                                     docs.length = 0;
                                 })();
                             }

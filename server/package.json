@@ -4,8 +4,8 @@
   "license": "MIT",
   "scripts": {
     "start": "node dist/app.js",
-    "serve": "npx tsc && node dist/app.js",
-    "build": "npx tsc",
+    "serve": "npx tsc -b && node dist/app.js",
+    "build": "npx tsc -b",
     "test": "npx jest",
     "tslint": "npx tslint -c tslint.json -p tsconfig.json",
     "watch-ts": "npx tsc -w",
