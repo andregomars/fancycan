@@ -20,6 +20,7 @@ describe('When test transform', () => {
     });
 
     const def9004: IJ1939 = {
+        Code: 'voltage',
         SPNNo: 9004,
         SPNName: 'Motor Voltage',
         PGNNo: 64534,
@@ -39,6 +40,7 @@ describe('When test transform', () => {
       };
 
     const def9006: IJ1939 = {
+        Code: 'hitemp_battery',
         SPNNo: 9006,
         SPNName: 'H-C Battery Temp',
         PGNNo: 64523,
@@ -58,6 +60,7 @@ describe('When test transform', () => {
       };
 
     const def2911 = {
+        Code: 'brakeswitch',
         SPNNo: 2911,
         SPNName: 'Halt brake switch',
         PGNNo: 61441,

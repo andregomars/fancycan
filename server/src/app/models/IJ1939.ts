@@ -1,4 +1,5 @@
 export interface IJ1939 {
+    Code: string;
     SPNNo: number;
     SPNName: string;
     PGNNo: number;

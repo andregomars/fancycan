@@ -30,6 +30,7 @@ export class TransformService {
             const state: ICanState = {
                 canObjID: can._id,
                 vid: 6001,
+                code: spn.Code,
                 spnNo: spn.SPNNo,
                 spnName: spn.SPNName,
                 pgnNo: pgnID,
@@ -79,7 +80,7 @@ export class TransformService {
 
     public buildVehicleState(canState: ICanState): any {
         const state: any = { vcode: +canState.vid };
-        state[canState.spnNo] = canState.value;
+        state[canState.code] = canState.value;
         return state;
     }
 }

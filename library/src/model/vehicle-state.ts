@@ -1,6 +1,6 @@
 import { Geolocation } from "./geolocation";
 
-export interface VehicleState {
+export interface IVehicleState {
     vcode: string,
     fcode: string,
     geolocations: Geolocation[],

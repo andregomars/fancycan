@@ -42,6 +42,7 @@ export class FireLayer {
                     const spns = [...spnsPropMatched, ...spns1939Matched];
                     return spns.map((spn: any) => {
                         return {
+                            Code: def.code,
                             SPNNo: +spn.SPNNo,
                             SPNName: spn.SPNName,
                             PGNNo: +spn.PGNNo,
