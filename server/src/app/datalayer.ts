@@ -4,6 +4,7 @@ import { MongoClient } from 'mongodb';
 import { ICanRaw } from './models/ICanRaw';
 import { ICan } from './models/ICanData';
 import { ICanState } from './models/ICanState';
+import { IVehicleState } from '../../../library/src';
 
 type InsertCallBack = (id: ObjectID) => any;
 
@@ -35,5 +36,17 @@ export class DataLayer {
 
     public async insertCanStates(docs: ICanState[]) {
         await this.conn.db('main').collection('can_state').insertMany(docs);
+    }
+
+    public async upsertVehicleState(state: any) {
+        await this.conn.db('main').collection('vehicle_state').updateOne(
+            { vcode: state.vcode },
+            {
+                $currentDate: { editDate: true },
+                $set: state,
+                $setOnInsert: { createDate: new Date() },
+            },
+            { upsert: true },
+        );
     }
 }

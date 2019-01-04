@@ -4,6 +4,7 @@ import { CacheLayer } from '../cachelayer';
 import { DataLayer } from '../datalayer';
 import { TransformService } from './transform.services';
 import { ICan } from '../models/ICanData';
+import { ICanState } from '../models/ICanState';
 
 export class Utility {
     public getDbConnectionString(): string {
@@ -67,6 +68,14 @@ export class Utility {
         dbo.insertCans(docs);
         const states = transformService.getCanStates(docs);
         await dbo.insertCanStates(states);
+        for (const canState of states) {
+            await this.saveVehicleStateDoc(canState, dbo, transformService);
+        }
+    }
+
+    public async saveVehicleStateDoc(canState: ICanState, dbo: DataLayer, transofrmService: TransformService) {
+        const state = transofrmService.buildVehicleState(canState);
+        await dbo.upsertVehicleState(state);
     }
 
     private buildPgnKey(pgnNo: number) {

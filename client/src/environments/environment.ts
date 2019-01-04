@@ -14,6 +14,11 @@ export const environment = {
     storageBucket: 'xxx',
     messagingSenderId: 'xxx'
   },
+  mongodbAPI: {
+    url: 'http://localhost:8080',
+    database: 'main',
+    authToken: 'Basic YWRtaW46Y2hhbmdlaXQ='
+  },
   mqtt: {
     connectOnCreate: false,
     protocol: 'ws',

@@ -112,6 +112,8 @@ export class VehicleComponent implements OnInit {
     this.loadVehicleStates();
     this.loadVehicle();
     this.loadPlayChartData();
+
+    this.loadVehicleState();
   }
 
   private loadVehicle() {
@@ -155,6 +157,10 @@ export class VehicleComponent implements OnInit {
     this.decodes$ = this.dataService.getDecodes().pipe(
       share()
     );
+  }
+
+  private loadVehicleState() {
+    this.dataService.getVehicleState('6001').subscribe(x => console.log(x));
   }
 
   private loadPlayChartData() {

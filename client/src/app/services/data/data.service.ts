@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Observable, pipe } from 'rxjs';
 
 
@@ -12,6 +12,8 @@ import { share, map } from 'rxjs/operators';
 export class DataService {
   private sourceType: DataSourceType;
   private rootUrl: string;
+  private mongoUrl: string;
+  private mongoApiHeader: HttpHeaders;
   private delayEmulatorTimer: number;
   private tooltips$: Observable<any>;
 
@@ -21,6 +23,8 @@ export class DataService {
   ) {
     this.sourceType = environment.dataSource;
     this.delayEmulatorTimer = environment.delayEmulatorTimer;
+    this.mongoUrl = `${environment.mongodbAPI.url}/${environment.mongodbAPI.database}`;
+    this.mongoApiHeader = new HttpHeaders().append('Authorization', environment.mongodbAPI.authToken);
 
 
     switch (this.sourceType) {
@@ -42,6 +46,18 @@ export class DataService {
   getRealtimeStates(): Observable<any> {
     return this.http
       .get<any>(`${this.rootUrl}/realtime-states.json`);
+  }
+
+  getVehicleState(vcode: string): Observable<any> {
+    const params = new HttpParams().set('filter', `{'vcode': ${vcode}}`);
+    const headers = this.mongoApiHeader;
+    return this.http
+      .get<any>(`${this.mongoUrl}/vehicle_state`, { headers, params }).pipe(
+        map(resp => {
+          const sets: any[] = resp._embedded;
+          return sets && sets.length > 0 ? sets[0] : null;
+        })
+      );
   }
 
   getAlertStats(): Observable<any> {

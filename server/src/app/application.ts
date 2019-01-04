@@ -56,7 +56,7 @@ export class Application {
                         })).on('data', (chunk: Buffer) => {
                             const doc = docService.buildCan(chunk, rawID, localPort, remotePort);
                             docs.push(doc);
-                            mqo.publishCans(docs);
+                            mqo.publishCan(doc);
                             if (docs.length >= MAX_BUFFERS) {
                                 (async () => {
                                     await utility.saveCanDocs(docs, dbo, transformService);

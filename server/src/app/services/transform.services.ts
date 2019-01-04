@@ -3,6 +3,7 @@ import { ICan } from '../models/ICanData';
 import { ICanState } from '../models/ICanState';
 import { IJ1939 } from '../models/IJ1939';
 import { Utility } from './utility';
+import { IVehicleState } from '../../../../library/src';
 
 export class TransformService {
     private utility: Utility;
@@ -74,5 +75,11 @@ export class TransformService {
 
         const val = Buffer.from(parsedValues).readUIntLE(0, bytesCount);
         return _.round(val * definition.Resolution + definition.Offset, 4);
+    }
+
+    public buildVehicleState(canState: ICanState): any {
+        const state: any = { vcode: +canState.vid };
+        state[canState.spnNo] = canState.value;
+        return state;
     }
 }
