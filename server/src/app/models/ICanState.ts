@@ -2,7 +2,7 @@ import { ObjectID } from 'bson';
 
 export interface ICanState {
     canObjID: ObjectID;
-    vid: number;
+    vcode: string;
     code: string;
     spnNo: number;
     spnName: string;

@@ -29,7 +29,7 @@ export class TransformService {
             const val = this.decodeData(can.canData, spn);
             const state: ICanState = {
                 canObjID: can._id,
-                vid: 6001,
+                vcode: '6001',
                 code: spn.Code,
                 spnNo: spn.SPNNo,
                 spnName: spn.SPNName,
@@ -79,7 +79,7 @@ export class TransformService {
     }
 
     public buildVehicleState(canState: ICanState): any {
-        const state: any = { vcode: +canState.vid };
+        const state: any = { vcode: canState.vcode };
         state[canState.code] = canState.value;
         return state;
     }
