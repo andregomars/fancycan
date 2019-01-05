@@ -11,7 +11,8 @@
     "watch-ts": "npx tsc -w",
     "serve-debug": "npx nodemon --inspect dist/app.js",
     "watch-debug": "npx concurrently -k -p \"[{name}]\" \"npm run watch-ts\" \"npm run serve-debug\"",
-    "debug": "npm run build && npm run watch-debug"
+    "debug": "npm run build && npm run watch-debug",
+    "deploy": "npx tsc -b && pm2 delete fcrx && pm2 start --env production"
   },
   "dependencies": {
     "axios": "^0.18.0",
