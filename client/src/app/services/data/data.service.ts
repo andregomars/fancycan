@@ -49,7 +49,7 @@ export class DataService {
   }
 
   getVehicleState(vcode: string): Observable<any> {
-    const params = new HttpParams().set('np', '').set('filter', `{'vcode': ${vcode}}`);
+    const params = new HttpParams().set('np', '').set('filter', `{'vcode': '${vcode}'}`);
     const headers = this.mongoApiHeader;
     return this.http
       .get<any>(`${this.mongoUrl}/vehicle_state`, { headers, params });

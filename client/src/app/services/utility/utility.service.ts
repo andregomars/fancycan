@@ -133,7 +133,7 @@ export class UtilityService {
         return output;
     }
 
-    attachMapLabel(vehicles: any): any {
+    attachMapLabels(vehicles: any): any {
         return vehicles.map(vehicle => {
             return Object.assign(vehicle, {
                 label: {
@@ -147,7 +147,23 @@ export class UtilityService {
         });
     }
 
-    public convertSelectOptions(options: string[], values: string[]): any[] {
+    attachGeoLabels(vehicle: any): any {
+        const locs: any[] = [...vehicle.geo];
+        vehicle.geo = locs.map(loc => {
+            return Object.assign(loc, {
+                label: {
+                    color: '#ffffff',
+                    fontFamily: '',
+                    fontSize: '9px',
+                    fontWeight: 'normal',
+                    text: vehicle.code
+                }
+            });
+        });
+        return vehicle;
+    }
+
+    convertSelectOptions(options: string[], values: string[]): any[] {
         return options.map(opt => {
             return {
                 name: opt,

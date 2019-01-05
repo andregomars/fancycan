@@ -12,7 +12,8 @@
           Current Time: {{ currentTime | date: 'yyyy-MM-dd hh:mm:ss'}}
         </div>
         <div class="col-12 col-md-6">
-          Last updated: {{ lastUpdated }}
+          <!-- Last updated: {{ lastUpdated }} -->
+          Last updated: {{ (vehicle$ | async)?.editDate.$date | date: 'yyyy-MM-dd hh:mm:ss' }}
         </div>
       </div>
     </div>
@@ -24,7 +25,7 @@
           <label>Engine</label>
         </div>
         <div class="col-4">
-          <app-switch [isSwitchOn]="(vehicle$ | async)?.engine"></app-switch>
+          <app-switch [isSwitchOn]="(vehicle$ | async)?.hivoltage"></app-switch>
         </div>
         <div class="col-3">
           <img *ngIf="(vehicle$ | async)?.engine_check"
@@ -103,11 +104,21 @@
         <div class="col mt-2 p-2" [style.min-height.px]="mapMinHeight" [style.background-color]="'#242f3e'">
           <agm-map id="map_canvas" *ngIf="loadMap" [zoom]="mapZoom" [streetViewControl]=false [styles]="mapStyle"
             [latitude]="map_lat" [longitude]="map_lgt">
-            <!-- <ng-container *ngIf="(vehicle$ | async) as vehicle">
-              <agm-marker [latitude]="vehicle.latitude" [longitude]="vehicle.longitude" iconUrl="assets/img/map/bus.20.png">
-              </agm-marker>
-            </ng-container> -->
-            <ng-container *ngIf="(vehicles$ | async) as locations">
+            <ng-container *ngIf="(vehicle$ | async)?.geo as locations">
+              <ng-container *ngFor="let loc of locations; let i = index; let isFirst = first; let isLast = last;" >
+                <agm-marker *ngIf="isLast" iconUrl="assets/img/map/arrow_orange.20.png"
+                  [latitude]="loc.lat" [longitude]="loc.long">
+                </agm-marker>
+                <agm-marker *ngIf="!isLast" iconUrl="assets/img/map/fa-circle.10.png"
+                  [latitude]="loc.lat" [longitude]="loc.long">
+                </agm-marker>
+              </ng-container>
+              <agm-polyline [polylineDraggable]=false [strokeColor]="'white'" [strokeOpacity]="0.5" [strokeWeight]="5">
+                <agm-polyline-point *ngFor="let loc of locations" [latitude]="loc.lat" [longitude]="loc.long">
+                </agm-polyline-point>
+              </agm-polyline>
+            </ng-container>
+            <!-- <ng-container *ngIf="(vehicles$ | async) as locations">
               <ng-container *ngFor="let loc of locations; let i = index; let isFirst = first; let isLast = last;" >
                 <agm-marker *ngIf="isLast" iconUrl="assets/img/map/arrow_orange.20.png"
                   [latitude]="loc.latitude" [longitude]="loc.longitude">
@@ -120,7 +131,7 @@
                 <agm-polyline-point *ngFor="let loc of locations" [latitude]="loc.latitude" [longitude]="loc.longitude">
                 </agm-polyline-point>
               </agm-polyline>
-            </ng-container>
+            </ng-container> -->
           </agm-map>
         </div>
       </div>
@@ -130,13 +141,13 @@
         <div class="col-6 text-center">
           <div>Speed</div>
           <ngx-gauge size="100" [foregroundColor]="gaugeForegroundColor" [type]="gaugeType" 
-            [value]="35" [label]="'0 - 100'" [thick]="gaugeThick">
+            [value]="(vehicle$ | async)?.speed" [label]="'0 - 100'" [thick]="gaugeThick">
           </ngx-gauge>
         </div>
         <div class="col-6 text-center">
           <div>RPM</div>
           <ngx-gauge size="100" [foregroundColor]="gaugeForegroundColor" [type]="gaugeType" 
-            [value]="85" [label]="'0 - 3500'" [thick]="gaugeThick">
+            [value]="(vehicle$ | async)?.speed_engine" [label]="'0 - 3500'" [thick]="gaugeThick">
           </ngx-gauge>
         </div>
         <div class="col-6 text-center">
@@ -156,7 +167,7 @@
       <div class="dropdown-divider"></div>
       <div class="row">
         <div class="col-12 col-md-6">
-          Odometer: {{ (vehicle$ | async)?.odometer | number:'1.1-2' }} mi
+          Odometer: {{ (vehicle$ | async)?.range | number:'1.1-2' }} mi
         </div>
         <div class="col-12 col-md-6">
           VIN: {{ (vehicle$ | async)?.vin }}
@@ -174,7 +185,7 @@
               <label>Coolant level</label>
             </div>
           </div>
-          <app-progress-bar [value]="(vehicle$ | async)?.coolant_level"
+          <app-progress-bar [value]="(vehicle$ | async)?.lotemp_battery"
             min="0" max="100"></app-progress-bar>
         </div>
       </div>
@@ -185,7 +196,7 @@
               <label>Coolant temperature</label>
             </div>
           </div>
-          <app-progress-bar [value]="(vehicle$ | async)?.coolant_temperature"
+          <app-progress-bar [value]="(vehicle$ | async)?.hitemp_battery"
             [min]="temperatureMin" [max]="temperatureMax"></app-progress-bar>
         </div>
       </div>

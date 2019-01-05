@@ -5,7 +5,7 @@ import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
 import * as moment from 'moment';
 import { Observable } from 'rxjs';
 import { DataService, UtilityService } from '../../services';
-import { share, map, tap, switchMap } from 'rxjs/operators';
+import { share, map, tap, switchMap, take } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { MapStyle } from './../shared/map-style';
 import { ViewProfile } from '../../models';
@@ -109,8 +109,9 @@ export class VehicleComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.loadVehicleStates();
-    this.loadVehicle();
+    // this.loadVehicleStates();
+    // this.loadVehicle();
+    this.loadVehicleState();
     this.loadPlayChartData();
 
     this.loadVehicleState();
@@ -120,16 +121,6 @@ export class VehicleComponent implements OnInit {
     this.vehicle$ = this.vehicles$.pipe(
       map(vehicles => vehicles[0])
     );
-    // this.vehicle$ = this.dataService.getPanels().pipe(
-    //   switchMap(vehicles =>
-    //     this.vcode$.pipe(
-    //       map(vcode =>
-    //         vehicles.find(vehicle => vehicle.code === vcode)
-    //       )
-    //     )
-    //   ),
-    //   share()
-    // );
   }
 
   private loadVehicleStates() {
@@ -141,7 +132,7 @@ export class VehicleComponent implements OnInit {
           )
         )
       ),
-      map(vehicles => this.utilityService.attachMapLabel(vehicles)),
+      map(vehicles => this.utilityService.attachMapLabels(vehicles)),
       share()
     );
 
@@ -160,7 +151,11 @@ export class VehicleComponent implements OnInit {
   }
 
   private loadVehicleState() {
-    this.dataService.getVehicleState('6001').subscribe(x => console.log(x));
+    this.vehicle$ = this.vcode$.pipe(
+      switchMap(vcode => this.dataService.getVehicleState(vcode)),
+      map(vehicles => this.utilityService.attachGeoLabels(vehicles[0])),
+      share()
+    );
   }
 
   private loadPlayChartData() {

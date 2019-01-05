@@ -90,7 +90,7 @@ export class PlaybackComponent implements OnInit {
           )
         )
       ),
-      map(vehicles => this.utilityService.attachMapLabel(vehicles)),
+      map(vehicles => this.utilityService.attachMapLabels(vehicles)),
       share()
     );
 

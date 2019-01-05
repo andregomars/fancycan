@@ -77,7 +77,7 @@ export class FleetDashboardComponent implements OnInit {
         vehicles.filter((el, idx, arr) =>
           idx === arr.findIndex(item => item.code === el.code))
       ),
-      map(vehicles => this.utilityService.attachMapLabel(vehicles)),
+      map(vehicles => this.utilityService.attachMapLabels(vehicles)),
       share()
     );
     // this.vehicles$ = this.dataService.getPanels().pipe(
