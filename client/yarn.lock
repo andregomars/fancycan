@@ -4412,9 +4412,12 @@ ngx-bootstrap@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/ngx-bootstrap/-/ngx-bootstrap-3.0.1.tgz#e98d2fc6340f32a9d358cd08e8fda7dcb23bdab3"
 
-ngx-gauge@^1.0.0-beta.4:
-  version "1.0.0-beta.4"
-  resolved "https://registry.yarnpkg.com/ngx-gauge/-/ngx-gauge-1.0.0-beta.4.tgz#cfbaab6660430926dc0814a00d1a06c9bdd6e581"
+ngx-gauge@^1.0.0-beta.7:
+  version "1.0.0-beta.7"
+  resolved "https://registry.yarnpkg.com/ngx-gauge/-/ngx-gauge-1.0.0-beta.7.tgz#d45488922c4b15ba4ca2f52dce9e16fc4a3e0eb9"
+  integrity sha512-pN3QIsQ5RZ5G2Nm+fi9PFw4AtN9ZPnKvPhPDKbcY5SnI34/zEr0+9r+CPXrVvWJ9HQKIIfuOuFMApCNh54fpVw==
+  dependencies:
+    tslib "^1.9.0"
 
 ngx-mqtt@^6.8.2:
   version "6.8.2"

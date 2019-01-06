@@ -1,21 +1,20 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DataService, UtilityService } from '../../services';
 import { Observable, Subscription } from 'rxjs';
-import { map, share, shareReplay, tap, take, bufferCount } from 'rxjs/operators';
+import { map, share } from 'rxjs/operators';
 import * as moment from 'moment';
 import { MqttService, IMqttMessage } from 'ngx-mqtt';
 import { Buffer } from 'buffer/';
 
 import { environment } from '../../../environments/environment';
 import { ICan } from '../../models/ican';
-import { MapStyle } from '../shared/map-style';
 
 @Component({
   selector: 'app-vehicle-rtm',
   templateUrl: './rtm.component.html',
   styleUrls: ['./rtm.component.scss']
 })
-export class RtmComponent implements OnInit, OnDestroy {
+export class RtmComponent implements OnInit {
   bsValue = new Date();
   bsRangeValue: Date[];
   maxDate = new Date();
@@ -43,10 +42,6 @@ export class RtmComponent implements OnInit, OnDestroy {
     this.initMqtt();
     this.loadData();
     this.subscribe();
-  }
-
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
   }
 
   private subscribe() {

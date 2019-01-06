@@ -14,6 +14,7 @@ import { SwitchComponent } from './switch/switch.component';
 import { TransmissionSwitchComponent } from './transmission-switch/transmission-switch.component';
 import { ProgressBarComponent } from './progress-bar/progress-bar.component';
 import { PlayChartComponent } from './play-chart/play-chart.component';
+import { ChartGaugeComponent } from './chart-gauge/chart-gauge.component';
 
 @NgModule({
   imports: [
@@ -33,6 +34,7 @@ import { PlayChartComponent } from './play-chart/play-chart.component';
       TransmissionSwitchComponent,
       ProgressBarComponent,
       PlayChartComponent,
+      ChartGaugeComponent,
   ],
   exports: [
       TooltipLabelComponent,
@@ -42,6 +44,7 @@ import { PlayChartComponent } from './play-chart/play-chart.component';
       TransmissionSwitchComponent,
       ProgressBarComponent,
       PlayChartComponent,
+      ChartGaugeComponent,
   ]
 })
 export class ComponentsModule { }
