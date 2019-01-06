@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-import { NgxGaugeModule } from 'ngx-gauge';
+// import { NgxGaugeModule } from 'ngx-gauge';
 import { AgmCoreModule } from '@agm/core';
 import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
 import { AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
@@ -27,7 +27,7 @@ import { MalfunctionListComponent } from './malfunction-list.component';
     FormsModule,
     ChartsModule,
     BsDropdownModule,
-    NgxGaugeModule,
+    // NgxGaugeModule,
     AppPipeModule,
     VehicleRoutingModule,
     AgmCoreModule,

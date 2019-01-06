@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
-import { NgxGaugeModule } from 'ngx-gauge';
+// import { NgxGaugeModule } from 'ngx-gauge';
 import { AgmCoreModule } from '@agm/core';
 import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
 import { AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
@@ -26,7 +26,7 @@ import { ChecklistLogComponent } from './checklist-log.component';
     ChartsModule,
     BsDropdownModule,
     BsDatepickerModule,
-    NgxGaugeModule,
+    // NgxGaugeModule,
     FleetRoutingModule,
     SelectModule,
     AppPipeModule,

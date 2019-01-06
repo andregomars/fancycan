@@ -144,24 +144,32 @@
     <div class="col-12 col-lg-4">
       <div class="row no-gutters mt-2">
         <div class="col-6 text-center">
-          <ngx-gauge size="100" foregroundColor="#17a2b8" [type]="gaugeType" [value]="85" [label]="'Speed'" [thick]="gaugeThick"
+          <!-- <ngx-gauge size="100" foregroundColor="#17a2b8" [type]="gaugeType" [value]="85" [label]="'Speed'" [thick]="gaugeThick"
             [append]="">
-          </ngx-gauge>
+          </ngx-gauge> -->
+          <app-chart-gauge [value]="85" 
+            [max]="100" title="Speed"></app-chart-gauge>
         </div>
         <div class="col-6 text-center">
-          <ngx-gauge size="100" foregroundColor="#17a2b8" [type]="gaugeType" [value]="57" [label]="'RPM'" [thick]="gaugeThick"
+          <!-- <ngx-gauge size="100" foregroundColor="#17a2b8" [type]="gaugeType" [value]="57" [label]="'RPM'" [thick]="gaugeThick"
             [append]="">
-          </ngx-gauge>
+          </ngx-gauge> -->
+          <app-chart-gauge [value]="57" 
+            [max]="100" title="RPM"></app-chart-gauge>
         </div>
         <div class="col-6 text-center">
-          <ngx-gauge size="100" foregroundColor="#17a2b8" [type]="gaugeType" [value]="68.3" [label]="'Spare 1'" [thick]="gaugeThick"
+          <!-- <ngx-gauge size="100" foregroundColor="#17a2b8" [type]="gaugeType" [value]="68.3" [label]="'Spare 1'" [thick]="gaugeThick"
             [append]="">
-          </ngx-gauge>
+          </ngx-gauge> -->
+          <app-chart-gauge [value]="57" 
+            [max]="100" title="Spare 1"></app-chart-gauge>
         </div>
         <div class="col-6 text-center">
-          <ngx-gauge size="100" foregroundColor="#17a2b8" [type]="gaugeType" [value]="68.3" [label]="'Spare 2'" [thick]="gaugeThick"
+          <!-- <ngx-gauge size="100" foregroundColor="#17a2b8" [type]="gaugeType" [value]="68.3" [label]="'Spare 2'" [thick]="gaugeThick"
             [append]="">
-          </ngx-gauge>
+          </ngx-gauge> -->
+          <app-chart-gauge [value]="57" 
+            [max]="100" title="Spare 2"></app-chart-gauge>
         </div>
       </div>
       <div class="dropdown-divider"></div>

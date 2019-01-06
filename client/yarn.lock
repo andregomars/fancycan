@@ -1829,6 +1829,11 @@ dashdash@^1.12.0:
   dependencies:
     assert-plus "^1.0.0"
 
+date-fns@^1.30.1:
+  version "1.30.1"
+  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-1.30.1.tgz#2e71bf0b119153dbb4cc4e88d9ea5acfb50dc05c"
+  integrity sha512-hBSVCvSmWC+QypYObzwGOd9wqdDpOt+0wl0KbU+R+uuZBS1jN8VsD1ss3irQDknRj5NvxiTF6oj/nDRnN/UQNw==
+
 date-format@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/date-format/-/date-format-1.2.0.tgz#615e828e233dd1ab9bb9ae0950e0ceccfa6ecad8"
@@ -4411,13 +4416,6 @@ ng2-charts@^1.6.0:
 ngx-bootstrap@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/ngx-bootstrap/-/ngx-bootstrap-3.0.1.tgz#e98d2fc6340f32a9d358cd08e8fda7dcb23bdab3"
-
-ngx-gauge@^1.0.0-beta.7:
-  version "1.0.0-beta.7"
-  resolved "https://registry.yarnpkg.com/ngx-gauge/-/ngx-gauge-1.0.0-beta.7.tgz#d45488922c4b15ba4ca2f52dce9e16fc4a3e0eb9"
-  integrity sha512-pN3QIsQ5RZ5G2Nm+fi9PFw4AtN9ZPnKvPhPDKbcY5SnI34/zEr0+9r+CPXrVvWJ9HQKIIfuOuFMApCNh54fpVw==
-  dependencies:
-    tslib "^1.9.0"
 
 ngx-mqtt@^6.8.2:
   version "6.8.2"
