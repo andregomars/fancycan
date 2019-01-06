@@ -20,7 +20,9 @@ export class RtmComponent implements OnInit {
   maxDate = new Date();
   definitions$: Observable<any>;
   cans$: Observable<any>;
-  private subscription: Subscription;
+  queue: any[] = [];
+  isFiltering = false;
+  // private subscription: Subscription;
   private topic: string;
 
   lastUpdated = '2018-08-28 23:32:55';
@@ -28,8 +30,8 @@ export class RtmComponent implements OnInit {
   engineRunning = 45;
   engineIdle = 60;
   odometer = 27026.8;
-  vin = 'V12W132456107';
-  imgBus = 'assets/img/vehicle/bus.png';
+  // vin = 'V12W132456107';
+  // imgBus = 'assets/img/vehicle/bus.png';
   imgEngineCheck = 'assets/img/vehicle/check_engine.png';
 
   constructor(
@@ -41,12 +43,16 @@ export class RtmComponent implements OnInit {
   ngOnInit() {
     this.initMqtt();
     this.loadData();
-    this.subscribe();
+    this.subscribeMqtt();
   }
 
-  private subscribe() {
+  filterCans() {
+    this.isFiltering = !this.isFiltering;
+  }
+
+  private subscribeMqtt() {
     this.mqttService.connect();
-    const queue = [];
+    // const queue = [];
     this.cans$ =
       this.mqttService.observe(this.topic).pipe(
         map((message: IMqttMessage) => {
@@ -55,11 +61,11 @@ export class RtmComponent implements OnInit {
             id: Buffer.from(canMsg.canID).toString('hex'),
             value: Buffer.from(canMsg.canData).toString('hex'),
           };
-          if (queue.length > environment.rtmMessagesMaxCount) {
-            queue.pop();
+          if (this.queue.length > environment.rtmMessagesMaxCount) {
+            this.queue.pop();
           }
-          queue.unshift(can);
-          return queue;
+          this.queue.unshift(can);
+          return this.queue;
         }),
       );
   }

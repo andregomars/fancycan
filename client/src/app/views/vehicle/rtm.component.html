@@ -3,7 +3,7 @@
     <div class="col-12 col-md-4 px-0">
       <app-nav-label></app-nav-label>
       <button class="btn btn-link pull-right p-0">
-        <i class="fa fa-refresh monospace">Connect</i>
+        <i class="fa fa-refresh">Connect</i>
       </button>
     </div>
     <div class="col-12 col-md-8">
@@ -51,7 +51,23 @@
               <tr>
                 <th><small>CAN ID</small></th>
                 <th><small>Start bit</small></th>
-                <th><small>Length</small></th>
+                <th>
+                  <small>Length</small>
+                  <!-- <button class="btn btn-link text-secondary pull-right p-0 m-0">
+                    <span class="fa-stack">
+                      <i class="fa fa-filter fa-stack-1x"></i>
+                      <i class="fa fa-ban fa-stack-1x"></i>
+                    </span>
+                  </button> -->
+                  <button *ngIf="!isFiltering" (click)="filterCans()"
+                    class="btn btn-link pull-right p-0 m-0">
+                    <i class="fa fa-filter"></i>
+                  </button>
+                  <button *ngIf="isFiltering" (click)="filterCans()"
+                    class="btn btn-link text-danger pull-right p-0 m-0">
+                    <i class="fa fa-times"></i>
+                  </button>
+                </th>
               </tr>
             </thead>
             <tbody>
