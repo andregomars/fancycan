@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService, UtilityService } from '../../services';
+import { DataService, UtilityService, SmartQueueService } from '../../services';
 import { Observable, Subscription } from 'rxjs';
 import { map, share } from 'rxjs/operators';
 import * as moment from 'moment';
@@ -20,9 +20,11 @@ export class RtmComponent implements OnInit {
   maxDate = new Date();
   definitions$: Observable<any>;
   cans$: Observable<any>;
-  queue: any[] = [];
+  // queue: any[] = [];
   isFiltering = false;
-  // private subscription: Subscription;
+  filterCanID: string;
+  filterStartBit: number;
+  filterLength: number;
   private topic: string;
 
   lastUpdated = '2018-08-28 23:32:55';
@@ -34,9 +36,23 @@ export class RtmComponent implements OnInit {
   // imgBus = 'assets/img/vehicle/bus.png';
   imgEngineCheck = 'assets/img/vehicle/check_engine.png';
 
+  get min() {
+    return this.smartQueueService.min ? this.smartQueueService.min : null;
+  }
+  get max() {
+    return this.smartQueueService.max ? this.smartQueueService.min : null;
+  }
+  get time() {
+    return this.smartQueueService.timer;
+  }
+  get times() {
+    return this.smartQueueService.times;
+  }
+
   constructor(
     private mqttService: MqttService,
     private dataService: DataService,
+    private smartQueueService: SmartQueueService,
     private utitlityService: UtilityService
   ) { }
 
@@ -48,24 +64,33 @@ export class RtmComponent implements OnInit {
 
   filterCans() {
     this.isFiltering = !this.isFiltering;
+
+    if (this.isFiltering && this.filterCanID) {
+      this.smartQueueService.setFilter(this.filterCanID, +this.filterStartBit, +this.filterLength);
+    } else {
+      this.smartQueueService.clearFilter();
+    }
   }
 
   private subscribeMqtt() {
     this.mqttService.connect();
-    // const queue = [];
     this.cans$ =
       this.mqttService.observe(this.topic).pipe(
         map((message: IMqttMessage) => {
           const canMsg: ICan = JSON.parse(message.payload.toString());
           const can = {
-            id: Buffer.from(canMsg.canID).toString('hex'),
+            key: Buffer.from(canMsg.canID).toString('hex'),
             value: Buffer.from(canMsg.canData).toString('hex'),
           };
-          if (this.queue.length > environment.rtmMessagesMaxCount) {
-            this.queue.pop();
-          }
-          this.queue.unshift(can);
-          return this.queue;
+          // if (this.queue.length > environment.rtmMessagesMaxCount) {
+          //   this.queue.pop();
+          // }
+          // this.queue.unshift(can);
+          // if (this.smartQueueService.queue.length > environment.rtmMessagesMaxCount) {
+          //   this.smartQueueService.pop();
+          // }
+          this.smartQueueService.push(can);
+          return this.smartQueueService.queue;
         }),
       );
   }

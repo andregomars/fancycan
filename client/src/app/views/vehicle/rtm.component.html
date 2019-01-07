@@ -73,13 +73,13 @@
             <tbody>
               <tr>
                 <td>
-                  <input type="text" class="form-control" />
+                  <input type="text" class="form-control" [(ngModel)]="filterCanID"  />
                 </td>
                 <td>
-                  <input type="text" class="form-control" />
+                  <input type="text" class="form-control" [(ngModel)]="filterStartBit"/>
                 </td>
                 <td>
-                  <input type="text" class="form-control" />
+                  <input type="text" class="form-control" [(ngModel)]="filterLength"/>
                 </td>
               </tr>
             </tbody>
@@ -98,10 +98,10 @@
             <tbody>
               <tr>
                 <td>
-                  <input type="text" class="form-control" />
+                  <input type="text" class="form-control" [value]="max" disabled/>
                 </td>
                 <td>
-                  <input type="text" class="form-control" />
+                  <input type="text" class="form-control" [value]="min" disabled/>
                 </td>
               </tr>
             </tbody>
@@ -112,16 +112,16 @@
             <thead class="text-white thead-light bg-primary">
               <tr>
                 <th><small>Times</small></th>
-                <th><small>Time</small></th>
+                <th><small>Time (s)</small></th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td>
-                  <input type="text" class="form-control" />
+                  <input type="text" class="form-control" [value]="times" disabled/>
                 </td>
                 <td>
-                  <input type="text" class="form-control" />
+                  <input type="text" class="form-control" [value]="time" disabled/>
                 </td>
               </tr>
             </tbody>
@@ -131,10 +131,8 @@
       <div class="row mt-2 py-2 border border-secondary rounded">
         <ul class="col list-unstyled">
           <li *ngFor="let item of cans$ | async" class="row text-monospace">
-            <!-- <pre>{{ item | json }}</pre> -->
-          <!-- <li *ngFor="let item of messages" class="row text-monospace"> -->
             <div class="col-4">
-              {{ item['id'] | uppercase }}
+              {{ item['key'] | uppercase }}
             </div>
             <div class="col-8">
               {{ item['value'] | uppercase }}

@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map, share, tap } from 'rxjs/operators';
-import { ViewProfileStateModel } from '../../models';
 import * as moment from 'moment';
+import { Buffer } from 'buffer/';
+
+import { ViewProfileStateModel } from '../../models';
 
 @Injectable({
     providedIn: 'root'
@@ -170,6 +172,40 @@ export class UtilityService {
                 selected: values.includes(opt)
             };
         });
+    }
+
+    decodeJ1939(raw: Buffer, startBit: number, length: number): number {
+        const definition = {
+            StartByte: Math.ceil(startBit / 8),
+            StartBit: startBit % 8 === 0 ? 8 : startBit % 8,
+            Length: length
+        };
+
+        /*** same as server transform ***/
+        const bytesCount = Math.ceil((definition.Length + definition.StartBit - 1) / 8);
+        const bytes = raw.slice(definition.StartByte - 1, definition.StartByte - 1 + bytesCount);
+
+        const parsedValues: number[] = [];
+        const firstIdx = bytes.length - 1;
+        const lastIdx = 0;
+        for (let i = 0; i < bytes.length; i++) {
+          let value = 0;
+          if (i === firstIdx) { // the first byte
+            const firstByte = bytes[firstIdx];
+            // tslint:disable-next-line:no-bitwise
+            value = firstByte >> (definition.StartBit - 1) & (Math.pow(2, definition.Length) - 1);
+          } else if (i === lastIdx) { // the last byte
+            const lastByte = bytes[lastIdx];
+            const shift = (definition.StartBit + definition.Length - 1) % 8;
+            // tslint:disable-next-line:no-bitwise
+            value = lastByte & (Math.pow(2, (shift === 0 ? 8 : shift)) - 1);
+          } else {
+            value = bytes[i];
+          }
+          parsedValues.push(value);
+        }
+
+        return Buffer.from(parsedValues).readUIntLE(0, bytesCount);
     }
 
     private randomObject(): any {
