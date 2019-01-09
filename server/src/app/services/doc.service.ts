@@ -1,5 +1,4 @@
 import { ObjectID } from 'bson';
-import { ObjectID } from 'mongodb';
 
 import { ICan } from '../models/ICanData';
 import { ICanRaw } from '../models/ICanRaw';
@@ -7,7 +6,7 @@ import { ICanRaw } from '../models/ICanRaw';
 export class DocService {
     public buildCan(buffer: Buffer, rawID: ObjectID, localPort: number, remotePort: number): ICan {
         return {
-            _id: new ObjectID(),
+            // _id: new ObjectID(),
             rawID: rawID,
             delimiter: buffer.slice(0, 1),
             canID: buffer.slice(1, 5),
