@@ -30,7 +30,7 @@ export class DataLayer {
         }
 
         try {
-            this.conn.db('main').collection('can').insertMany(docs, (error, result) => {
+            this.conn.db('main').collection('can').insertMany(docs, { forceServerObjectId: true }, (error, result) => {
                 // assert.equal(error, null);
                 if (error) {
                     console.log(error);
