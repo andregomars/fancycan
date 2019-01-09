@@ -1,4 +1,5 @@
 import { ObjectID } from 'bson';
+import { ObjectID } from 'mongodb';
 
 import { ICan } from '../models/ICanData';
 import { ICanRaw } from '../models/ICanRaw';
