@@ -58,7 +58,11 @@ export class DataLayer {
     }
 
     public async insertCanStates(docs: ICanState[]) {
-        await this.conn.db('main').collection('can_state').insertMany(docs);
+        try {
+            await this.conn.db('main').collection('can_state').insertMany(docs, { forceServerObjectId: true });
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     public async upsertVehicleState(state: any) {
