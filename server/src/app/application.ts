@@ -72,7 +72,6 @@ export class Application {
                             dbo.insertCanRaw(doc, (id: ObjectID) => {
                                 rawID = id;
                                 stream.push(data);
-                                stream.push(null);
                             });
                         });
                     } catch (error) {
