@@ -88,7 +88,7 @@ export class TransformService {
             { lat: 34.056325, long: -118.239507 },
         ];
         const state: any = { vcode: canState.vcode, geo: geolocations };
-        state[canState.spnNo] = canState.value;
+        state['spn' + canState.spnNo] = canState.value;
         return state;
     }
 }
