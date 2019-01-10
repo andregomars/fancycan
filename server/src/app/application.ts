@@ -6,7 +6,8 @@ import { Readable } from 'stream';
 import { MongoClient } from 'mongodb';
 import * as mqtt from 'mqtt';
 import { MqttClient } from 'mqtt';
-const Splitter = require('split-frames');
+// const Splitter = require('split-frames');
+const chunker = require('stream-chunker');
 
 import { DataLayer } from './datalayer';
 import { QueueLayer } from './queuelayer';
@@ -51,19 +52,21 @@ export class Application {
                         let rawID: ObjectID;
 
                         // put data into buffer cache while fetching data from splitter stream
-                        stream.pipe(new Splitter({
-                            startWith: STX,
-                        })).on('data', (chunk: Buffer) => {
-                            const doc = docService.buildCan(chunk, rawID, localPort, remotePort);
-                            docs.push(doc);
-                            mqo.publishCan(doc);
-                            if (docs.length >= MAX_BUFFERS) {
-                                (async () => {
-                                    await utility.saveCanDocs(docs, dbo, transformService);
-                                    docs.length = 0;
-                                })();
-                            }
-                        });
+                        // stream.pipe(new Splitter({
+                        //     startWith: STX,
+                        // })).on('data', (chunk: Buffer) => {
+                        stream.pipe(chunker(13))
+                            .on('data', (chunk: Buffer) => {
+                                const doc = docService.buildCan(chunk, rawID, localPort, remotePort);
+                                docs.push(doc);
+                                mqo.publishCan(doc);
+                                if (docs.length >= MAX_BUFFERS) {
+                                    (async () => {
+                                        await utility.saveCanDocs(docs, dbo, transformService);
+                                        docs.length = 0;
+                                    })();
+                                }
+                            });
 
                         // push into splitter stream while fetching data from TCP socket
                         socket.on('data', (data) => {

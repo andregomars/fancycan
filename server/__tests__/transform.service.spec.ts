@@ -4,6 +4,10 @@ import { ICan } from '../src/app/models/ICanData';
 import { IJ1939 } from '../src/app/models/IJ1939';
 import { ICanState } from '../src/app/models/ICanState';
 import { Utility } from '../src/app/services/utility';
+import { Readable } from 'stream';
+// const Splitter = require('split-frames');
+const chunker = require('stream-chunker');
+// import * as chunker from 'stream-chunker';
 
 jest.mock('mongodb');
 jest.mock('../src/app/firelayer');
@@ -14,6 +18,7 @@ describe('When test transform', () => {
     // }));
     const transformService = new TransformService();
     const utility = new Utility();
+    const canRawSample = 'iAzwAgPN/////////4gY8wkAAA8AAAAAAHGIGPwA9AAAABgAAABmiAj+bgsCHy8fnx4LH4gY/Af0oAmgCUgCWYiIGPwUIQAAAABcAgAAiAzwAgPN/////////4gM0i8nABGgAAAAAACIGO8ZIX9f////////iBj68iGgCgAVAqoKAIgY/BchhjQAAAAAAMSIGPwE9EQBBTo5O3MSiBj+vwsFH3t/e3///4gY/+EZQKQAAs8wMACIGP/iGU08Of/M/8z/iAzwAgPN/////////4gY/+MZbgAWAf////+IGOz/GSAKAAL/yv4AiBjw1hn//////wA//4gI/m4L1R4CH94eSh8=';
 
     beforeAll(() => {
         utility.storeSpnsIntoCacheGroupedByPgn([def9004, def2911]);
@@ -138,5 +143,53 @@ describe('When test transform', () => {
     it('should get CAN state', () => {
         const actual: ICanState[] = transformService.getCanState(sample9004);
         expect(actual.length).toBe(1);
+    });
+
+    // it('should split buffer through Splitter properly', ( done ) => {
+    //     expect.assertions(1);
+
+    //     let total = 0;
+    //     const stream = new Readable({
+    //         read() {
+    //             return;
+    //         },
+    //     });
+    //     const STX = 0x88;
+    //     const buffer = Buffer.from(canRawSample, 'base64');
+
+    //     stream.pipe(new Splitter({
+    //         startWith: STX,
+    //     })).on('data', (chunk: Buffer) => {
+    //         total += 1;
+    //     }).on('end', () => {
+    //         expect(total).toBe(20);
+    //         done();
+    //     });
+
+    //     stream.push(buffer);
+    //     stream.push(null);
+    // });
+
+    it('should split buffer through stream-chunker properly', ( done ) => {
+        expect.hasAssertions();
+
+        let total = 0;
+        const stream = new Readable({
+            read() {
+                return;
+            },
+        });
+        const buffer = Buffer.from(canRawSample, 'base64');
+
+        stream.pipe(chunker(13))
+            .on('data', (chunk: Buffer) => {
+                total += 1;
+            }).on('end', () => {
+                expect(total).toBe(20);
+                done();
+            });
+
+        stream.push(buffer);
+        stream.push(null);
     });
 });

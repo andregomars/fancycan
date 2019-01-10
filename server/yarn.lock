@@ -4085,11 +4085,6 @@ spdx-license-ids@^3.0.0:
   resolved "https://registry.yarnpkg.com/spdx-license-ids/-/spdx-license-ids-3.0.2.tgz#a59efc09784c2a5bada13cfeaf5c75dd214044d2"
   integrity sha512-qky9CVt0lVIECkEsYbNILVnPvycuEBkXoMFLRWsREkomQLevYhtRKC+R91a5TOAQ3bCMjikRwhyaRqj1VYatYg==
 
-split-frames@^2.4.1:
-  version "2.4.1"
-  resolved "https://registry.yarnpkg.com/split-frames/-/split-frames-2.4.1.tgz#0d5369eae47354864cb9437bd8b0980dfdbb3abc"
-  integrity sha512-QxP4d+4AzwsW+cf2pJDfwGGnhLctjcXyGnRA3wEH6teWw3I0M3Gr+EgV9rC0LCYEvpUsxILTdUi4UEmFAQFZmg==
-
 split-string@^3.0.1, split-string@^3.0.2:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/split-string/-/split-string-3.1.0.tgz#7cb09dda3a86585705c64b39a6466038682e8fe2"
@@ -4141,6 +4136,13 @@ stealthy-require@^1.1.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/stealthy-require/-/stealthy-require-1.1.1.tgz#35b09875b4ff49f26a777e509b3090a3226bf24b"
   integrity sha1-NbCYdbT/SfJqd35QmzCQoyJr8ks=
+
+stream-chunker@^1.2.8:
+  version "1.2.8"
+  resolved "https://registry.yarnpkg.com/stream-chunker/-/stream-chunker-1.2.8.tgz#eb3af2c8aee5256cde76f0a1fea86348336d04f7"
+  integrity sha1-6zryyK7lJWzedvCh/qhjSDNtBPc=
+  dependencies:
+    through2 "~2.0.0"
 
 stream-shift@^1.0.0:
   version "1.0.0"
