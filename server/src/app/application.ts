@@ -61,6 +61,7 @@ export class Application {
                                 (async () => {
                                     await utility.saveCanDocs(docs, dbo, transformService);
                                     docs.length = 0;
+                                    process.exit();
                                 })();
                             }
                         });
