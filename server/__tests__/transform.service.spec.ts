@@ -5,9 +5,7 @@ import { IJ1939 } from '../src/app/models/IJ1939';
 import { ICanState } from '../src/app/models/ICanState';
 import { Utility } from '../src/app/services/utility';
 import { Readable } from 'stream';
-// const Splitter = require('split-frames');
 const chunker = require('stream-chunker');
-// import * as chunker from 'stream-chunker';
 
 jest.mock('mongodb');
 jest.mock('../src/app/firelayer');
@@ -90,7 +88,7 @@ describe('When test transform', () => {
     };
 
     const sample9004: ICan = {
-        _id: new ObjectID(),
+        // _id: new ObjectID(),
         rawID: new ObjectID(),
         delimiter: Buffer.from('88', 'hex'),
         canID: Buffer.from('GPwWIQ==', 'base64'),
@@ -101,7 +99,7 @@ describe('When test transform', () => {
     };
 
     const sample9006: ICan = {
-        _id: new ObjectID(),
+        // _id: new ObjectID(),
         rawID: new ObjectID(),
         delimiter: Buffer.from('88', 'hex'),
         canID: Buffer.from('GPwL9A==', 'base64'),
@@ -111,7 +109,7 @@ describe('When test transform', () => {
     };
 
     const sample2911: ICan = {
-        _id: new ObjectID(),
+        // _id: new ObjectID(),
         rawID: new ObjectID(),
         delimiter: Buffer.from('88', 'hex'),
         canID: Buffer.from('GPABCw==', 'base64'),

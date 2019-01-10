@@ -26,7 +26,6 @@ export class Application {
         fire.getDefinitionWithSpecs().subscribe((spns: IJ1939[]) => {
             utility.storeSpnsIntoCacheGroupedByPgn(spns);
 
-            const STX = 0x88;
             const stream = this.createReadStream();
             const docs: ICan[] = [];
 
@@ -51,10 +50,6 @@ export class Application {
                         const localPort = socket.localPort!;
                         let rawID: ObjectID;
 
-                        // put data into buffer cache while fetching data from splitter stream
-                        // stream.pipe(new Splitter({
-                        //     startWith: STX,
-                        // })).on('data', (chunk: Buffer) => {
                         stream.pipe(chunker(13))
                             .on('data', (chunk: Buffer) => {
                                 const doc = docService.buildCan(chunk, rawID, localPort, remotePort);
@@ -69,9 +64,9 @@ export class Application {
                             });
 
                         // push into splitter stream while fetching data from TCP socket
-                        socket.on('data', (data) => {
+                        socket.on('data', (data: Buffer) => {
                             const doc = docService.buildCanRaw(data);
-                            dbo.insertCanRaw(doc, (id) => {
+                            dbo.insertCanRaw(doc, (id: ObjectID) => {
                                 rawID = id;
                                 stream.push(data);
                             });
