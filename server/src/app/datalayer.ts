@@ -24,6 +24,20 @@ export class DataLayer {
         });
     }
 
+    public insertCan(doc: ICan) {
+        try {
+            this.conn.db('main').collection('can').insertOne(doc, (error, result) => {
+                if (error) {
+                    console.log(error);
+                } else {
+                    console.log(`${result.insertedCount} docs were stored into can collection`);
+                }
+            });
+        } catch (error) {
+            // console.log(error);
+        }
+    }
+
     public insertCans(docs: ICan[]) {
         if (!docs || docs.length < 1) {
             return;

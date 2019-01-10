@@ -27,7 +27,7 @@ export class Application {
             utility.storeSpnsIntoCacheGroupedByPgn(spns);
 
             const stream = this.createReadStream();
-            const docs: ICan[] = [];
+            // const docs: ICan[] = [];
 
             const tcpServer = net.createServer();
             const docService = new DocService();
@@ -53,14 +53,17 @@ export class Application {
                         stream.pipe(chunker(13))
                             .on('data', (chunk: Buffer) => {
                                 const doc = docService.buildCan(chunk, rawID, localPort, remotePort);
-                                docs.push(doc);
+                                // docs.push(doc);
+                                (async () => {
+                                    await utility.saveCanDoc(doc, dbo, transformService);
+                                })();
                                 mqo.publishCan(doc);
-                                if (docs.length >= MAX_BUFFERS) {
-                                    (async () => {
-                                        await utility.saveCanDocs(docs, dbo, transformService);
-                                        docs.length = 0;
-                                    })();
-                                }
+                                // if (docs.length >= MAX_BUFFERS) {
+                                //     (async () => {
+                                //         await utility.saveCanDocs(docs, dbo, transformService);
+                                //         docs.length = 0;
+                                //     })();
+                                // }
                             });
 
                         // push into splitter stream while fetching data from TCP socket
@@ -69,6 +72,7 @@ export class Application {
                             dbo.insertCanRaw(doc, (id: ObjectID) => {
                                 rawID = id;
                                 stream.push(data);
+                                stream.push(null);
                             });
                         });
                     } catch (error) {
@@ -83,11 +87,11 @@ export class Application {
                 // process.on('SIGINT', async () => {
                 exitHook(async () => {
                     tcpServer.close();
-                    console.log(`docs in stream remains ${docs.length} before exit`);
-                    if (docs.length > 0) {
-                        await utility.saveCanDocs(docs, dbo, transformService);
-                        console.log('remained data stream are all stored.');
-                    }
+                    // console.log(`docs in stream remains ${docs.length} before exit`);
+                    // if (docs.length > 0) {
+                    //     await utility.saveCanDocs(docs, dbo, transformService);
+                    //     console.log('remained data stream are all stored.');
+                    // }
                     dbClient.close();
                 });
             });
