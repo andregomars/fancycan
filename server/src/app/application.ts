@@ -58,12 +58,6 @@ export class Application {
                                     await utility.saveCanDoc(doc, dbo, transformService);
                                 })();
                                 mqo.publishCan(doc);
-                                // if (docs.length >= MAX_BUFFERS) {
-                                //     (async () => {
-                                //         await utility.saveCanDocs(docs, dbo, transformService);
-                                //         docs.length = 0;
-                                //     })();
-                                // }
                             });
 
                         // push into splitter stream while fetching data from TCP socket
@@ -84,13 +78,8 @@ export class Application {
                 console.log('start listening on port ' + port);
 
                 // process.on('SIGINT', async () => {
-                exitHook(async () => {
+                exitHook(() => {
                     tcpServer.close();
-                    // console.log(`docs in stream remains ${docs.length} before exit`);
-                    // if (docs.length > 0) {
-                    //     await utility.saveCanDocs(docs, dbo, transformService);
-                    //     console.log('remained data stream are all stored.');
-                    // }
                     dbClient.close();
                 });
             });

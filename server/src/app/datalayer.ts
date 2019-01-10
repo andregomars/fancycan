@@ -25,17 +25,9 @@ export class DataLayer {
     }
 
     public insertCan(doc: ICan) {
-        try {
-            this.conn.db('main').collection('can').insertOne(doc, (error, result) => {
-                if (error) {
-                    console.log(error);
-                } else {
-                    console.log(`${result.insertedCount} docs were stored into can collection`);
-                }
-            });
-        } catch (error) {
-            // console.log(error);
-        }
+        this.conn.db('main').collection('can').insertOne(doc, (error, result) => {
+            assert.equal(error, null);
+        });
     }
 
     public insertCans(docs: ICan[]) {
@@ -43,18 +35,9 @@ export class DataLayer {
             return;
         }
 
-        try {
-            this.conn.db('main').collection('can').insertMany(docs, { forceServerObjectId: true }, (error, result) => {
-                // assert.equal(error, null);
-                if (error) {
-                    console.log(error);
-                } else {
-                    console.log(`${result.insertedCount} docs were stored into can collection`);
-                }
-            });
-        } catch (error) {
-            // console.log(error);
-        }
+        this.conn.db('main').collection('can').insertMany(docs, { forceServerObjectId: true }, (error, result) => {
+            assert.equal(error, null);
+        });
     }
 
     public async insertCanStates(docs: ICanState[]) {

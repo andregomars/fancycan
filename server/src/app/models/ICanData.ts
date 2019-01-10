@@ -1,7 +1,7 @@
 import { ObjectID } from 'bson';
 
 export interface ICan {
-    // _id: ObjectID;
+    _id: ObjectID;
     rawID: ObjectID;
     delimiter: Buffer;
     canID: Buffer;
