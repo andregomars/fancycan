@@ -2,14 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { getStyle, hexToRgba } from '@coreui/coreui-pro/dist/js/coreui-utilities';
 import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
 
-import * as moment from 'moment';
 import { Observable } from 'rxjs';
 import { DataService, UtilityService } from '../../services';
-import { share, map, tap, switchMap, take } from 'rxjs/operators';
+import { share, map, tap, switchMap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { MapStyle } from './../shared/map-style';
-import { ViewProfile } from '../../models';
-import { Store, Select } from '@ngxs/store';
+import { Select } from '@ngxs/store';
 import { ViewProfileState } from '../../states';
 
 @Component({
@@ -47,7 +45,8 @@ export class VehicleComponent implements OnInit {
   gaugeThick = 15;
 
   lastUpdated = '2018-08-28 23:32:55';
-  currentTime = moment().toDate();
+  // currentTime = moment().toDate();
+  currentTime = new Date();
   engineRunning = 45;
   engineIdle = 60;
   odometer = 27026.8;
