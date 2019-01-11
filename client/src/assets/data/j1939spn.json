@@ -17,6 +17,10 @@
         "Resolution_Metric": "0.00391",
         "Resolution_USA": "0.00242956061",
         "SPNDescription": "Speed of the vehicle as calculated from wheel or tailshaft speed.",
+        "Status": {
+          "Name": [],
+          "Description": []
+        },
         "SPNName": "Wheel-Based Vehicle Speed",
         "SPNNo": "84",
         "StartBit": "1",
@@ -47,6 +51,10 @@
         "Resolution_Metric": "0.125",
         "Resolution_USA": "0.125",
         "SPNDescription": "Actual engine speed which is calculated over a minimum crankshaft angle of 720 degrees divided by the number of cylinders.",
+        "Status": {
+          "Name": [],
+          "Description": []
+        },
         "SPNName": "Engine Speed",
         "SPNNo": "190",
         "StartBit": "1",
@@ -77,6 +85,10 @@
         "Resolution_Metric": "5",
         "Resolution_USA": "5",
         "SPNDescription": "Accumulated distance traveled by the vehicle during its operation.",
+        "Status": {
+          "Name": [],
+          "Description": []
+        },
         "SPNName": "High Resolution Total Vehicle Distance",
         "SPNNo": "917",
         "StartBit": "1",
@@ -88,5 +100,63 @@
         "UpperDataRange": "21055405"
       }
     ]
+  },
+  {
+    "SPNItems": [
+      {
+        "UnitType": "1",
+        "SPNNo": "584",
+        "SPNName": "Latitude",
+        "SPNDescription": "Latitude position of the vehicle.",
+        "Status": {
+          "Name": [],
+          "Description": []
+        },
+        "Unit_USA": "deg",
+        "Unit_Metric": "deg",
+        "Unit": "deg",
+        "Resolution_USA": "1",
+        "Resolution_Metric": "1",
+        "Resolution": "1",
+        "Offset_USA": "-210",
+        "Offset_Metric": "-210",
+        "Offset": "-210",
+        "StartByte": "1",
+        "StartBit": "1",
+        "Length": "32",
+        "UpperDataRange": "211",
+        "LowerDataRange": "-210"
+      },
+      {
+        "UnitType": "1",
+        "SPNNo": "585",
+        "SPNName": "Longitude",
+        "SPNDescription": "Longitude position of the vehicle.",
+        "Status": {
+          "Name": [],
+          "Description": []
+        },
+        "Unit_USA": "deg",
+        "Unit_Metric": "deg",
+        "Unit": "deg",
+        "Resolution_USA": "1",
+        "Resolution_Metric": "1",
+        "Resolution": "1",
+        "Offset_USA": "-210",
+        "Offset_Metric": "-210",
+        "Offset": "-210",
+        "StartByte": "5",
+        "StartBit": "1",
+        "Length": "32",
+        "UpperDataRange": "211",
+        "LowerDataRange": "-210"
+      }
+    ],
+    "TransmissionRate": "5",
+    "PGNNo": "65267",
+    "PGNName": "Vehicle Position",
+    "SA": "-1",
+    "DA": "-1",
+    "Priority": "-1"
   }
 ]
