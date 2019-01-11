@@ -54,8 +54,8 @@
     "StartBit": "1",
     "StartByte": "1",
     "Status": {
-      "Description": [],
-      "Name": ""
+     "Description": [],
+     "Name": ""
     },
     "Unit": "V",
     "UnitType": "1",
@@ -225,6 +225,54 @@
     "Unit": "bit",
     "UnitType": "1",
     "UpperDataRange": "10",
+    "fleet_code": "BYD"
+  },
+  {
+    "Length": "2",
+    "LowerDataRange": "0",
+    "Offset": "0",
+    "PGNName": "Door Status",
+    "PGNNo": "64230",
+    "Resolution": "1",
+    "SPNDescription": "Front Door Status",
+    "SPNName": "Front Door Status",
+    "SPNNo": "9010",
+    "StartBit": "1",
+    "StartByte": "1",
+    "Status": {
+      "Description": [
+        "Close",
+        "Open"
+      ],
+      "Name": "Enable"
+    },
+    "Unit": "bit",
+    "UnitType": "1",
+    "UpperDataRange": "1",
+    "fleet_code": "BYD"
+  },
+  {
+    "Length": "2",
+    "LowerDataRange": "0",
+    "Offset": "0",
+    "PGNName": "Door Status",
+    "PGNNo": "64230",
+    "Resolution": "1",
+    "SPNDescription": "Rear Door Status",
+    "SPNName": "Rear Door Status",
+    "SPNNo": "9011",
+    "StartBit": "3",
+    "StartByte": "1",
+    "Status": {
+      "Description": [
+        "Close",
+        "Open"
+      ],
+      "Name": "Enable"
+    },
+    "Unit": "bit",
+    "UnitType": "1",
+    "UpperDataRange": "1",
     "fleet_code": "BYD"
   }
 ]

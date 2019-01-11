@@ -1,7 +1,6 @@
 [
   {
     "fleet_code": "BYD",
-    "code": "speed",
     "name": "Wheel-Based Vehicle Speed",
     "pgn": "65265",
     "spn": "84",
@@ -9,7 +8,6 @@
   },
   {
     "fleet_code": "BYD",
-    "code": "speed_engine",
     "name": "Engine Speed",
     "pgn": "61444",
     "spn": "190",
@@ -17,7 +15,20 @@
   },
   {
     "fleet_code": "BYD",
-    "code": "range",
+    "name": "Latitude position of the vehicle",
+    "pgn": "65267",
+    "spn": "584",
+    "type": "J1939"
+  },
+  {
+    "fleet_code": "BYD",
+    "name": "Longitude position of the vehicle",
+    "pgn": "65267",
+    "spn": "585",
+    "type": "J1939"
+  },
+  {
+    "fleet_code": "BYD",
     "name": "High Resolution Vehicle Distance",
     "pgn": "65217",
     "spn": "917",
@@ -25,7 +36,6 @@
   },
   {
     "fleet_code": "BYD",
-    "code": "soc",
     "name": "State Of Charge",
     "pgn": "64519",
     "spn": "9000",
@@ -33,7 +43,6 @@
   },
   {
     "fleet_code": "BYD",
-    "code": "energy",
     "name": "Battery Energy",
     "pgn": "64527",
     "spn": "9001",
@@ -41,7 +50,6 @@
   },
   {
     "fleet_code": "BYD",
-    "code": "voltage",
     "name": "Battery Voltage",
     "pgn": "64520",
     "spn": "9002",
@@ -49,7 +57,6 @@
   },
   {
     "fleet_code": "BYD",
-    "code": "current",
     "name": "Battery Current",
     "pgn": "64520",
     "spn": "9003",
@@ -57,7 +64,6 @@
   },
   {
     "fleet_code": "BYD",
-    "code": "voltage",
     "name": "Motor Voltage",
     "pgn": "64534",
     "spn": "9004",
@@ -65,7 +71,6 @@
   },
   {
     "fleet_code": "BYD",
-    "code": "lotemp_battery",
     "name": "L-C Battery Temp",
     "pgn": "64523",
     "spn": "9005",
@@ -73,7 +78,6 @@
   },
   {
     "fleet_code": "BYD",
-    "code": "hitemp_battery",
     "name": "H-C Battery Temp",
     "pgn": "64523",
     "spn": "9006",
@@ -81,15 +85,13 @@
   },
   {
     "fleet_code": "BYD",
-    "code": "hivoltage",
     "name": "High Voltage Status",
-    "pgn": "64516",
+    "pgn": "94516",
     "spn": "9007",
     "type": "Proprietary"
   },
   {
     "fleet_code": "BYD",
-    "code": "lcharge",
     "name": "Left Charge Status",
     "pgn": "64538",
     "spn": "9008",
@@ -97,10 +99,23 @@
   },
   {
     "fleet_code": "BYD",
-    "code": "rcharge",
     "name": "Right Charge Status",
     "pgn": "64537",
     "spn": "9009",
+    "type": "Proprietary"
+  },
+  {
+    "fleet_code": "BYD",
+    "name": "Front Door Status",
+    "pgn": "64230",
+    "spn": "9010",
+    "type": "Proprietary"
+  },
+  {
+    "fleet_code": "BYD",
+    "name": "Rear Door Status",
+    "pgn": "64230",
+    "spn": "9011",
     "type": "Proprietary"
   }
 ]
