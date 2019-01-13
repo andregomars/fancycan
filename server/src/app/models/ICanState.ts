@@ -3,7 +3,6 @@ import { ObjectID } from 'bson';
 export interface ICanState {
     canObjID: ObjectID;
     vcode: string;
-    code: string;
     spnNo: number;
     spnName: string;
     pgnNo: number;

@@ -131,11 +131,14 @@
       <div class="row mt-2 py-2 border border-secondary rounded">
         <ul class="col list-unstyled">
           <li *ngFor="let item of cans$ | async" class="row text-monospace">
-            <div class="col-4">
+            <div class="col-3">
               {{ item['key'] | uppercase }}
             </div>
-            <div class="col-8">
+            <div class="col-5">
               {{ item['value'] | uppercase }}
+            </div>
+            <div class="col-4">
+              {{ item['time'] | date: 'hh:mm:ss' }}
             </div>
           </li>
         </ul>

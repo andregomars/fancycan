@@ -32,7 +32,6 @@ export class TransformService {
                 canObjID: can._id,
                 // canObjID: can.rawID,
                 vcode: vcode,
-                code: spn.Code,
                 spnNo: spn.SPNNo,
                 spnName: spn.SPNName,
                 pgnNo: pgnID,

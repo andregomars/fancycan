@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { DataService, UtilityService, SmartQueueService } from '../../services';
 import { Observable, Subscription } from 'rxjs';
 import { map, share } from 'rxjs/operators';
-import * as moment from 'moment';
+// import * as moment from 'moment';
 import { MqttService, IMqttMessage } from 'ngx-mqtt';
 import { Buffer } from 'buffer/';
+import { ObjectID } from 'bson';
 
 import { environment } from '../../../environments/environment';
 import { ICan } from '../../models/ican';
@@ -28,7 +29,8 @@ export class RtmComponent implements OnInit {
   private topic: string;
 
   lastUpdated = '2018-08-28 23:32:55';
-  currentTime = moment().toDate();
+  // currentTime = moment().toDate();
+  currentTime = new Date();
   engineRunning = 45;
   engineIdle = 60;
   odometer = 27026.8;
@@ -81,6 +83,7 @@ export class RtmComponent implements OnInit {
           const can = {
             key: Buffer.from(canMsg.canID).toString('hex'),
             value: Buffer.from(canMsg.canData).toString('hex'),
+            time: new ObjectID(canMsg.rawID).getTimestamp()
           };
           // if (this.queue.length > environment.rtmMessagesMaxCount) {
           //   this.queue.pop();

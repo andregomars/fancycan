@@ -76,9 +76,11 @@ export class Utility {
     public async saveCanDoc(doc: ICan, dbo: DataLayer, transformService: TransformService) {
         dbo.insertCan(doc);
         const states = transformService.getCanState(doc);
-        await dbo.insertCanStates(states);
-        for (const canState of states) {
-            await this.saveVehicleStateDoc(canState, dbo, transformService);
+        if (states.length > 0) {
+            await dbo.insertCanStates(states);
+            for (const canState of states) {
+                await this.saveVehicleStateDoc(canState, dbo, transformService);
+            }
         }
     }
 
