@@ -26,7 +26,6 @@ export class DataService {
     this.mongoUrl = `${environment.mongodbAPI.url}/${environment.mongodbAPI.database}`;
     this.mongoApiHeader = new HttpHeaders().append('Authorization', environment.mongodbAPI.authToken);
 
-
     switch (this.sourceType) {
       case (DataSourceType.Firebase):
         this.rootUrl = environment.firebase.databaseURL;
@@ -53,6 +52,13 @@ export class DataService {
     const headers = this.mongoApiHeader;
     return this.http
       .get<any>(`${this.mongoUrl}/vehicle_state`, { headers, params });
+  }
+
+  getVehicleMalfuncState(vcode: string): Observable<any> {
+    const params = new HttpParams().set('np', '').set('filter', `{'vcode': '${vcode}'}`);
+    const headers = this.mongoApiHeader;
+    return this.http
+      .get<any>(`${this.mongoUrl}/vehicle_malfunc_state`, { headers, params });
   }
 
   getAlertStats(): Observable<any> {

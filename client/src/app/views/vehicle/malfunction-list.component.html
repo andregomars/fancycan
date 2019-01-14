@@ -23,7 +23,7 @@
             <td>
               <a class="btn btn-link text-primary" 
                 (click)="nav(item.fleet_code, item.vehicle_number, item.updated_time)">
-                <small>{{ item.updated_time | date:'MM/dd HH:mm:ss'}}</small>
+                <small>{{ item.CreatedDate.$date | date:'MM/dd HH:mm:ss'}}</small>
               </a>
             </td>
             <td>
@@ -33,7 +33,7 @@
               <div class="small">{{ item.type | titlecase }}</div>
             </td>
             <td>
-              <div class="small">{{ item.notified_time | date:'MM/dd HH:mm'}}</div>
+              <div class="small">{{ item.CreatedDate.$date | date:'MM/dd HH:mm'}}</div>
             </td>
           </tr>
         </tbody>
