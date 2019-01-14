@@ -80,6 +80,7 @@ export class Utility {
             await dbo.insertCanStates(states);
             for (const canState of states) {
                 await this.saveVehicleStateDoc(canState, dbo, transformService);
+                await this.saveVehicleMalfuncStateDoc(canState, dbo, transformService);
             }
         }
     }
@@ -87,6 +88,13 @@ export class Utility {
     public async saveVehicleStateDoc(canState: ICanState, dbo: DataLayer, transofrmService: TransformService) {
         const state = transofrmService.buildVehicleState(canState);
         await dbo.upsertVehicleState(state);
+    }
+
+    public async saveVehicleMalfuncStateDoc(canState: ICanState, dbo: DataLayer, transofrmService: TransformService) {
+        if (canState.spnNo === 190 && canState.value > 800) {
+            const state = transofrmService.buildVehicleMalfuncState(canState);
+            await dbo.insertVehicleMalfuncState(state);
+        }
     }
 
     private buildPgnKey(pgnNo: number) {

@@ -95,4 +95,17 @@ export class TransformService {
         state['spn' + canState.spnNo] = canState.value;
         return state;
     }
+
+    public buildVehicleMalfuncState(canState: ICanState): any {
+        const fcode = 'BYD';
+        const state: any = {
+            vcode: canState.vcode,
+            fcode: fcode,
+            spn: canState.spnNo,
+            value: canState.value,
+            type: 'General',
+            CreatedDate: canState.canObjID.getTimestamp(),
+        };
+        return state;
+    }
 }

@@ -59,4 +59,8 @@ export class DataLayer {
             { upsert: true },
         );
     }
+
+    public async insertVehicleMalfuncState(state: any) {
+        await this.conn.db('main').collection('vehicle_malfunc_state').insertOne(state);
+    }
 }

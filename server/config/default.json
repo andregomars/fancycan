@@ -19,5 +19,12 @@
     },
     "common": {
         "rawParsingBuffer": 1
-    }
+    },
+    "malfunctions": [
+        {
+            "spnNo": 190,
+            "expression": ">",
+            "valve": 800
+        }
+    ]
 }
