@@ -45,7 +45,6 @@ export class VehicleComponent implements OnInit {
   gaugeThick = 15;
 
   lastUpdated = '2018-08-28 23:32:55';
-  // currentTime = moment().toDate();
   currentTime = new Date();
   engineRunning = 45;
   engineIdle = 60;
@@ -134,6 +133,14 @@ export class VehicleComponent implements OnInit {
       map(vehicles => this.utilityService.attachMapLabels(vehicles)),
       share()
     );
+  }
+
+  private loadVehicleState() {
+    this.vehicle$ = this.vcode$.pipe(
+      switchMap(vcode => this.dataService.getVehicleState(vcode)),
+      map(vehicles => this.utilityService.attachGeoLabels(vehicles[0])),
+      share()
+    );
 
     this.alerts$ = this.dataService.getAlertStats().pipe(
       map((alerts: any[]) => alerts.slice(0, 5)),
@@ -145,14 +152,6 @@ export class VehicleComponent implements OnInit {
     );
 
     this.decodes$ = this.dataService.getDecodes().pipe(
-      share()
-    );
-  }
-
-  private loadVehicleState() {
-    this.vehicle$ = this.vcode$.pipe(
-      switchMap(vcode => this.dataService.getVehicleState(vcode)),
-      map(vehicles => this.utilityService.attachGeoLabels(vehicles[0])),
       share()
     );
   }

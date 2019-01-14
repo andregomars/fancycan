@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { differenceInSeconds } from 'date-fns';
 import { Buffer } from 'buffer/';
+import * as _ from 'lodash';
 import { UtilityService } from './utility.service';
 
 @Injectable({
@@ -14,12 +15,13 @@ export class SmartQueueService {
   private _times: number;
   private _timerStartAt: Date;
 
-  private filterKey: string;
+  private _filterKey: string;
   private filterValueStartBit: number;
   private filterValueLength: number;
 
   get queue() {
-    return this._queue;
+    // return this._queue;
+    return _.sortBy(this._queue, ['key']);
   }
 
   get min() {
@@ -34,6 +36,9 @@ export class SmartQueueService {
   get times() {
     return this._times;
   }
+  get filterKey() {
+    return this._filterKey;
+  }
 
   constructor(
     private utilityService: UtilityService
@@ -43,7 +48,7 @@ export class SmartQueueService {
   }
 
   clearFilter() {
-    this.filterKey = null;
+    this._filterKey = null;
     this.filterValueStartBit = 0;
     this.filterValueLength = 0;
     this._timerStartAt = null;
@@ -55,7 +60,7 @@ export class SmartQueueService {
   }
 
   setFilter(id: string, startBit: number, length: number) {
-    this.filterKey = id;
+    this._filterKey = id;
     this.filterValueStartBit = startBit;
     this.filterValueLength = length;
   }
@@ -64,11 +69,12 @@ export class SmartQueueService {
     const entryMatched = this._queue.find(x => x.key === entry.key);
     if (entryMatched) {
       entryMatched.value = entry.value;
+      entryMatched.time = entry.time;
     } else {
       this._queue.unshift(entry);
     }
 
-    if (this.filterKey && this.filterKey.toUpperCase() === entry.key.toUpperCase()) {
+    if (this._filterKey && this._filterKey.toUpperCase() === entry.key.toUpperCase()) {
       this.increaseTimes();
       this.extendTimer();
       this.calculateMinMax(entry.value);
@@ -113,4 +119,5 @@ export class SmartQueueService {
 export interface IEntry {
   key: string;
   value: string;
+  time: Date;
 }

@@ -80,15 +80,6 @@ export class FleetDashboardComponent implements OnInit {
       map(vehicles => this.utilityService.attachMapLabels(vehicles)),
       share()
     );
-    // this.vehicles$ = this.dataService.getPanels().pipe(
-    //   switchMap(vehicles =>
-    //       this.fcode$.pipe(
-    //         map(fcode => vehicles.filter(vehicle => vehicle.fleet_code === fcode))
-    //     )
-    //   ),
-    //   map(vehicles => this.utilityService.attachMapLabel(vehicles)),
-    //   share()
-    // );
   }
 
 }

@@ -21,7 +21,6 @@ export class RtmComponent implements OnInit {
   maxDate = new Date();
   definitions$: Observable<any>;
   cans$: Observable<any>;
-  // queue: any[] = [];
   isFiltering = false;
   filterCanID: string;
   filterStartBit: number;
@@ -29,7 +28,6 @@ export class RtmComponent implements OnInit {
   private topic: string;
 
   lastUpdated = '2018-08-28 23:32:55';
-  // currentTime = moment().toDate();
   currentTime = new Date();
   engineRunning = 45;
   engineIdle = 60;
@@ -39,10 +37,10 @@ export class RtmComponent implements OnInit {
   imgEngineCheck = 'assets/img/vehicle/check_engine.png';
 
   get min() {
-    return this.smartQueueService.min ? this.smartQueueService.min : null;
+    return this.smartQueueService.min;
   }
   get max() {
-    return this.smartQueueService.max ? this.smartQueueService.min : null;
+    return this.smartQueueService.max;
   }
   get time() {
     return this.smartQueueService.timer;
@@ -50,12 +48,15 @@ export class RtmComponent implements OnInit {
   get times() {
     return this.smartQueueService.times;
   }
+  get filterKey() {
+    return this.smartQueueService.filterKey;
+  }
 
   constructor(
     private mqttService: MqttService,
     private dataService: DataService,
     private smartQueueService: SmartQueueService,
-    private utitlityService: UtilityService
+    // private utitlityService: UtilityService
   ) { }
 
   ngOnInit() {
@@ -85,13 +86,6 @@ export class RtmComponent implements OnInit {
             value: Buffer.from(canMsg.canData).toString('hex'),
             time: new ObjectID(canMsg.rawID).getTimestamp()
           };
-          // if (this.queue.length > environment.rtmMessagesMaxCount) {
-          //   this.queue.pop();
-          // }
-          // this.queue.unshift(can);
-          // if (this.smartQueueService.queue.length > environment.rtmMessagesMaxCount) {
-          //   this.smartQueueService.pop();
-          // }
           this.smartQueueService.push(can);
           return this.smartQueueService.queue;
         }),

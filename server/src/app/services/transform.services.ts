@@ -80,13 +80,18 @@ export class TransformService {
     }
 
     public buildVehicleState(canState: ICanState): any {
+        const fcode = 'BYD';
         const geolocations = [
             { lat: 34.057539, long: -118.237494 },
             { lat: 34.056544, long: -118.238082 },
             { lat: 34.055955, long: -118.238996 },
             { lat: 34.056325, long: -118.239507 },
         ];
-        const state: any = { vcode: canState.vcode, geo: geolocations };
+        const state: any = {
+            vcode: canState.vcode,
+            fcode: fcode,
+            geo: geolocations,
+        };
         state['spn' + canState.spnNo] = canState.value;
         return state;
     }

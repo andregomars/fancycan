@@ -59,12 +59,10 @@
                       <i class="fa fa-ban fa-stack-1x"></i>
                     </span>
                   </button> -->
-                  <button *ngIf="!isFiltering" (click)="filterCans()"
-                    class="btn btn-link pull-right p-0 m-0">
+                  <button *ngIf="!isFiltering" (click)="filterCans()" class="btn btn-link pull-right p-0 m-0">
                     <i class="fa fa-filter"></i>
                   </button>
-                  <button *ngIf="isFiltering" (click)="filterCans()"
-                    class="btn btn-link text-danger pull-right p-0 m-0">
+                  <button *ngIf="isFiltering" (click)="filterCans()" class="btn btn-link text-danger pull-right p-0 m-0">
                     <i class="fa fa-times"></i>
                   </button>
                 </th>
@@ -73,13 +71,13 @@
             <tbody>
               <tr>
                 <td>
-                  <input type="text" class="form-control" [(ngModel)]="filterCanID"  />
+                  <input type="text" class="form-control" [(ngModel)]="filterCanID" />
                 </td>
                 <td>
-                  <input type="text" class="form-control" [(ngModel)]="filterStartBit"/>
+                  <input type="text" class="form-control" [(ngModel)]="filterStartBit" />
                 </td>
                 <td>
-                  <input type="text" class="form-control" [(ngModel)]="filterLength"/>
+                  <input type="text" class="form-control" [(ngModel)]="filterLength" />
                 </td>
               </tr>
             </tbody>
@@ -98,10 +96,10 @@
             <tbody>
               <tr>
                 <td>
-                  <input type="text" class="form-control" [value]="max" disabled/>
+                  <input type="text" class="form-control" [value]="max" disabled />
                 </td>
                 <td>
-                  <input type="text" class="form-control" [value]="min" disabled/>
+                  <input type="text" class="form-control" [value]="min" disabled />
                 </td>
               </tr>
             </tbody>
@@ -118,27 +116,31 @@
             <tbody>
               <tr>
                 <td>
-                  <input type="text" class="form-control" [value]="times" disabled/>
+                  <input type="text" class="form-control" [value]="times" disabled />
                 </td>
                 <td>
-                  <input type="text" class="form-control" [value]="time" disabled/>
+                  <input type="text" class="form-control" [value]="time" disabled />
                 </td>
               </tr>
             </tbody>
           </table>
         </div>
       </div>
-      <div class="row mt-2 py-2 border border-secondary rounded">
+      <div class="row mt-2 py-2 border border-secondary rounded px-0">
         <ul class="col list-unstyled">
-          <li *ngFor="let item of cans$ | async" class="row text-monospace">
-            <div class="col-3">
-              {{ item['key'] | uppercase }}
-            </div>
-            <div class="col-5">
-              {{ item['value'] | uppercase }}
-            </div>
-            <div class="col-4">
-              {{ item['time'] | date: 'hh:mm:ss' }}
+          <li *ngFor="let item of cans$ | async">
+            <div [ngClass]="filterKey && filterKey.toUpperCase() === item['key'].toUpperCase() ? 'text-warning' : '' ">
+              <div class="row text-monospace no-gutters p-0 m-0">
+                <div class="col-3">
+                  {{ item['key'] | uppercase }}
+                </div>
+                <div class="col-5">
+                  {{ item['value'] | uppercase }}
+                </div>
+                <div class="col-4">
+                  {{ item['time'] | date: 'HH:mm:ss' }}
+                </div>
+              </div>
             </div>
           </li>
         </ul>
