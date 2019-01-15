@@ -107,32 +107,10 @@ export class VehicleComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // this.loadVehicleStates();
-    // this.loadVehicle();
     this.loadVehicleState();
     this.loadPlayChartData();
 
     this.loadVehicleState();
-  }
-
-  private loadVehicle() {
-    this.vehicle$ = this.vehicles$.pipe(
-      map(vehicles => vehicles[0])
-    );
-  }
-
-  private loadVehicleStates() {
-    this.vehicles$ = this.dataService.getRealtimeStates().pipe(
-      switchMap(states =>
-        this.vcode$.pipe(
-          map(vcode =>
-            states.filter(state => state.code === vcode)
-          )
-        )
-      ),
-      map(vehicles => this.utilityService.attachMapLabels(vehicles)),
-      share()
-    );
   }
 
   private loadVehicleState() {

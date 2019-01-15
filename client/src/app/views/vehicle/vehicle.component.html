@@ -159,7 +159,7 @@
       <div class="dropdown-divider"></div>
       <div class="row">
         <div class="col-12 col-md-6">
-          Odometer: {{ (vehicle$ | async)?.spn917 | number:'1.1-2' }} mi
+          Odometer: {{ (vehicle$ | async)?.spn917 / 1000 / 1.6 | number:'1.1-2' }} mi
         </div>
         <div class="col-12 col-md-6">
           VIN: {{ (vehicle$ | async)?.vin }}
