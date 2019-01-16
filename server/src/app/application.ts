@@ -27,7 +27,6 @@ export class Application {
             utility.storeSpnsIntoCacheGroupedByPgn(spns);
 
             const stream = this.createReadStream();
-            // const docs: ICan[] = [];
 
             const tcpServer = net.createServer();
             const docService = new DocService();

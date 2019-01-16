@@ -45,7 +45,7 @@ export class MalfunctinoSettingComponent implements OnInit {
       notification: this.utilityService.convertSelectOptions(
         this.notificationOptions,
         selectedEntry.notification),
-      conditions: selectedEntry.conditions
+      conditions: selectedEntry.conditions || []
     });
   }
 

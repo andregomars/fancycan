@@ -45,18 +45,18 @@
     },
     {
         "id": 3,
-        "fleet_code": "AVTA",
-        "name": "Lane Departure",
+        "fleet_code": "BYD",
+        "name": "Engine Speed & Battery Current Alert",
         "conditions": [
             {
-                "spn": "1493",
+                "spn": "190",
                 "expression": ">",
-                "value": 32
+                "value": 3000
             },
             {
-                "spn": "1489",
-                "expression": "!=",
-                "value": 44
+                "spn": "9003",
+                "expression": "<",
+                "value": 0
             }
         ],
         "gpslat": 123.212112,

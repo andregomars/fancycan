@@ -66,6 +66,11 @@ export class FireLayer {
         );
     }
 
+    public getMalfunctionSetting(): Observable<any> {
+        return this.http
+            .get<any>(`/malfunction-setting.json`);
+    }
+
     private getFlattedSPNSpecs(specs: any[]): any[] {
         return specs.map((pgn: any) =>
             pgn.SPNItems.map((spn: any) =>

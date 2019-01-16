@@ -1,4 +1,5 @@
 import config from 'config';
+import { Engine } from 'json-rules-engine';
 import { IJ1939 } from '../models/IJ1939';
 import { CacheLayer } from '../cachelayer';
 import { DataLayer } from '../datalayer';
@@ -97,8 +98,55 @@ export class Utility {
         }
     }
 
+    public buildRules(malfuncRules: any[]) {
+        for (const rule of malfuncRules) {
+            const conditions = rule.conditions.map((condition: any) => {
+                return {
+                    fact: `spn${condition.spn}`,
+                    operator: this.getOperatorTerm(condition.expression),
+                    value: condition.value,
+                } as RuleCondition;
+            });
+            if (conditions && conditions.length > 0) {
+                const conditionFleetCode: RuleCondition = {
+                    fact: 'fcode',
+                    operator: 'equal',
+                    value: rule.fleet_code,
+                };
+                conditions.push(conditionFleetCode);
+            }
+        }
+    }
+
     private buildPgnKey(pgnNo: number) {
         return `pgn_${pgnNo}`;
     }
 
+    private getOperatorTerm(sign: string) {
+        let term = '';
+        switch (sign) {
+            case '>':
+                term = 'greaterThan';
+                break;
+            case '<':
+                term = 'lessThan';
+                break;
+            case '=':
+                term = 'equal';
+                break;
+            case '!=':
+                term = 'notEqual';
+                break;
+            default:
+                break;
+        }
+        return term;
+    }
+
+}
+
+export interface RuleCondition {
+    fact: string;
+    operator: string;
+    value: number;
 }

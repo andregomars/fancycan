@@ -12,7 +12,6 @@
     "StartBit": "1",
     "StartByte": "5",
     "Status": {
-      "Description": [],
       "Name": ""
     },
     "Unit": "%",
@@ -33,7 +32,6 @@
     "StartBit": "1",
     "StartByte": "6",
     "Status": {
-      "Description": [],
       "Name": ""
     },
     "Unit": "kWh",
@@ -54,8 +52,7 @@
     "StartBit": "1",
     "StartByte": "1",
     "Status": {
-     "Description": [],
-     "Name": ""
+      "Name": ""
     },
     "Unit": "V",
     "UnitType": "1",
@@ -65,7 +62,7 @@
   {
     "Length": "16",
     "LowerDataRange": "-300",
-    "Offset": "-1600",
+    "Offset": "-1000",
     "PGNName": "Voltage and Current",
     "PGNNo": "64520",
     "Resolution": "0.1",
@@ -75,7 +72,6 @@
     "StartBit": "1",
     "StartByte": "3",
     "Status": {
-      "Description": [],
       "Name": ""
     },
     "Unit": "A",
@@ -96,8 +92,8 @@
     "StartBit": "1",
     "StartByte": "5",
     "Status": {
-      "Description": [],
-      "Name": ""
+      "Name": [],
+      "Description": []
     },
     "Unit": "V",
     "UnitType": "1",
@@ -117,8 +113,8 @@
     "StartBit": "1",
     "StartByte": "3",
     "Status": {
-      "Description": [],
-      "Name": ""
+      "Name": [],
+      "Description": []
     },
     "Unit": "F",
     "UnitType": "1",
@@ -138,8 +134,8 @@
     "StartBit": "1",
     "StartByte": "7",
     "Status": {
-      "Description": [],
-      "Name": ""
+      "Name": [],
+      "Description": []
     },
     "Unit": "F",
     "UnitType": "1",
