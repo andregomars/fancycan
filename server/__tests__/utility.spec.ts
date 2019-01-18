@@ -1,6 +1,6 @@
 import { Utility } from '../src/app/services/utility';
 import { IJ1939 } from '../src/app/models/IJ1939';
-import { CacheLayer } from '../src/app/cachelayer';
+import { IRuleCondition } from '../src/app/models/IRuleCondition';
 
 describe('When test utility', () => {
     const utility = new Utility();
@@ -54,9 +54,45 @@ describe('When test utility', () => {
         },
     };
 
+    const alertSetting = [{
+        id: 3,
+        fleet_code: 'BYD',
+        name: 'Engine Speed & Battery Current Alert',
+        conditions: [
+            {
+                spn: '190',
+                expression: '>',
+                value: 3000
+            },
+            {
+                spn: '9003',
+                expression: '<',
+                value: 0
+            }
+        ],
+        gpslat: 123.212112,
+        gpslgt: 123.332432,
+        gpsexpression: '>',
+        gpsvalue: '3',
+        notification: []
+    }];
+
     it('should get spn list', () => {
         const actual = utility.retrieveSpnsByPgnFromCache(64534);
         expect(actual).toBeDefined();
         expect(actual!.length).toBe(1);
+    });
+
+    it('should build rule conditions', () => {
+        const actual = utility.buildRuleConditionGroups(alertSetting);
+        expect(actual).toBeDefined();
+        expect(actual.size).toBe(1);
+        expect(actual.has(3)).toBeTruthy();
+        expect(actual.get(3)!.length).toBe(3);
+
+        const fcodeCondition = actual.get(3)!.find((c: IRuleCondition) => c.fact === 'fcode');
+        expect(fcodeCondition).toBeDefined();
+        expect(fcodeCondition!.value).toBe('BYD');
+        expect(fcodeCondition!.operator).toBe('equal');
     });
 });

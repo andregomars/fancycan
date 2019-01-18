@@ -6,7 +6,6 @@ import { Readable } from 'stream';
 import { MongoClient } from 'mongodb';
 import * as mqtt from 'mqtt';
 import { MqttClient } from 'mqtt';
-// const Splitter = require('split-frames');
 const chunker = require('stream-chunker');
 
 import { DataLayer } from './datalayer';

@@ -6,6 +6,7 @@ import { DataLayer } from '../datalayer';
 import { TransformService } from './transform.services';
 import { ICan } from '../models/ICanData';
 import { ICanState } from '../models/ICanState';
+import { IRuleCondition } from '../models/IRuleCondition';
 
 export class Utility {
     public getDbConnectionString(): string {
@@ -98,24 +99,28 @@ export class Utility {
         }
     }
 
-    public buildRules(malfuncRules: any[]) {
+    public buildRuleConditionGroups(malfuncRules: any[]): Map<number, IRuleCondition[]> {
+        const conditionGroups = new Map<number, IRuleCondition[]>();
         for (const rule of malfuncRules) {
-            const conditions = rule.conditions.map((condition: any) => {
+            const conditions: IRuleCondition[] = rule.conditions.map((condition: any) => {
                 return {
                     fact: `spn${condition.spn}`,
                     operator: this.getOperatorTerm(condition.expression),
                     value: condition.value,
-                } as RuleCondition;
+                } as IRuleCondition;
             });
-            if (conditions && conditions.length > 0) {
-                const conditionFleetCode: RuleCondition = {
+            if (conditions.length > 0) {
+                const conditionFleetCode: IRuleCondition = {
                     fact: 'fcode',
                     operator: 'equal',
                     value: rule.fleet_code,
                 };
                 conditions.push(conditionFleetCode);
             }
+            conditionGroups.set(rule.id, conditions);
         }
+
+        return conditionGroups;
     }
 
     private buildPgnKey(pgnNo: number) {
@@ -143,10 +148,4 @@ export class Utility {
         return term;
     }
 
-}
-
-export interface RuleCondition {
-    fact: string;
-    operator: string;
-    value: number;
 }
