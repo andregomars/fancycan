@@ -1,22 +1,16 @@
-import { MqttClient } from 'mqtt';
-import { Utility } from './services/utility';
-import { ICan } from './models';
+import * as mqtt from 'mqtt';
 
 export class QueueLayer {
-    private queue: MqttClient;
-    private utility: Utility;
+    private queue: mqtt.Client;
 
-    constructor(client: MqttClient) {
-        this.queue = client;
-        this.utility = new Utility();
+    constructor(brokerUrl: string) {
+        this.queue = mqtt.connect(brokerUrl);
     }
 
-    public publishCan(doc: ICan) {
-        if (doc) {
-            const topic = this.utility.getTopicName();
-            const message = JSON.stringify(doc);
-            this.queue.publish(topic, message);
+    public publish<T>(message: T, topic: string) {
+        if (message) {
+            const msgText = JSON.stringify(message);
+            this.queue.publish(topic, msgText);
         }
     }
-
 }
