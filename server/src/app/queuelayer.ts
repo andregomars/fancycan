@@ -1,6 +1,6 @@
 import { MqttClient } from 'mqtt';
 import { Utility } from './services/utility';
-import { ICan } from './models/ICanData';
+import { ICan } from './models';
 
 export class QueueLayer {
     private queue: MqttClient;

@@ -1,8 +1,8 @@
 import { TransformService } from './../src/app/services/transform.services';
 import { ObjectID } from 'mongodb';
-import { ICan } from '../src/app/models/ICanData';
-import { IJ1939 } from '../src/app/models/IJ1939';
-import { ICanState } from '../src/app/models/ICanState';
+import { ICan } from '../src/app/models/';
+import { IJ1939 } from '../src/app/models/';
+import { ICanState } from '../src/app/models/';
 import { Utility } from '../src/app/services/utility';
 import { Readable } from 'stream';
 const chunker = require('stream-chunker');

@@ -1,9 +1,8 @@
-import assert from 'assert';
 import { Rxios } from 'rxios';
 import { Observable, forkJoin } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Utility } from './services/utility';
-import { IJ1939 } from './models/IJ1939';
+import { IJ1939 } from './models';
 
 export class FireLayer {
     private http: Rxios;

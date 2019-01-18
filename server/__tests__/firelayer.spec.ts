@@ -1,5 +1,5 @@
 import { FireLayer } from './../src/app/firelayer';
-import { IJ1939 } from '../src/app/models/IJ1939';
+import { IJ1939 } from '../src/app/models';
 
 it('should get definition from remote source', () => {
     const fireLayer = new FireLayer();

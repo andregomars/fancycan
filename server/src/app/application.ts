@@ -12,10 +12,9 @@ import { DataLayer } from './datalayer';
 import { QueueLayer } from './queuelayer';
 import { DocService } from './services/doc.service';
 import { TransformService } from './services/transform.services';
-import { ICan } from './models/ICanData';
 import { Utility } from './services/utility';
 import { FireLayer } from './firelayer';
-import { IJ1939 } from './models/IJ1939';
+import { IJ1939 } from '../../../library/src/index';
 
 export class Application {
     public start() {

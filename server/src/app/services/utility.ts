@@ -1,12 +1,12 @@
 import config from 'config';
 import { Engine } from 'json-rules-engine';
-import { IJ1939 } from '../models/IJ1939';
+import { IJ1939 } from '../models';
 import { CacheLayer } from '../cachelayer';
 import { DataLayer } from '../datalayer';
 import { TransformService } from './transform.services';
-import { ICan } from '../models/ICanData';
-import { ICanState } from '../models/ICanState';
-import { IRuleCondition } from '../models/IRuleCondition';
+import { ICan } from '../models';
+import { ICanState } from '../models';
+import { IRuleCondition } from '../models';
 
 export class Utility {
     public getDbConnectionString(): string {

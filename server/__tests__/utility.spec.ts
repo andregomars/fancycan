@@ -1,6 +1,6 @@
 import { Utility } from '../src/app/services/utility';
-import { IJ1939 } from '../src/app/models/IJ1939';
-import { IRuleCondition } from '../src/app/models/IRuleCondition';
+import { IJ1939 } from '../src/app/models';
+import { IRuleCondition } from '../src/app/models';
 
 describe('When test utility', () => {
     const utility = new Utility();

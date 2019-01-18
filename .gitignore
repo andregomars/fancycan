@@ -1,2 +1,5 @@
 www
 .firebase
+
+.DS_Store
+.swp

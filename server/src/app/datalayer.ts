@@ -1,10 +1,9 @@
 import assert from 'assert';
 import { ObjectID } from 'bson';
 import { MongoClient } from 'mongodb';
-import { ICanRaw } from './models/ICanRaw';
-import { ICan } from './models/ICanData';
-import { ICanState } from './models/ICanState';
-import { IVehicleState } from '../../../library/src';
+import { ICanRaw } from './models';
+import { ICan } from './models';
+import { ICanState } from './models';
 
 type InsertCallBack = (id: ObjectID) => any;
 

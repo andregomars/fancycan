@@ -1,9 +1,8 @@
 import _ from 'lodash';
-import { ICan } from '../models/ICanData';
-import { ICanState } from '../models/ICanState';
-import { IJ1939 } from '../models/IJ1939';
+import { ICan } from '../models';
+import { ICanState } from '../models';
+import { IJ1939 } from '../models';
 import { Utility } from './utility';
-import { IVehicleState } from '../../../../library/src';
 
 export class TransformService {
     private utility: Utility;
