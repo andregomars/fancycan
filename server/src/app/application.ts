@@ -4,7 +4,7 @@ import exitHook from 'exit-hook';
 import { ObjectID } from 'bson';
 import { Readable } from 'stream';
 import { MongoClient } from 'mongodb';
-// import QueueLayer from 'fancycan-queue';
+// import QueueLayer from '@fancycan/queue';
 import { QueueLayer } from './queuelayer';
 const chunker = require('stream-chunker');
 
@@ -13,7 +13,7 @@ import { DocService } from './services/doc.service';
 import { TransformService } from './services/transform.services';
 import { Utility } from './services/utility';
 import { FireLayer } from './firelayer';
-import { IJ1939, ICan } from '../../../library/src/index';
+import { IJ1939, ICan } from '../../../library/model';
 
 export class Application {
     public start() {

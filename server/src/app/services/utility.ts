@@ -1,7 +1,7 @@
 import config from 'config';
 import { Engine } from 'json-rules-engine';
 import { IJ1939 } from '../models';
-import CacheLayer from 'fancycan-cache';
+import CacheLayer from '@fancycan/cache';
 import { DataLayer } from '../datalayer';
 import { TransformService } from './transform.services';
 import { ICan } from '../models';

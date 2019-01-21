@@ -1,2 +1,2 @@
 // from external library project
-export * from '../../../../library/src';
+export * from '../../../../library/model';
