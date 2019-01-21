@@ -12,9 +12,9 @@ describe('SmartQueueService', () => {
 
   it('should update existing entry in the queue', () => {
     const service: SmartQueueService = TestBed.get(SmartQueueService);
-    service.push({key: 'id001', value: 'andre'});
-    service.push({key: 'id002', value: 'blake'});
-    service.push({key: 'id001', value: 'carol'});
+    service.push({key: 'id001', value: 'andre', time: new Date()});
+    service.push({key: 'id002', value: 'blake', time: new Date()});
+    service.push({key: 'id001', value: 'carol', time: new Date()});
 
     const queue = service.queue;
     const entry001 = queue.find(x => x.key === 'id001').value;
@@ -29,12 +29,12 @@ describe('SmartQueueService', () => {
     const service: SmartQueueService = TestBed.get(SmartQueueService);
 
     service.setFilter('18fc1621', 33, 16);
-    service.push({ key: '18A74221', value: '040400000C020020' });
-    service.push({ key: '18fc1621', value: '0404000054020020' });
-    service.push({ key: '18fc1621', value: '040400006A020020' });
-    service.push({ key: '18A74221', value: '040400000C020020' });
-    service.push({ key: '18fc1621', value: '040400000C020020' });
-    service.push({ key: '10FDA300', value: '040400000C020020' });
+    service.push({ key: '18A74221', value: '040400000C020020', time: new Date() });
+    service.push({ key: '18fc1621', value: '0404000054020020', time: new Date() });
+    service.push({ key: '18fc1621', value: '040400006A020020', time: new Date() });
+    service.push({ key: '18A74221', value: '040400000C020020', time: new Date() });
+    service.push({ key: '18fc1621', value: '040400000C020020', time: new Date() });
+    service.push({ key: '10FDA300', value: '040400000C020020', time: new Date() });
     service.clearFilter();
 
     expect(service.queue.length).toEqual(3);
@@ -49,12 +49,12 @@ describe('SmartQueueService', () => {
     const service: SmartQueueService = TestBed.get(SmartQueueService);
 
     service.setFilter('18fc1621', 33, 16);
-    service.push({ key: '18A74221', value: '040400000C020020' });
-    service.push({ key: '18fc1621', value: '0404000054020020' });
-    service.push({ key: '18fc1621', value: '040400006A020020' });
-    service.push({ key: '18A74221', value: '040400000C020020' });
-    service.push({ key: '18fc1621', value: '040400000C020020' });
-    service.push({ key: '10FDA300', value: '040400000C020020' });
+    service.push({ key: '18A74221', value: '040400000C020020', time: new Date() });
+    service.push({ key: '18fc1621', value: '0404000054020020', time: new Date() });
+    service.push({ key: '18fc1621', value: '040400006A020020', time: new Date() });
+    service.push({ key: '18A74221', value: '040400000C020020', time: new Date() });
+    service.push({ key: '18fc1621', value: '040400000C020020', time: new Date() });
+    service.push({ key: '10FDA300', value: '040400000C020020', time: new Date() });
 
     expect(service.queue.length).toEqual(3);
     expect(service.times).toEqual(3);

@@ -4,7 +4,6 @@ import exitHook from 'exit-hook';
 import { ObjectID } from 'bson';
 import { Readable } from 'stream';
 import { MongoClient } from 'mongodb';
-// import QueueLayer from '@fancycan/queue';
 import { QueueLayer } from './queuelayer';
 const chunker = require('stream-chunker');
 

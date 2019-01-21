@@ -23,8 +23,8 @@ export const environment = {
   mqtt: {
     connectOnCreate: false,
     protocol: 'ws',
-    hostname: '52.32.76.180',
-    // hostname: 'localhost',
+    // hostname: '52.32.76.180',
+    hostname: 'localhost',
     port: 9001
   },
   rtmMessagesMaxCount: 15,

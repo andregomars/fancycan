@@ -20,7 +20,6 @@ export class SmartQueueService {
   private filterValueLength: number;
 
   get queue() {
-    // return this._queue;
     return _.sortBy(this._queue, ['key']);
   }
 
