@@ -9,6 +9,7 @@ import { ObjectID } from 'bson';
 
 import { environment } from '../../../environments/environment';
 import { ICan } from '../../models/ican';
+import { ICanEntry } from '../../models';
 
 @Component({
   selector: 'app-vehicle-rtm',
@@ -81,7 +82,7 @@ export class RtmComponent implements OnInit {
       this.mqttService.observe(this.topic).pipe(
         map((message: IMqttMessage) => {
           const canMsg: ICan = JSON.parse(message.payload.toString());
-          const can = {
+          const can: ICanEntry = {
             key: Buffer.from(canMsg.canID).toString('hex'),
             value: Buffer.from(canMsg.canData).toString('hex'),
             time: new ObjectID(canMsg.rawID).getTimestamp()

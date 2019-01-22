@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { differenceInSeconds } from 'date-fns';
 import { Buffer } from 'buffer/';
 import * as _ from 'lodash';
-import { UtilityService } from './utility.service';
+import { CanService } from './can.service';
+import { ICanEntry } from '../../models';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SmartQueueService {
-  private _queue: IEntry[];
+  private _queue: ICanEntry[];
   private _min: number;
   private _max: number;
   private _timer: number;
@@ -40,7 +41,7 @@ export class SmartQueueService {
   }
 
   constructor(
-    private utilityService: UtilityService
+    private canService: CanService
   ) {
     this._queue = [];
     this.clearFilter();
@@ -64,7 +65,7 @@ export class SmartQueueService {
     this.filterValueLength = length;
   }
 
-  push(entry: IEntry) {
+  push(entry: ICanEntry) {
     const entryMatched = this._queue.find(x => x.key === entry.key);
     if (entryMatched) {
       entryMatched.value = entry.value;
@@ -80,13 +81,13 @@ export class SmartQueueService {
     }
   }
 
-  pop(): IEntry {
+  pop(): ICanEntry {
     return this._queue.pop();
   }
 
   private calculateMinMax(canData: string) {
     const buffer = Buffer.from(canData, 'hex');
-    const val = this.utilityService.decodeJ1939(buffer, this.filterValueStartBit, this.filterValueLength);
+    const val = this.canService.decodeJ1939(buffer, this.filterValueStartBit, this.filterValueLength);
 
     if (this._min === null && this._max === null) {
       this._min = val;
@@ -113,10 +114,4 @@ export class SmartQueueService {
       this._timer = differenceInSeconds(current, this._timerStartAt);
     }
   }
-}
-
-export interface IEntry {
-  key: string;
-  value: string;
-  time: Date;
 }
