@@ -1,8 +1,8 @@
 import { TestBed, inject } from '@angular/core/testing';
 import { Buffer } from 'buffer/';
 
-import { CanService, Dm1Data, Dm1Collection } from './can.service';
-import { Dm1EntryType } from '../../models/dm1-entry-type';
+import { CanService } from './can.service';
+import { Dm1EntryType, Dm1Data, Dm1Collection } from '../../models';
 
 describe('CanService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
@@ -34,13 +34,12 @@ describe('CanService', () => {
 
   it('should get single DM1 value from CAN data', inject([CanService], (can: CanService) => {
     const canData = '10FF6F020101FFFF';
-    const list: Dm1Data[] = [];
     const dm1Collection: Dm1Collection = {
       lamp: 0,
       packetsCount: 0,
       entriesCount: 0,
-      entriesBuffer: Buffer.alloc(1),
-      data: list
+      entriesBuffer: Buffer.alloc(0),
+      data: []
     };
     const actual = can.decodeDm1(canData, Dm1EntryType.Single, dm1Collection);
 
@@ -55,13 +54,12 @@ describe('CanService', () => {
   }));
 
   it('should get multiple DM1 values from CAN data', inject([CanService], (can: CanService) => {
-    const list: Dm1Data[] = [];
     let dm1Collection: Dm1Collection = {
       lamp: 0,
       packetsCount: 0,
       entriesCount: 0,
       entriesBuffer: Buffer.alloc(0),
-      data: list
+      data: []
     };
     dm1Collection = can.decodeDm1('200AFFFFFFCAFE00', Dm1EntryType.MultiHeader, dm1Collection);
     dm1Collection = can.decodeDm1('0110FF640001013D', Dm1EntryType.MultiData, dm1Collection);

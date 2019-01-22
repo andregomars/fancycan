@@ -9,7 +9,9 @@ import { ObjectID } from 'bson';
 
 import { environment } from '../../../environments/environment';
 import { ICan } from '../../models/ican';
-import { ICanEntry } from '../../models';
+import { ICanEntry, Dm1Collection } from '../../models';
+import { CanService } from '../../services/utility/can.service';
+import { Dm1AlertService } from '../../services/utility/dm1-alert.service';
 
 @Component({
   selector: 'app-vehicle-rtm',
@@ -53,10 +55,21 @@ export class RtmComponent implements OnInit {
     return this.smartQueueService.filterKey;
   }
 
+  get listDm1Collection(): Dm1Collection {
+    return this.dm1AlertService.listDm1Collection;
+  }
+  get listDm1SingleRaw(): ICanEntry[] {
+    return this.dm1AlertService.listDm1SingleRaw;
+  }
+  get listDm1MultipleRaw(): ICanEntry[] {
+    return this.dm1AlertService.listDm1MultipleRaw;
+  }
+
   constructor(
     private mqttService: MqttService,
     private dataService: DataService,
     private smartQueueService: SmartQueueService,
+    private dm1AlertService: Dm1AlertService,
     // private utitlityService: UtilityService
   ) { }
 
@@ -88,6 +101,7 @@ export class RtmComponent implements OnInit {
             time: new ObjectID(canMsg.rawID).getTimestamp()
           };
           this.smartQueueService.push(can);
+          this.dm1AlertService.push(can);
           return this.smartQueueService.queue;
         }),
       );

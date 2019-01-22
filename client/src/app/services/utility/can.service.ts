@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Buffer } from 'buffer/';
-import { Dm1EntryType } from '../../models/dm1-entry-type';
+import { Dm1EntryType, Dm1Data, Dm1Collection } from '../../models';
 import * as _ from 'lodash';
 
 @Injectable({
@@ -105,16 +105,3 @@ export class CanService {
   }
 }
 
-export interface Dm1Data {
-  spn: number;
-  fmi: number;
-  count: number;
-}
-
-export interface Dm1Collection {
-  lamp: number;
-  packetsCount: number;  // count of 4 bytes data, e.g. 0x64 0x00 0x01 0x01
-  entriesCount: number;  // count of can data entries
-  entriesBuffer: Buffer;  // can data entries
-  data: Dm1Data[];
-}
