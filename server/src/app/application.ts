@@ -15,73 +15,71 @@ import { FireLayer } from './firelayer';
 import { IJ1939, ICan } from '../../../library/model';
 
 export class Application {
-    public start() {
+    public async start() {
         const fire = new FireLayer();
         const utility = new Utility();
 
-        fire.getDefinitionWithSpecs().subscribe((spns: IJ1939[]) => {
-            utility.storeSpnsIntoCacheGroupedByPgn(spns);
+        const spns = await fire.getDefinitionWithSpecs().toPromise<IJ1939[]>();
 
-            const stream = this.createReadStream();
+        utility.storeSpnsIntoCacheGroupedByPgn(spns);
 
-            const tcpServer = net.createServer();
-            const docService = new DocService();
-            const MAX_BUFFERS = +utility.getCommonConfig('rawParsingBuffer');
-            const urlDbConn = utility.getDbConnectionString();
-            const urlMqConn = utility.getMqConnectionString();
-            const mqTopic = utility.getTopicName();
-            const mqo = new QueueLayer(urlMqConn);
+        const stream = this.createReadStream();
 
-            MongoClient.connect(urlDbConn, { useNewUrlParser: true }, (error, dbClient) => {
-                assert.equal(error, null);
-                const dbo = new DataLayer(dbClient);
-                const transformService = new TransformService();
+        const tcpServer = net.createServer();
+        const docService = new DocService();
+        const MAX_BUFFERS = +utility.getCommonConfig('rawParsingBuffer');
+        const port = +utility.getCommonConfig('listeningPort');
+        const urlDbConn = utility.getDbConnectionString();
+        const urlMqConn = utility.getMqConnectionString();
+        const mqTopic = utility.getTopicName();
+        const mqo = new QueueLayer(urlMqConn);
 
-                tcpServer.on('connection', (socket) => {
-                    console.log('start db connection');
+        const dbClient = await MongoClient.connect(urlDbConn, { useNewUrlParser: true });
+        const dbo = new DataLayer(dbClient);
+        const transformService = new TransformService();
 
-                    try {
-                        const remotePort = socket.remotePort!;
-                        const localPort = socket.localPort!;
-                        let rawID: ObjectID;
+        tcpServer.on('connection', (socket) => {
+            try {
+                const remotePort = socket.remotePort!;
+                const localPort = socket.localPort!;
+                let rawID: ObjectID;
 
-                        stream.pipe(chunker(13))
-                            .on('data', (chunk: Buffer) => {
-                                const doc = docService.buildCan(chunk, rawID, localPort, remotePort);
-                                // docs.push(doc);
-                                (async () => {
-                                    await utility.saveCanDoc(doc, dbo, transformService);
-                                })();
-                                mqo.publish<ICan>(doc, mqTopic);
-                            });
+                stream.pipe(chunker(13))
+                    .on('data', (chunk: Buffer) => {
+                        const doc = docService.buildCan(chunk, rawID, localPort, remotePort);
+                        (async () => {
+                            await utility.saveCanDoc(doc, dbo, transformService);
+                        })();
+                        mqo.publish<ICan>(doc, mqTopic);
+                    });
 
-                        // push into splitter stream while fetching data from TCP socket
-                        socket.on('data', (data: Buffer) => {
-                            const doc = docService.buildCanRaw(data);
-                            dbo.insertCanRaw(doc, (id: ObjectID) => {
-                                rawID = id;
-                                stream.push(data);
-                            });
-                        });
-                    } catch (error) {
-                        console.log(error);
-                    }
+                // push into splitter stream while fetching data from TCP socket
+                socket.on('data', (data: Buffer) => {
+                    const doc = docService.buildCanRaw(data);
+                    (async () => {
+                        rawID = await dbo.insertCanRaw(doc);
+                        stream.push(data);
+                    })();
+                    // dbo.insertCanRaw(doc, (id: ObjectID) => {
+                    //     rawID = id;
+                    //     stream.push(data);
+                    // });
                 });
+            } catch (error) {
+                console.log(error);
+            }
+        });
 
-                const port = 5888;
-                tcpServer.listen(port);
-                console.log('start listening on port ' + port);
+        tcpServer.listen(port);
+        console.log('start listening on port ' + port);
 
-                // process.on('SIGINT', async () => {
-                exitHook(() => {
-                    tcpServer.close();
-                    dbClient.close();
-                });
-            });
+        exitHook(() => {
+            tcpServer.close();
+            dbClient.close();
         });
     }
 
-    public createReadStream() {
+    private createReadStream() {
         return new Readable({
             read() {
                 return;

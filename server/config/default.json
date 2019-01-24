@@ -18,7 +18,8 @@
         "url": "https://fancycandemo.firebaseio.com"
     },
     "common": {
-        "rawParsingBuffer": 1
+        "rawParsingBuffer": 100,
+        "listeningPort": 5888
     },
     "malfunctions": [
         {

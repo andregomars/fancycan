@@ -66,17 +66,17 @@ export class Utility {
         return CacheLayer.getInstance().get<IJ1939[]>(key);
     }
 
-    public async saveCanDocs(docs: ICan[], dbo: DataLayer, transformService: TransformService) {
-        dbo.insertCans(docs);
-        const states = transformService.getCanStates(docs);
-        await dbo.insertCanStates(states);
-        for (const canState of states) {
-            await this.saveVehicleStateDoc(canState, dbo, transformService);
-        }
-    }
+    // public async saveCanDocs(docs: ICan[], dbo: DataLayer, transformService: TransformService) {
+    //     dbo.insertCans(docs);
+    //     const states = transformService.getCanStates(docs);
+    //     await dbo.insertCanStates(states);
+    //     for (const canState of states) {
+    //         await this.saveVehicleStateDoc(canState, dbo, transformService);
+    //     }
+    // }
 
     public async saveCanDoc(doc: ICan, dbo: DataLayer, transformService: TransformService) {
-        dbo.insertCan(doc);
+        await dbo.insertCan(doc);
         const states = transformService.getCanState(doc);
         if (states.length > 0) {
             await dbo.insertCanStates(states);

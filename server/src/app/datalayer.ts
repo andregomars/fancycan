@@ -14,37 +14,30 @@ export class DataLayer {
         this.conn = client;
     }
 
-    public insertCanRaw(doc: ICanRaw, callback: InsertCallBack) {
-        console.log('start insert docs');
-        this.conn.db('main').collection('can_raw').insertOne(doc, (error, result) => {
-            assert.equal(error, null);
-            console.log('insert doc into collection can_raw');
-            callback(result.insertedId);
-        });
+    // public insertCanRaw(doc: ICanRaw, callback: InsertCallBack) {
+    //     console.log('start insert docs');
+    //     this.conn.db('main').collection('can_raw').insertOne(doc, (error, result) => {
+    //         assert.equal(error, null);
+    //         console.log('insert doc into collection can_raw');
+    //         callback(result.insertedId);
+    //     });
+    // }
+
+    // public async insertCans(docs: ICan[]) {
+    //     await this.conn.db('main').collection('can').insertMany(docs, { forceServerObjectId: true });
+    // }
+
+    public async insertCanRaw(doc: ICanRaw): Promise<ObjectID> {
+        const result = await this.conn.db('main').collection('can_raw').insertOne(doc);
+        return result.insertedId;
     }
 
-    public insertCan(doc: ICan) {
-        this.conn.db('main').collection('can').insertOne(doc, (error, result) => {
-            assert.equal(error, null);
-        });
-    }
-
-    public insertCans(docs: ICan[]) {
-        if (!docs || docs.length < 1) {
-            return;
-        }
-
-        this.conn.db('main').collection('can').insertMany(docs, { forceServerObjectId: true }, (error, result) => {
-            assert.equal(error, null);
-        });
+    public async insertCan(doc: ICan) {
+        await this.conn.db('main').collection('can').insertOne(doc);
     }
 
     public async insertCanStates(docs: ICanState[]) {
-        try {
-            await this.conn.db('main').collection('can_state').insertMany(docs, { forceServerObjectId: true });
-        } catch (error) {
-            console.log(error);
-        }
+        await this.conn.db('main').collection('can_state').insertMany(docs, { forceServerObjectId: true });
     }
 
     public async upsertVehicleState(state: any) {
