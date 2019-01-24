@@ -2,9 +2,11 @@
   "name": "@fancycan/fcrx",
   "version": "1.0.0",
   "license": "MIT",
+  "private": true,
+  "workspaces": [ "../library/*" ],
   "scripts": {
     "start": "node dist/app.js",
-    "serve": "npx tsc -b && node dist/app.js",
+    "serve": "npx tsc -b && node dist/server/app.js",
     "build": "npx tsc -b",
     "test": "npx jest",
     "tslint": "npx tslint -c tslint.json -p tsconfig.json",
