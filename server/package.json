@@ -1,5 +1,5 @@
 {
-  "name": "fc-server",
+  "name": "@fancycan/fcrx",
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
@@ -15,6 +15,7 @@
     "deploy": "npx tsc -b && pm2 delete fcrx && pm2 start --env production"
   },
   "dependencies": {
+    "@fancycan/cache": "0.0.1",
     "axios": "^0.18.0",
     "config": "^3.0.0",
     "exit-hook": "^2.0.0",
