@@ -5,8 +5,6 @@ import { ICanRaw } from './models';
 import { ICan } from './models';
 import { ICanState } from './models';
 
-type InsertCallBack = (id: ObjectID) => any;
-
 export class DataLayer {
     private conn: MongoClient;
 

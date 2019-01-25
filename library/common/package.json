@@ -5,7 +5,8 @@
   "license": "MIT",
   "typings": "dist/types/index.d.ts",
   "dependencies": {
-    "fancycan-cache": "^1.0.0"
+    "fancycan-cache": "^1.0.0",
+    "fancycan-model": "^1.0.2"
   },
   "devDependencies": {
     "@types/jest": "^23.3.13",
