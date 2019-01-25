@@ -1,8 +1,8 @@
 {
-  "name": "@fancycan/model",
-  "version": "1.0.0",
+  "name": "fancycan-model",
+  "version": "1.0.1",
   "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "types": "dist/types/index.d.ts",
   "license": "MIT",
   "scripts": {
     "build": "npx tsc -b"
