@@ -1,12 +1,12 @@
 {
   "name": "fancycan-common",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "main": "dist/lib/index.js",
   "license": "MIT",
   "typings": "dist/types/index.d.ts",
   "dependencies": {
     "fancycan-cache": "^1.0.0",
-    "fancycan-model": "^1.0.4"
+    "fancycan-model": "^1.0.5"
   },
   "devDependencies": {
     "@types/bson": "^1.0.11",
