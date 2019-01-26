@@ -18,12 +18,19 @@
     esutils "^2.0.2"
     js-tokens "^4.0.0"
 
+"@types/bson@^1.0.11":
+  version "1.0.11"
+  resolved "https://registry.yarnpkg.com/@types/bson/-/bson-1.0.11.tgz#c95ad69bb0b3f5c33b4bb6cc86d86cafb273335c"
+  integrity sha512-j+UcCWI+FsbI5/FQP/Kj2CXyplWAz39ktHFkXk84h7dNblKRSoNJs95PZFRd96NQGqsPEPgeclqnznWZr14ZDA==
+  dependencies:
+    "@types/node" "*"
+
 "@types/jest@^23.3.13":
   version "23.3.13"
   resolved "https://registry.yarnpkg.com/@types/jest/-/jest-23.3.13.tgz#c81484b6f4ca007bb09887ed15ecb3286d58f928"
   integrity sha512-ePl4l+7dLLmCucIwgQHAgjiepY++qcI6nb8eAwGNkB6OxmTe3Z9rQU3rSpomqu42PCCnlThZbOoxsf+qylJsLA==
 
-"@types/node@^10.12.18":
+"@types/node@*", "@types/node@^10.12.18":
   version "10.12.18"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.12.18.tgz#1d3ca764718915584fcd9f6344621b7672665c67"
   integrity sha512-fh+pAqt4xRzPfqA6eh3Z2y6fyZavRIumvjhaCL753+TVkGKGhpPeyrJG2JftD0T9q4GF00KjefsQ+PQNDdWQaQ==
@@ -1000,10 +1007,10 @@ fancycan-cache@^1.0.0:
   dependencies:
     node-cache "^4.2.0"
 
-fancycan-model@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/fancycan-model/-/fancycan-model-1.0.2.tgz#fd78382b9b72467a35baff117929bf63059cc8c8"
-  integrity sha512-gt75snffkWcfrcL1nHGYzyxkV9i53QEf9VlFHZrU/hR1TRis33TqqZ2VUDUAVCHxzKC4oCcvz90M/4dXXvzjwA==
+fancycan-model@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/fancycan-model/-/fancycan-model-1.0.4.tgz#08659e21991d8e21f9fa6d45efd1e0b84b155070"
+  integrity sha512-cAhY8pZdzOsgdCigRLn8lboxsFq0cqy/G88mlmlTEO2MDNjKSUCLXPbCf2ABmK2BBSm7NupJj2DRhLjfA+GzmQ==
   dependencies:
     node-cache "^4.2.0"
 
@@ -2997,7 +3004,7 @@ ret@~0.1.10:
   resolved "https://registry.yarnpkg.com/ret/-/ret-0.1.15.tgz#b8a4825d5bdb1fc3f6f53c2bc33f81388681c7bc"
   integrity sha512-TTlYpa+OL+vMMNG24xSlQGEJ3B/RzEfUlLct7b5G/ytav+wPrplCpVMFuwzXbkecJrb6IYo1iFb0S9v37754mg==
 
-rimraf@^2.5.4, rimraf@^2.6.1:
+rimraf@^2.5.4, rimraf@^2.6.1, rimraf@^2.6.3:
   version "2.6.3"
   resolved "https://registry.yarnpkg.com/rimraf/-/rimraf-2.6.3.tgz#b2d104fe0d8fb27cf9e0a1cda8262dd3833c6cab"
   integrity sha512-mwqeW5XsA2qAejG46gYdENaxXjx9onRNCfn7L0duuP4hCuTIi/QO7PDK07KJfp1d+izWPrzEJDcSqBa0OZQriA==

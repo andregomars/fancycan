@@ -1,7 +1,6 @@
 import { SpnRepository } from 'fancycan-common';
+import { IJ1939, IRuleCondition } from 'fancycan-model';
 import { RuleEngine } from '../src/app/rule-engine';
-import { IJ1939 } from '../src/app/models';
-import { IRuleCondition } from '../src/app/models';
 
 describe('When test utility', () => {
     const repo = new SpnRepository();

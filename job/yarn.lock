@@ -18,6 +18,13 @@
     esutils "^2.0.2"
     js-tokens "^4.0.0"
 
+"@types/bson@^1.0.11":
+  version "1.0.11"
+  resolved "https://registry.yarnpkg.com/@types/bson/-/bson-1.0.11.tgz#c95ad69bb0b3f5c33b4bb6cc86d86cafb273335c"
+  integrity sha512-j+UcCWI+FsbI5/FQP/Kj2CXyplWAz39ktHFkXk84h7dNblKRSoNJs95PZFRd96NQGqsPEPgeclqnznWZr14ZDA==
+  dependencies:
+    "@types/node" "*"
+
 "@types/config@^0.0.34":
   version "0.0.34"
   resolved "https://registry.yarnpkg.com/@types/config/-/config-0.0.34.tgz#123f91bdb5afdd702294b9de9ca04d9ea11137b0"
@@ -28,7 +35,7 @@
   resolved "https://registry.yarnpkg.com/@types/jest/-/jest-23.3.13.tgz#c81484b6f4ca007bb09887ed15ecb3286d58f928"
   integrity sha512-ePl4l+7dLLmCucIwgQHAgjiepY++qcI6nb8eAwGNkB6OxmTe3Z9rQU3rSpomqu42PCCnlThZbOoxsf+qylJsLA==
 
-"@types/node@^10.12.18":
+"@types/node@*", "@types/node@^10.12.18":
   version "10.12.18"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.12.18.tgz#1d3ca764718915584fcd9f6344621b7672665c67"
   integrity sha512-fh+pAqt4xRzPfqA6eh3Z2y6fyZavRIumvjhaCL753+TVkGKGhpPeyrJG2JftD0T9q4GF00KjefsQ+PQNDdWQaQ==
@@ -1036,12 +1043,20 @@ fancycan-cache@^1.0.0:
   dependencies:
     node-cache "^4.2.0"
 
-fancycan-common@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/fancycan-common/-/fancycan-common-1.0.1.tgz#dd1f7b83ec6d8ae84e3ba0827d1ef5abc70503d0"
-  integrity sha512-ZFD4UTgAKJ0dGLKen6DTg5KUecVo7kbrNtfhT07itfPINDnAPJGn/9tUptFwJWtnK/wuHrDVgy4ZDz/dqm/HQQ==
+fancycan-common@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/fancycan-common/-/fancycan-common-1.0.3.tgz#1f04f0619ca1f83cab5e6e7f3c2edafdcc0bfd5d"
+  integrity sha512-xNXGqz7+K+nfM+Wcjzo5aSyzanvdEM3EmGCgiYze67tyPgUPnF8+8Cao5cNsSoXLhXddbBfjBfIVv/f9baaf7g==
   dependencies:
     fancycan-cache "^1.0.0"
+    fancycan-model "^1.0.4"
+
+fancycan-model@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/fancycan-model/-/fancycan-model-1.0.4.tgz#08659e21991d8e21f9fa6d45efd1e0b84b155070"
+  integrity sha512-cAhY8pZdzOsgdCigRLn8lboxsFq0cqy/G88mlmlTEO2MDNjKSUCLXPbCf2ABmK2BBSm7NupJj2DRhLjfA+GzmQ==
+  dependencies:
+    node-cache "^4.2.0"
 
 fast-bind@^1.0.0:
   version "1.0.0"

@@ -63,4 +63,10 @@
   // "references": [
   //   { "path": "../model" }
   // ]
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "**/__test__/*"
+  ]
 }

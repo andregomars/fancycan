@@ -19,6 +19,7 @@
     "deploy": "npx tsc -b && pm2 delete fcrx && pm2 start --env production"
   },
   "devDependencies": {
+    "@types/bson": "^1.0.11",
     "@types/jest": "^23.3.13",
     "@types/node": "^10.12.18",
     "jest": "^23.6.0",
@@ -29,7 +30,8 @@
   "dependencies": {
     "@types/config": "^0.0.34",
     "config": "^3.0.1",
-    "fancycan-common": "^1.0.1",
+    "fancycan-common": "^1.0.3",
+    "fancycan-model": "^1.0.4",
     "json-rules-engine": "^2.3.2"
   }
 }

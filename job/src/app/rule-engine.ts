@@ -1,4 +1,4 @@
-import { IRuleCondition } from './models';
+import { IRuleCondition } from 'fancycan-model';
 
 export class RuleEngine {
     public buildRuleConditionGroups(malfuncRules: any[]): Map<number, IRuleCondition[]> {
