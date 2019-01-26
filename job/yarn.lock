@@ -1043,18 +1043,18 @@ fancycan-cache@^1.0.0:
   dependencies:
     node-cache "^4.2.0"
 
-fancycan-common@^1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/fancycan-common/-/fancycan-common-1.0.3.tgz#1f04f0619ca1f83cab5e6e7f3c2edafdcc0bfd5d"
-  integrity sha512-xNXGqz7+K+nfM+Wcjzo5aSyzanvdEM3EmGCgiYze67tyPgUPnF8+8Cao5cNsSoXLhXddbBfjBfIVv/f9baaf7g==
+fancycan-common@^1.0.6:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/fancycan-common/-/fancycan-common-1.0.6.tgz#cf3e603b94d3a22926c8ebe45b5d056e6aab7829"
+  integrity sha512-3qfeYguP9jjX64sB1ZPrf2obqh9NT8bnJ6TGrgU7JQuKehlPmw8o4EFgg/VGcZVmDCiFVCPhbhc4yUemK01bjg==
   dependencies:
     fancycan-cache "^1.0.0"
-    fancycan-model "^1.0.4"
+    fancycan-model "^1.0.5"
 
-fancycan-model@^1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/fancycan-model/-/fancycan-model-1.0.4.tgz#08659e21991d8e21f9fa6d45efd1e0b84b155070"
-  integrity sha512-cAhY8pZdzOsgdCigRLn8lboxsFq0cqy/G88mlmlTEO2MDNjKSUCLXPbCf2ABmK2BBSm7NupJj2DRhLjfA+GzmQ==
+fancycan-model@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/fancycan-model/-/fancycan-model-1.0.5.tgz#5e66ade27d627000b5cb0d9d2dccb941cf868b06"
+  integrity sha512-X3IClEai5gqpzLv08qhErF3iEISz9OI7bxLSgAg8ktrzMhCFQcM6Xdv6Yo87Z+8lmCFjVY63iWekzX7Et1Vlog==
   dependencies:
     node-cache "^4.2.0"
 
