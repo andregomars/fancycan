@@ -1,16 +1,19 @@
 {
   "name": "fancycan-common",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "main": "dist/lib/index.js",
   "license": "MIT",
   "typings": "dist/types/index.d.ts",
   "dependencies": {
+    "bson": "^4.0.1",
     "fancycan-cache": "^1.0.0",
-    "fancycan-model": "^1.0.5"
+    "fancycan-model": "^1.0.5",
+    "lodash": "^4.17.11"
   },
   "devDependencies": {
     "@types/bson": "^1.0.11",
     "@types/jest": "^23.3.13",
+    "@types/lodash": "^4.14.120",
     "@types/node": "^10.12.18",
     "jest": "^23.6.0",
     "rimraf": "^2.6.3",
