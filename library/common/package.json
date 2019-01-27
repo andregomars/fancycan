@@ -1,9 +1,17 @@
 {
   "name": "fancycan-common",
-  "version": "1.0.10",
+  "version": "1.0.12",
   "main": "dist/lib/index.js",
   "license": "MIT",
   "types": "dist/types/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "prebuild": "rimraf dist",
+    "build": "npx tsc -b",
+    "test": "jest"
+  },
   "dependencies": {
     "bson": "^4.0.1",
     "fancycan-cache": "^1.0.0",
@@ -20,10 +28,5 @@
     "ts-jest": "^23.10.5",
     "tslint": "^5.12.1",
     "typescript": "^3.2.4"
-  },
-  "scripts": {
-    "prebuild": "rimraf dist",
-    "build": "npx tsc -b",
-    "test": "jest"
   }
 }
