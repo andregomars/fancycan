@@ -2,8 +2,10 @@ import { Injectable } from '@angular/core';
 import { differenceInSeconds } from 'date-fns';
 import { Buffer } from 'buffer/';
 import * as _ from 'lodash';
-import { CanService } from './can.service';
-import { ICanEntry } from '../../models';
+import { ICanEntry } from 'fancycan-model';
+import { TransformService } from './transform.service';
+
+// import { CanService } from './can.service';
 
 @Injectable({
   providedIn: 'root'
@@ -41,8 +43,9 @@ export class SmartQueueService {
   }
 
   constructor(
-    private canService: CanService
+    private transformService: TransformService
   ) {
+    // this.transform = new Transform();
     this._queue = [];
     this.clearFilter();
   }
@@ -87,7 +90,8 @@ export class SmartQueueService {
 
   private calculateMinMax(canData: string) {
     const buffer = Buffer.from(canData, 'hex');
-    const val = this.canService.decodeJ1939(buffer, this.filterValueStartBit, this.filterValueLength);
+    // const val = this.canService.decodeJ1939(buffer, this.filterValueStartBit, this.filterValueLength);
+    const val = this.transformService.decodeJ1939(buffer.toString('hex'), this.filterValueStartBit, this.filterValueLength);
 
     if (this._min === null && this._max === null) {
       this._min = val;

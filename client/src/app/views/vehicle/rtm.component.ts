@@ -1,16 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService, UtilityService, SmartQueueService } from '../../services';
-import { Observable, Subscription } from 'rxjs';
+import { DataService, SmartQueueService } from '../../services';
+import { Observable } from 'rxjs';
 import { map, share } from 'rxjs/operators';
-// import * as moment from 'moment';
 import { MqttService, IMqttMessage } from 'ngx-mqtt';
 import { Buffer } from 'buffer/';
 import { ObjectID } from 'bson';
 
 import { environment } from '../../../environments/environment';
 import { ICan } from '../../models/ican';
-import { ICanEntry, Dm1Collection } from '../../models';
-import { CanService } from '../../services/utility/can.service';
+import { ICanEntry, Dm1Collection } from 'fancycan-model';
 import { Dm1AlertService } from '../../services/utility/dm1-alert.service';
 
 @Component({
@@ -70,7 +68,6 @@ export class RtmComponent implements OnInit {
     private dataService: DataService,
     private smartQueueService: SmartQueueService,
     private dm1AlertService: Dm1AlertService,
-    // private utitlityService: UtilityService
   ) { }
 
   ngOnInit() {

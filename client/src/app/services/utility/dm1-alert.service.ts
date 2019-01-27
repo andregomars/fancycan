@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Buffer } from 'buffer/';
+import { ICanEntry, Dm1EntryType, Dm1Collection } from 'fancycan-model';
+import { TransformService } from './transform.service';
 
-import { ICanEntry, Dm1EntryType, Dm1Collection } from '../../models';
 import { environment } from '../../../environments/environment';
-import { CanService } from './can.service';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +26,7 @@ export class Dm1AlertService {
   }
 
   constructor(
-    private canService: CanService
+    private transformService: TransformService
   ) {
     this.initDm1Collection();
   }
@@ -36,16 +36,16 @@ export class Dm1AlertService {
       case Dm1EntryType.Single:
         this._listDm1SingleRaw.pop();
         this._listDm1SingleRaw.push(entry);
-        this._listDm1Collection = this.canService.decodeDm1(entry.value, Dm1EntryType.Single, this._listDm1Collection);
+        this._listDm1Collection = this.transformService.decodeDm1(entry.value, Dm1EntryType.Single, this._listDm1Collection);
         break;
       case Dm1EntryType.MultiHeader:
         this._listDm1MultipleRaw.length = 0;
         this._listDm1MultipleRaw.push(entry);
-        this._listDm1Collection = this.canService.decodeDm1(entry.value, Dm1EntryType.MultiHeader, this._listDm1Collection);
+        this._listDm1Collection = this.transformService.decodeDm1(entry.value, Dm1EntryType.MultiHeader, this._listDm1Collection);
         break;
       case Dm1EntryType.MultiData:
         this._listDm1MultipleRaw.push(entry);
-        this._listDm1Collection = this.canService.decodeDm1(entry.value, Dm1EntryType.MultiData, this._listDm1Collection);
+        this._listDm1Collection = this.transformService.decodeDm1(entry.value, Dm1EntryType.MultiData, this._listDm1Collection);
         break;
     }
   }

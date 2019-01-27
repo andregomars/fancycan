@@ -3,10 +3,9 @@
   "version": "1.0.0",
   "license": "MIT",
   "private": true,
-  "workspaces": [ "../library/*" ],
   "scripts": {
     "start": "node dist/app.js",
-    "serve": "npx tsc -b && node dist/server/app.js",
+    "serve": "npx tsc -b && node dist/app.js",
     "build": "npx tsc -b",
     "test": "npx jest",
     "tslint": "npx tslint -c tslint.json -p tsconfig.json",
@@ -17,10 +16,12 @@
     "deploy": "npx tsc -b && pm2 delete fcrx && pm2 start --env production"
   },
   "dependencies": {
-    "@fancycan/cache": "0.0.1",
     "axios": "^0.18.0",
     "config": "^3.0.0",
     "exit-hook": "^2.0.0",
+    "fancycan-cache": "^1.0.0",
+    "fancycan-common": "^1.0.16",
+    "fancycan-model": "^1.0.11",
     "json-rules-engine": "^2.3.2",
     "lodash": "^4.17.11",
     "mongodb": "^3.1.10",

@@ -1,27 +1,27 @@
 import net from 'net';
-import assert from 'assert';
 import exitHook from 'exit-hook';
 import { ObjectID } from 'bson';
 import { Readable } from 'stream';
 import { MongoClient } from 'mongodb';
-import { QueueLayer } from './queuelayer';
+import { IJ1939, ICan } from 'fancycan-model';
+import { SpnRepository, Transform } from 'fancycan-common';
 const chunker = require('stream-chunker');
 
+import { QueueLayer } from './queuelayer';
 import { DataLayer } from './datalayer';
 import { DocService } from './services/doc.service';
-import { TransformService } from './services/transform.services';
 import { Utility } from './services/utility';
 import { FireLayer } from './firelayer';
-import { IJ1939, ICan } from '../../../library/model';
 
 export class Application {
     public async start() {
         const fire = new FireLayer();
+        const spnRepo = new SpnRepository();
         const utility = new Utility();
 
         const spns = await fire.getDefinitionWithSpecs().toPromise<IJ1939[]>();
 
-        utility.storeSpnsIntoCacheGroupedByPgn(spns);
+        spnRepo.storeSpnsIntoCacheGroupedByPgn(spns);
 
         const stream = this.createReadStream();
 
@@ -36,7 +36,7 @@ export class Application {
 
         const dbClient = await MongoClient.connect(urlDbConn, { useNewUrlParser: true });
         const dbo = new DataLayer(dbClient);
-        const transformService = new TransformService();
+        const transform = new Transform();
 
         tcpServer.on('connection', (socket) => {
             try {
@@ -48,7 +48,7 @@ export class Application {
                     .on('data', (chunk: Buffer) => {
                         const doc = docService.buildCan(chunk, rawID, localPort, remotePort);
                         (async () => {
-                            await utility.saveCanDoc(doc, dbo, transformService);
+                            await utility.saveCanDoc(doc, dbo, transform);
                         })();
                         mqo.publish<ICan>(doc, mqTopic);
                     });

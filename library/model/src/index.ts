@@ -5,3 +5,7 @@ export * from './ICanData';
 export * from './ICanRaw';
 export * from './ICanState';
 export * from './IJ1939';
+export * from './dm1-data';
+export * from './dm1-entry-type';
+export * from './dm1-collection';
+export * from './ican-entry';

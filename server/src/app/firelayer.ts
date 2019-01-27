@@ -2,7 +2,7 @@ import { Rxios } from 'rxios';
 import { Observable, forkJoin } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Utility } from './services/utility';
-import { IJ1939 } from './models';
+import { IJ1939 } from 'fancycan-model';
 
 export class FireLayer {
     private http: Rxios;

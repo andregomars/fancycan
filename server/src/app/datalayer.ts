@@ -1,9 +1,6 @@
-import assert from 'assert';
 import { ObjectID } from 'bson';
 import { MongoClient } from 'mongodb';
-import { ICanRaw } from './models';
-import { ICan } from './models';
-import { ICanState } from './models';
+import { ICanRaw, ICan, ICanState } from 'fancycan-model';
 
 export class DataLayer {
     private conn: MongoClient;

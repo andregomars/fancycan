@@ -1,7 +1,6 @@
 import { ObjectID } from 'bson';
 
-import { ICan } from '../models';
-import { ICanRaw } from '../models';
+import { ICan, ICanRaw } from 'fancycan-model';
 
 export class DocService {
     public buildCan(buffer: Buffer, rawID: ObjectID, localPort: number, remotePort: number): ICan {

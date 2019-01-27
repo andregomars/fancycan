@@ -1,12 +1,8 @@
 import config from 'config';
-import { Engine } from 'json-rules-engine';
-import { IJ1939 } from '../models';
-import CacheLayer from '@fancycan/cache';
+import { ICan, ICanState } from 'fancycan-model';
 import { DataLayer } from '../datalayer';
-import { TransformService } from './transform.services';
-import { ICan } from '../models';
-import { ICanState } from '../models';
-import { IRuleCondition } from '../models';
+// import { TransformService } from './transform.services';
+import { Transform } from 'fancycan-common';
 
 export class Utility {
     public getDbConnectionString(): string {
@@ -46,25 +42,25 @@ export class Utility {
         return config.get(`mqConfig.topics.${name}`) || defaultTopic;
     }
 
-    public storeSpnsIntoCacheGroupedByPgn(spns: IJ1939[]) {
-        const cache = CacheLayer.getInstance();
-        let key = '';
-        for (const spn of spns) {
-            key = this.buildPgnKey(spn.PGNNo);
-            const pgn = cache.get<IJ1939[]>(key);
-            if (pgn && pgn.length > 0) {
-                pgn.push(spn);
-                cache.set<IJ1939[]>(key, pgn);
-            } else {
-                cache.set<IJ1939[]>(key, [spn]);
-            }
-        }
-    }
+    // public storeSpnsIntoCacheGroupedByPgn(spns: IJ1939[]) {
+    //     const cache = CacheLayer.getInstance();
+    //     let key = '';
+    //     for (const spn of spns) {
+    //         key = this.buildPgnKey(spn.PGNNo);
+    //         const pgn = cache.get<IJ1939[]>(key);
+    //         if (pgn && pgn.length > 0) {
+    //             pgn.push(spn);
+    //             cache.set<IJ1939[]>(key, pgn);
+    //         } else {
+    //             cache.set<IJ1939[]>(key, [spn]);
+    //         }
+    //     }
+    // }
 
-    public retrieveSpnsByPgnFromCache(pgnNo: number): IJ1939[] | undefined {
-        const key = this.buildPgnKey(pgnNo);
-        return CacheLayer.getInstance().get<IJ1939[]>(key);
-    }
+    // public retrieveSpnsByPgnFromCache(pgnNo: number): IJ1939[] | undefined {
+    //     const key = this.buildPgnKey(pgnNo);
+    //     return CacheLayer.getInstance().get<IJ1939[]>(key);
+    // }
 
     // public async saveCanDocs(docs: ICan[], dbo: DataLayer, transformService: TransformService) {
     //     dbo.insertCans(docs);
@@ -75,77 +71,77 @@ export class Utility {
     //     }
     // }
 
-    public async saveCanDoc(doc: ICan, dbo: DataLayer, transformService: TransformService) {
+    public async saveCanDoc(doc: ICan, dbo: DataLayer, transform: Transform) {
         await dbo.insertCan(doc);
-        const states = transformService.getCanState(doc);
+        const states = transform.buildCanState(doc);
         if (states.length > 0) {
             await dbo.insertCanStates(states);
             for (const canState of states) {
-                await this.saveVehicleStateDoc(canState, dbo, transformService);
-                await this.saveVehicleMalfuncStateDoc(canState, dbo, transformService);
+                await this.saveVehicleStateDoc(canState, dbo, transform);
+                await this.saveVehicleMalfuncStateDoc(canState, dbo, transform);
             }
         }
     }
 
-    public async saveVehicleStateDoc(canState: ICanState, dbo: DataLayer, transofrmService: TransformService) {
-        const state = transofrmService.buildVehicleState(canState);
+    public async saveVehicleStateDoc(canState: ICanState, dbo: DataLayer, transform: Transform) {
+        const state = transform.buildVehicleState(canState);
         await dbo.upsertVehicleState(state);
     }
 
-    public async saveVehicleMalfuncStateDoc(canState: ICanState, dbo: DataLayer, transofrmService: TransformService) {
+    public async saveVehicleMalfuncStateDoc(canState: ICanState, dbo: DataLayer, transform: Transform) {
         if (canState.spnNo === 190 && canState.value > 800) {
-            const state = transofrmService.buildVehicleMalfuncState(canState);
+            const state = transform.buildVehicleMalfuncState(canState);
             await dbo.insertVehicleMalfuncState(state);
         }
     }
 
-    public buildRuleConditionGroups(malfuncRules: any[]): Map<number, IRuleCondition[]> {
-        const conditionGroups = new Map<number, IRuleCondition[]>();
-        for (const rule of malfuncRules) {
-            const conditions: IRuleCondition[] = rule.conditions.map((condition: any) => {
-                return {
-                    fact: `spn${condition.spn}`,
-                    operator: this.getOperatorTerm(condition.expression),
-                    value: condition.value,
-                } as IRuleCondition;
-            });
-            if (conditions.length > 0) {
-                const conditionFleetCode: IRuleCondition = {
-                    fact: 'fcode',
-                    operator: 'equal',
-                    value: rule.fleet_code,
-                };
-                conditions.push(conditionFleetCode);
-            }
-            conditionGroups.set(rule.id, conditions);
-        }
+    // public buildRuleConditionGroups(malfuncRules: any[]): Map<number, IRuleCondition[]> {
+    //     const conditionGroups = new Map<number, IRuleCondition[]>();
+    //     for (const rule of malfuncRules) {
+    //         const conditions: IRuleCondition[] = rule.conditions.map((condition: any) => {
+    //             return {
+    //                 fact: `spn${condition.spn}`,
+    //                 operator: this.getOperatorTerm(condition.expression),
+    //                 value: condition.value,
+    //             } as IRuleCondition;
+    //         });
+    //         if (conditions.length > 0) {
+    //             const conditionFleetCode: IRuleCondition = {
+    //                 fact: 'fcode',
+    //                 operator: 'equal',
+    //                 value: rule.fleet_code,
+    //             };
+    //             conditions.push(conditionFleetCode);
+    //         }
+    //         conditionGroups.set(rule.id, conditions);
+    //     }
 
-        return conditionGroups;
-    }
+    //     return conditionGroups;
+    // }
 
     private buildPgnKey(pgnNo: number) {
         return `pgn_${pgnNo}`;
     }
 
-    private getOperatorTerm(sign: string) {
-        let term = '';
-        switch (sign) {
-            case '>':
-                term = 'greaterThan';
-                break;
-            case '<':
-                term = 'lessThan';
-                break;
-            case '=':
-                term = 'equal';
-                break;
-            case '!=':
-                term = 'notEqual';
-                break;
-            default:
-                break;
-        }
-        return term;
-    }
+    // private getOperatorTerm(sign: string) {
+    //     let term = '';
+    //     switch (sign) {
+    //         case '>':
+    //             term = 'greaterThan';
+    //             break;
+    //         case '<':
+    //             term = 'lessThan';
+    //             break;
+    //         case '=':
+    //             term = 'equal';
+    //             break;
+    //         case '!=':
+    //             term = 'notEqual';
+    //             break;
+    //         default:
+    //             break;
+    //     }
+    //     return term;
+    // }
 
 }
