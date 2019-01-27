@@ -1,6 +1,6 @@
 {
   "name": "fancycan-model",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
   "license": "MIT",
@@ -15,6 +15,7 @@
     "typescript": "^3.2.2"
   },
   "dependencies": {
+    "buffer": "^5.2.1",
     "node-cache": "^4.2.0"
   }
 }
