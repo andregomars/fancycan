@@ -51,7 +51,7 @@ export class DefaultLayoutComponent implements OnInit {
           vcode: route['params']['vcode']
         };
       }),
-      tap(param => this.store.dispatch(new SetProfile(param.fcode, param.vcode)))
+      tap(param => this.store.dispatch(new SetProfile(param.fcode, param.vcode, null, null)))
     ).subscribe();
   }
 }

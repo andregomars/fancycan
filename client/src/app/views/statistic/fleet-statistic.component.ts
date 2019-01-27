@@ -45,7 +45,7 @@ export class FleetStatisticComponent implements OnInit {
   }
 
   nav(fcode: string, vcode: string) {
-    this.store.dispatch(new SetProfile(fcode, vcode));
+    this.store.dispatch(new SetProfile(fcode, vcode, null, null));
     this.store.dispatch(new Navigate(['statistic/vehicle', vcode]));
   }
 

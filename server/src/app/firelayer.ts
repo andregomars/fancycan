@@ -29,6 +29,11 @@ export class FireLayer {
             .get<any>(`/j1939spn.json`);
     }
 
+    public getFleets(): Observable<any> {
+        return this.http
+            .get<any>(`/fleets.json`);
+    }
+
     public getDefinitionWithSpecs(): Observable<IJ1939[]> {
         return forkJoin(this.getDefinitions(), this.getProprietarySpnList(), this.getJ1939SpnList()).pipe(
             map(([defs, spnsProp, spns1939]) => {

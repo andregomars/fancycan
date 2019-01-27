@@ -3,7 +3,7 @@ import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { ViewProfileState } from '../../states';
 import { switchMap, map, share } from 'rxjs/operators';
-import { DataService, UtilityService } from '../../services';
+import { DataService, UtilityService, TransformService } from '../../services';
 import { IOption } from 'ng-select';
 
 @Component({
@@ -19,7 +19,8 @@ export class ChecklistLogComponent implements OnInit {
 
   constructor(
     private dataService: DataService,
-    private utilityService: UtilityService
+    // private utilityService: UtilityService
+    private transformService: TransformService
   ) { }
 
   ngOnInit() {
@@ -30,7 +31,7 @@ export class ChecklistLogComponent implements OnInit {
     const fleets$ = this.dataService.getFleets();
     const vehicleProfiles$ = this.fcode$.pipe(
       switchMap(fcode =>
-        this.utilityService.getViewProfileByFleetCode(fcode, fleets$))
+        this.transformService.getViewProfileByFleetCode(fcode, fleets$))
     );
     this.vehicleOpts$ = vehicleProfiles$.pipe(
       map(profiles => profiles.map(profile => {

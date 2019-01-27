@@ -9,3 +9,4 @@ export * from './dm1-data';
 export * from './dm1-entry-type';
 export * from './dm1-collection';
 export * from './ican-entry';
+export * from './view-profile-state.model';

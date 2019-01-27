@@ -46,7 +46,8 @@
               <td>
                 <!-- <a class="btn btn-link" [routerLink]="['/vehicle', vehicle.code]"> -->
                 <a class="btn btn-link text-primary" (click)="nav(vehicle.fleet_code, vehicle.code)">
-                  <small>{{ vehicle.code }}</small>
+                  <!-- <small>{{ vehicle.code }}</small> -->
+                  <pre>{{ vehicle | json }}</pre>
                 </a>
               </td>
               <td>

@@ -1,12 +1,14 @@
 import { State, Selector, Action, StateContext } from '@ngxs/store';
 import { ViewProfileStateModel } from '../models/view-profile.model';
 import { SetProfile, ClearProfile } from '../actions';
-import { DataService, UtilityService } from '../services';
+import { DataService, UtilityService, TransformService } from '../services';
 import { tap } from 'rxjs/operators';
 
 const defaults: ViewProfileStateModel = {
     fcode: null,
-    vcode: null
+    fname: null,
+    vcode: null,
+    vin: null
 };
 
 @State<ViewProfileStateModel>({
@@ -26,20 +28,23 @@ export class ViewProfileState {
 
     constructor(
         private dataService: DataService,
-        private utilityService: UtilityService
+        // private utilityService: UtilityService
+        private transformService: TransformService
     ) { }
 
     @Action(SetProfile)
     setProfile(ctx: StateContext<ViewProfileStateModel>, action: SetProfile) {
         if (action.vcode && !action.fcode) {
             const fleets$ = this.dataService.getFleets();
-            return this.utilityService.getViewProfileByVehicleCode(action.vcode, fleets$).pipe(
+            return this.transformService.getViewProfileByVehicleCode(action.vcode, fleets$).pipe(
                 tap(profile => ctx.patchState(profile))
             );
         } else {
             ctx.patchState({
                 fcode: action.fcode,
-                vcode: action.vcode
+                fname: action.fname,
+                vcode: action.vcode,
+                vin: action.vin
             });
         }
     }

@@ -1,10 +1,24 @@
 import config from 'config';
-import { ICan, ICanState } from 'fancycan-model';
+import { ICan, ICanState, IJ1939 } from 'fancycan-model';
 import { DataLayer } from '../datalayer';
+import { FireLayer } from '../firelayer';
 // import { TransformService } from './transform.services';
-import { Transform } from 'fancycan-common';
+import { Transform, SpnRepository } from 'fancycan-common';
 
 export class Utility {
+    private fire: FireLayer;
+    private spnRepo: SpnRepository;
+
+    constructor() {
+        this.fire = new FireLayer();
+        this.spnRepo = new SpnRepository();
+    }
+
+    public async initCacheStorage() {
+        const spns = await this.fire.getDefinitionWithSpecs().toPromise<IJ1939[]>();
+        this.spnRepo.storeSpnsIntoCacheGroupedByPgn(spns);
+    }
+
     public getDbConnectionString(): string {
         const host = encodeURIComponent(config.get('dbConfig.host'));
         const port = encodeURIComponent(config.get('dbConfig.port'));
@@ -42,35 +56,6 @@ export class Utility {
         return config.get(`mqConfig.topics.${name}`) || defaultTopic;
     }
 
-    // public storeSpnsIntoCacheGroupedByPgn(spns: IJ1939[]) {
-    //     const cache = CacheLayer.getInstance();
-    //     let key = '';
-    //     for (const spn of spns) {
-    //         key = this.buildPgnKey(spn.PGNNo);
-    //         const pgn = cache.get<IJ1939[]>(key);
-    //         if (pgn && pgn.length > 0) {
-    //             pgn.push(spn);
-    //             cache.set<IJ1939[]>(key, pgn);
-    //         } else {
-    //             cache.set<IJ1939[]>(key, [spn]);
-    //         }
-    //     }
-    // }
-
-    // public retrieveSpnsByPgnFromCache(pgnNo: number): IJ1939[] | undefined {
-    //     const key = this.buildPgnKey(pgnNo);
-    //     return CacheLayer.getInstance().get<IJ1939[]>(key);
-    // }
-
-    // public async saveCanDocs(docs: ICan[], dbo: DataLayer, transformService: TransformService) {
-    //     dbo.insertCans(docs);
-    //     const states = transformService.getCanStates(docs);
-    //     await dbo.insertCanStates(states);
-    //     for (const canState of states) {
-    //         await this.saveVehicleStateDoc(canState, dbo, transformService);
-    //     }
-    // }
-
     public async saveCanDoc(doc: ICan, dbo: DataLayer, transform: Transform) {
         await dbo.insertCan(doc);
         const states = transform.buildCanState(doc);
@@ -94,54 +79,5 @@ export class Utility {
             await dbo.insertVehicleMalfuncState(state);
         }
     }
-
-    // public buildRuleConditionGroups(malfuncRules: any[]): Map<number, IRuleCondition[]> {
-    //     const conditionGroups = new Map<number, IRuleCondition[]>();
-    //     for (const rule of malfuncRules) {
-    //         const conditions: IRuleCondition[] = rule.conditions.map((condition: any) => {
-    //             return {
-    //                 fact: `spn${condition.spn}`,
-    //                 operator: this.getOperatorTerm(condition.expression),
-    //                 value: condition.value,
-    //             } as IRuleCondition;
-    //         });
-    //         if (conditions.length > 0) {
-    //             const conditionFleetCode: IRuleCondition = {
-    //                 fact: 'fcode',
-    //                 operator: 'equal',
-    //                 value: rule.fleet_code,
-    //             };
-    //             conditions.push(conditionFleetCode);
-    //         }
-    //         conditionGroups.set(rule.id, conditions);
-    //     }
-
-    //     return conditionGroups;
-    // }
-
-    private buildPgnKey(pgnNo: number) {
-        return `pgn_${pgnNo}`;
-    }
-
-    // private getOperatorTerm(sign: string) {
-    //     let term = '';
-    //     switch (sign) {
-    //         case '>':
-    //             term = 'greaterThan';
-    //             break;
-    //         case '<':
-    //             term = 'lessThan';
-    //             break;
-    //         case '=':
-    //             term = 'equal';
-    //             break;
-    //         case '!=':
-    //             term = 'notEqual';
-    //             break;
-    //         default:
-    //             break;
-    //     }
-    //     return term;
-    // }
 
 }

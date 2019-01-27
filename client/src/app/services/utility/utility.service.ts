@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map, share, tap } from 'rxjs/operators';
-import * as moment from 'moment';
-import { Buffer } from 'buffer/';
+import { format } from 'date-fns';
 
 import { ViewProfileStateModel } from '../../models';
 
@@ -11,38 +10,42 @@ import { ViewProfileStateModel } from '../../models';
 })
 export class UtilityService {
 
-    getFlattedVehicles(fleets$: Observable<any>): Observable<any> {
-        return fleets$.pipe(
-            map(fleets => fleets.reduce((all, fleet) => {
-                const vlist = fleet.vehicles.map(v => {
-                    return {
-                        vcode: v.code,
-                        fcode: fleet.code
-                    };
-                });
-                return [...all, ...vlist];
-            }, []))
-        );
-    }
+    // private getFlattedVehicles(fleets$: Observable<any>): Observable<any> {
+    //     return fleets$.pipe(
+    //         map(fleets => fleets.reduce((all, fleet) => {
+    //             const vlist = fleet.vehicles.map(v => {
+    //                 return {
+    //                     vcode: v.code,
+    //                     vin: v.vin,
+    //                     fcode: fleet.code,
+    //                     fname: fleet.name
+    //                 };
+    //             });
+    //             return [...all, ...vlist];
+    //         }, []))
+    //     );
+    // }
 
-    getViewProfileByVehicleCode(vcode: string, fleets$: Observable<any>): Observable<ViewProfileStateModel> {
-        return this.getFlattedVehicles(fleets$).pipe(
-            map((vehicles: any[]) => vehicles.find(vehicle => vehicle.vcode === vcode)),
-            map(vehicle => {
-                return {
-                    fcode: vehicle.fcode,
-                    vcode: vehicle.vcode,
-                };
-            })
-        );
-    }
+    // getViewProfileByVehicleCode(vcode: string, fleets$: Observable<any>): Observable<ViewProfileStateModel> {
+    //     return this.getFlattedVehicles(fleets$).pipe(
+    //         map((vehicles: any[]) => vehicles.find(vehicle => vehicle.vcode === vcode)),
+    //         map(vehicle => {
+    //             return {
+    //                 fcode: vehicle.fcode,
+    //                 fname: vehicle.fname,
+    //                 vcode: vehicle.vcode,
+    //                 vin: vehicle.vin
+    //             };
+    //         })
+    //     );
+    // }
 
-    getViewProfileByFleetCode(fcode: string, fleets$: Observable<any>): Observable<any[]> {
-        return this.getFlattedVehicles(fleets$).pipe(
-            map((vehicles: any[]) =>
-                vehicles.filter(vehicle => vehicle.fcode.toUpperCase() === fcode.toUpperCase()))
-        );
-    }
+    // getViewProfileByFleetCode(fcode: string, fleets$: Observable<any>): Observable<any[]> {
+    //     return this.getFlattedVehicles(fleets$).pipe(
+    //         map((vehicles: any[]) =>
+    //             vehicles.filter(vehicle => vehicle.fcode.toUpperCase() === fcode.toUpperCase()))
+    //     );
+    // }
 
     getVehiclesByFleetCode(fcode: string, fleets$: Observable<any>) {
         return fleets$.pipe(
@@ -104,7 +107,7 @@ export class UtilityService {
 
     formatDataTime(data: any) {
         return {
-            time: moment(data.time).format('hh:mm:ss'),
+            time: format(data.time, 'HH:mm:ss'),
             num: data.num
         };
     }
@@ -173,40 +176,6 @@ export class UtilityService {
             };
         });
     }
-
-    // decodeJ1939(raw: Buffer, startBit: number, length: number): number {
-    //     const definition = {
-    //         StartByte: Math.ceil(startBit / 8),
-    //         StartBit: startBit % 8 === 0 ? 8 : startBit % 8,
-    //         Length: length
-    //     };
-
-    //     /*** same as server transform ***/
-    //     const bytesCount = Math.ceil((definition.Length + definition.StartBit - 1) / 8);
-    //     const bytes = raw.slice(definition.StartByte - 1, definition.StartByte - 1 + bytesCount);
-
-    //     const parsedValues: number[] = [];
-    //     const firstIdx = bytes.length - 1;
-    //     const lastIdx = 0;
-    //     for (let i = 0; i < bytes.length; i++) {
-    //       let value = 0;
-    //       if (i === firstIdx) { // the first byte
-    //         const firstByte = bytes[firstIdx];
-    //         // tslint:disable-next-line:no-bitwise
-    //         value = firstByte >> (definition.StartBit - 1) & (Math.pow(2, definition.Length) - 1);
-    //       } else if (i === lastIdx) { // the last byte
-    //         const lastByte = bytes[lastIdx];
-    //         const shift = (definition.StartBit + definition.Length - 1) % 8;
-    //         // tslint:disable-next-line:no-bitwise
-    //         value = lastByte & (Math.pow(2, (shift === 0 ? 8 : shift)) - 1);
-    //       } else {
-    //         value = bytes[i];
-    //       }
-    //       parsedValues.push(value);
-    //     }
-
-    //     return Buffer.from(parsedValues).readUIntLE(0, bytesCount);
-    // }
 
     private randomObject(): any {
         const time = new Date();

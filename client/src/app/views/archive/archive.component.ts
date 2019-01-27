@@ -3,7 +3,7 @@ import { Select } from '@ngxs/store';
 import { ViewProfileState } from '../../states';
 import { Observable } from 'rxjs';
 import { IOption } from 'ng-select';
-import { DataService, UtilityService } from '../../services';
+import { DataService, UtilityService, TransformService } from '../../services';
 import { switchMap, map, tap } from 'rxjs/operators';
 
 @Component({
@@ -20,14 +20,15 @@ export class ArchiveComponent implements OnInit {
 
   constructor(
     private dataService: DataService,
-    private utilityService: UtilityService
+    // private utilityService: UtilityService
+    private transformService: TransformService
   ) { }
 
   ngOnInit() {
     const fleets$ = this.dataService.getFleets();
     const vehicleProfiles$ = this.fcode$.pipe(
       switchMap(fcode =>
-        this.utilityService.getViewProfileByFleetCode(fcode, fleets$))
+        this.transformService.getViewProfileByFleetCode(fcode, fleets$))
     );
     this.vehicleOpts$ = vehicleProfiles$.pipe(
       map(profiles => profiles.map(profile => {

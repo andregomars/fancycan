@@ -30,7 +30,7 @@ export class MalfunctionListComponent implements OnInit {
   }
 
   nav(fcode: string, vcode: string, time: string) {
-    this.store.dispatch(new SetProfile(fcode, vcode));
+    this.store.dispatch(new SetProfile(fcode, vcode, null, null));
     this.store.dispatch(new Navigate(
       ['vehicle/playback', vcode],
       { time: time}

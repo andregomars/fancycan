@@ -26,7 +26,12 @@ export const environment = {
     path: '/mqtt',
     port: 9001
   },
-  rtmMessagesMaxCount: 20,
+  rtmMessagesMaxCount: 15,
+  dm1SingleCanIDs: ['18FECA00', '18FECA03'],
+  dm1MultipleCanIDs: {
+    header: ['18ECFF00', '18ECFF03'],
+    data: ['18EBFF00', '18EBFF03'],
+  },
   topic: 'tCan',
   apiRootLocal: 'assets/data',
   reportFallbackMonths: 3,

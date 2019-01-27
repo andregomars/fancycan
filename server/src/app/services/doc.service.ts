@@ -1,4 +1,5 @@
 import { ObjectID } from 'bson';
+import { Buffer } from 'buffer/';
 
 import { ICan, ICanRaw } from 'fancycan-model';
 

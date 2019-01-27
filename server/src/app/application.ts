@@ -1,27 +1,25 @@
 import net from 'net';
 import exitHook from 'exit-hook';
+import { Buffer } from 'buffer/';
 import { ObjectID } from 'bson';
 import { Readable } from 'stream';
 import { MongoClient } from 'mongodb';
 import { IJ1939, ICan } from 'fancycan-model';
-import { SpnRepository, Transform } from 'fancycan-common';
+import { Transform } from 'fancycan-common';
 const chunker = require('stream-chunker');
 
 import { QueueLayer } from './queuelayer';
 import { DataLayer } from './datalayer';
 import { DocService } from './services/doc.service';
 import { Utility } from './services/utility';
-import { FireLayer } from './firelayer';
 
 export class Application {
     public async start() {
-        const fire = new FireLayer();
-        const spnRepo = new SpnRepository();
         const utility = new Utility();
 
-        const spns = await fire.getDefinitionWithSpecs().toPromise<IJ1939[]>();
-
-        spnRepo.storeSpnsIntoCacheGroupedByPgn(spns);
+        // const spns = await fire.getDefinitionWithSpecs().toPromise<IJ1939[]>();
+        // spnRepo.storeSpnsIntoCacheGroupedByPgn(spns);
+        await utility.initCacheStorage();
 
         const stream = this.createReadStream();
 

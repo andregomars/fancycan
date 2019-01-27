@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { DataService, UtilityService } from '../../services';
+import { DataService, UtilityService, TransformService } from '../../services';
 import { share, map, switchMap, tap } from 'rxjs/operators';
 import { Select } from '@ngxs/store';
 import { IOption } from 'ng-select';
-import * as moment from 'moment';
+// import * as moment from 'moment';
+import { addDays, format, isSameDay } from 'date-fns';
 import { getStyle, hexToRgba } from '@coreui/coreui-pro/dist/js/coreui-utilities';
 import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
 
@@ -96,7 +97,8 @@ export class CompareStatisticComponent implements OnInit {
 
   constructor(
     private dataService: DataService,
-    private utilityService: UtilityService
+    // private utilityService: UtilityService
+    private transformService: TransformService
   ) { }
 
   ngOnInit() {
@@ -126,7 +128,7 @@ export class CompareStatisticComponent implements OnInit {
     const fleets$ = this.dataService.getFleets();
     this.vehicleList$ = this.fcode$.pipe(
       switchMap(fcode =>
-        this.utilityService.getViewProfileByFleetCode(fcode, fleets$)),
+        this.transformService.getViewProfileByFleetCode(fcode, fleets$)),
       share()
     );
 
@@ -143,7 +145,8 @@ export class CompareStatisticComponent implements OnInit {
   private initChartLabels() {
     // ['2018-09-01', ...'2018-09-07']
     const daysofOneWeekLabels =
-      Array.from(new Array(7), (val, index) => moment('2018-09-01').add(index, 'days').format('YYYY-MM-DD') );
+      // Array.from(new Array(7), (val, index) => moment('2018-09-01').add(index, 'days').format('YYYY-MM-DD') );
+      Array.from(new Array(7), (val, index) => format(addDays(new Date(2018, 8, 1), index), 'YYYY-MM-DD'));
     this.chartLabels = daysofOneWeekLabels;
   }
 
@@ -190,7 +193,8 @@ export class CompareStatisticComponent implements OnInit {
     });
 
     for (const label of labels) {
-      const data = sourceData.find(s => moment(s[timeKey]).isSame(label));
+      // const data = sourceData.find(s => moment(s[timeKey]).isSame(label));
+      const data = sourceData.find(s => isSameDay(s[timeKey], label));
       for (let i = 0; i < keys.length; i++) {
         output[i].data.push(data ? data[keys[i]] : null);
       }

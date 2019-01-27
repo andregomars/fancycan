@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Buffer } from 'buffer/';
 import { Transform } from 'fancycan-common';
-import { ICan, ICanState, IJ1939, Dm1EntryType, Dm1Collection } from 'fancycan-model';
+import { ICan, ICanState, IJ1939, Dm1EntryType, Dm1Collection, ViewProfileStateModel } from 'fancycan-model';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -44,4 +45,13 @@ export class TransformService {
   decodeDm1(canData: string, entryType: Dm1EntryType, dm1Collection: Dm1Collection): Dm1Collection {
     return this.transform.decodeDm1(canData, entryType, dm1Collection);
   }
+
+  getViewProfileByVehicleCode(vcode: string, fleets$: Observable<any>): Observable<ViewProfileStateModel> {
+    return this.transform.getViewProfileByVehicleCode(vcode, fleets$);
+  }
+
+  getViewProfileByFleetCode(fcode: string, fleets$: Observable<any>): Observable<any[]> {
+    return this.transform.getViewProfileByFleetCode(fcode, fleets$);
+  }
+
 }
