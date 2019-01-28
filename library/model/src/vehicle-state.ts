@@ -1,8 +1,10 @@
 import { Geolocation } from "./geolocation";
 
 export interface IVehicleState {
-    vcode: string,
-    fcode: string,
-    geolocations: Geolocation[],
-    soc: number,
+    vcode: string;
+    vin: string;
+    fcode: string;
+    fname: string;
+    geolocations: Geolocation[];
+    [key: string]: any;
 }

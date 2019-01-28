@@ -2,8 +2,8 @@
 import { ObjectID } from 'bson';
 import { Buffer } from 'buffer/';
 
-import { ICanState, ICan, IJ1939, Dm1Collection, Dm1EntryType } from 'fancycan-model';
-import { SpnRepository } from '../src/repository';
+import { ICanState, ICan, IVehicleState, IJ1939, Dm1Collection, Dm1EntryType, ViewProfileStateModel } from 'fancycan-model';
+import { SpnRepository, ViewProfileRepository } from '../src/repository';
 import { Transform } from '../src/transform';
 // const chunker = require('stream-chunker');
 
@@ -13,11 +13,23 @@ import { Transform } from '../src/transform';
 describe('When test transform', () => {
     const transform = new Transform();
     const spnRepo = new SpnRepository();
+    const viewProfileRepo = new ViewProfileRepository();
     // const canRawSample = 'iAzwAgPN/////////4gY8wkAAA8AAAAAAHGIGPwA9AAAABgAAABmiAj+bgsCHy8fnx4LH4gY/Af0oAmgCUgCWYiIGPwUIQAAAABcAgAAiAzwAgPN/////////4gM0i8nABGgAAAAAACIGO8ZIX9f////////iBj68iGgCgAVAqoKAIgY/BchhjQAAAAAAMSIGPwE9EQBBTo5O3MSiBj+vwsFH3t/e3///4gY/+EZQKQAAs8wMACIGP/iGU08Of/M/8z/iAzwAgPN/////////4gY/+MZbgAWAf////+IGOz/GSAKAAL/yv4AiBjw1hn//////wA//4gI/m4L1R4CH94eSh8=';
 
     beforeAll(() => {
         spnRepo.storeSpnsIntoCacheGroupedByPgn([def9004, def2911]);
+        viewProfileRepo.storeViewProfileIntoCacheGroupedByVehicleCode(flattedVehicles);
+
     });
+
+    const flattedVehicles: ViewProfileStateModel[] = [
+        {
+            fcode: 'BYD',
+            fname: 'BYD',
+            vcode: '6005',
+            vin: 'BYDW21312312005'
+        }
+    ];
 
     const def9004: IJ1939 = {
         Code: 'voltage',
@@ -117,22 +129,22 @@ describe('When test transform', () => {
 
     it('get spn from header', () => {
         const actual = transform.decodePGN(sample9004.canID);
-        expect(actual).toBe(64534);
+        expect(actual).toEqual(64534);
     });
 
     it('get correct value from sample spn# 9004', () => {
         const actual = transform.decodeData(sample9004.canData, def9004);
-        expect(actual).toBe(596);
+        expect(actual).toEqual(596);
     });
 
     it('get correct value from sample spn# 9006', () => {
         const actual = transform.decodeData(sample9006.canData, def9006);
-        expect(actual).toBe(105.8);
+        expect(actual).toEqual(105.8);
     });
 
     it('get correct value from sample spn# 2911', () => {
         const actual = transform.decodeData(sample2911.canData, def2911);
-        expect(actual).toBe(3);
+        expect(actual).toEqual(3);
     });
 
     it('should get CAN state', () => {
@@ -228,5 +240,15 @@ describe('When test transform', () => {
         expect(actual.data[1].spn).toEqual(2877);
         expect(actual.data[1].fmi).toEqual(1);
         expect(actual.data[1].count).toEqual(1);
+    });
+
+    it('should build viechle states', () => {
+        const canStates: ICanState[] = transform.buildCanState(sample9004);
+        const actual = transform.buildVehicleState(canStates[0]);
+        expect(actual).toBeDefined();
+        expect(actual!.vcode).toEqual('6005');
+        expect(actual!.vin).toEqual('BYDW21312312005');
+        expect(actual!.fcode).toEqual('BYD');
+        expect(actual!.spn9004).toEqual(596);
     });
 });

@@ -1,22 +1,30 @@
 import config from 'config';
-import { ICan, ICanState, IJ1939 } from 'fancycan-model';
+import { ICan, ICanState, IJ1939, ViewProfileStateModel } from 'fancycan-model';
 import { DataLayer } from '../datalayer';
 import { FireLayer } from '../firelayer';
-// import { TransformService } from './transform.services';
-import { Transform, SpnRepository } from 'fancycan-common';
+import { Transform, SpnRepository, ViewProfileRepository } from 'fancycan-common';
 
 export class Utility {
     private fire: FireLayer;
     private spnRepo: SpnRepository;
+    private transform: Transform;
+    private viewProfileRepo: ViewProfileRepository;
 
     constructor() {
-        this.fire = new FireLayer();
+        this.fire = new FireLayer(this.getFbConnectionString());
         this.spnRepo = new SpnRepository();
+        this.transform = new Transform();
+        this.viewProfileRepo = new ViewProfileRepository();
     }
 
     public async initCacheStorage() {
         const spns = await this.fire.getDefinitionWithSpecs().toPromise<IJ1939[]>();
         this.spnRepo.storeSpnsIntoCacheGroupedByPgn(spns);
+
+        const fleets$ = await this.fire.getFleets();
+        const flattedViehcles =
+            await this.transform.getFlattedVehicles(fleets$).toPromise<ViewProfileStateModel[]>();
+        this.viewProfileRepo.storeViewProfileIntoCacheGroupedByVehicleCode(flattedViehcles);
     }
 
     public getDbConnectionString(): string {
@@ -62,20 +70,24 @@ export class Utility {
         if (states.length > 0) {
             await dbo.insertCanStates(states);
             for (const canState of states) {
-                await this.saveVehicleStateDoc(canState, dbo, transform);
-                await this.saveVehicleMalfuncStateDoc(canState, dbo, transform);
+                await this.saveVehicleStateDoc(canState, dbo);
+                await this.saveVehicleMalfuncStateDoc(canState, dbo);
             }
         }
     }
 
-    public async saveVehicleStateDoc(canState: ICanState, dbo: DataLayer, transform: Transform) {
-        const state = transform.buildVehicleState(canState);
+    public async saveVehicleStateDoc(canState: ICanState, dbo: DataLayer) {
+        const state = this.transform.buildVehicleState(canState);
+        if (!state) {
+            console.log(`vehicle state build failed for vcode : ${canState.vcode} & can objID: ${canState.vcode}`);
+            return;
+        }
         await dbo.upsertVehicleState(state);
     }
 
-    public async saveVehicleMalfuncStateDoc(canState: ICanState, dbo: DataLayer, transform: Transform) {
+    public async saveVehicleMalfuncStateDoc(canState: ICanState, dbo: DataLayer) {
         if (canState.spnNo === 190 && canState.value > 800) {
-            const state = transform.buildVehicleMalfuncState(canState);
+            const state = this.transform.buildVehicleMalfuncState(canState);
             await dbo.insertVehicleMalfuncState(state);
         }
     }

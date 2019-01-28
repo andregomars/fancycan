@@ -16,17 +16,14 @@ import { Utility } from './services/utility';
 export class Application {
     public async start() {
         const utility = new Utility();
-
-        // const spns = await fire.getDefinitionWithSpecs().toPromise<IJ1939[]>();
-        // spnRepo.storeSpnsIntoCacheGroupedByPgn(spns);
         await utility.initCacheStorage();
 
         const stream = this.createReadStream();
-
         const tcpServer = net.createServer();
         const docService = new DocService();
-        const MAX_BUFFERS = +utility.getCommonConfig('rawParsingBuffer');
+        // const MAX_BUFFERS = +utility.getCommonConfig('rawParsingBuffer');
         const port = +utility.getCommonConfig('listeningPort');
+        const portRemoteTest = +utility.getCommonConfig('remotePortForTest');
         const urlDbConn = utility.getDbConnectionString();
         const urlMqConn = utility.getMqConnectionString();
         const mqTopic = utility.getTopicName();
@@ -38,7 +35,8 @@ export class Application {
 
         tcpServer.on('connection', (socket) => {
             try {
-                const remotePort = socket.remotePort!;
+                const remotePort =
+                    portRemoteTest > 0 ? portRemoteTest : socket.remotePort!;
                 const localPort = socket.localPort!;
                 let rawID: ObjectID;
 

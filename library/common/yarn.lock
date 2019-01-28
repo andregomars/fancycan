@@ -1033,10 +1033,10 @@ fancycan-cache@^1.0.0:
   dependencies:
     node-cache "^4.2.0"
 
-fancycan-model@^1.0.14:
-  version "1.0.14"
-  resolved "https://registry.yarnpkg.com/fancycan-model/-/fancycan-model-1.0.14.tgz#99106a99d480c523c68a7a7fd482a6baea84596a"
-  integrity sha512-9BA7lACixAzaD+6N2gBEoLAsy7Ise6Mm01txeKyhbY0C8d+akMCGrtiEZ5DhtAG6SGW5+QNGQxG5xOr34XZUiQ==
+fancycan-model@^1.0.17:
+  version "1.0.17"
+  resolved "https://registry.yarnpkg.com/fancycan-model/-/fancycan-model-1.0.17.tgz#3faec663ebe15d81c4b2ed3b3c515480bb8b79cd"
+  integrity sha512-r588CuzM3CjSY2JpyacPM9AoLijHVukhIkE07mKKVaE5wAttnAddpg3kPHooo6LcUEoExcuJkohx7tkcf4qAHQ==
   dependencies:
     buffer "^5.2.1"
     node-cache "^4.2.0"

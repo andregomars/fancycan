@@ -1,6 +1,6 @@
 import { ObjectID } from 'bson';
 import { MongoClient } from 'mongodb';
-import { ICanRaw, ICan, ICanState } from 'fancycan-model';
+import { ICanRaw, ICan, ICanState, IVehicleState } from 'fancycan-model';
 
 export class DataLayer {
     private conn: MongoClient;
@@ -35,7 +35,7 @@ export class DataLayer {
         await this.conn.db('main').collection('can_state').insertMany(docs, { forceServerObjectId: true });
     }
 
-    public async upsertVehicleState(state: any) {
+    public async upsertVehicleState(state: IVehicleState) {
         await this.conn.db('main').collection('vehicle_state').updateOne(
             { vcode: state.vcode },
             {

@@ -141,12 +141,65 @@
     {
         "code": "BYD",
         "name": "BYD",
+        "icon": "https://fancycandemo.firebaseapp.com/assets/img/brand/fc.white.svg",
+        "latitude": 34.095072,
+        "longitude": -117.907717,
+        "zoom": 12,
+        "timezone": "PDT",
+        "mode": "K11M",
+        "address": "",
+        "phone": "",
+        "email": "",
+        "note": "",
+        "created": "2019-01-20 15:32:41",
         "vehicles": [
             {
-                "code": "6001"
+                "code": "6001",
+                "vin": "1ZW21312312231",
+                "mac": "6001",
+                "picture": "https://s3.aws.com/vpic.png",
+                "note": "",
+                "created": "2018-10-20 15:32:41"
             },
             {
-                "code": "6002"
+                "code": "6002",
+                "vin": "1ZW21312312231",
+                "mac": "6002",
+                "picture": "https://s3.aws.com/vpic.png",
+                "note": "",
+                "created": "2018-10-20 15:32:41"
+            },
+            {
+                "code": "6003",
+                "vin": "1ZW21312312231",
+                "mac": "6003",
+                "picture": "https://s3.aws.com/vpic.png",
+                "note": "",
+                "created": "2018-10-20 15:32:41"
+            },
+            {
+                "code": "6004",
+                "vin": "1ZW21312312231",
+                "mac": "6004",
+                "picture": "https://s3.aws.com/vpic.png",
+                "note": "",
+                "created": "2018-10-20 15:32:41"
+            },
+            {
+                "code": "6005",
+                "vin": "XZW21312316005",
+                "mac": "6005",
+                "picture": "https://s3.aws.com/vpic.png",
+                "note": "",
+                "created": "2018-10-20 15:32:41"
+            },
+            {
+                "code": "6006",
+                "vin": "1ZW21312312231",
+                "mac": "6006",
+                "picture": "https://s3.aws.com/vpic.png",
+                "note": "",
+                "created": "2018-10-20 15:32:41"
             }
         ]
     },
