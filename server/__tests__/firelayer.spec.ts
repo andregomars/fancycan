@@ -1,5 +1,5 @@
+import { IJ1939 } from 'fancycan-model';
 import { FireLayer } from './../src/app/firelayer';
-import { IJ1939 } from '../src/app/models';
 
 const fireUrl = 'https://fancycandemo.firebaseio.com';
 

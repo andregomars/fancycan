@@ -1,8 +1,9 @@
 import config from 'config';
 import { ICan, ICanState, IJ1939, ViewProfileStateModel } from 'fancycan-model';
+import { Transform, SpnRepository, ViewProfileRepository } from 'fancycan-common';
+
 import { DataLayer } from '../datalayer';
 import { FireLayer } from '../firelayer';
-import { Transform, SpnRepository, ViewProfileRepository } from 'fancycan-common';
 
 export class Utility {
     private fire: FireLayer;
