@@ -47,6 +47,13 @@ export class DataService {
       .get<any>(`${this.rootUrl}/realtime-states.json`);
   }
 
+  getVehicleStates(fcode: string): Observable<any> {
+    const params = new HttpParams().set('np', '').set('filter', `{'fcode': '${fcode}'}`);
+    const headers = this.mongoApiHeader;
+    return this.http
+      .get<any>(`${this.mongoUrl}/vehicle_state`, { headers, params });
+  }
+
   getVehicleState(vcode: string): Observable<any> {
     const params = new HttpParams().set('np', '').set('filter', `{'vcode': '${vcode}'}`);
     const headers = this.mongoApiHeader;

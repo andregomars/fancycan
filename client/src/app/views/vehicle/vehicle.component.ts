@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { getStyle, hexToRgba } from '@coreui/coreui-pro/dist/js/coreui-utilities';
 import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
 
@@ -15,8 +15,12 @@ import { ViewProfileState } from '../../states';
   templateUrl: './vehicle.component.html',
   styleUrls: ['./vehicle.component.scss']
 })
-export class VehicleComponent implements OnInit {
+export class VehicleComponent implements OnInit, OnDestroy {
   @Select(ViewProfileState.vcode) vcode$: Observable<string>;
+
+  isAutoSync = true;
+  intSecState = 15;
+  itv: any;
   len = 30;
   intSec = 1;
   temperatureMax = 300;
@@ -108,15 +112,45 @@ export class VehicleComponent implements OnInit {
 
   ngOnInit() {
     this.loadVehicleState();
+    this.loadVehicleStatePeriodically();
     this.loadPlayChartData();
+  }
 
-    this.loadVehicleState();
+  ngOnDestroy() {
+    this.clearAutoSync();
+  }
+
+  switchSyncStatus() {
+    this.isAutoSync = !this.isAutoSync;
+    if (this.isAutoSync) {
+      this.loadVehicleStatePeriodically();
+    } else {
+      this.clearAutoSync();
+    }
+  }
+
+  clearAutoSync() {
+    if (this.itv) {
+      clearInterval(this.itv);
+    }
+  }
+
+  private loadVehicleStatePeriodically() {
+    this.itv = setInterval(() => {
+      this.loadVehicleState();
+    }, this.intSecState * 1000);
   }
 
   private loadVehicleState() {
+    // this.vehicle$ = this.vcode$.pipe(
+    //   switchMap(vcode => this.dataService.getVehicleState(vcode)),
+    //   map(vehicles => this.utilityService.attachGeoLabels(vehicles[0])),
+    //   share()
+    // );
+
     this.vehicle$ = this.vcode$.pipe(
       switchMap(vcode => this.dataService.getVehicleState(vcode)),
-      map(vehicles => this.utilityService.attachGeoLabels(vehicles[0])),
+      map(vehicles => this.utilityService.attachGeoLocationAndMapLabel(vehicles)[0]),
       share()
     );
 

@@ -50,7 +50,7 @@ export class FleetDashboardComponent implements OnInit {
       this.filteredVehicles$ = this.vehicles$.pipe(
         debounce(() => timer(300)),
         map(vehicles =>
-          vehicles.filter(v => v.code.toString().toUpperCase().indexOf(vcode.trim().toUpperCase()) > -1)
+          vehicles.filter(v => v.vcode.toString().toUpperCase().indexOf(vcode.trim().toUpperCase()) > -1)
         )
       );
   }
@@ -65,21 +65,35 @@ export class FleetDashboardComponent implements OnInit {
   }
 
   private loadData() {
-    this.vehicles$ = this.dataService.getRealtimeStates().pipe(
-      switchMap(states =>
-        this.fcode$.pipe(
-          map(fcode =>
-            states.filter(state => state.fleet_code === fcode)
-          )
-        )
+    this.vehicles$ = this.fcode$.pipe(
+      switchMap(fcode =>
+        this.dataService.getVehicleStates(fcode)
       ),
       map((vehicles: any[]) =>
         vehicles.filter((el, idx, arr) =>
           idx === arr.findIndex(item => item.code === el.code))
       ),
-      map(vehicles => this.utilityService.attachMapLabels(vehicles)),
+      map(vehicles => this.utilityService.attachGeoLocationAndMapLabel(vehicles)),
       share()
     );
   }
+
+  // private loadData() {
+  //   this.vehicles$ = this.dataService.getRealtimeStates().pipe(
+  //     switchMap(states =>
+  //       this.fcode$.pipe(
+  //         map(fcode =>
+  //           states.filter(state => state.fleet_code === fcode)
+  //         )
+  //       )
+  //     ),
+  //     map((vehicles: any[]) =>
+  //       vehicles.filter((el, idx, arr) =>
+  //         idx === arr.findIndex(item => item.code === el.code))
+  //     ),
+  //     map(vehicles => this.utilityService.attachMapLabels(vehicles)),
+  //     share()
+  //   );
+  // }
 
 }

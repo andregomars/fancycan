@@ -2,18 +2,23 @@
   <div class="row mt-2">
     <div class="col-12 col-md-4 px-0">
       <app-nav-label></app-nav-label>
-      <button class="btn btn-link pull-right p-0">
-        <i class="fa fa-refresh fa-spin monospace"></i>&nbsp;<small>Update</small>
+      <button class="btn btn-link pull-right p-0" (click)="switchSyncStatus()">
+        <ng-container *ngIf="isAutoSync; then tSpin; else tStill"></ng-container>
+        <ng-template #tSpin>
+          <i class="fa fa-refresh fa-spin"></i>&nbsp;<small>Auto Sync</small>
+        </ng-template>
+        <ng-template #tStill>
+          <i class="fa fa-refresh"></i>&nbsp;<small>Manual Sync</small>
+        </ng-template>
       </button>
     </div>
     <div class="col-12 col-md-8">
       <div class="row">
         <div class="col-12 col-md-6">
-          Current Time: {{ currentTime | date: 'yyyy-MM-dd hh:mm:ss'}}
+          Current Time: {{ currentTime | date: 'yyyy-MM-dd HH:mm:ss'}}
         </div>
         <div class="col-12 col-md-6">
-          <!-- Last updated: {{ lastUpdated }} -->
-          Last updated: {{ (vehicle$ | async)?.editDate.$date | date: 'yyyy-MM-dd hh:mm:ss' }}
+          Last updated: {{ (vehicle$ | async)?.editDate?.$date | date: 'yyyy-MM-dd HH:mm:ss' }}
         </div>
       </div>
     </div>
@@ -104,17 +109,17 @@
         <div class="col mt-2 p-2" [style.min-height.px]="mapMinHeight" [style.background-color]="'#242f3e'">
           <agm-map id="map_canvas" *ngIf="loadMap" [zoom]="mapZoom" [streetViewControl]=false [styles]="mapStyle"
             [latitude]="map_lat" [longitude]="map_lgt">
-            <ng-container *ngIf="(vehicle$ | async)?.geo as locations">
+            <ng-container *ngIf="(vehicle$ | async)?.geolocations as locations">
               <ng-container *ngFor="let loc of locations; let i = index; let isFirst = first; let isLast = last;" >
                 <agm-marker *ngIf="isLast" iconUrl="assets/img/map/arrow_orange.20.png"
-                  [latitude]="loc.lat" [longitude]="loc.long">
+                  [latitude]="loc.latitude" [longitude]="loc.longitude">
                 </agm-marker>
                 <agm-marker *ngIf="!isLast" iconUrl="assets/img/map/fa-circle.10.png"
-                  [latitude]="loc.lat" [longitude]="loc.long">
+                  [latitude]="loc.latitude" [longitude]="loc.longitude">
                 </agm-marker>
               </ng-container>
               <agm-polyline [polylineDraggable]=false [strokeColor]="'white'" [strokeOpacity]="0.5" [strokeWeight]="5">
-                <agm-polyline-point *ngFor="let loc of locations" [latitude]="loc.lat" [longitude]="loc.long">
+                <agm-polyline-point *ngFor="let loc of locations" [latitude]="loc.latitude" [longitude]="loc.longitude">
                 </agm-polyline-point>
               </agm-polyline>
             </ng-container>
@@ -138,19 +143,19 @@
     </div>
     <div class="col-12 col-lg-4">
       <div class="row no-gutters mt-2">
-        <div class="col-6 text-center">
+        <div class="col-6 text-center my-1 by-1">
           <app-chart-gauge [value]="(vehicle$ | async)?.spn84 | number:'1.0-1'" 
             [max]="100" title="Speed"></app-chart-gauge>
         </div>
-        <div class="col-6 text-center">
+        <div class="col-6 text-center bg-secondary my-1 by-1">
           <app-chart-gauge [value]="(vehicle$ | async)?.spn190 | number:'1.0-1'" 
             [max]="5000" title="RPM"></app-chart-gauge>
         </div>
-        <div class="col-6 text-center">
+        <div class="col-6 text-center bg-secondary my-1 by-1">
           <app-chart-gauge [value]="(vehicle$ | async)?.spn9000 | number:'1.0-1'" 
             [max]="100" title="SOC(%)"></app-chart-gauge>
         </div>
-        <div class="col-6 text-center">
+        <div class="col-6 text-center my-1 by-1">
           <app-chart-gauge [value]="(vehicle$ | async)?.spn9001 | number:'1.0-1'" 
             [max]="300" title="Battery kWh"></app-chart-gauge>
         </div>

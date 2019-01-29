@@ -3,8 +3,6 @@ import { Observable, of } from 'rxjs';
 import { map, share, tap } from 'rxjs/operators';
 import { format } from 'date-fns';
 
-import { ViewProfileStateModel } from '../../models';
-
 @Injectable({
     providedIn: 'root'
 })
@@ -52,7 +50,7 @@ export class UtilityService {
             map((fleets: any[]) =>
                 fleets.find(fleet => fleet.code.toUpperCase() === fcode.toUpperCase())
                     .vehicles.map(vehicle => {
-                        return {...vehicle, fcode: fcode};
+                        return { ...vehicle, fcode: fcode };
                     })
             )
         );
@@ -115,27 +113,51 @@ export class UtilityService {
     formatRawCAN(can: string) {
         return can.split('').reduce((output, char, i) =>
             output + char + ((i % 2 !== 0) ? ' ' : '')
-        , '').trim();
+            , '').trim();
 
     }
 
     getAggregateData(sourcList: any[], keyName: string, valueName: string): any[] {
         let output = [];
         sourcList.forEach(current => {
-        const scannedObj = output.find(sourceObj => sourceObj[keyName] === current[keyName]);
+            const scannedObj = output.find(sourceObj => sourceObj[keyName] === current[keyName]);
 
-        if (scannedObj) {
-            if (valueName) {
-            scannedObj[valueName] += current[valueName];
+            if (scannedObj) {
+                if (valueName) {
+                    scannedObj[valueName] += current[valueName];
+                } else {
+                    scannedObj[valueName] += 1;
+                }
             } else {
-            scannedObj[valueName] += 1;
+                output = [...output, current];
             }
-        } else {
-            output = [...output, current];
-        }
         });
 
         return output;
+    }
+
+    attachGeoLocationAndMapLabel(vehicles: any): any {
+        return vehicles.map(vehicle => {
+            let lat: number;
+            let long: number;
+            if (vehicle.geolocations && vehicle.geolocations.length > 0) {
+                lat = vehicle.geolocations[0].latitude;
+                long = vehicle.geolocations[0].longitude;
+                return Object.assign(vehicle, {
+                    label: {
+                        color: '#ffffff',
+                        fontFamily: '',
+                        fontSize: '9px',
+                        fontWeight: 'normal',
+                        text: vehicle.vcode.toString()
+                    },
+                    latitude: lat,
+                    longitude: long
+                });
+            } else {
+                return vehicle;
+            }
+        });
     }
 
     attachMapLabels(vehicles: any): any {

@@ -36,7 +36,7 @@
           <thead class="text-white thead-light bg-primary">
             <tr>
               <th class="w-25 text-center"><small>#</small></th>
-              <th><small>Range</small></th>
+              <th><small>SOC</small></th>
               <th><small>Odometer</small></th>
               <th><small>Updated</small></th>
             </tr>
@@ -44,20 +44,19 @@
           <tbody>
             <tr *ngFor="let vehicle of filteredVehicles$ | async">
               <td>
-                <!-- <a class="btn btn-link" [routerLink]="['/vehicle', vehicle.code]"> -->
-                <a class="btn btn-link text-primary" (click)="nav(vehicle.fleet_code, vehicle.code)">
-                  <!-- <small>{{ vehicle.code }}</small> -->
-                  <pre>{{ vehicle | json }}</pre>
+                <a class="btn btn-link text-primary" (click)="nav(vehicle.fcode, vehicle.vcode)">
+                  <small>{{ vehicle.vcode }}</small>
+                  <!-- <pre class="text-white">{{ vehicle | json }}</pre> -->
                 </a>
               </td>
               <td>
-                <div class="small">{{ vehicle.range }}</div>
+                <div class="small">{{ vehicle.spn9000 }}</div>
               </td>
               <td>
-                <div class="small">{{ vehicle.odometer }}</div>
+                <div class="small">{{ vehicle.spn917 / 1000 / 1.6 | number:'1.1-2' }}</div>
               </td>
               <td>
-                <div class="small">{{ vehicle.updated | date: 'MM/dd hh:mm' }}</div>
+                <div class="small">{{ vehicle.editDate.$date | date: 'MM/dd HH:mm' }}</div>
               </td>
             </tr>
           </tbody>
