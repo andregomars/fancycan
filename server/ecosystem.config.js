@@ -1,7 +1,7 @@
 module.exports = {
   apps : [{
     name: 'fcrx',
-    script: 'dist/server/app.js',
+    script: 'dist/app.js',
 
     // Options reference: https://pm2.io/doc/en/runtime/reference/ecosystem-file/
     args: 'one two',
