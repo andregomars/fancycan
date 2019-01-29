@@ -20,7 +20,7 @@
     "common": {
         "rawParsingBuffer": 100,
         "listeningPort": 5888,
-        "remotePortForTest": 0
+        "remotePortForTest": 6005
     },
     "malfunctions": [
         {

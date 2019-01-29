@@ -1,5 +1,6 @@
 {
     "common": {
-        "rawParsingBuffer": 100
+        "rawParsingBuffer": 100,
+        "remotePortForTest": 0
     }
 }
