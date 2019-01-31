@@ -6,7 +6,7 @@
         [longitude]="map_lgt">
         <ng-container *ngIf="(vehicles$ | async) as locations">
           <agm-marker-cluster *ngIf="locations && locations.length > 0" [imagePath]="'https://googlemaps.github.io/js-marker-clusterer/images/m'">
-            <agm-marker *ngFor="let loc of locations" [latitude]="loc.latitude" [longitude]="loc.longitude" iconUrl="assets/img/map/bus.40.png"
+            <agm-marker *ngFor="let loc of locations" [latitude]="loc.latitude" [longitude]="loc.longitude" iconUrl="assets/img/map/bus.orange.40.png"
               [label]="loc.label">
               <agm-snazzy-info-window [maxWidth]="300" [closeWhenOthersOpen]="true">
                 <ng-template>

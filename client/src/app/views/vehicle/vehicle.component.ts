@@ -38,7 +38,7 @@ export class VehicleComponent implements OnInit, OnDestroy {
   @Select(ViewProfileState.vcode) vcode$: Observable<string>;
 
   isAutoSync = true;
-  intSecState = 5;
+  intSecState = 15;
   itv: any;
   len = 30;
   intSec = 1;
