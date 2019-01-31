@@ -15,7 +15,7 @@ export const environment = {
     messagingSenderId: 'xxx'
   },
   mongodbAPI: {
-    url: 'http://52.32.76.180:8080',
+    url: 'http://app.fancycan.com:8080',
     database: 'main',
     authToken: 'Basic YWRtaW46Y2hhbmdlaXQ='
   },

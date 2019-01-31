@@ -9,17 +9,36 @@ import { environment } from '../../../environments/environment';
 import { MapStyle } from './../shared/map-style';
 import { Select } from '@ngxs/store';
 import { ViewProfileState } from '../../states';
+// import { trigger, state, transition, style, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-vehicle',
   templateUrl: './vehicle.component.html',
-  styleUrls: ['./vehicle.component.scss']
+  styleUrls: ['./vehicle.component.scss'],
+  // animations: [
+  //   // the fade-in/fade-out animation.
+  //   trigger('simpleFadeAnimation', [
+
+  //     // the "in" style determines the "resting" state of the element when it is visible.
+  //     state('in', style({ opacity: 1 })),
+
+  //     // fade in when created. this could also be written as transition('void => *')
+  //     transition(':enter', [
+  //       style({ opacity: 0 }),
+  //       animate(600)
+  //     ]),
+
+  //     // fade out when destroyed. this could also be written as transition('void => *')
+  //     transition(':leave',
+  //       animate(600, style({ opacity: 0 })))
+  //   ])
+  // ]
 })
 export class VehicleComponent implements OnInit, OnDestroy {
   @Select(ViewProfileState.vcode) vcode$: Observable<string>;
 
   isAutoSync = true;
-  intSecState = 15;
+  intSecState = 5;
   itv: any;
   len = 30;
   intSec = 1;
@@ -58,7 +77,7 @@ export class VehicleComponent implements OnInit, OnDestroy {
   imgEngineCheck = 'assets/img/vehicle/check_engine.png';
   imgTransmissionCheck = 'assets/img/vehicle/check_transmission.png';
 
-   // lineChart3
+  // lineChart3
   public lineChart3Data: Array<any> = [
     {
       data: [12, 28],

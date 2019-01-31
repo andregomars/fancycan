@@ -23,9 +23,9 @@ export class Utility {
         this.spnRepo.storeSpnsIntoCacheGroupedByPgn(spns);
 
         const fleets$ = await this.fire.getFleets();
-        const flattedViehcles =
+        const flattedVehicles =
             await this.transform.getFlattedVehicles(fleets$).toPromise<ViewProfileStateModel[]>();
-        this.viewProfileRepo.storeViewProfileIntoCacheGroupedByVehicleCode(flattedViehcles);
+        this.viewProfileRepo.storeViewProfileIntoCacheGroupedByVehicleCode(flattedVehicles);
     }
 
     public getDbConnectionString(): string {
