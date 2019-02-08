@@ -1,7 +1,6 @@
 import { IJ1939, ViewProfileStateModel } from 'fancycan-model';
-import { TransformUtility, SpnCache, ViewProfileCache, ConfigUtility, MongoLayer } from 'fancycan-common';
-
-import { FireLayer } from './firelayer';
+import { TransformUtility, SpnCache, ViewProfileCache,
+    MongoLayer, FireLayer } from 'fancycan-common';
 
 export class Startup {
     private fire: FireLayer;
@@ -10,8 +9,7 @@ export class Startup {
     private viewProfileCache: ViewProfileCache;
 
     constructor() {
-        const config = new ConfigUtility();
-        this.fire = new FireLayer(config.getFbConnectionString());
+        this.fire = new FireLayer();
         this.spnCache = new SpnCache();
         this.transform = new TransformUtility();
         this.viewProfileCache = new ViewProfileCache();

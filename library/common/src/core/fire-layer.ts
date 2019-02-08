@@ -2,13 +2,15 @@ import { Rxios } from 'rxios';
 import { Observable, forkJoin } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { IJ1939 } from 'fancycan-model';
+import { ConfigUtility } from '../utility';
 
 export class FireLayer {
     private http: Rxios;
 
-    constructor(fireUrl: string) {
+    constructor() {
+        const config = new ConfigUtility();
         this.http = new Rxios({
-            baseURL: fireUrl,
+            baseURL: config.getFbConnectionString(),
         });
     }
 
