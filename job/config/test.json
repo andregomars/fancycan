@@ -1,0 +1,14 @@
+{
+    "dbConfig": {
+        "host": "127.0.0.1",
+        "port": 27017,
+        "user": "admin",
+        "password": "fccdbo123!",
+        "auth": "DEFAULT"
+    },
+    "fbConfig": {
+        "url": "https://fancycandemo.firebaseio.com"
+    },
+    "common": {
+    }
+}

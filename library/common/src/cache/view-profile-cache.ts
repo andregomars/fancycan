@@ -1,7 +1,7 @@
 import CacheLayer from 'fancycan-cache';
 import { ViewProfileStateModel } from 'fancycan-model';
 
-export class ViewProfileRepository {
+export class ViewProfileCache {
 
     public storeViewProfileIntoCacheGroupedByVehicleCode(viewProfiles: ViewProfileStateModel[]) {
         const cache = CacheLayer.getInstance();

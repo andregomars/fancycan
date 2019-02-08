@@ -6,6 +6,7 @@
     "jsRules": {},
     "rules": {
         "align": false,
+        "member-ordering": false,
         "class-name": true,
         "no-console": false,
         "trailing-comma": false,

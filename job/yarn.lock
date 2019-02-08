@@ -1092,17 +1092,23 @@ fancycan-cache@^1.0.0:
   dependencies:
     node-cache "^4.2.0"
 
-fancycan-common@^1.0.22:
-  version "1.0.22"
-  resolved "https://registry.yarnpkg.com/fancycan-common/-/fancycan-common-1.0.22.tgz#4f01b354800f130e3e35206bd9269f6b860a0d95"
-  integrity sha512-GgE1VIuC1XNKU/cPWaj+8Q/5qDK5Y87xZckIv43jlDC3ZN3BZNe09w4ocPKgFdfJI51/eP0veW1bAxvwweMKJQ==
+fancycan-common@^1.0.27:
+  version "1.0.27"
+  resolved "https://registry.yarnpkg.com/fancycan-common/-/fancycan-common-1.0.27.tgz#631bda7325cd53016bb092418948e9cf22520473"
+  integrity sha512-cdMk8zbcb0RkvZ4Waen6wVRmAvVulatmTlD9qRd7IpSh5UR23JF828S8hKSjthNtFwGvmKJSPWXNMoPubXp/FQ==
   dependencies:
+    axios "^0.18.0"
     bson "^4.0.1"
     buffer "^5.2.1"
+    config "^3.0.1"
     fancycan-cache "^1.0.0"
     fancycan-model "^1.0.18"
     lodash "^4.17.11"
+    mongodb "^3.1.13"
+    mongoskin "^2.1.0"
+    rxios "^1.1.2"
     rxjs "^6.3.3"
+    rxjs-compat "^6.4.0"
 
 fancycan-model@^1.0.18:
   version "1.0.18"
@@ -2541,6 +2547,11 @@ mongodb@^3.1.13:
     mongodb-core "3.1.11"
     safe-buffer "^5.1.2"
 
+mongoskin@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/mongoskin/-/mongoskin-2.1.0.tgz#1fda6814b21de53e36b4396f6126c979c5e9ee60"
+  integrity sha1-H9poFLId5T42tDlvYSbJecXp7mA=
+
 ms@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.0.0.tgz#5608aeadfc00be6c2901df5f9861788de0d597c8"
@@ -3204,6 +3215,11 @@ rxios@^1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/rxios/-/rxios-1.1.2.tgz#412bf98a646eb1662fe9e6941d1c93f39e643e61"
   integrity sha512-nfQH2PdBqqvX41zDCM3KbXm4lJjUEaSoggT4g6tJTpBe2rrwDvKmVZ6Qaq3mKxs0IO33QT2RPEj1wIrwblhtPQ==
+
+rxjs-compat@^6.4.0:
+  version "6.4.0"
+  resolved "https://registry.yarnpkg.com/rxjs-compat/-/rxjs-compat-6.4.0.tgz#800923c15697948e1f30f18c531b12b49451c75c"
+  integrity sha512-eo/O8RS83hJdJukCtA+IF6qnqa8FPOuVo+OPCzgVi+dbTle9KCdNv97IcQO0WwNVik7DJLKmf0F8uwzc0q40vw==
 
 rxjs@^6.3.3, rxjs@^6.4.0:
   version "6.4.0"

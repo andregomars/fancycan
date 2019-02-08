@@ -3,35 +3,34 @@ import exitHook from 'exit-hook';
 import { Buffer } from 'buffer/';
 import { ObjectID } from 'bson';
 import { Readable } from 'stream';
-import { MongoClient } from 'mongodb';
-import { IJ1939, ICan } from 'fancycan-model';
-import { Transform } from 'fancycan-common';
+import { ICan } from 'fancycan-model';
+import { ConfigUtility, MongoLayer, CanOrch, CanRepository } from 'fancycan-common';
 const chunker = require('stream-chunker');
 
 import { QueueLayer } from './queuelayer';
-import { DataLayer } from './datalayer';
-import { DocService } from './services/doc.service';
-import { Utility } from './services/utility';
+import { Startup } from './startup';
 
 export class Application {
     public async start() {
-        const utility = new Utility();
-        await utility.initCacheStorage();
+        const startup = new Startup();
+        await startup.init();
+
+        const config = new ConfigUtility();
+        const canRepo = new CanRepository();
+        const canOrch = new CanOrch();
 
         const stream = this.createReadStream();
         const tcpServer = net.createServer();
-        const docService = new DocService();
-        // const MAX_BUFFERS = +utility.getCommonConfig('rawParsingBuffer');
-        const port = +utility.getCommonConfig('listeningPort');
-        const portRemoteTest = +utility.getCommonConfig('remotePortForTest');
-        const urlDbConn = utility.getDbConnectionString();
-        const urlMqConn = utility.getMqConnectionString();
-        const mqTopic = utility.getTopicName();
+
+        // retrive configurations
+        const port = +config.getCommonConfig('listeningPort');
+        const portRemoteTest = +config.getCommonConfig('remotePortForTest');
+        const urlMqConn = config.getMqConnectionString();
+        const mqTopic = config.getTopicName();
+
         const mqo = new QueueLayer(urlMqConn);
 
-        const dbClient = await MongoClient.connect(urlDbConn, { useNewUrlParser: true });
-        const dbo = new DataLayer(dbClient);
-        const transform = new Transform();
+        const dbo = MongoLayer.getInstance().Client;
 
         tcpServer.on('connection', (socket) => {
             try {
@@ -42,24 +41,20 @@ export class Application {
 
                 stream.pipe(chunker(13))
                     .on('data', (chunk: Buffer) => {
-                        const doc = docService.buildCan(chunk, rawID, localPort, remotePort);
+                        const doc = canRepo.buildCan(chunk, rawID, localPort, remotePort);
                         (async () => {
-                            await utility.saveCanDoc(doc, dbo, transform);
+                            await canOrch.saveCanDoc(doc);
                         })();
                         mqo.publish<ICan>(doc, mqTopic);
                     });
 
                 // push into splitter stream while fetching data from TCP socket
                 socket.on('data', (data: Buffer) => {
-                    const doc = docService.buildCanRaw(data);
+                    const doc = canRepo.buildCanRaw(data);
                     (async () => {
-                        rawID = await dbo.insertCanRaw(doc);
+                        rawID = await canRepo.insertCanRaw(doc);
                         stream.push(data);
                     })();
-                    // dbo.insertCanRaw(doc, (id: ObjectID) => {
-                    //     rawID = id;
-                    //     stream.push(data);
-                    // });
                 });
             } catch (error) {
                 console.log(error);
@@ -71,7 +66,7 @@ export class Application {
 
         exitHook(() => {
             tcpServer.close();
-            dbClient.close();
+            dbo.close();
         });
     }
 

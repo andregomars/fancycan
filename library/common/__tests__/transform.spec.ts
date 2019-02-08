@@ -1,24 +1,23 @@
-// import { Readable } from 'stream';
 import { ObjectID } from 'bson';
 import { Buffer } from 'buffer/';
 
-import { ICanState, ICan, IVehicleState, IJ1939, Dm1Collection, Dm1EntryType, ViewProfileStateModel } from 'fancycan-model';
-import { SpnRepository, ViewProfileRepository } from '../src/repository';
-import { Transform } from '../src/transform';
+import { ICan, IJ1939, Dm1Collection, Dm1EntryType, ViewProfileStateModel } from 'fancycan-model';
+import { SpnCache, ViewProfileCache } from '../src/cache';
+import { TransformUtility } from '../src/utility';
 // const chunker = require('stream-chunker');
 
 // jest.mock('mongodb');
 // jest.mock('../src/app/firelayer');
 
 describe('When test transform', () => {
-    const transform = new Transform();
-    const spnRepo = new SpnRepository();
-    const viewProfileRepo = new ViewProfileRepository();
+    const transform = new TransformUtility();
+    const spnCache = new SpnCache();
+    const viewProfileCache = new ViewProfileCache();
     // const canRawSample = 'iAzwAgPN/////////4gY8wkAAA8AAAAAAHGIGPwA9AAAABgAAABmiAj+bgsCHy8fnx4LH4gY/Af0oAmgCUgCWYiIGPwUIQAAAABcAgAAiAzwAgPN/////////4gM0i8nABGgAAAAAACIGO8ZIX9f////////iBj68iGgCgAVAqoKAIgY/BchhjQAAAAAAMSIGPwE9EQBBTo5O3MSiBj+vwsFH3t/e3///4gY/+EZQKQAAs8wMACIGP/iGU08Of/M/8z/iAzwAgPN/////////4gY/+MZbgAWAf////+IGOz/GSAKAAL/yv4AiBjw1hn//////wA//4gI/m4L1R4CH94eSh8=';
 
     beforeAll(() => {
-        spnRepo.storeSpnsIntoCacheGroupedByPgn([def9004, def2911]);
-        viewProfileRepo.storeViewProfileIntoCacheGroupedByVehicleCode(flattedVehicles);
+        spnCache.storeSpnsIntoCacheGroupedByPgn([def9004, def2911]);
+        viewProfileCache.storeViewProfileIntoCacheGroupedByVehicleCode(flattedVehicles);
 
     });
 
@@ -147,11 +146,6 @@ describe('When test transform', () => {
         expect(actual).toEqual(3);
     });
 
-    it('should get CAN state', () => {
-        const actual: ICanState[] = transform.buildCanState(sample9004);
-        expect(actual.length).toBe(1);
-    });
-
     // it('should split buffer through stream-chunker properly', ( done ) => {
     //     expect.hasAssertions();
 
@@ -242,13 +236,4 @@ describe('When test transform', () => {
         expect(actual.data[1].count).toEqual(1);
     });
 
-    it('should build viechle states', () => {
-        const canStates: ICanState[] = transform.buildCanState(sample9004);
-        const actual = transform.buildVehicleState(canStates[0]);
-        expect(actual).toBeDefined();
-        expect(actual!.vcode).toEqual('6005');
-        expect(actual!.vin).toEqual('BYDW21312312005');
-        expect(actual!.fcode).toEqual('BYD');
-        expect(actual!.spn9004).toEqual(596);
-    });
 });

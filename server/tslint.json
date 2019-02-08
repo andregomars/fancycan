@@ -5,6 +5,7 @@
     ],
     "jsRules": {},
     "rules": {
+        "no-var-requires": false,
         "align": false,
         "class-name": true,
         "no-console": false,

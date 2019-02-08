@@ -1,11 +1,11 @@
 import { IJ1939 } from 'fancycan-model';
-import { SpnRepository } from '../src/repository/spn-repo';
+import { SpnCache } from '../src/cache';
 
 describe('When test utility', () => {
-    const repo = new SpnRepository();
+    const spnCache = new SpnCache();
 
     beforeAll(() => {
-        repo.storeSpnsIntoCacheGroupedByPgn([def9004, def2911]);
+        spnCache.storeSpnsIntoCacheGroupedByPgn([def9004, def2911]);
     });
 
     const def9004: IJ1939 = {
@@ -54,7 +54,7 @@ describe('When test utility', () => {
     };
 
     it('should get spn list', () => {
-        const actual = repo.retrieveSpnsByPgnFromCache(64534);
+        const actual = spnCache.retrieveSpnsByPgnFromCache(64534);
         expect(actual).toBeDefined();
         expect(actual!.length).toBe(1);
     });

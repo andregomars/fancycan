@@ -21,7 +21,7 @@
     "config": "^3.0.0",
     "exit-hook": "^2.0.0",
     "fancycan-cache": "^1.0.0",
-    "fancycan-common": "^1.0.22",
+    "fancycan-common": "^1.0.26",
     "fancycan-model": "^1.0.18",
     "json-rules-engine": "^2.3.2",
     "lodash": "^4.17.11",

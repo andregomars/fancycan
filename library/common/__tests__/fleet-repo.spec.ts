@@ -1,8 +1,8 @@
-import { IJ1939, ViewProfileStateModel } from 'fancycan-model';
-import { ViewProfileRepository } from '../src/repository/view-profile-repo';
+import { ViewProfileStateModel } from 'fancycan-model';
+import { ViewProfileCache } from '../src/cache';
 
 describe('When test utility', () => {
-    const repo = new ViewProfileRepository();
+    const viewProfileCache = new ViewProfileCache();
 
     const flattedVehicles: ViewProfileStateModel[] = [
         {
@@ -38,11 +38,11 @@ describe('When test utility', () => {
     ];
 
     beforeAll(() => {
-        repo.storeViewProfileIntoCacheGroupedByVehicleCode(flattedVehicles);
+        viewProfileCache.storeViewProfileIntoCacheGroupedByVehicleCode(flattedVehicles);
     });
 
     it('should get vehicle profile list', () => {
-        const actual = repo.retrieveViewProfileByVehicleCodeFromCache('6001');
+        const actual = viewProfileCache.retrieveViewProfileByVehicleCodeFromCache('6001');
         expect(actual).toBeDefined();
         expect(actual!.vcode).toEqual('6001');
         expect(actual!.fname).toEqual('BYD');

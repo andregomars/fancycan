@@ -1,6 +1,6 @@
 import CacheLayer from 'fancycan-cache';
 
-export class MalfuncSettingRepository {
+export class MalfuncSettingCache {
 
     public storeMalfuncSettingIntoCache(malfuncSettings: any[]) {
         const cache = CacheLayer.getInstance();

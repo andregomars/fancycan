@@ -2,53 +2,9 @@ import _ from 'lodash';
 import { Buffer } from 'buffer/';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { ICan, ICanState, IJ1939, Dm1EntryType, Dm1Collection, Dm1Data, ViewProfileStateModel, IVehicleState, Geolocation } from 'fancycan-model';
+import { IJ1939, Dm1EntryType, Dm1Collection, Dm1Data, ViewProfileStateModel } from 'fancycan-model';
 
-import { SpnRepository, ViewProfileRepository } from '../repository';
-
-export class Transform {
-    private spnRepo: SpnRepository;
-    private viewProfileRepo: ViewProfileRepository;
-
-    constructor() {
-        this.spnRepo = new SpnRepository();
-        this.viewProfileRepo = new ViewProfileRepository();
-    }
-
-    public buildCanStates(cans: ICan[]): ICanState[] {
-        return cans.map((can: ICan) => this.buildCanState(can)).reduce((pre, cur) => [...pre, ...cur]);
-    }
-
-    public buildCanState(can: ICan): ICanState[] {
-        const pgnID = this.decodePGN(can.canID);
-        const spns = this.spnRepo.retrieveSpnsByPgnFromCache(pgnID);
-
-        if (!spns) {
-            return [];
-        }
-
-        const canStates = new Array<ICanState>();
-        for (const spn of spns!) {
-            const val = this.decodeData(can.canData, spn);
-            // const vcode = _.random(6001, 6010).toString();
-            const state: ICanState = {
-                canObjID: can._id,
-                // canObjID: can.rawID,
-                vcode: can.remotePort.toString(),
-                spnNo: spn.SPNNo,
-                spnName: spn.SPNName,
-                pgnNo: pgnID,
-                pgnName: spn.PGNName,
-                value: val,
-                unit: spn.Unit,
-                min: spn.LowerDataRange,
-                max: spn.UpperDataRange,
-            };
-            canStates.push(state);
-        }
-
-        return canStates;
-    }
+export class TransformUtility {
 
     public decodePGN(canID: Buffer): number {
         return canID.readUInt16BE(1);
@@ -104,42 +60,6 @@ export class Transform {
 
         const val = Buffer.from(parsedValues).readUIntLE(0, bytesCount);
         return _.round(val * definition.Resolution + definition.Offset, 4);
-    }
-
-    public buildVehicleState(canState: ICanState): IVehicleState | undefined {
-        const geolocations: Geolocation[] = [
-            { latitude: 34.057539, longitude: -118.237494 },
-            { latitude: 34.056544, longitude: -118.238082 },
-            { latitude: 34.055955, longitude: -118.238996 },
-            { latitude: 34.056325, longitude: -118.239507 },
-        ];
-        const viewProfile = this.viewProfileRepo.retrieveViewProfileByVehicleCodeFromCache(canState.vcode);
-        if (!viewProfile) {
-            return undefined;
-        }
-
-        const state: IVehicleState = {
-            vcode: canState.vcode,
-            vin: viewProfile.vin,
-            fcode: viewProfile.fcode,
-            fname: viewProfile.fname,
-            geolocations: geolocations,
-        };
-        state['spn' + canState.spnNo] = canState.value;
-        return state;
-    }
-
-    public buildVehicleMalfuncState(canState: ICanState): any {
-        const fcode = 'BYD';
-        const state: any = {
-            vcode: canState.vcode,
-            fcode: fcode,
-            spn: canState.spnNo,
-            value: canState.value,
-            type: 'General',
-            CreatedDate: canState.canObjID.getTimestamp(),
-        };
-        return state;
     }
 
     public decodeDm1(canData: string, entryType: Dm1EntryType, dm1Collection: Dm1Collection): Dm1Collection {

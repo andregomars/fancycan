@@ -1,13 +1,13 @@
-import { SpnRepository } from 'fancycan-common';
+import { SpnCache } from 'fancycan-common';
 import { IJ1939, IRuleCondition } from 'fancycan-model';
 import { RuleEngine } from '../src/app/rule-engine';
 
-describe('When test utility', () => {
-    const repo = new SpnRepository();
+describe('When test rule engine', () => {
+    const spnCache = new SpnCache();
     const rule = new RuleEngine();
 
     beforeAll(() => {
-        repo.storeSpnsIntoCacheGroupedByPgn([def9004, def2911]);
+        spnCache.storeSpnsIntoCacheGroupedByPgn([def9004, def2911]);
     });
 
     const def9004: IJ1939 = {
@@ -79,7 +79,7 @@ describe('When test utility', () => {
     }];
 
     it('should get spn list', () => {
-        const actual = repo.retrieveSpnsByPgnFromCache(64534);
+        const actual = spnCache.retrieveSpnsByPgnFromCache(64534);
         expect(actual).toBeDefined();
         expect(actual!.length).toBe(1);
     });
