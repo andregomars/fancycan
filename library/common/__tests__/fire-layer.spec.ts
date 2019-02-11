@@ -8,10 +8,13 @@ it('should get definition from remote source', () => {
     });
 });
 
-it('should get definition with specification details', () => {
+it('should get definition with specification details', (done) => {
     const fireLayer = new FireLayer();
-    fireLayer.getDefinitionWithSpecs().subscribe((spn: IJ1939[]) => {
-        expect(spn).toBeDefined();
-        expect(spn.length).toEqual(13);
+    fireLayer.getDefinitionWithSpecs().subscribe({
+        next: (spn: IJ1939[]) => {
+            expect(spn).toBeDefined();
+            expect(spn.length).toEqual(16);
+        },
+        complete: () => done(),
     });
 });

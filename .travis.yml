@@ -17,7 +17,7 @@ install:
   - yarn install
 
 script:
-  - yarn tslint
+  - yarn lint
   - mongo main --eval 'db.createUser({user:"admin",pwd:"fccdbo123!",roles:["readWrite", "dbAdmin"]});'
   - yarn build
   - yarn test
