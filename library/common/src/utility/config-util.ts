@@ -2,13 +2,15 @@ import config from 'config';
 
 export class ConfigUtility {
     public getDbConnectionString(): string {
+        const scheme = config.get('dbConfig.scheme');
         const host = encodeURIComponent(config.get('dbConfig.host'));
-        const port = encodeURIComponent(config.get('dbConfig.port'));
         const user = encodeURIComponent(config.get('dbConfig.user'));
         const password = encodeURIComponent(config.get('dbConfig.password'));
-        const authMechanism = config.get('dbConfig.auth');
+        // const port = encodeURIComponent(config.get('dbConfig.port'));
+        // const authMechanism = config.get('dbConfig.auth');
         const url =
-            `mongodb://${user}:${password}@${host}:${port}/?authMechanism=${authMechanism}`;
+            // `${scheme}://${user}:${password}@${host}:${port}/?authMechanism=${authMechanism}`;
+            `${scheme}://${user}:${password}@${host}`;
 
         return url;
     }

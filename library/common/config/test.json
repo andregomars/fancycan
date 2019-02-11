@@ -1,6 +1,7 @@
 {
     "dbConfig": {
-        "host": "127.0.0.1",
+        "scheme": "mongodb+srv",
+        "host": "cluster0-pwbs7.mongodb.net",
         "port": 27017,
         "user": "admin",
         "password": "fccdbo123!",
