@@ -1,8 +1,8 @@
 language: node_js
 node_js:
   - '10'
-services:
-  - mongodb
+notifications:
+  email: false
 
 cache:
   yarn: true
@@ -11,13 +11,11 @@ cache:
 
 before_install:
   - cd library/common
-  # - sleep 15
 
 install:
   - yarn install
 
 script:
   - yarn lint
-  - mongo --eval 'db.createUser({user:"admin",pwd:"fccdbo123!",roles:["readWrite", "dbAdmin"]});'
   - yarn build
   - yarn test
