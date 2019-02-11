@@ -1,1 +1,1 @@
-* FancyCan
+* FancyCan [![Build Status](https://travis-ci.com/andregomars/fancycan.svg?token=DaRSg5qHk9qtfNNaqzoW&branch=master)](https://travis-ci.com/andregomars/fancycan)
