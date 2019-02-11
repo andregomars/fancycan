@@ -14,6 +14,7 @@ before_script:
   - mongo main --eval 'db.createUser({user:"admin",pwd:"fccdbo123!",roles:["readWrite", "dbAdmin"]});'
 
 script:
-  - yarn lint
+  - yarn
+  - yarn tslint
   - yarn build --progress false
   - yarn test --progress false
