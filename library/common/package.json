@@ -1,6 +1,6 @@
 {
   "name": "fancycan-common",
-  "version": "1.0.29",
+  "version": "1.0.30",
   "main": "dist/lib/index.js",
   "license": "MIT",
   "types": "dist/types/index.d.ts",
@@ -22,7 +22,6 @@
     "fancycan-model": "^1.0.18",
     "lodash": "^4.17.11",
     "mongodb": "^3.1.13",
-    "mongoskin": "^2.1.0",
     "rxios": "^1.1.2",
     "rxjs": "^6.3.3",
     "rxjs-compat": "^6.4.0"
