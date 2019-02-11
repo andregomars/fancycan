@@ -1,0 +1,17 @@
+language: node_js
+node_js:
+  - '10'
+
+cache:
+  yarn: true
+  directories:
+    - library/common/node_modules
+
+before_script:
+  - sleep 15
+  - mongo main --eval 'db.createUser({user:"admin",pwd:"fccdbo123!",roles:["readWrite", "dbAdmin"]});'
+
+script:
+  - yarn lint
+  - yarn build --progress false
+  - yarn test --progress false
