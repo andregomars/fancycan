@@ -8,14 +8,12 @@ cache:
   yarn: true
   directories:
     - library/common/node_modules
-
-before_install:
-  - cd library/common
+    - job/node_modules
 
 install:
-  - yarn install
+  - yarn --cwd './library/common' install
+  - yarn --cwd './job' install
 
 script:
-  - yarn lint
-  - yarn build
-  - yarn test
+  - yarn --cwd './library/common' test
+  - yarn --cwd './job' test

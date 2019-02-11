@@ -7,8 +7,8 @@
   "scripts": {
     "start": "npx tsc && node dist/app.js",
     "build": "npx tsc",
-    "test": "jest",
-    "tslint": "npx tslint -c tslint.json -p tsconfig.json",
+    "test": "npx tsc && jest",
+    "lint": "npx tslint -c tslint.json -p tsconfig.json",
     "watch-ts": "npx tsc -w",
     "serve-debug": "npx nodemon --inspect dist/app.js",
     "watch-debug": "npx concurrently -k -p \"[{name}]\" \"npm run watch-ts\" \"npm run serve-debug\"",
@@ -29,7 +29,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "config": "^3.0.1",
-    "fancycan-common": "^1.0.27",
+    "fancycan-common": "^1.0.30",
     "fancycan-model": "^1.0.18",
     "json-rules-engine": "^2.3.2",
     "mongodb": "^3.1.13",
