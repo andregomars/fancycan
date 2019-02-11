@@ -14,10 +14,10 @@ before_install:
   # - sleep 15
 
 install:
-  - yarn
+  - yarn install
 
 script:
   - yarn tslint
   - mongo main --eval 'db.createUser({user:"admin",pwd:"fccdbo123!",roles:["readWrite", "dbAdmin"]});'
-  - yarn build --progress false
-  - yarn test --progress false
+  - yarn build
+  - yarn test

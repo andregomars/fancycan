@@ -9,6 +9,7 @@
   ],
   "scripts": {
     "prebuild": "rimraf dist",
+    "lint": "npx tslint -c tslint.json -p tsconfig.json",
     "build": "npx tsc",
     "test": "jest"
   },
