@@ -2,18 +2,7 @@ import { MongoLayer } from '../src/core';
 import { MongoClient } from 'mongodb';
 
 describe('When test MongoLayer', () => {
-    // let conn: MongoClient;
-
-    // beforeAll(async () => {
-        // await MongoLayer.getInstance().connect();
-        // conn = MongoLayer.getInstance().Client;
-    // });
-
-    // afterAll(() => {
-        // conn.close();
-    // });
-
-    it('should able to insert one doc into mydb.mycoll', async (done) => {
+    it('should able to insert one doc into mydb.mycoll', async () => {
         await MongoLayer.getInstance().connect();
         const conn = MongoLayer.getInstance().Client;
 
@@ -28,12 +17,8 @@ describe('When test MongoLayer', () => {
 
         } finally {
             conn.close();
-            done();
         }
 
     });
 
-    it('will pass', () => {
-        expect(true).toBeTruthy();
-    });
 });
