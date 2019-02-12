@@ -1,4 +1,4 @@
-import { SpnCache } from 'fancycan-common';
+import { SpnCache, FireLayer } from 'fancycan-common';
 import { IJ1939, IRuleCondition } from 'fancycan-model';
 import { RuleEngine } from '../src/app/rule-engine';
 
@@ -96,4 +96,21 @@ describe('When test rule engine', () => {
         expect(fcodeCondition!.value).toBe('BYD');
         expect(fcodeCondition!.operator).toBe('equal');
     });
+
+    it('should build rule conditions from firebase malfunction settings', async () => {
+        const fire = new FireLayer();
+        const settings = await fire.getMalfunctionSetting().toPromise();
+        expect(settings).toBeDefined();
+        const actual = rule.buildRuleConditionGroups(settings);
+        expect(actual).toBeDefined();
+        expect(actual.size).toEqual(3);
+        expect(actual.has(3)).toBeTruthy();
+        expect(actual.get(3)!.length).toEqual(3);
+
+        // const fcodeCondition = actual.get(3)!.find((c: IRuleCondition) => c.fact === 'fcode');
+        // expect(fcodeCondition).toBeDefined();
+        // expect(fcodeCondition!.value).toBe('BYD');
+        // expect(fcodeCondition!.operator).toBe('equal');
+    });
+
 });
