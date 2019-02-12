@@ -4,14 +4,14 @@ import { MongoClient } from 'mongodb';
 describe('When test MongoLayer', () => {
     // let conn: MongoClient;
 
-    beforeAll(async () => {
+    // beforeAll(async () => {
         // await MongoLayer.getInstance().connect();
         // conn = MongoLayer.getInstance().Client;
-    });
+    // });
 
-    afterAll(() => {
+    // afterAll(() => {
         // conn.close();
-    });
+    // });
 
     it('should able to insert one doc into mydb.mycoll', async () => {
         await MongoLayer.getInstance().connect();
