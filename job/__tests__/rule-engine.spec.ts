@@ -107,10 +107,10 @@ describe('When test rule engine', () => {
         expect(actual.has(3)).toBeTruthy();
         expect(actual.get(3)!.length).toEqual(3);
 
-        // const fcodeCondition = actual.get(3)!.find((c: IRuleCondition) => c.fact === 'fcode');
-        // expect(fcodeCondition).toBeDefined();
-        // expect(fcodeCondition!.value).toBe('BYD');
-        // expect(fcodeCondition!.operator).toBe('equal');
+        const fcodeCondition = actual.get(3)!.find((c: IRuleCondition) => c.fact === 'fcode');
+        expect(fcodeCondition).toBeDefined();
+        expect(fcodeCondition!.value).toBe('BYD');
+        expect(fcodeCondition!.operator).toBe('equal');
     });
 
 });
