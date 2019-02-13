@@ -4,7 +4,7 @@ import { RuleEngine } from '../src/app/rule-engine';
 
 describe('When test rule engine', () => {
     const spnCache = new SpnCache();
-    const rule = new RuleEngine();
+    const ruleEngine = new RuleEngine();
 
     beforeAll(() => {
         spnCache.storeSpnsIntoCacheGroupedByPgn([def9004, def2911]);
@@ -85,7 +85,7 @@ describe('When test rule engine', () => {
     });
 
     it('should build rule conditions', () => {
-        const actual = rule.buildRuleConditionGroups(alertSetting);
+        const actual = ruleEngine.buildRuleConditionGroups(alertSetting);
         expect(actual).toBeDefined();
         expect(actual.size).toBe(1);
         expect(actual.has(3)).toBeTruthy();
@@ -101,7 +101,7 @@ describe('When test rule engine', () => {
         const fire = new FireLayer();
         const settings = await fire.getMalfunctionSetting().toPromise();
         expect(settings).toBeDefined();
-        const actual = rule.buildRuleConditionGroups(settings);
+        const actual = ruleEngine.buildRuleConditionGroups(settings);
         expect(actual).toBeDefined();
         expect(actual.size).toEqual(3);
         expect(actual.has(3)).toBeTruthy();
@@ -113,4 +113,42 @@ describe('When test rule engine', () => {
         expect(fcodeCondition!.operator).toBe('equal');
     });
 
+    it('should test with palyer fouled out', async () => {
+        const rule = ruleEngine.buildSampleRule();
+        const engine = ruleEngine.createEngine();
+        engine.addRule(rule);
+        const facts = {
+            personalFoulCount: 6,
+            gameDuration: 40
+        };
+        const events = await engine.run(facts);
+
+        expect(events).toBeDefined();
+        expect(events.length).toEqual(1);
+        expect(events[0].params.message).toEqual('Player has fouled out!');
+    });
+
+    it('should test with player stay in court', async () => {
+        const rule = ruleEngine.buildSampleRule();
+        const engine = ruleEngine.createEngine();
+        engine.addRule(rule);
+        const facts = {
+            personalFoulCount: 4,
+            gameDuration: 40
+        };
+        const events = await engine.run(facts);
+
+        expect(events).toBeDefined();
+        expect(events.length).toEqual(0);
+    });
+
+    it('should build rule', () => {
+        const actual = ruleEngine.buildRule(alertSetting);
+        expect(actual).toBeDefined();
+        expect(actual.conditions.any.length).toEqual(1);
+        expect(actual.conditions.any[0].all.length).toEqual(3);
+        expect(actual.conditions.any[0].all[0].fact).toEqual('spn190');
+        expect(actual.event.type).toEqual('regular');
+
+    });
 });
