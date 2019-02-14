@@ -4,42 +4,48 @@ const Engine = require('json-rules-engine').Engine;
 
 export class RuleEngine {
     public createEngine(): any {
-        return new Engine();
+        return this.createEngineWithRules([]);
+    }
+
+    public createEngineWithRules(rules: any[]): any {
+        return new Engine(rules, { allowUndefinedFacts: true });
     }
 
     public buildRule(malfuncRules: any[]): any {
         const groups = this.buildRuleConditionGroups(malfuncRules);
-        /* groups sample:
-            1: [
-                { fact: spn9004, operator: 'lessThan', value: 2},
-                { fact: spn90, operator: 'notEqual', value: 1},
-                { fact: 'fcode', operator: 'equal', value: 'OMNIT'}
-            ]
-            2: [
-                { fact: spn9004, operator: 'greaterThan', value: 11},
-                { fact: 'fcode, operator: 'equal', value: 'BYD'}
-            ]
-        */
 
-       const subConditions: any[] = [];
-       groups.forEach((value, key) => {
-           subConditions.push({
-               all: value
-           });
-       });
+        const subConditions: any[] = [];
+        groups.forEach((value, key) => {
+            subConditions.push({
+                all: value
+            });
+        });
 
-       const rule = {
-           conditions: {
-               any: subConditions
-           },
-           event: {
-               type: 'regular'
-           }
-       };
+        const rule = {
+            conditions: {
+                any: subConditions
+            },
+            event: {
+                type: 'regular'
+            }
+        };
 
-       return rule;
+        return rule;
     }
 
+    /**
+     * @example
+     * // returned groups for example:
+     * //  1: [
+     * //      { fact: spn9004, operator: 'lessThan', value: 2},
+     * //      { fact: spn90, operator: 'notEqual', value: 1},
+     * //      { fact: 'fcode', operator: 'equal', value: 'OMNIT'}
+     * //  ]
+     * //  2: [
+     * //      { fact: spn9004, operator: 'greaterThan', value: 11},
+     * //      { fact: 'fcode', operator: 'equal', value: 'BYD'}
+     * //  ]
+     */
     public buildRuleConditionGroups(malfuncRules: any[]): Map<number, IRuleCondition[]> {
         const conditionGroups = new Map<number, IRuleCondition[]>();
         for (const rule of malfuncRules) {

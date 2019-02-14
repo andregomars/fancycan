@@ -115,8 +115,7 @@ describe('When test rule engine', () => {
 
     it('should test with palyer fouled out', async () => {
         const rule = ruleEngine.buildSampleRule();
-        const engine = ruleEngine.createEngine();
-        engine.addRule(rule);
+        const engine = ruleEngine.createEngineWithRules([rule]);
         const facts = {
             personalFoulCount: 6,
             gameDuration: 40
@@ -130,8 +129,7 @@ describe('When test rule engine', () => {
 
     it('should test with player stay in court', async () => {
         const rule = ruleEngine.buildSampleRule();
-        const engine = ruleEngine.createEngine();
-        engine.addRule(rule);
+        const engine = ruleEngine.createEngineWithRules([rule]);
         const facts = {
             personalFoulCount: 4,
             gameDuration: 40
@@ -151,4 +149,52 @@ describe('When test rule engine', () => {
         expect(actual.event.type).toEqual('regular');
 
     });
+
+    it('should build rule from firebase malfunction settings', async () => {
+        const fire = new FireLayer();
+        const settings = await fire.getMalfunctionSetting().toPromise();
+        expect(settings).toBeDefined();
+        const actual = ruleEngine.buildRule(settings);
+        expect(actual).toBeDefined();
+        expect(actual.conditions.any.length).toBeGreaterThan(1);
+        expect(actual.conditions.any.every((g: any) =>
+            g.all.some((c: any) =>
+                c.fact === 'fcode' && c.operator === 'equal'))).toBeTruthy();
+    });
+
+    it('should have alert of OMNIT with spn# 1432 & 1489', async () => {
+        const fire = new FireLayer();
+        const settings = await fire.getMalfunctionSetting().toPromise();
+        const rule = ruleEngine.buildRule(settings);
+        const engine = ruleEngine.createEngineWithRules([rule]);
+        const facts = {
+            fcode: 'OMNIT',
+            spn1432: 33,
+            spn1489: 0,
+        };
+        const events = await engine.run(facts);
+
+        expect(events).toBeDefined();
+        expect(events.length).toEqual(1);
+        expect(events[0].type).toEqual('regular');
+    });
+
+    it('should NOT have alert of OMNIT with spn# 1432, 1489, 1530 & 1624', async () => {
+        const fire = new FireLayer();
+        const settings = await fire.getMalfunctionSetting().toPromise();
+        const rule = ruleEngine.buildRule(settings);
+        const engine = ruleEngine.createEngineWithRules([rule]);
+        const facts = {
+            fcode: 'OMNIT',
+            spn1432: 39,
+            spn1489: 44,
+            spn1530: 99,
+            spn1624: 88
+        };
+        const events = await engine.run(facts);
+
+        expect(events).toBeDefined();
+        expect(events.length).toEqual(0);
+    });
+
 });
