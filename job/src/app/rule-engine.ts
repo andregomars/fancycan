@@ -11,26 +11,26 @@ export class RuleEngine {
         return new Engine(rules, { allowUndefinedFacts: true });
     }
 
-    public buildRule(malfuncRules: any[]): any {
+    public buildRules(malfuncRules: any[]): any[] {
         const groups = this.buildRuleConditionGroups(malfuncRules);
 
-        const subConditions: any[] = [];
+        const rules: any[] = [];
         groups.forEach((value, key) => {
-            subConditions.push({
-                all: value
+            rules.push({
+                conditions: {
+                    all: value
+                },
+                event: {
+                    type: 'Malfunction',
+                    params: {
+                        id: key,
+                        level: 'General',
+                    }
+                }
             });
         });
 
-        const rule = {
-            conditions: {
-                any: subConditions
-            },
-            event: {
-                type: 'regular'
-            }
-        };
-
-        return rule;
+        return rules;
     }
 
     /**
