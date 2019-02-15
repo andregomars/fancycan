@@ -7,11 +7,8 @@ export class MalfuncProceccor {
         const settings = new MalfuncSettingCache().retrieveMalfuncSettingFromCache();
         const vehicleRepo = new VehicleRepository();
 
-        console.log(settings);
         const rules = new RuleEngine().buildMalfunctionRules(settings);
-        console.log(JSON.stringify(rules))
-        process.exit();
-        const engine = new RuleEngine().createEngineWithRules(settings);
+        const engine = new RuleEngine().createEngineWithRules(rules);
 
         const states = await vehicleRepo.getVehicleStates();
         console.log(states);
