@@ -1,5 +1,5 @@
 import { SpnCache, FireLayer } from 'fancycan-common';
-import { IJ1939, IRuleCondition } from 'fancycan-model';
+import { IJ1939 } from 'fancycan-model';
 import { RuleEngine } from '../src/app/rule-engine';
 
 describe('When test rule engine', () => {

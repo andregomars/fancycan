@@ -1092,10 +1092,10 @@ fancycan-cache@^1.0.0:
   dependencies:
     node-cache "^4.2.0"
 
-fancycan-common@^1.0.30:
-  version "1.0.30"
-  resolved "https://registry.yarnpkg.com/fancycan-common/-/fancycan-common-1.0.30.tgz#c3604d66f1b71324ff7657e331eff38ec9bc7cab"
-  integrity sha512-UcEdlThDbU3CpO3WWhMVb6K4awyGfo2HE7gTwyY0GyJm6VXADoO17gqrbH6+7CYzPePCl5voRqAxqVXDQQAzCQ==
+fancycan-common@^1.0.34:
+  version "1.0.34"
+  resolved "https://registry.yarnpkg.com/fancycan-common/-/fancycan-common-1.0.34.tgz#27723c0a6902225f2a5669f9344f397f98725541"
+  integrity sha512-bHEVouNwnTdYdErxX/jtfm9wf7OPPlTm89MU0KQwR1Y0OqO7Z9o5ZZbILTp6vNERx3NXwd/6PWcpnGCvPtdSFg==
   dependencies:
     axios "^0.18.0"
     bson "^4.0.1"
