@@ -1,6 +1,6 @@
 {
   "name": "fancycan-common",
-  "version": "1.0.31",
+  "version": "1.0.34",
   "main": "dist/lib/index.js",
   "license": "MIT",
   "types": "dist/types/index.d.ts",
@@ -8,10 +8,11 @@
     "dist"
   ],
   "scripts": {
-    "prebuild": "rimraf dist",
     "lint": "npx tslint -c tslint.json -p tsconfig.json",
+    "prebuild": "rimraf dist",
     "build": "npx tsc",
-    "test": "rimraf dist && jest"
+    "test": "rimraf dist && jest",
+    "prepublishOnly": "npx tsc"
   },
   "dependencies": {
     "axios": "^0.18.0",
