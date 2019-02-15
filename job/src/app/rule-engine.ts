@@ -11,6 +11,46 @@ export class RuleEngine {
         return new Engine(rules, { allowUndefinedFacts: true });
     }
 
+    public buildMalfunctionRules(ruleSettings: any[]): any[] {
+        const rules: any[] = [];
+        for (const setting of ruleSettings) {
+            const conditions: IRuleCondition[] = setting.conditions.map((condition: any) => {
+                return {
+                    fact: `spn${condition.spn}`,
+                    operator: this.getOperatorTerm(condition.expression),
+                    value: condition.value,
+                } as IRuleCondition;
+            });
+            if (conditions.length > 0) {
+                const conditionFleetCode: IRuleCondition = {
+                    fact: 'fcode',
+                    operator: 'equal',
+                    value: setting.fleet_code,
+                };
+                conditions.push(conditionFleetCode);
+            }
+
+            const rule = {
+                conditions: {
+                    all: conditions
+                },
+                event: {
+                    type: 'Malfunction',
+                    params: {
+                        id: setting.id,
+                        name: setting.name,
+                        level: 'General',
+                    }
+                }
+            };
+
+            rules.push(rule);
+        }
+
+        return rules;
+    }
+
+    /*
     public buildRules(malfuncRules: any[]): any[] {
         const groups = this.buildRuleConditionGroups(malfuncRules);
 
@@ -33,19 +73,6 @@ export class RuleEngine {
         return rules;
     }
 
-    /**
-     * @example
-     * // returned groups for example:
-     * //  1: [
-     * //      { fact: spn9004, operator: 'lessThan', value: 2},
-     * //      { fact: spn90, operator: 'notEqual', value: 1},
-     * //      { fact: 'fcode', operator: 'equal', value: 'OMNIT'}
-     * //  ]
-     * //  2: [
-     * //      { fact: spn9004, operator: 'greaterThan', value: 11},
-     * //      { fact: 'fcode', operator: 'equal', value: 'BYD'}
-     * //  ]
-     */
     public buildRuleConditionGroups(malfuncRules: any[]): Map<number, IRuleCondition[]> {
         const conditionGroups = new Map<number, IRuleCondition[]>();
         for (const rule of malfuncRules) {
@@ -69,6 +96,7 @@ export class RuleEngine {
 
         return conditionGroups;
     }
+    */
 
     public buildSampleRule(): any {
         const event = {
