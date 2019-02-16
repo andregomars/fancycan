@@ -1,68 +1,92 @@
 [
     {
-        "id": 1,
-        "fleet_code": "OMNIT",
-        "name": "Temperature",
         "conditions": [
             {
-                "spn": "1432",
                 "expression": ">",
+                "spn": "1432",
                 "value": 32
             },
             {
-                "spn": "1489",
                 "expression": "!=",
+                "spn": "1489",
                 "value": 44
             }
         ],
+        "fleet_code": "OMNIT",
+        "gpsexpression": ">",
         "gpslat": 123.212112,
         "gpslgt": 123.332432,
-        "gpsexpression": ">",
         "gpsvalue": "3",
-        "notification": ["email", "app"]
+        "id": 1,
+        "name": "Temperature",
+        "level": "General",
+        "notification": [
+            "email",
+            "app"
+        ]
     },
     {
-        "id": 2,
-        "fleet_code": "OMNIT",
-        "name": "XBR Message",
         "conditions": [
             {
-                "spn": "1530",
                 "expression": "<",
+                "spn": "1530",
                 "value": 100
             },
             {
-                "spn": "1624",
                 "expression": "=",
-                "value": 0 
-            }
-        ],
-        "gpslat": 123.212112,
-        "gpslgt": 123.332432,
-        "gpsexpression": "<",
-        "gpsvalue": "3",
-        "notification": [ "email" ]
-    },
-    {
-        "id": 3,
-        "fleet_code": "BYD",
-        "name": "Engine Speed & Battery Current Alert",
-        "conditions": [
-            {
-                "spn": "190",
-                "expression": ">",
-                "value": 3000
-            },
-            {
-                "spn": "9003",
-                "expression": "<",
+                "spn": "1624",
                 "value": 0
             }
         ],
+        "fleet_code": "OMNIT",
+        "gpsexpression": "<",
         "gpslat": 123.212112,
         "gpslgt": 123.332432,
-        "gpsexpression": ">",
         "gpsvalue": "3",
-        "notification": []
+        "id": 2,
+        "name": "XBR Message",
+        "level": "General",
+        "notification": [
+            "email"
+        ]
+    },
+    {
+        "conditions": [
+            {
+                "expression": ">",
+                "spn": "190",
+                "value": 3000
+            },
+            {
+                "expression": "<",
+                "spn": "9003",
+                "value": 0
+            }
+        ],
+        "fleet_code": "BYD",
+        "gpsexpression": ">",
+        "gpslat": 123.212112,
+        "gpslgt": 123.332432,
+        "gpsvalue": "3",
+        "id": 3,
+        "name": "Engine Speed & Battery Current Alert",
+        "level": "Critical"
+    },
+    {
+        "conditions": [
+            {
+                "expression": ">",
+                "spn": "9004",
+                "value": 500
+            }
+        ],
+        "fleet_code": "BYD",
+        "gpsexpression": ">",
+        "gpslat": 123.212112,
+        "gpslgt": 123.332432,
+        "gpsvalue": "3",
+        "id": 4,
+        "name": "Motor Voltage Alert",
+        "level": "General"
     }
 ]

@@ -1,7 +1,7 @@
 import { Buffer } from 'buffer/';
 import { ICanState, ICan, IJ1939, ViewProfileStateModel } from 'fancycan-model';
 import { ObjectID } from 'bson';
-import { CanRepository } from '../src/repository';
+import { CanRepository, VehicleRepository } from '../src/repository';
 import { SpnCache, ViewProfileCache } from '../src/cache';
 import { VehicleOrch } from '../src/orchestration';
 
@@ -53,9 +53,9 @@ describe('When test Vehicle orch', () => {
 
     it('should build viechle states', () => {
         const canRepo = new CanRepository();
-        const vehicleOrch = new VehicleOrch();
+        const vehicleRepo = new VehicleRepository();
         const canStates: ICanState[] = canRepo.buildCanState(sample9004);
-        const actual = vehicleOrch.buildVehicleState(canStates[0]);
+        const actual = vehicleRepo.buildVehicleState(canStates[0]);
         expect(canStates).toBeDefined();
         expect(actual).toBeDefined();
         expect(actual!.vcode).toEqual('6005');

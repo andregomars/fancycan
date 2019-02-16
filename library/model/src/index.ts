@@ -1,5 +1,6 @@
 export * from './geolocation';
 export * from './vehicle-state';
+export * from './vehicle-malfunction';
 export * from './IRuleCondition';
 export * from './ICanData';
 export * from './ICanRaw';
@@ -10,3 +11,4 @@ export * from './dm1-entry-type';
 export * from './dm1-collection';
 export * from './ican-entry';
 export * from './view-profile-state.model';
+export * from './json-rules-engine';

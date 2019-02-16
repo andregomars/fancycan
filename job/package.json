@@ -30,8 +30,8 @@
   "dependencies": {
     "axios": "^0.18.0",
     "config": "^3.0.1",
-    "fancycan-common": "^1.0.34",
-    "fancycan-model": "^1.0.18",
+    "fancycan-common": "^1.0.35",
+    "fancycan-model": "^1.0.21",
     "json-rules-engine": "^2.3.2",
     "mongodb": "^3.1.13",
     "rxios": "^1.1.2",

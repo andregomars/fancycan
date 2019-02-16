@@ -1,4 +1,4 @@
-import { IRuleCondition } from 'fancycan-model';
+import { IRuleCondition, IRuleEvent } from 'fancycan-model';
 const Rule = require('json-rules-engine').Rule;
 const Engine = require('json-rules-engine').Engine;
 
@@ -30,18 +30,20 @@ export class RuleEngine {
                 conditions.push(conditionFleetCode);
             }
 
+            const event: IRuleEvent = {
+                type: 'Malfunction',
+                params: {
+                    id: setting.id,
+                    name: setting.name,
+                    level: setting.level,
+                }
+            }
+
             const rule = {
                 conditions: {
                     all: conditions
                 },
-                event: {
-                    type: 'Malfunction',
-                    params: {
-                        id: setting.id,
-                        name: setting.name,
-                        level: 'General',
-                    }
-                }
+                event: event
             };
 
             rules.push(rule);

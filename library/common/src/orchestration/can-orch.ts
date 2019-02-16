@@ -18,7 +18,6 @@ export class CanOrch {
             await this.canRepo.insertCanStates(states);
             for (const canState of states) {
                 await this.vehicleOrch.saveVehicleStateDoc(canState);
-                await this.vehicleOrch.saveVehicleMalfuncStateDoc(canState);
             }
         }
     }

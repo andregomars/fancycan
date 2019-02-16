@@ -59,6 +59,7 @@ describe('When test rule engine', () => {
         id: 3,
         fleet_code: 'BYD',
         name: 'Engine Speed & Battery Current Alert',
+        level: 'General',
         conditions: [
             {
                 spn: '190',
