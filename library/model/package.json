@@ -1,6 +1,6 @@
 {
   "name": "fancycan-model",
-  "version": "1.0.25",
+  "version": "1.0.26",
   "main": "dist/lib/index.js",
   "types": "dist/types/index.d.ts",
   "license": "MIT",
