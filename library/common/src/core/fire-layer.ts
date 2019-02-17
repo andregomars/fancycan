@@ -1,37 +1,36 @@
 import { Rxios } from 'rxios';
 import { Observable, forkJoin } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { IJ1939 } from 'fancycan-model';
+import { IJ1939, IUser } from 'fancycan-model';
 import { ConfigUtility } from '../utility';
 
 export class FireLayer {
     private http: Rxios;
 
     constructor() {
-        const config = new ConfigUtility();
         this.http = new Rxios({
-            baseURL: config.getFbConnectionString(),
+            baseURL: ConfigUtility.getFbConnectionString(),
         });
     }
 
     public getDefinitions(): Observable<any> {
-        return this.http
-            .get<any>(`/definitions.json`);
+        return this.http.get<any>('/definitions.json');
     }
 
     public getProprietarySpnList(): Observable<any> {
-        return this.http
-            .get<any>(`/proprietary-spn.json`);
+        return this.http.get<any>('/proprietary-spn.json');
     }
 
     public getJ1939SpnList(): Observable<any> {
-        return this.http
-            .get<any>(`/j1939spn.json`);
+        return this.http.get<any>('/j1939spn.json');
     }
 
     public getFleets(): Observable<any> {
-        return this.http
-            .get<any>(`/fleets.json`);
+        return this.http.get<any>('/fleets.json');
+    }
+
+    public getUsers(): Observable<IUser[]> {
+        return this.http.get<IUser[]>('/users.json');
     }
 
     public getDefinitionWithSpecs(): Observable<IJ1939[]> {

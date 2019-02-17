@@ -12,3 +12,4 @@ export * from './dm1-collection';
 export * from './ican-entry';
 export * from './view-profile-state.model';
 export * from './json-rules-engine';
+export * from './IUser';

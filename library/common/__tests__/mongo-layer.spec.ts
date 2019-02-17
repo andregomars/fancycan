@@ -1,8 +1,7 @@
 import { MongoLayer } from '../src/core';
-import { MongoClient } from 'mongodb';
 
 describe('When test MongoLayer', () => {
-    it('should able to insert one doc into mydb.mycoll', async () => {
+    it.skip('should able to insert one doc into mydb.mycoll', async () => {
         await MongoLayer.getInstance().connect();
         const conn = MongoLayer.getInstance().Client;
 

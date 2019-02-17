@@ -17,8 +17,7 @@ export class MongoLayer {
   }
 
   private constructor() {
-    const config = new ConfigUtility();
-    this.client = new MongoClient(config.getDbConnectionString(), { useNewUrlParser: true });
+    this.client = new MongoClient(ConfigUtility.getDbConnectionString(), { useNewUrlParser: true });
   }
 
   public async connect() {

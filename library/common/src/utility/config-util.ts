@@ -1,7 +1,15 @@
 import config from 'config';
 
 export class ConfigUtility {
-    public getDbConnectionString(): string {
+    public static getEmailApiKey(): string {
+        return config.get('email.apiKey');
+    }
+
+    public static getEmailFrom(): string {
+        return config.get('email.from');
+    }
+
+    public static getDbConnectionString(): string {
         const scheme = config.get('dbConfig.scheme');
         const host = encodeURIComponent(config.get('dbConfig.host'));
         const user = encodeURIComponent(config.get('dbConfig.user'));
@@ -15,11 +23,11 @@ export class ConfigUtility {
         return url;
     }
 
-    public getFbConnectionString(): string {
+    public static getFbConnectionString(): string {
         return config.get('fbConfig.url');
     }
 
-    public getMqConnectionString(): string {
+    public static getMqConnectionString(): string {
         const host = encodeURIComponent(config.get('mqConfig.host'));
         const scheme = encodeURIComponent(config.get('mqConfig.scheme'));
         const port = encodeURIComponent(config.get('mqConfig.port'));
@@ -30,11 +38,11 @@ export class ConfigUtility {
         return url;
     }
 
-    public getCommonConfig(key: string): string {
+    public static getCommonConfig(key: string): string {
         return config.get(`common.${key}`);
     }
 
-    public getTopicName(name: string = 'default'): string {
+    public static getTopicName(name: string = 'default'): string {
         const defaultTopic = 'tCan';
         return config.get(`mqConfig.topics.${name}`) || defaultTopic;
     }

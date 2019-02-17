@@ -1,6 +1,6 @@
 
 import { ICanState, IVehicleState, Geolocation,
-    IRuleEvent, IRuleEventParams, IVehicleMalfuction } from 'fancycan-model';
+    IRuleEvent, IVehicleMalfuction } from 'fancycan-model';
 import { ViewProfileCache } from '../cache';
 import { MongoClient } from 'mongodb';
 import { MongoLayer } from '../core';
@@ -39,6 +39,7 @@ export class VehicleRepository {
             malfuncID: ruleEvent.params.id,
             malfuncName: ruleEvent.params.name,
             malfuncLevel: ruleEvent.params.level,
+            malfuncNotification: ruleEvent.params.notification
         };
         const mState: IVehicleMalfuction = Object.assign({}, vState, malfuncInfo);
         return mState;
