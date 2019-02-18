@@ -4,8 +4,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "start": "node dist/app.js",
-    "serve": "rimraf dist && npx tsc && node dist/app.js",
+    "start": "npx ts-node app.ts",
     "prebuild": "rimraf dist",
     "build": "npx tsc ",
     "test": "npx jest",
@@ -21,8 +20,8 @@
     "config": "^3.0.0",
     "exit-hook": "^2.0.0",
     "fancycan-cache": "^1.0.0",
-    "fancycan-common": "^1.0.30",
-    "fancycan-model": "^1.0.18",
+    "fancycan-common": "^1.0.42",
+    "fancycan-model": "^1.0.26",
     "json-rules-engine": "^2.3.2",
     "lodash": "^4.17.11",
     "mongodb": "^3.1.10",
@@ -47,6 +46,7 @@
     "nodemon": "^1.18.6",
     "rimraf": "^2.6.3",
     "ts-jest": "^23.10.5",
+    "ts-node": "^8.0.2",
     "tslint": "^5.11.0",
     "typescript": "^3.1.6"
   }

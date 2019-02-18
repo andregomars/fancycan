@@ -5,7 +5,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "start": "npx tsc && node dist/app.js",
+    "start": "npx ts-node app.ts",
     "build": "npx tsc",
     "test": "rimraf dist && jest",
     "lint": "npx tslint -c tslint.json -p tsconfig.json",
@@ -13,7 +13,7 @@
     "serve-debug": "npx nodemon --inspect dist/app.js",
     "watch-debug": "npx concurrently -k -p \"[{name}]\" \"npm run watch-ts\" \"npm run serve-debug\"",
     "debug": "npm run build && npm run watch-debug",
-    "deploy": "npx tsc && pm2 delete fcrx && pm2 start --env production"
+    "deploy": "npx tsc && pm2 delete fcjb && pm2 start --env production"
   },
   "devDependencies": {
     "@types/bson": "^1.0.11",
@@ -24,13 +24,14 @@
     "jest": "^23.6.0",
     "rimraf": "^2.6.3",
     "ts-jest": "^23.10.5",
+    "ts-node": "^8.0.2",
     "tslint": "^5.12.1",
     "typescript": "^3.2.4"
   },
   "dependencies": {
     "axios": "^0.18.0",
     "config": "^3.0.1",
-    "fancycan-common": "^1.0.42",
+    "fancycan-common": "^1.0.47",
     "fancycan-model": "^1.0.26",
     "json-rules-engine": "^2.3.2",
     "mongodb": "^3.1.13",

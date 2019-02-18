@@ -1,8 +1,9 @@
-
+import { ViewProfileCache } from '../cache';
+import { ObjectID } from 'bson';
+import { MongoClient, InsertOneWriteOpResult  } from 'mongodb';
 import { ICanState, IVehicleState, Geolocation,
     IRuleEvent, IVehicleMalfuction } from 'fancycan-model';
-import { ViewProfileCache } from '../cache';
-import { MongoClient } from 'mongodb';
+
 import { MongoLayer } from '../core';
 
 export class VehicleRepository {
@@ -26,8 +27,8 @@ export class VehicleRepository {
         );
     }
 
-    public async insertVehicleMalfuncState(state: any) {
-        await this.conn.db('main').collection('vehicle_malfunc_state').insertOne(state);
+    public async insertVehicleMalfuncState(state: any): Promise<InsertOneWriteOpResult> {
+        return await this.conn.db('main').collection('vehicle_malfunc_state').insertOne(state);
     }
 
     public async getVehicleStates(): Promise<IVehicleState[]> {
@@ -41,6 +42,7 @@ export class VehicleRepository {
             malfuncLevel: ruleEvent.params.level,
             malfuncNotification: ruleEvent.params.notification
         };
+        vState._id = new ObjectID();
         const mState: IVehicleMalfuction = Object.assign({}, vState, malfuncInfo);
         return mState;
     }

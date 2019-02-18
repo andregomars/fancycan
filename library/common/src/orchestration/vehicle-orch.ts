@@ -1,4 +1,5 @@
-import { ICanState, IVehicleState, IRuleEvent, IVehicleMalfuction } from 'fancycan-model';
+import { ObjectID } from 'bson';
+import { ICanState, IVehicleState, IRuleEvent } from 'fancycan-model';
 import { VehicleRepository, UserRepository } from '../repository';
 
 export class VehicleOrch {
@@ -19,20 +20,23 @@ export class VehicleOrch {
         await this.vehicleRepo.upsertVehicleState(state);
     }
 
-    public async saveVehicleMalfuncStateDoc(vehicleState: IVehicleState, ruleEvent: IRuleEvent) {
+    public async saveVehicleMalfuncStateDoc(vehicleState: IVehicleState, ruleEvent: IRuleEvent): Promise<ObjectID> {
         const mState = this.vehicleRepo.buildVehicleMalfuncState(vehicleState, ruleEvent);
-        await this.vehicleRepo.insertVehicleMalfuncState(mState);
+        const result = await this.vehicleRepo.insertVehicleMalfuncState(mState);
+        return result.insertedId;
     }
 
-    public async notifyMalfunctionSubscribers(vehicleState: IVehicleState, ruleEvent: IRuleEvent) {
+    public async notifyMalfunctionSubscribers(vehicleState: IVehicleState, ruleEvent: IRuleEvent, malfuncDocID?: ObjectID) {
         const subject = 'fancycan.com - Malfunction Notification';
         const html = `
             <h1>Dear fleet ${ vehicleState.fname } users:</h1>
-            <p>&nbsp;&nbsp;Please pay attention there is malfunction record reported from vehicle code ${ vehicleState.vcode } with VIN ${ vehicleState.vin }.</p>
+            <p>&nbsp;&nbsp;Please pay attention there is a malfunction reported from vehicle code ${ vehicleState.vcode } with VIN ${ vehicleState.vin }.</p>
+            <p><b>Malfunction ID: </b>${ malfuncDocID ? malfuncDocID : 'N/A' }</p>
+            <p><b>Malfunction Setting: </b></p>
             <ul>
-                <li>Malfunction ID: ${ ruleEvent.params.id }</li>
-                <li>Malfunction Name: ${ ruleEvent.params.name }</li>
-                <li>Malfunction Level: ${ ruleEvent.params.level }</li>
+                <li>ID: ${ ruleEvent.params.id }</li>
+                <li>Name: ${ ruleEvent.params.name }</li>
+                <li>Level: ${ ruleEvent.params.level }</li>
             </ul>
             <p>Thanks!</p>
         `;

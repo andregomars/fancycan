@@ -13,9 +13,6 @@ export class MalfuncProceccor {
 
         const states = await vehicleRepo.getVehicleStates();
 
-        // console.log(new UserRepository().getUsers());
-        // console.log(settings);
-
         for (const state of states) {
             // clone state into fact in order to avoid object altering in engine.run()
             const fact = Object.assign({}, state);
@@ -26,8 +23,8 @@ export class MalfuncProceccor {
             state.editDate = null;
 
             for (const event of events) {
-                await vehicleOrch.saveVehicleMalfuncStateDoc(state, event);
-                await vehicleOrch.notifyMalfunctionSubscribers(state, event);
+                const malfuncID = await vehicleOrch.saveVehicleMalfuncStateDoc(state, event);
+                await vehicleOrch.notifyMalfunctionSubscribers(state, event, malfuncID);
             }
         }
 

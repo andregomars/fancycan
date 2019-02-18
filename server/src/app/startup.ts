@@ -20,7 +20,7 @@ export class Startup {
         await this.initDatabaseConnection();
     }
 
-    public async initCacheStorage() {
+    private async initCacheStorage() {
         const spns = await this.fire.getDefinitionWithSpecs().toPromise<IJ1939[]>();
         this.spnCache.storeSpnsIntoCacheGroupedByPgn(spns);
 
@@ -30,7 +30,7 @@ export class Startup {
         this.viewProfileCache.storeViewProfileIntoCacheGroupedByVehicleCode(flattedVehicles);
     }
 
-    public async initDatabaseConnection() {
+    private async initDatabaseConnection() {
         await MongoLayer.getInstance().connect();
     }
 }

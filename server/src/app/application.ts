@@ -15,7 +15,6 @@ export class Application {
         const startup = new Startup();
         await startup.init();
 
-        const config = new ConfigUtility();
         const canRepo = new CanRepository();
         const canOrch = new CanOrch();
 
@@ -23,10 +22,10 @@ export class Application {
         const tcpServer = net.createServer();
 
         // retrive configurations
-        const port = +config.getCommonConfig('listeningPort');
-        const portRemoteTest = +config.getCommonConfig('remotePortForTest');
-        const urlMqConn = config.getMqConnectionString();
-        const mqTopic = config.getTopicName();
+        const port = +ConfigUtility.getCommonConfig('listeningPort');
+        const portRemoteTest = +ConfigUtility.getCommonConfig('remotePortForTest');
+        const urlMqConn = ConfigUtility.getMqConnectionString();
+        const mqTopic = ConfigUtility.getTopicName();
 
         const mqo = new QueueLayer(urlMqConn);
 
