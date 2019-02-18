@@ -1,4 +1,5 @@
-import { MalfuncSettingCache, FireLayer, MongoLayer } from 'fancycan-common';
+import { MalfuncSettingCache, FireLayer, MongoLayer, GeneralCache } from 'fancycan-common';
+import { IUser } from 'fancycan-model';
 
 export class Startup {
     private fire: FireLayer;
@@ -18,6 +19,8 @@ export class Startup {
         const settings = await this.fire.getMalfunctionSetting().toPromise<any[]>();
         this.malfuncSettingCache.storeMalfuncSettingIntoCache(settings);
 
+        const users = await this.fire.getUsers().toPromise<IUser[]>();
+        GeneralCache.storeUsers(users);
     }
 
     public async initDatabaseConnection() {

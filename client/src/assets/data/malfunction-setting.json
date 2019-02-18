@@ -87,6 +87,9 @@
         "gpsvalue": "3",
         "id": 4,
         "name": "Motor Voltage Alert",
-        "level": "General"
+        "level": "General",
+        "notification": [
+            "email"
+        ]
     }
 ]

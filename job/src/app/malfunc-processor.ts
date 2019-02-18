@@ -1,4 +1,4 @@
-import { VehicleRepository, MalfuncSettingCache, VehicleOrch } from 'fancycan-common';
+import { VehicleRepository, MalfuncSettingCache, VehicleOrch, UserRepository } from 'fancycan-common';
 import { RuleEngine } from './rule-engine';
 
 export class MalfuncProceccor {
@@ -12,6 +12,10 @@ export class MalfuncProceccor {
         const engine = new RuleEngine().createEngineWithRules(rules);
 
         const states = await vehicleRepo.getVehicleStates();
+
+        // console.log(new UserRepository().getUsers());
+        // console.log(settings);
+
         for (const state of states) {
             // clone state into fact in order to avoid object altering in engine.run()
             const fact = Object.assign({}, state);
@@ -23,7 +27,7 @@ export class MalfuncProceccor {
 
             for (const event of events) {
                 await vehicleOrch.saveVehicleMalfuncStateDoc(state, event);
-                await vehicleOrch.notifyMalfunctionSubscribers(mal)
+                await vehicleOrch.notifyMalfunctionSubscribers(state, event);
             }
         }
 

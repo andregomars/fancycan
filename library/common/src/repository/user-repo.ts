@@ -11,6 +11,10 @@ export class UserRepository {
 
     public async notifyUsers(subject: string, html: string, notifyOptions: string[]) {
         const users = this.getUsers();
+        if (!users || users.length < 1) {
+            return;
+        }
+
         for (const user of users) {
             // user subscribes email and notify options contains email
             if (user.notification && user.notification.indexOf(this.NOTIFY_EMAIL) > -1 &&
