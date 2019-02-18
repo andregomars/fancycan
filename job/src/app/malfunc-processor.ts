@@ -23,6 +23,7 @@ export class MalfuncProceccor {
 
             for (const event of events) {
                 await vehicleOrch.saveVehicleMalfuncStateDoc(state, event);
+                await vehicleOrch.notifyMalfunctionSubscribers(mal)
             }
         }
 

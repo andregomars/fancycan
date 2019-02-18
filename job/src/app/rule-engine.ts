@@ -36,6 +36,7 @@ export class RuleEngine {
                     id: setting.id,
                     name: setting.name,
                     level: setting.level,
+                    notification: setting.notification
                 }
             }
 

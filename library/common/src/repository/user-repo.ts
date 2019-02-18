@@ -13,11 +13,12 @@ export class UserRepository {
         const users = this.getUsers();
         for (const user of users) {
             // user subscribes email and notify options contains email
-            if (user.notification.indexOf(this.NOTIFY_EMAIL) > -1 &&
-                notifyOptions.indexOf(this.NOTIFY_EMAIL) > -1) {
+            if (user.notification && user.notification.indexOf(this.NOTIFY_EMAIL) > -1 &&
+                notifyOptions && notifyOptions.indexOf(this.NOTIFY_EMAIL) > -1) {
                 await EmailLayer.send(user.email, subject, html);
             }
         }
+
     }
 
 }
