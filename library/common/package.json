@@ -1,6 +1,6 @@
 {
   "name": "fancycan-common",
-  "version": "1.0.40",
+  "version": "1.0.42",
   "main": "dist/lib/index.js",
   "license": "MIT",
   "types": "dist/types/index.d.ts",
