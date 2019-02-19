@@ -2,6 +2,7 @@ version: '3'
 services:
   nginx:
     image: nginx:1.15-alpine
+    container_name: app.fancycan
     ports:
       - "80:80"
       - "443:443"
