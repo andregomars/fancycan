@@ -1,9 +1,0 @@
-version: '3'
-services:
-  app.web:
-    image: nginx:alpine
-    container_name: app.web
-    ports:
-        - '80:80'
-    volumes:
-        - '$PWD/../www/:/usr/share/nginx/html:ro'
