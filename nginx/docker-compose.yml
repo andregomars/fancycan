@@ -10,8 +10,8 @@ services:
       - ./data/nginx:/etc/nginx/conf.d
       - ./data/certbot/conf:/etc/letsencrypt
       - ./data/certbot/www:/var/www/certbot
-      - ./www:/var/www
-      - ../app:/var/app
+      - ./www:/var/www/fancycan.com
+      - ../app:/var/app/fancycan.com
     command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
   certbot:
     image: certbot/certbot
