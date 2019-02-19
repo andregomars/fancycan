@@ -15,7 +15,7 @@ export const environment = {
     messagingSenderId: 'xxx'
   },
   mongodbAPI: {
-    url: 'http://app.fancycan.com:8080',
+    url: 'https://app.fancycan.com/rest',
     database: 'main',
     authToken: 'Basic YWRtaW46Y2hhbmdlaXQ='
   },
@@ -24,7 +24,7 @@ export const environment = {
     protocol: 'wss',
     hostname: 'app.fancycan.com',
     path: '/mqtt',
-    port: 9001
+    port: 443
   },
   rtmMessagesMaxCount: 15,
   dm1SingleCanIDs: ['18FECA00', '18FECA03'],
