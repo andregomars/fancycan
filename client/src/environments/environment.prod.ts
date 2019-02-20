@@ -15,14 +15,14 @@ export const environment = {
     messagingSenderId: 'xxx'
   },
   mongodbAPI: {
-    url: 'https://app.fancycan.com/rest',
+    url: 'https://api.fancycan.com/rest',
     database: 'main',
     authToken: 'Basic YWRtaW46Y2hhbmdlaXQ='
   },
   mqtt: {
     connectOnCreate: false,
     protocol: 'wss',
-    hostname: 'app.fancycan.com',
+    hostname: 'api.fancycan.com',
     path: '/mqtt',
     port: 443
   },

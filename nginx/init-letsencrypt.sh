@@ -1,6 +1,6 @@
 #!/bin/bash
 
-domains=(app.fancycan.com)
+domains=(app.fancycan.com, api.fancycan.com)
 rsa_key_size=4096
 data_path="./data/certbot"
 email="" # Adding a valid address is strongly recommended
