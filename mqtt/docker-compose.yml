@@ -9,8 +9,8 @@ services:
     volumes:
       - '$PWD/mosquitto.conf:/mosquitto/config/mosquitto.conf'
       - '$PWD/ssl/:/mosquitto/ssl/'
-    networks:
-      - database_backend
 
 networks:
-  database_backend:
+  default:
+    external:
+      name: database_backend
