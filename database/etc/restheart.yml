@@ -86,7 +86,7 @@ mongo-uri: mongodb://admin:fccdbo123!@mongodb
 # either all absolute paths or all path templates.
 mongo-mounts:
     - what: "*"
-      where: /
+      where: /rest
 
 #### Static Web Resources
 
