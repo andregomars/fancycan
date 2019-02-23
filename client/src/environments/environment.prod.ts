@@ -24,7 +24,7 @@ export const environment = {
     protocol: 'wss',
     hostname: 'api.fancycan.com',
     path: '/mqtt',
-    port: 443
+    port: 9001
   },
   rtmMessagesMaxCount: 15,
   dm1SingleCanIDs: ['18FECA00', '18FECA03'],
