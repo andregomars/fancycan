@@ -23,7 +23,7 @@ export const environment = {
     connectOnCreate: false,
     protocol: 'wss',
     hostname: 'api.fancycan.com',
-    path: '/mq',
+    path: '/mqtt',
     port: 443
   },
   rtmMessagesMaxCount: 15,
