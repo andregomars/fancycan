@@ -10,7 +10,7 @@ services:
       - '$PWD/mosquitto.conf:/mosquitto/config/mosquitto.conf'
       - '$PWD/ssl/:/mosquitto/ssl/'
 
-# networks:
-#   default:
-#     external:
-#       name: database_backend
+networks:
+  default:
+    external:
+      name: database_backend
