@@ -16,16 +16,16 @@ export const environment = {
   },
   mongodbAPI: {
     // url: 'http://localhost:8080',
-    url: 'http://52.32.76.180:8080',
+    url: 'https://api.fancycan.com/rest',
     database: 'main',
     authToken: 'Basic YWRtaW46Y2hhbmdlaXQ='
   },
   mqtt: {
     connectOnCreate: false,
-    protocol: 'ws',
-    hostname: '52.32.76.180',
+    protocol: 'wss',
     // hostname: 'localhost',
-    port: 9001
+    hostname: 'api.fancycan.com',
+    port: 443
   },
   rtmMessagesMaxCount: 15,
   dm1SingleCanIDs: ['18FECA00', '18FECA03'],

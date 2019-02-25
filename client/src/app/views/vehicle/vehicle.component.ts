@@ -132,7 +132,7 @@ export class VehicleComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.loadVehicleState();
     this.loadVehicleStatePeriodically();
-    this.loadPlayChartData();
+    // this.loadPlayChartData();
   }
 
   ngOnDestroy() {
