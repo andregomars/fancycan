@@ -1,5 +1,5 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
-import { DataService, StorageService, PromptUpdateService, TransformService } from './index';
+import { DataService, PromptUpdateService, TransformService } from './index';
 
 @NgModule({
   imports: [
@@ -10,7 +10,7 @@ import { DataService, StorageService, PromptUpdateService, TransformService } fr
   ],
   providers: [
     DataService,
-    StorageService,
+    // StorageService,
     PromptUpdateService,
     TransformService
   ]
@@ -21,7 +21,7 @@ export class ServicesModule {
       ngModule: ServicesModule,
       providers: [
         DataService,
-        StorageService,
+        // StorageService,
         PromptUpdateService,
         TransformService
       ]

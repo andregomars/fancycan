@@ -1,7 +1,7 @@
 import { State, Selector, Action, StateContext } from '@ngxs/store';
-import { ViewProfileStateModel } from '../models/view-profile.model';
+import { ViewProfileStateModel } from '../models';
 import { SetProfile, ClearProfile } from '../actions';
-import { DataService, UtilityService, TransformService } from '../services';
+import { DataService, TransformService } from '../services';
 import { tap } from 'rxjs/operators';
 
 const defaults: ViewProfileStateModel = {
@@ -28,7 +28,6 @@ export class ViewProfileState {
 
     constructor(
         private dataService: DataService,
-        // private utilityService: UtilityService
         private transformService: TransformService
     ) { }
 

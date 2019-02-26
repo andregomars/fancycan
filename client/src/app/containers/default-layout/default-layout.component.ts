@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 import { navItems } from './../../_nav';
 import { AppRouterStateSerializer } from '../../models';
 import { ViewProfileState } from '../../states';
-import { ClearProfile, SetProfile } from '../../actions';
+import { ClearProfile, SetProfile, ClearSpnProfiles } from '../../actions';
 import { map, tap } from 'rxjs/operators';
 
 @Component({
@@ -41,6 +41,7 @@ export class DefaultLayoutComponent implements OnInit {
 
   resetViewProfile() {
     this.store.dispatch(new ClearProfile());
+    this.store.dispatch(new ClearSpnProfiles());
   }
 
   private setViewPofileByUrl() {

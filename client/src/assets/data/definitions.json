@@ -1,13 +1,13 @@
 [
   {
-    "fleet_code": "BYD",
+    "fleet_code": "OMNIT",
     "name": "Wheel-Based Vehicle Speed",
     "pgn": "65265",
     "spn": "84",
     "type": "J1939"
   },
   {
-    "fleet_code": "BYD",
+    "fleet_code": "OMNIT",
     "name": "Engine Speed",
     "pgn": "61444",
     "spn": "190",

@@ -42,7 +42,7 @@ import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 
 // ngxs states
-import { ViewProfileState } from './states';
+import { ViewProfileState, SpnProfileState } from './states';
 
 // Import 3rd party components
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
@@ -65,11 +65,11 @@ import { LoginComponent } from './views/common/login.component';
     BrowserAnimationsModule,
     HttpClientModule,
     NgxsModule.forRoot([
-      ViewProfileState
+      ViewProfileState, SpnProfileState
     ]),
     NgxsRouterPluginModule.forRoot(),
     NgxsStoragePluginModule.forRoot({
-      key: ['viewprofile.fcode', 'viewprofile.vcode']
+      key: ['viewprofile.fcode', 'viewprofile.vcode', 'spnprofiles']
     }),
     NgxsReduxDevtoolsPluginModule.forRoot(),
     // NgxsLoggerPluginModule.forRoot(),
