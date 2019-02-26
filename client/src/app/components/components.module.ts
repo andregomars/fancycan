@@ -15,6 +15,7 @@ import { TransmissionSwitchComponent } from './transmission-switch/transmission-
 import { ProgressBarComponent } from './progress-bar/progress-bar.component';
 import { PlayChartComponent } from './play-chart/play-chart.component';
 import { ChartGaugeComponent } from './chart-gauge/chart-gauge.component';
+import { SpnDefListComponent } from './spn-def-list/spn-def-list.component';
 
 @NgModule({
   imports: [
@@ -35,6 +36,7 @@ import { ChartGaugeComponent } from './chart-gauge/chart-gauge.component';
       ProgressBarComponent,
       PlayChartComponent,
       ChartGaugeComponent,
+      SpnDefListComponent,
   ],
   exports: [
       TooltipLabelComponent,
@@ -45,6 +47,7 @@ import { ChartGaugeComponent } from './chart-gauge/chart-gauge.component';
       ProgressBarComponent,
       PlayChartComponent,
       ChartGaugeComponent,
+      SpnDefListComponent,
   ]
 })
 export class ComponentsModule { }

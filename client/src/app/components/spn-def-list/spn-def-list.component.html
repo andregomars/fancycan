@@ -1,0 +1,22 @@
+<table class="table table-striped table-hover table-outline table-sm mt-1">
+  <thead class="text-white thead-light bg-primary">
+    <tr>
+      <th><small>SPN</small></th>
+      <th><small>Name</small></th>
+      <th><small>PGN</small></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of spns$ | async">
+      <td>
+        <div class="small">{{ item.spn }}</div>
+      </td>
+      <td>
+        <div class="small">{{ item.name }}</div>
+      </td>
+      <td>
+        <div class="small">{{ item.pgn }}</div>
+      </td>
+    </tr>
+  </tbody>
+</table>

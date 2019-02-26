@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { DataService, UtilityService, TransformService } from '../../services';
+import { DataService, TransformService } from '../../services';
 import { share, map, switchMap, tap } from 'rxjs/operators';
 import { Select } from '@ngxs/store';
 import { IOption } from 'ng-select';
@@ -9,7 +9,7 @@ import { addDays, format, isSameDay } from 'date-fns';
 import { getStyle, hexToRgba } from '@coreui/coreui-pro/dist/js/coreui-utilities';
 import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
 
-import { ViewProfileState } from '../../states';
+import { ViewProfileState, SpnProfileState } from '../../states';
 
 @Component({
   selector: 'app-compare-statistic',
@@ -18,7 +18,8 @@ import { ViewProfileState } from '../../states';
 })
 export class CompareStatisticComponent implements OnInit {
   @Select(ViewProfileState.fcode) fcode$: Observable<string>;
-  definitions$: Observable<any[]>;
+  @Select(SpnProfileState.spns) spns$: Observable<any[]>;
+  // definitions$: Observable<any[]>;
   spnList$: Observable<any[]>;
   vehicleList$: Observable<any[]>;
   vehicleOptions$: Observable<any[]>;
@@ -112,11 +113,11 @@ export class CompareStatisticComponent implements OnInit {
   }
 
   private loadDefault() {
-    this.definitions$ = this.dataService.getDefinitions().pipe(
-      share()
-    );
+    // this.definitions$ = this.dataService.getDefinitions().pipe(
+    //   share()
+    // );
 
-    this.spnList$ = this.definitions$.pipe(
+    this.spnList$ = this.spns$.pipe(
       map(defs => defs.map(def => {
         return {
           label: def.spn,

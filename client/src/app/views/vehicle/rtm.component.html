@@ -319,28 +319,7 @@
         </div>
       </div>
       <div class="row mt-2 table-responsive-lg m-0">
-        <table class="table table-striped table-hover table-outline table-sm mt-1">
-          <thead class="text-white thead-light bg-primary">
-            <tr>
-              <th><small>SPN</small></th>
-              <th><small>Name</small></th>
-              <th><small>PGN</small></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let definition of definitions$ | async">
-              <td>
-                <div class="small">{{ definition.spn }}</div>
-              </td>
-              <td>
-                <div class="small">{{ definition.name }}</div>
-              </td>
-              <td>
-                <div class="small">{{ definition.updated }}</div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <app-spn-def-list class="w-100"></app-spn-def-list>
       </div>
     </div>
   </div>

@@ -4,7 +4,7 @@ import { Select } from '@ngxs/store';
 import { map, switchMap, share, tap } from 'rxjs/operators';
 
 import { DataService, UtilityService } from '../../services';
-import { ViewProfileState } from '../../states';
+import { ViewProfileState, SpnProfileState } from '../../states';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 
 @Component({
@@ -14,7 +14,8 @@ import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 })
 export class SpnDefinitionComponent implements OnInit {
   @Select(ViewProfileState.fcode) fcode$: Observable<string>;
-  spnList$: Observable<any[]>;
+  @Select(SpnProfileState.spns) spnList$: Observable<any[]>;
+  // spnList$: Observable<any[]>;
   spnForm: FormGroup;
 
   get statusList(): FormArray {
@@ -29,7 +30,7 @@ export class SpnDefinitionComponent implements OnInit {
 
   ngOnInit() {
     this.initForms(0);
-    this.loadSpnList();
+    // this.loadSpnList();
   }
 
   selectSpn(selectedSpn: any) {
@@ -74,16 +75,16 @@ export class SpnDefinitionComponent implements OnInit {
 
   }
 
-  private loadSpnList() {
-    this.spnList$ = this.dataService.getDefinitions().pipe(
-      switchMap(spns =>
-          this.fcode$.pipe(
-            map(fcode => spns.filter(spn => spn.fleet_code === fcode)),
-            share()
-        )
-      )
-    );
-  }
+  // private loadSpnList() {
+  //   this.spnList$ = this.dataService.getDefinitions().pipe(
+  //     switchMap(spns =>
+  //         this.fcode$.pipe(
+  //           map(fcode => spns.filter(spn => spn.fleet_code === fcode)),
+  //           share()
+  //       )
+  //     )
+  //   );
+  // }
 
   private getSpn(spnNo: string, sourceType: string): Observable<any> {
     if (sourceType === 'J1939') {

@@ -22,7 +22,7 @@ export class PlaybackComponent implements OnInit {
   rawDataList: any[];
   vehicle$: Observable<any>;
   vehicles$: Observable<any>;
-  definitions$: Observable<any>;
+  // definitions$: Observable<any>;
   cans$: Observable<any>;
   checklist$: Observable<any>;
 
@@ -94,9 +94,9 @@ export class PlaybackComponent implements OnInit {
       share()
     );
 
-    this.definitions$ = this.dataService.getDefinitions().pipe(
-      share()
-    );
+    // this.definitions$ = this.dataService.getDefinitions().pipe(
+    //   share()
+    // );
 
     this.cans$ = this.dataService.getCANs().pipe(
       map((cans: any[]) =>

@@ -20,7 +20,7 @@ export class RtmComponent implements OnInit {
   bsValue = new Date();
   bsRangeValue: Date[];
   maxDate = new Date();
-  definitions$: Observable<any>;
+  // definitions$: Observable<any>;
   cans$: Observable<any>;
   isFiltering = false;
   filterCanID: string;
@@ -115,9 +115,9 @@ export class RtmComponent implements OnInit {
   // }
 
   private loadData() {
-    this.definitions$ = this.dataService.getDefinitions().pipe(
-      share()
-    );
+    // this.definitions$ = this.dataService.getDefinitions().pipe(
+    //   share()
+    // );
 
     // this.cans$ = this.dataService.getCANs().pipe(
     //   map((cans: any[]) =>

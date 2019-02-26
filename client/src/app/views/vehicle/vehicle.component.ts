@@ -4,11 +4,11 @@ import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
 
 import { Observable } from 'rxjs';
 import { DataService, UtilityService } from '../../services';
-import { share, map, tap, switchMap } from 'rxjs/operators';
+import { share, map, tap, switchMap, concatMap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { MapStyle } from './../shared/map-style';
 import { Select } from '@ngxs/store';
-import { ViewProfileState } from '../../states';
+import { ViewProfileState, SpnProfileState } from '../../states';
 // import { trigger, state, transition, style, animate } from '@angular/animations';
 
 @Component({
@@ -36,6 +36,7 @@ import { ViewProfileState } from '../../states';
 })
 export class VehicleComponent implements OnInit, OnDestroy {
   @Select(ViewProfileState.vcode) vcode$: Observable<string>;
+  @Select(SpnProfileState.spns) spns$: Observable<any[]>;
 
   isAutoSync = true;
   intSecState = 15;
@@ -46,8 +47,8 @@ export class VehicleComponent implements OnInit, OnDestroy {
   temperatureMin = -300;
   queue: any[];
   alerts$: Observable<any>;
-  definitions$: Observable<any>;
-  decodes$: Observable<any>;
+  // decodes$: Observable<any>;
+  vehicleStateSpnList$: Observable<any>;
   vehicles$: Observable<any>;
   vehicle$: Observable<any>;
   playChartData$: Observable<any>;
@@ -173,18 +174,20 @@ export class VehicleComponent implements OnInit, OnDestroy {
       share()
     );
 
+    this.vehicleStateSpnList$ = this.vehicle$.pipe(
+      switchMap(state => this.spns$.pipe(
+        map(spns => this.utilityService.buildVehicleStateSpnList(state, spns))
+      ))
+    );
+
     this.alerts$ = this.dataService.getAlertStats().pipe(
       map((alerts: any[]) => alerts.slice(0, 5)),
       share()
     );
 
-    this.definitions$ = this.dataService.getDefinitions().pipe(
-      share()
-    );
-
-    this.decodes$ = this.dataService.getDecodes().pipe(
-      share()
-    );
+    // this.decodes$ = this.dataService.getDecodes().pipe(
+    //   share()
+    // );
   }
 
   private loadPlayChartData() {

@@ -199,6 +199,26 @@ export class UtilityService {
         });
     }
 
+    buildVehicleStateSpnList(vehicleState: any, spnProfileList: any[]): any[] {
+        const spns = [];
+        for (const key in vehicleState) {
+            if (key.startsWith('spn')) {
+                const spn = key.substring(3).trimRight();
+                const spnProfile = spnProfileList.find(profile => profile.spn === spn);
+                if (spnProfile) {
+                    spns.push({
+                        spn: spn,
+                        name: spnProfile.name,
+                        value: vehicleState[key],
+                        unit: spnProfile.unit
+                    });
+                }
+            }
+        }
+
+        return spns;
+    }
+
     private randomObject(): any {
         const time = new Date();
         const num = this.randomNumberRange(20, 80);

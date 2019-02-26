@@ -13,7 +13,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class VehicleTemplateComponent implements OnInit {
   @Select(ViewProfileState.fcode) fcode$: Observable<string>;
-  definitions$: Observable<any[]>;
+  // definitions$: Observable<any[]>;
   templates$: Observable<any[]>;
   rootForm: FormGroup;
   colorOptions = ['red', 'blue', 'yellow', 'black', 'white', 'green'];
@@ -30,9 +30,9 @@ export class VehicleTemplateComponent implements OnInit {
   }
 
   private loadData() {
-    this.definitions$ = this.dataService.getDefinitions().pipe(
-      share()
-    );
+    // this.definitions$ = this.dataService.getDefinitions().pipe(
+    //   share()
+    // );
 
     this.templates$ = this.fcode$.pipe(
       switchMap(fcode =>

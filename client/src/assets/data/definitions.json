@@ -1,16 +1,18 @@
 [
   {
-    "fleet_code": "OMNIT",
+    "fleet_code": "BYD",
     "name": "Wheel-Based Vehicle Speed",
     "pgn": "65265",
     "spn": "84",
+    "unit": "mph",
     "type": "J1939"
   },
   {
-    "fleet_code": "OMNIT",
+    "fleet_code": "BYD",
     "name": "Engine Speed",
     "pgn": "61444",
     "spn": "190",
+    "unit": "rpm",
     "type": "J1939"
   },
   {
@@ -18,6 +20,7 @@
     "name": "Latitude position of the vehicle",
     "pgn": "65267",
     "spn": "584",
+    "unit": "deg",
     "type": "J1939"
   },
   {
@@ -25,6 +28,7 @@
     "name": "Longitude position of the vehicle",
     "pgn": "65267",
     "spn": "585",
+    "unit": "deg",
     "type": "J1939"
   },
   {
@@ -32,6 +36,7 @@
     "name": "High Resolution Vehicle Distance",
     "pgn": "65217",
     "spn": "917",
+    "unit": "m",
     "type": "J1939"
   },
   {
@@ -39,6 +44,7 @@
     "name": "State Of Charge",
     "pgn": "64519",
     "spn": "9000",
+    "unit": "%",
     "type": "Proprietary"
   },
   {
@@ -46,6 +52,7 @@
     "name": "Battery Energy",
     "pgn": "64527",
     "spn": "9001",
+    "unit": "kWh",
     "type": "Proprietary"
   },
   {
@@ -53,6 +60,7 @@
     "name": "Battery Voltage",
     "pgn": "64520",
     "spn": "9002",
+    "unit": "V",
     "type": "Proprietary"
   },
   {
@@ -60,6 +68,7 @@
     "name": "Battery Current",
     "pgn": "64520",
     "spn": "9003",
+    "unit": "A",
     "type": "Proprietary"
   },
   {
@@ -67,6 +76,7 @@
     "name": "Motor Voltage",
     "pgn": "64534",
     "spn": "9004",
+    "unit": "V",
     "type": "Proprietary"
   },
   {
@@ -74,6 +84,7 @@
     "name": "L-C Battery Temp",
     "pgn": "64523",
     "spn": "9005",
+    "unit": "F",
     "type": "Proprietary"
   },
   {
@@ -81,6 +92,7 @@
     "name": "H-C Battery Temp",
     "pgn": "64523",
     "spn": "9006",
+    "unit": "F",
     "type": "Proprietary"
   },
   {
@@ -88,6 +100,7 @@
     "name": "High Voltage Status",
     "pgn": "94516",
     "spn": "9007",
+    "unit": "bit",
     "type": "Proprietary"
   },
   {
@@ -95,6 +108,7 @@
     "name": "Left Charge Status",
     "pgn": "64538",
     "spn": "9008",
+    "unit": "bit",
     "type": "Proprietary"
   },
   {
@@ -102,6 +116,7 @@
     "name": "Right Charge Status",
     "pgn": "64537",
     "spn": "9009",
+    "unit": "bit",
     "type": "Proprietary"
   },
   {
@@ -109,6 +124,7 @@
     "name": "Front Door Status",
     "pgn": "64230",
     "spn": "9010",
+    "unit": "bit",
     "type": "Proprietary"
   },
   {
@@ -116,6 +132,7 @@
     "name": "Rear Door Status",
     "pgn": "64230",
     "spn": "9011",
+    "unit": "bit",
     "type": "Proprietary"
   }
 ]

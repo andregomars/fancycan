@@ -52,6 +52,68 @@ describe('UtilityService', () => {
     expect(output).toEqual(expected);
   }));
 
+  it('should return vechicle srtate spn list', inject([UtilityService], (utility: UtilityService) => {
+    const input = 'A1';
+    const spnProfileList = [
+      {fleet_code: 'BYD', name: 'Wheel-Based Vehicle Speed', pgn: '65265', spn: '84', unit: 'mph', type: 'J1939'}
+      , {fleet_code: 'BYD', name: 'Engine Speed', pgn: '61444', spn: '190', unit: 'rpm', type: 'J1939'}
+      , {fleet_code: 'BYD', name: 'State Of Charge', pgn: '64519', spn: '9000', unit: '%', type: 'Proprietary'}
+    ];
+
+    const vehicleState = {
+        '_id': {
+          '$oid': '5c6a569b9cbc5c64ce9db11b'
+        },
+        'vcode': '6005',
+        'createDate': {
+          '$date': 1550472859453
+        },
+        'editDate': {
+          '$date': 1551074480736
+        },
+        'fcode': 'BYD',
+        'fname': 'BYD',
+        'geolocations': [
+          {
+            'latitude': 34.057539,
+            'longitude': -118.237494
+          },
+          {
+            'latitude': 34.056544,
+            'longitude': -118.238082
+          },
+          {
+            'latitude': 34.055955,
+            'longitude': -118.238996
+          },
+          {
+            'latitude': 34.056325,
+            'longitude': -118.239507
+          }
+        ],
+        'spn9004': 608,
+        'vin': 'XZW21312316005',
+        'spn9001': 218.3,
+        'spn9000': 58.3,
+        'spn190': 0,
+        'spn917': 31928085,
+        'spn84': 19.281,
+        'spn9002': 617,
+        'spn9003': 25.1,
+        'spn9010': 0,
+        'spn9011': 0,
+        'spn9005': 84.2,
+        'spn9006': 105.8
+      };
+    const output = utility.buildVehicleStateSpnList(vehicleState, spnProfileList);
+
+    expect(output).toBeDefined();
+    expect(output.length).toEqual(3);
+    expect(output[0].spn).toEqual('9000');
+    expect(output[1].spn).toEqual('190');
+    expect(output[2].spn).toEqual('84');
+  }));
+
   // it('should get value from CAN data', inject([UtilityService], (utility: UtilityService) => {
   //   const buffer = Buffer.from('BAQAAFQCACA=', 'base64');
   //   const startBit = 33;
