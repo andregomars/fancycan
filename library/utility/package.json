@@ -1,0 +1,36 @@
+{
+  "name": "fancycan-utility",
+  "version": "1.0.1",
+  "main": "dist/lib/index.js",
+  "license": "MIT",
+  "types": "dist/types/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "lint": "npx tslint -c tslint.json -p tsconfig.json",
+    "prebuild": "rimraf dist",
+    "build": "npx tsc",
+    "test": "rimraf dist && jest",
+    "prepublishOnly": "npx tsc"
+  },
+  "devDependencies": {
+    "@types/bson": "^4.0.0",
+    "@types/config": "^0.0.34",
+    "@types/jest": "^24.0.9",
+    "@types/lodash": "^4.14.121",
+    "@types/node": "^11.9.5",
+    "jest": "^24.1.0",
+    "rimraf": "^2.6.3",
+    "ts-jest": "^24.0.0",
+    "tslint": "^5.13.0",
+    "typescript": "^3.3.3333"
+  },
+  "dependencies": {
+    "bson": "^4.0.1",
+    "buffer": "^5.2.1",
+    "config": "^3.0.1",
+    "fancycan-model": "^1.0.26",
+    "lodash": "^4.17.11"
+  }
+}
