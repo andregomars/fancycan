@@ -3,7 +3,7 @@ import { Buffer } from 'buffer/';
 
 import { ICan, IJ1939, Dm1Collection, Dm1EntryType, ViewProfileStateModel } from 'fancycan-model';
 import { SpnCache, ViewProfileCache } from '../src/cache';
-import { TransformUtility } from '../src/utility';
+import { TransformUtility } from 'fancycan-utility';
 // const chunker = require('stream-chunker');
 
 // jest.mock('mongodb');

@@ -25,6 +25,7 @@ export const environment = {
     protocol: 'wss',
     // hostname: 'localhost',
     hostname: 'api.fancycan.com',
+    path: '/mqtt',
     port: 443
   },
   rtmMessagesMaxCount: 15,

@@ -16,7 +16,7 @@
       "dom"
     ]
   },
-  "references": [
-    { "path": "../library/model"}
-  ]
+  // "references": [
+  //   { "path": "../library/model"}
+  // ]
 }

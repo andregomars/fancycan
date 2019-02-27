@@ -128,8 +128,14 @@ export class CompareStatisticComponent implements OnInit {
 
     const fleets$ = this.dataService.getFleets();
     this.vehicleList$ = this.fcode$.pipe(
+      // switchMap(fcode =>
+      //   this.transformService.getViewProfileByFleetCode(fcode, fleets$)),
       switchMap(fcode =>
-        this.transformService.getViewProfileByFleetCode(fcode, fleets$)),
+        this.dataService.getFleets().pipe(
+          map((fleets: any[]) =>
+            this.transformService.getViewProfileByFleetCode(fcode, fleets))
+          )
+        ),
       share()
     );
 

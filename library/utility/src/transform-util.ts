@@ -1,7 +1,5 @@
 import _ from 'lodash';
 import { Buffer } from 'buffer/';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { IJ1939, Dm1EntryType, Dm1Collection, Dm1Data, ViewProfileStateModel } from 'fancycan-model';
 
 export class TransformUtility {
@@ -71,30 +69,62 @@ export class TransformUtility {
         }
     }
 
-    public getViewProfileByVehicleCode(vcode: string, fleets$: Observable<any>): Observable<ViewProfileStateModel> {
-        return this.getFlattedVehicles(fleets$).pipe(
-            map((vehicles: any[]) => vehicles.find((vehicle: any) => vehicle.vcode === vcode)),
-            map((vehicle: any) => {
-                return {
-                    fcode: vehicle.fcode,
-                    fname: vehicle.fname,
-                    vcode: vehicle.vcode,
-                    vin: vehicle.vin
-                };
-            })
-        );
+    // public getViewProfileByVehicleCode(vcode: string, fleets$: Observable<any>): Observable<ViewProfileStateModel> {
+    //     return this.getFlattedVehicles(fleets$).pipe(
+    //         map((vehicles: any[]) => vehicles.find((vehicle: any) => vehicle.vcode === vcode)),
+    //         map((vehicle: any) => {
+    //             return {
+    //                 fcode: vehicle.fcode,
+    //                 fname: vehicle.fname,
+    //                 vcode: vehicle.vcode,
+    //                 vin: vehicle.vin
+    //             };
+    //         })
+    //     );
+    // }
+
+    // public getViewProfileByFleetCode(fcode: string, fleets$: Observable<any>): Observable<any[]> {
+    //     return this.getFlattedVehicles(fleets$).pipe(
+    //         map((vehicles: any[]) =>
+    //             vehicles.filter((vehicle: any) => vehicle.fcode.toUpperCase() === fcode.toUpperCase()))
+    //     );
+    // }
+
+    // public getFlattedVehicles(fleets$: Observable<any>): Observable<any> {
+    //     return fleets$.pipe(
+    //         map((fleets: any[]) => fleets.reduce((all, fleet) => {
+    //             const vlist = fleet.vehicles.map((v: any) => {
+    //                 return {
+    //                     vcode: v.code,
+    //                     vin: v.vin,
+    //                     fcode: fleet.code,
+    //                     fname: fleet.name
+    //                 };
+    //             });
+    //             return [...all, ...vlist];
+    //         }, []))
+    //     );
+    // }
+
+    public getViewProfileByVehicleCode(vcode: string, fleets: any[]): ViewProfileStateModel {
+         const vehicle = this.getFlattedVehicles(fleets).find((v: any) => v.vcode === vcode);
+         return {
+            fcode: vehicle.fcode,
+            fname: vehicle.fname,
+            vcode: vehicle.vcode,
+            vin: vehicle.vin
+         };
     }
 
-    public getViewProfileByFleetCode(fcode: string, fleets$: Observable<any>): Observable<any[]> {
-        return this.getFlattedVehicles(fleets$).pipe(
+    public getViewProfileByFleetCode(fcode: string, fleets: any[]): any[] {
+        return this.getFlattedVehicles(fleets).
             map((vehicles: any[]) =>
-                vehicles.filter((vehicle: any) => vehicle.fcode.toUpperCase() === fcode.toUpperCase()))
-        );
+                vehicles.filter((vehicle: any) =>
+                    vehicle.fcode.toUpperCase() === fcode.toUpperCase()));
     }
 
-    public getFlattedVehicles(fleets$: Observable<any>): Observable<any> {
-        return fleets$.pipe(
-            map((fleets: any[]) => fleets.reduce((all, fleet) => {
+    public getFlattedVehicles(fleets: any[]): any[] {
+        return fleets.reduce((all, fleet) => {
                 const vlist = fleet.vehicles.map((v: any) => {
                     return {
                         vcode: v.code,
@@ -104,8 +134,7 @@ export class TransformUtility {
                     };
                 });
                 return [...all, ...vlist];
-            }, []))
-        );
+            }, []);
     }
 
     /// private helpers section

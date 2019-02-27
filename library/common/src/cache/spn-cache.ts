@@ -1,6 +1,6 @@
 import { IJ1939, ICan } from 'fancycan-model';
 import CacheLayer from 'fancycan-cache';
-import { TransformUtility } from '../utility';
+import { TransformUtility } from 'fancycan-utility';
 
 export class SpnCache {
     private transform: TransformUtility;

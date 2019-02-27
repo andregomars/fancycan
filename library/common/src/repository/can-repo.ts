@@ -3,7 +3,7 @@ import { Buffer } from 'buffer/';
 import { MongoClient } from 'mongodb';
 import { ICan, ICanState, ICanRaw } from 'fancycan-model';
 import { MongoLayer } from '../core';
-import { TransformUtility } from '../utility';
+import { TransformUtility } from 'fancycan-utility';
 import { SpnCache } from '../cache';
 
 export class CanRepository {

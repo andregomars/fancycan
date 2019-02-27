@@ -1,25 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Buffer } from 'buffer/';
-import { Transform } from 'fancycan-common';
-import { ICan, ICanState, IJ1939, Dm1EntryType, Dm1Collection, ViewProfileStateModel } from 'fancycan-model';
-import { Observable } from 'rxjs';
+import { TransformUtility } from 'fancycan-utility';
+import { IJ1939, Dm1EntryType, Dm1Collection, ViewProfileStateModel } from 'fancycan-model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TransformService {
-  private transform: Transform;
+  private transform: TransformUtility;
 
   constructor() {
-    this.transform = new Transform();
-  }
-
-  buildCanStates(cans: ICan[]): ICanState[] {
-    return this.transform.buildCanStates(cans);
-  }
-
-  buildCanState(can: ICan): ICanState[] {
-    return this.transform.buildCanState(can);
+    this.transform = new TransformUtility();
   }
 
   decodePGN(canID: Buffer): number {
@@ -34,24 +25,16 @@ export class TransformService {
     return this.transform.decodeData(raw, definition);
   }
 
-  buildVehicleState(canState: ICanState): any {
-    return this.transform.buildVehicleState(canState);
-  }
-
-  buildVehicleMalfuncState(canState: ICanState): any {
-    return this.transform.buildVehicleMalfuncState(canState);
-  }
-
   decodeDm1(canData: string, entryType: Dm1EntryType, dm1Collection: Dm1Collection): Dm1Collection {
     return this.transform.decodeDm1(canData, entryType, dm1Collection);
   }
 
-  getViewProfileByVehicleCode(vcode: string, fleets$: Observable<any>): Observable<ViewProfileStateModel> {
-    return this.transform.getViewProfileByVehicleCode(vcode, fleets$);
+  getViewProfileByVehicleCode(vcode: string, fleets: any[]): ViewProfileStateModel {
+    return this.transform.getViewProfileByVehicleCode(vcode, fleets);
   }
 
-  getViewProfileByFleetCode(fcode: string, fleets$: Observable<any>): Observable<any[]> {
-    return this.transform.getViewProfileByFleetCode(fcode, fleets$);
+  getViewProfileByFleetCode(fcode: string, fleets: any[]): any[] {
+    return this.transform.getViewProfileByFleetCode(fcode, fleets);
   }
 
 }

@@ -1,7 +1,7 @@
 {
     "dbConfig": {
-        "scheme": "mongodb",
-        "host": "127.0.0.1",
+        "scheme": "mongodb+srv",
+        "host": "cluster0-pwbs7.mongodb.net",
         "port": 27017,
         "user": "admin",
         "password": "fccdbo123!",
@@ -17,6 +17,10 @@
     },
     "fbConfig": {
         "url": "https://fancycandemo.firebaseio.com"
+    },
+    "email": {
+        "apiKey": "xxx",
+        "from": "NoReply@fancycan.com"
     },
     "common": {
         "rawParsingBuffer": 100,
