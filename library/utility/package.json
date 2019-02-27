@@ -1,6 +1,6 @@
 {
   "name": "fancycan-utility",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "main": "dist/lib/index.js",
   "license": "MIT",
   "types": "dist/types/index.d.ts",
@@ -16,7 +16,6 @@
   },
   "devDependencies": {
     "@types/bson": "^4.0.0",
-    "@types/config": "^0.0.34",
     "@types/jest": "^24.0.9",
     "@types/lodash": "^4.14.121",
     "@types/node": "^11.9.5",
@@ -29,7 +28,6 @@
   "dependencies": {
     "bson": "^4.0.1",
     "buffer": "^5.2.1",
-    "config": "^3.0.1",
     "fancycan-model": "^1.0.26",
     "lodash": "^4.17.11"
   }
