@@ -8,6 +8,7 @@ import { AppRouterStateSerializer } from '../../models';
 import { ViewProfileState } from '../../states';
 import { ClearProfile, SetProfile, ClearSpnProfiles } from '../../actions';
 import { map, tap } from 'rxjs/operators';
+import { AuthService } from '../../services';
 
 @Component({
   selector: 'app-dashboard',
@@ -23,7 +24,8 @@ export class DefaultLayoutComponent implements OnInit {
   private changes: MutationObserver;
 
   constructor(
-    private store: Store
+    private store: Store,
+    private authService: AuthService
   ) {
 
     this.changes = new MutationObserver((mutations) => {
@@ -42,6 +44,10 @@ export class DefaultLayoutComponent implements OnInit {
   resetViewProfile() {
     this.store.dispatch(new ClearProfile());
     this.store.dispatch(new ClearSpnProfiles());
+  }
+
+  logout() {
+    this.authService.signOut();
   }
 
   private setViewPofileByUrl() {
