@@ -7,12 +7,12 @@ export const environment = {
   production: false,
   agm: { apiKey: 'AIzaSyCjplxp6Vku_R6LtWskqd0K7tSb0wLISPY' },
   firebase: {
-    apiKey: 'xxx',
-    authDomain: 'xxx',
+    apiKey: 'AIzaSyCjplxp6Vku_R6LtWskqd0K7tSb0wLISPY',
+    authDomain: 'fancycandemo.firebaseapp.com',
     databaseURL: 'https://fancycandemo.firebaseio.com',
-    projectId: 'xxx',
-    storageBucket: 'xxx',
-    messagingSenderId: 'xxx'
+    projectId: 'fancycandemo',
+    storageBucket: 'fancycandemo.appspot.com',
+    messagingSenderId: '459557828534'
   },
   mongodbAPI: {
     // url: 'http://localhost:8080',

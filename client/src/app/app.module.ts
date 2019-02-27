@@ -58,12 +58,21 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import { LoginComponent } from './views/common/login.component';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AuthService } from './services';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    FormsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    AngularFirestoreModule,
     NgxsModule.forRoot([
       ViewProfileState, SpnProfileState
     ]),
@@ -99,6 +108,7 @@ import { LoginComponent } from './views/common/login.component';
     LoginComponent,
   ],
   providers: [
+    AuthService,
     { provide: LocationStrategy, useClass: PathLocationStrategy},
     { provide: RouterStateSerializer, useClass: AppRouterStateSerializer }
   ],

@@ -6,3 +6,5 @@ export * from './ican-entry';
 export * from './dm1-data';
 export * from './dm1-collection';
 export * from './dm1-entry-type';
+export * from './user';
+export * from './role';
