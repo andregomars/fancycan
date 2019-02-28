@@ -35,7 +35,7 @@ export class VehicleOrch {
         const html = `
             <h1>Dear fleet ${ vehicleState.fname } users:</h1>
             <p>&nbsp;&nbsp;Please pay attention there is a malfunction reported from vehicle code ${ vehicleState.vcode } with VIN ${ vehicleState.vin }.</p>
-            <p><b>Event Time: </b>${ format(vehicleState.createDate, 'MM/DD HH:mm:ss') }</p>
+            <p><b>Event Time: </b>${ format(vehicleState.createDate, 'MM/DD HH:mm:ss') } UTC</p>
             <p><b>Related Malfunction Setting: </b></p>
             <ul>
                 <li>ID: ${ ruleEvent.params.id }</li>
