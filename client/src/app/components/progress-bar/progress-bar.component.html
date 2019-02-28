@@ -1,9 +1,9 @@
 <div class="d-flex">
-  <span class="mx-1 text-secondary text-right">{{ min }}</span>
+  <span class="mx-1 text-secondary text-right"><small>{{ min }}</small></span>
   <div class="progress border border-dark w-100">
-    <div class="progress-bar bg-success" [style.width.%]="value">
+    <div class="progress-bar bg-success" [style.width.%]="value/(max-min)*100">
       {{value}}
     </div>
   </div>
-  <span class="mx-1 text-secondary text-left">{{ max }}</span>
+  <span class="mx-1 text-secondary text-left"><small>{{ max }}</small></span>
 </div>
