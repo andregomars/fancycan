@@ -14,7 +14,9 @@ export class RuleEngine {
     public buildMalfunctionRules(ruleSettings: any[]): any[] {
         const rules: any[] = [];
         for (const setting of ruleSettings) {
+            const spnIDs: string[] = [];
             const conditions: IRuleCondition[] = setting.conditions.map((condition: any) => {
+                spnIDs.push(condition.spn);
                 return {
                     fact: `spn${condition.spn}`,
                     operator: this.getOperatorTerm(condition.expression),
@@ -36,9 +38,10 @@ export class RuleEngine {
                     id: setting.id,
                     name: setting.name,
                     level: setting.level,
+                    spns: spnIDs.join(', '),
                     notification: setting.notification
                 }
-            }
+            };
 
             const rule = {
                 conditions: {

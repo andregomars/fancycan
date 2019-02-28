@@ -180,8 +180,9 @@ export class VehicleComponent implements OnInit, OnDestroy {
       ))
     );
 
-    this.alerts$ = this.dataService.getAlertStats().pipe(
-      map((alerts: any[]) => alerts.slice(0, 5)),
+    this.alerts$ = this.vcode$.pipe(
+      switchMap(vcode => this.dataService.getVehicleMalfuncStateByLatestN(vcode, 5)),
+      // map((alerts: any[]) => alerts.slice(0, 5)),
       share()
     );
 

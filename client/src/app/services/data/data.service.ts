@@ -68,6 +68,15 @@ export class DataService {
       .get<any>(`${this.mongoUrl}/vehicle_malfunc_state`, { headers, params });
   }
 
+  getVehicleMalfuncStateByLatestN(vcode: string, latestN: number): Observable<any> {
+    const params = new HttpParams().set('np', '')
+      .set('filter', `{'vcode': '${vcode}'}`)
+      .set('count', '').set('page', '1').set('pagesize', latestN.toString());
+    const headers = this.mongoApiHeader;
+    return this.http
+      .get<any>(`${this.mongoUrl}/vehicle_malfunc_state`, { headers, params });
+  }
+
   getAlertStats(): Observable<any> {
     return this.http
       .get<any>(`${this.rootUrl}/alert-stats.json`);

@@ -61,6 +61,7 @@ import { LoginComponent } from './views/common/login.component';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { FirestoreSettingsToken} from '@angular/fire/firestore';
 import { AuthService } from './services';
 import { FormsModule } from '@angular/forms';
 
@@ -109,6 +110,7 @@ import { FormsModule } from '@angular/forms';
   ],
   providers: [
     AuthService,
+    { provide: FirestoreSettingsToken, useValue: {} },
     { provide: LocationStrategy, useClass: PathLocationStrategy},
     { provide: RouterStateSerializer, useClass: AppRouterStateSerializer }
   ],

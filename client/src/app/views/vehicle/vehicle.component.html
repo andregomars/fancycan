@@ -317,13 +317,13 @@
                 <tbody>
                   <tr *ngFor="let alert of alerts$ | async">
                     <td>
-                      <div class="small">{{ alert.name }}</div>
+                      <div class="small">{{ alert.malfuncName }}</div>
                     </td>
                     <td>
-                      <div class="small">{{ alert.spn }}</div>
+                      <div class="small">{{ alert.malfuncSpns }}</div>
                     </td>
                     <td>
-                      <div class="small">{{ alert.updated }}</div>
+                      <div class="small">{{ alert.createDate.$date | date: 'MM/dd HH:mm'}}</div>
                     </td>
                   </tr>
                 </tbody>

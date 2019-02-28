@@ -19,6 +19,7 @@ describe('When test Vehicle Orchestration', () => {
         params: {
             id: 1,
             name: 'voltage test failure',
+            spns: '9004, 9888',
             level: 'Critical',
             notification: ['email', 'app']
         }

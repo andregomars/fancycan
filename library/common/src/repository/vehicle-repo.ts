@@ -39,6 +39,7 @@ export class VehicleRepository {
         const malfuncInfo = {
             malfuncID: ruleEvent.params.id,
             malfuncName: ruleEvent.params.name,
+            malfuncSpns: ruleEvent.params.spns,
             malfuncLevel: ruleEvent.params.level,
             malfuncNotification: ruleEvent.params.notification
         };
