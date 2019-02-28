@@ -1,6 +1,9 @@
 import { ObjectID } from 'bson';
+import { format } from 'date-fns';
+
 import { ICanState, IVehicleState, IRuleEvent } from 'fancycan-model';
 import { VehicleRepository, UserRepository } from '../repository';
+import { ConfigUtility } from '../utility';
 
 export class VehicleOrch {
     private vehicleRepo: VehicleRepository;
@@ -28,16 +31,18 @@ export class VehicleOrch {
 
     public async notifyMalfunctionSubscribers(vehicleState: IVehicleState, ruleEvent: IRuleEvent, malfuncDocID?: ObjectID) {
         const subject = 'fancycan.com - Malfunction Notification';
+        const urlAppWeb = ConfigUtility.getCommonConfig('urlAppWeb');
         const html = `
             <h1>Dear fleet ${ vehicleState.fname } users:</h1>
             <p>&nbsp;&nbsp;Please pay attention there is a malfunction reported from vehicle code ${ vehicleState.vcode } with VIN ${ vehicleState.vin }.</p>
-            <p><b>Malfunction ID: </b>${ malfuncDocID ? malfuncDocID : 'N/A' }</p>
-            <p><b>Malfunction Setting: </b></p>
+            <p><b>Event Time: </b>${ format(vehicleState.createDate, 'MM/DD HH:mm:ss') }</p>
+            <p><b>Related Malfunction Setting: </b></p>
             <ul>
                 <li>ID: ${ ruleEvent.params.id }</li>
                 <li>Name: ${ ruleEvent.params.name }</li>
                 <li>Level: ${ ruleEvent.params.level }</li>
             </ul>
+            <p><a href="${ urlAppWeb }/vehicle/malfunctions/${ vehicleState.vcode }">See Detail</a></p>
             <p>Thanks!</p>
         `;
         await this.userRepo.notifyUsers(subject, html, ruleEvent.params.notification);

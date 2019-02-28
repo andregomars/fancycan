@@ -15,5 +15,6 @@
         "from": "NoReply@fancycan.com"
     },
     "common": {
+        "urlAppWeb": "https://app.fancycan.com"
     }
 }

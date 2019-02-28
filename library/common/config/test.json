@@ -23,6 +23,7 @@
         "from": "NoReply@fancycan.com"
     },
     "common": {
+        "urlAppWeb": "https://app.fancycan.com",
         "rawParsingBuffer": 100,
         "listeningPort": 5888,
         "remotePortForTest": 6005

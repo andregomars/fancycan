@@ -826,6 +826,11 @@ data-urls@^1.0.0:
     whatwg-mimetype "^2.2.0"
     whatwg-url "^7.0.0"
 
+date-fns@^1.30.1:
+  version "1.30.1"
+  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-1.30.1.tgz#2e71bf0b119153dbb4cc4e88d9ea5acfb50dc05c"
+  integrity sha512-hBSVCvSmWC+QypYObzwGOd9wqdDpOt+0wl0KbU+R+uuZBS1jN8VsD1ss3irQDknRj5NvxiTF6oj/nDRnN/UQNw==
+
 debug@=3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/debug/-/debug-3.1.0.tgz#5bb5a0672628b64149566ba16819e61518c67261"
@@ -1154,16 +1159,17 @@ fancycan-cache@^1.0.0:
   dependencies:
     node-cache "^4.2.0"
 
-fancycan-common@^1.0.52:
-  version "1.0.52"
-  resolved "https://registry.yarnpkg.com/fancycan-common/-/fancycan-common-1.0.52.tgz#a60be5f9d32fb34803d56c589f6891dd7db0f27a"
-  integrity sha512-LZ2IQSO5vZZaMl/ECBzVw7B4c8q66Ka9L2Eflqqld311cZqlShJpqRsYMWru65IK02aqsr82OSg/mTPFOgPJbA==
+fancycan-common@^1.0.54:
+  version "1.0.54"
+  resolved "https://registry.yarnpkg.com/fancycan-common/-/fancycan-common-1.0.54.tgz#d9b35e105dd35f409981907319ab22b2dd7bfa3e"
+  integrity sha512-2bc+Gg3VFaolvAKkwnOUpSD5+JH0USlAWESaRSlLVPWCGW8fhwQrBglqo0PvnRLHVKIaIzUQAupRaG/mKOJ2VA==
   dependencies:
     "@sendgrid/mail" "^6.3.1"
     axios "^0.18.0"
     bson "^4.0.1"
     buffer "^5.2.1"
     config "^3.0.1"
+    date-fns "^1.30.1"
     fancycan-cache "^1.0.0"
     fancycan-model "^1.0.30"
     fancycan-utility "^1.0.3"
