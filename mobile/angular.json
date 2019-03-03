@@ -6,11 +6,11 @@
     "defaultCollection": "@nativescript/schematics"
   },
   "projects": {
-    "blank": {
+    "fc-mobile": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
-      "prefix": "ns"
+      "prefix": "app"
     }
   },
   "defaultProject": "blank"

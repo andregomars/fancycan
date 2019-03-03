@@ -2,5 +2,8 @@
     "main": "main.js",
     "android": {
         "v8Flags": "--expose_gc"
+    },
+    "dependencies": {
+        "fancycan-model": "^1.0.30"
     }
 }

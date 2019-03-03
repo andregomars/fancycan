@@ -720,6 +720,14 @@ buffer@^4.3.0:
     ieee754 "^1.1.4"
     isarray "^1.0.0"
 
+buffer@^5.2.1:
+  version "5.2.1"
+  resolved "https://registry.yarnpkg.com/buffer/-/buffer-5.2.1.tgz#dd57fa0f109ac59c602479044dca7b8b3d0b71d6"
+  integrity sha512-c+Ko0loDaFfuPWiL02ls9Xd3GO3cPVmUobQ6t3rXNUk304u6hGq+8N/kFi+QEIKhzK3uwolVhLzszmfLmMLnqg==
+  dependencies:
+    base64-js "^1.0.2"
+    ieee754 "^1.1.4"
+
 builtin-status-codes@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/builtin-status-codes/-/builtin-status-codes-3.0.0.tgz#85982878e21b98e1c66425e03d0174788f569ee8"
@@ -1632,6 +1640,13 @@ extsprintf@^1.2.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/extsprintf/-/extsprintf-1.4.0.tgz#e2689f8f356fad62cca65a3a91c5df5f9551692f"
   integrity sha1-4mifjzVvrWLMplo6kcXfX5VRaS8=
+
+fancycan-model@^1.0.30:
+  version "1.0.30"
+  resolved "https://registry.yarnpkg.com/fancycan-model/-/fancycan-model-1.0.30.tgz#3a021061783e3483d815cdb3f28a4351766c756e"
+  integrity sha512-FzBIMEMatvdMC61IqU+igzwZ7NGTnpIlwH3YLLijCMj9yhayOX+v/BOC01yAjBgQIkD75LeYNpHxCgbvjIWy/w==
+  dependencies:
+    buffer "^5.2.1"
 
 fast-deep-equal@^1.0.0:
   version "1.1.0"
