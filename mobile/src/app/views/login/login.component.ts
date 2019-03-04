@@ -6,7 +6,8 @@ import { prompt, inputType } from "tns-core-modules/ui/dialogs";
 import { isAndroid, device } from "tns-core-modules/platform";
 import * as app from "tns-core-modules/application";
 
-import { UtilityService } from "../services/utility.service";
+import { UtilityService } from "../../services/utility.service";
+import { User } from "~/app/models/user";
 
 declare var android: any;
 
@@ -42,8 +43,8 @@ export class LoginComponent implements OnInit {
       private routerExtensions: RouterExtensions,
     ) {
         this.user = new User();
-        this.user.email = "";
-        this.user.password = "";
+        this.user.email = "guest@fancycan.com";
+        this.user.password = "11111111";
     }
 
     ngOnInit() {
@@ -166,7 +167,7 @@ export class LoginComponent implements OnInit {
             // this.backendService.loginWithKinvey(this.user)
             //     .then(() => {
                     this.isAuthenticating = false;
-                    this.routerExtensions.navigate(["/home"], { clearHistory: true });
+                    this.routerExtensions.navigate(['../main/default'], { clearHistory: true });
                 // }).catch(error => {
                 //     this.isAuthenticating = false;
                 //     this.loginError = error.message;
@@ -204,11 +205,3 @@ export class LoginComponent implements OnInit {
     }
 }
 
-export class User {
-  email?: string;
-  password: string;
-
-  hasEmail() {
-      return this.email != '';
-  }
-}

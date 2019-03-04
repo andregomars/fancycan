@@ -49,10 +49,10 @@
                         <GridLayout row="2" rows="auto, auto" class="submit-container">
                             <Button row="0" [isEnabled]="isSubmitEnabled()"
                                 class="eloha-font-semibold login-submit"
+                                [text]="'Sign in'" [nsRouterLink]="['../main/default']" [ngClass]="{'font-size-lg': !isTablet(), 'font-size-lg-tablet': isTablet()}"></Button>
+                            <Button row="0" [isEnabled]="isSubmitEnabled()"
+                                class="eloha-font-semibold login-submit"
                                 [text]="'Sign in'" (tap)="login()" [ngClass]="{'font-size-lg': !isTablet(), 'font-size-lg-tablet': isTablet()}"></Button>
-                            <Label *ngIf="hasLoginErrors()" class="eloha-font-semibold color-danger"
-                                row="1" [text]="getLoginError()" textWrap="true"
-                                [ngClass]="{'font-size-md': !isTablet(), 'font-size-md-tablet': isTablet()}"></Label>
                         </GridLayout>
                         <GridLayout row="3" class="p-t-20">
                             <Button row="3" horizontalAlignment="center"

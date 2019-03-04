@@ -11,10 +11,10 @@ import { UtilityService } from "./services/utility.service";
     ],
     imports: [
         NativeScriptModule,
-        AppRoutingModule
+        AppRoutingModule,
     ],
     declarations: [
-        AppComponent
+        AppComponent,
     ],
     providers: [
         UtilityService,
