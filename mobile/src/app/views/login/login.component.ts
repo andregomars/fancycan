@@ -167,7 +167,7 @@ export class LoginComponent implements OnInit {
             // this.backendService.loginWithKinvey(this.user)
             //     .then(() => {
                     this.isAuthenticating = false;
-                    this.routerExtensions.navigate(['../main/default'], { clearHistory: true });
+                    this.routerExtensions.navigate(['/main/default'], { clearHistory: true });
                 // }).catch(error => {
                 //     this.isAuthenticating = false;
                 //     this.loginError = error.message;

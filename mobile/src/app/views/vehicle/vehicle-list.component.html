@@ -1,0 +1,18 @@
+<StackLayout>
+	<ActionBar title="Vehicles" class="action-bar">
+	</ActionBar>
+	<ScrollView class="page">
+		<StackLayout>
+			<SearchBar [hint]="searchHint" 
+				(clear)="onClear($event)" (submit)="onSubmit($event)"></SearchBar>
+			<ListView [items]="myItems" class="list-group">
+				<ng-template let-item="item">
+					<GridLayout class="item list-group-item">
+                        <Label [text]="item.name" class="list-group-item-heading"
+                            [nsRouterLink]="item.name"></Label>
+					</GridLayout>
+				</ng-template>
+			</ListView>
+		</StackLayout>
+	</ScrollView>
+</StackLayout>

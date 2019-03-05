@@ -1,8 +1,7 @@
 <TabView class="fa h3" selectedIndex="0" androidTabsPosition="bottom">
     <page-router-outlet
         *tabItem="{title: '&#xf207; Vehicle'}"
-        name="vehicleTab"
-        actionBarVisibility="never">
+        name="vehicleTab">
     </page-router-outlet>
 
     <page-router-outlet
@@ -14,5 +13,26 @@
         *tabItem="{title: '&#xf03a; CheckList'}"
         name="checklistTab">
     </page-router-outlet>
+
+    <!-- <StackLayout 
+        *tabItem="{title: '&#xf207; Vehicle'}">
+       <page-router-outlet
+            name="vehicleTab">
+        </page-router-outlet>
+    </StackLayout>
+
+    <StackLayout
+        *tabItem="{title: '&#xf013; Setting'}">
+        <page-router-outlet
+            name="settingTab">
+        </page-router-outlet>
+    </StackLayout>
+
+    <StackLayout
+        *tabItem="{title: '&#xf03a; CheckList'}">
+        <page-router-outlet
+            name="checklistTab">
+        </page-router-outlet>
+    </StackLayout> -->
 
 </TabView>

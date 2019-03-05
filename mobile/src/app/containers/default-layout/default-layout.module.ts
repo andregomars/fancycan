@@ -1,7 +1,7 @@
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
+import { NativeScriptCommonModule } from 'nativescript-angular/common';
 
 import { DefaultLayoutRoutingModule } from './default-layout-routing.module';
-import { NativeScriptCommonModule } from 'nativescript-angular/common';
 import { DefaultLayoutComponent } from './default-layout.component';
 
 @NgModule({

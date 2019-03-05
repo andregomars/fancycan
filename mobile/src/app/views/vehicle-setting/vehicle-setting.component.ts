@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RouterExtensions } from 'nativescript-angular';
 
 @Component({
   selector: 'app-vehicle-setting',
@@ -8,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VehicleSettingComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private routerExtension: RouterExtensions
+  ) { }
 
   ngOnInit() {
+  }
+
+  logoff() {
+    this.routerExtension.navigate(["login"], { clearHistory: true });
+    
   }
 
 }
