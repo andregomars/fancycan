@@ -15,7 +15,7 @@
     <div class="col-12 col-md-8">
       <div class="row">
         <div class="col-12 col-md-6">
-          Current Time: {{ currentTime | date: 'yyyy-MM-dd HH:mm:ss'}}
+          Current Time: {{ currentTime$ | async | date: 'yyyy-MM-dd HH:mm:ss'}}
         </div>
         <div class="col-12 col-md-6">
           Last updated: {{ (vehicle$ | async)?.editDate?.$date | date: 'yyyy-MM-dd HH:mm:ss' }}
@@ -275,7 +275,7 @@
         </div>
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <div class="row table-responsive-lg m-0">
+            <div class="row table-responsive-lg m-0 w-100">
               <table class="table table-striped table-hover table-outline table-sm mt-1">
                 <thead class="text-white thead-light bg-primary">
                   <tr>

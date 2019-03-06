@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { getStyle, hexToRgba } from '@coreui/coreui-pro/dist/js/coreui-utilities';
 import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
 
-import { Observable } from 'rxjs';
+import { Observable, Observer, timer } from 'rxjs';
 import { DataService, UtilityService } from '../../services';
 import { share, map, tap, switchMap, concatMap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
@@ -39,7 +39,7 @@ export class VehicleComponent implements OnInit, OnDestroy {
   @Select(SpnProfileState.spns) spns$: Observable<any[]>;
 
   isAutoSync = true;
-  intSecState = 15;
+  intSecState = 5;
   itv: any;
   len = 30;
   intSec = 1;
@@ -69,7 +69,8 @@ export class VehicleComponent implements OnInit, OnDestroy {
   gaugeThick = 15;
 
   lastUpdated = '2018-08-28 23:32:55';
-  currentTime = new Date();
+  // currentTime = new Date();
+  currentTime$: Observable<Date>;
   engineRunning = 45;
   engineIdle = 60;
   odometer = 27026.8;
@@ -131,6 +132,7 @@ export class VehicleComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
+    this.loadTimeLabel();
     this.loadVehicleState();
     this.loadVehicleStatePeriodically();
     // this.loadPlayChartData();
@@ -155,6 +157,15 @@ export class VehicleComponent implements OnInit, OnDestroy {
     }
   }
 
+  private loadTimeLabel() {
+    // this.currentTime$ = new Observable<Date>((observer: Observer<Date>) => {
+    //   setInterval(() => observer.next(new Date()), 1000);
+    // });
+    this.currentTime$ = timer(0, 1000).pipe(
+      map(() => new Date())
+    );
+  }
+
   private loadVehicleStatePeriodically() {
     this.itv = setInterval(() => {
       this.loadVehicleState();
@@ -171,7 +182,6 @@ export class VehicleComponent implements OnInit, OnDestroy {
     this.vehicle$ = this.vcode$.pipe(
       switchMap(vcode => this.dataService.getVehicleState(vcode)),
       map(vehicles => this.utilityService.attachGeoLocationAndMapLabel(vehicles)[0]),
-      share()
     );
 
     this.vehicleStateSpnList$ = this.vehicle$.pipe(
