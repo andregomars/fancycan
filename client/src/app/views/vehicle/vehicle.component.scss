@@ -21,6 +21,9 @@ html, body, #map_canvas {
 
 .vehicle-gauge {
     height: 150px;
-    // @extend .text-center;
-    // @extend .py-1;
+}
+
+.vehicle-gauge-alt {
+    @extend .vehicle-gauge;
+    background-color: #555555;
 }

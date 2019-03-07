@@ -145,8 +145,8 @@ export class PlayChartComponent implements OnInit, OnDestroy {
   }
 
   private loadData() {
-    this.source$ = this.utilityService.getCurrentData().pipe(
-    // this.source$ = this.data$.pipe(
+    // this.source$ = this.utilityService.getCurrentData().pipe(
+    this.source$ = this.data$.pipe(
       map(data => {
         this.queue.shift();
         const formatedData = this.utilityService.formatDataTime(data);

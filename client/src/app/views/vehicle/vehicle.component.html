@@ -5,10 +5,10 @@
       <button class="btn btn-link pull-right p-0" (click)="switchSyncStatus()">
         <ng-container *ngIf="isAutoSync; then tSpin; else tStill"></ng-container>
         <ng-template #tSpin>
-          <i class="fa fa-refresh fa-spin"></i>&nbsp;<small>Auto Sync</small>
+          <i class="fa fa-refresh fa-spin"></i>&nbsp;<small>Manual Sync</small>
         </ng-template>
         <ng-template #tStill>
-          <i class="fa fa-refresh"></i>&nbsp;<small>Manual Sync</small>
+          <i class="fa fa-refresh"></i>&nbsp;<small>Auto Sync</small>
         </ng-template>
       </button>
     </div>
@@ -59,7 +59,7 @@
           <div class="row">
             <div class="col">
               <div class="card mb-0 div-disabled">
-                <app-play-chart [len]="len" [intSec]="intSec"
+                <app-play-chart #playChart [len]="len" [intSec]="intSec"
                   [labels]="playChartLabels" [data$]="playChartData$"></app-play-chart>
                 <!-- <div class="chart-wrapper mt-0" style="height:70px;">
                   <canvas baseChart class="chart" [datasets]="lineChart3Data" [labels]="lineChart3Labels" [options]="lineChart3Options"
@@ -144,19 +144,19 @@
     <div class="col-12 col-lg-4">
       <div class="row no-gutters mt-2">
         <div class="col-6 text-center py-1 vehicle-gauge" >
-          <app-chart-gauge [value]="(vehicle$ | async)?.spn84 | number:'1.0-1'"
+          <app-chart-gauge [value]="(vehicle$ | async)?.spn84"
             [max]="100" title="Speed"></app-chart-gauge>
         </div>
-        <div class="col-6 text-center py-1 bg-secondary vehicle-gauge">
-          <app-chart-gauge [value]="(vehicle$ | async)?.spn190 | number:'1.0-1'" 
+        <div class="col-6 text-center py-1 vehicle-gauge-alt">
+          <app-chart-gauge [value]="(vehicle$ | async)?.spn190" 
             [max]="5000" title="RPM"></app-chart-gauge>
         </div>
-        <div class="col-6 text-center py-1 bg-secondary vehicle-gauge">
-          <app-chart-gauge [value]="(vehicle$ | async)?.spn9000 | number:'1.0-1'" 
+        <div class="col-6 text-center py-1 vehicle-gauge-alt">
+          <app-chart-gauge [value]="(vehicle$ | async)?.spn9000" 
             [max]="100" title="SOC(%)"></app-chart-gauge>
         </div>
         <div class="col-6 text-center py-1 vehicle-gauge">
-          <app-chart-gauge [value]="(vehicle$ | async)?.spn9001 | number:'1.0-1'" 
+          <app-chart-gauge [value]="(vehicle$ | async)?.spn9001" 
             [max]="300" title="Battery kWh"></app-chart-gauge>
         </div>
       </div>

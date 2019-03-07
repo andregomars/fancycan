@@ -1,14 +1,15 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { getStyle, hexToRgba } from '@coreui/coreui-pro/dist/js/coreui-utilities';
 import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
 
-import { Observable, Observer, timer } from 'rxjs';
+import { Observable, Observer, timer, from, of } from 'rxjs';
 import { DataService, UtilityService } from '../../services';
 import { share, map, tap, switchMap, concatMap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { MapStyle } from './../shared/map-style';
 import { Select } from '@ngxs/store';
 import { ViewProfileState, SpnProfileState } from '../../states';
+import { PlayChartComponent } from '../../components/play-chart/play-chart.component';
 // import { trigger, state, transition, style, animate } from '@angular/animations';
 
 @Component({
@@ -37,9 +38,10 @@ import { ViewProfileState, SpnProfileState } from '../../states';
 export class VehicleComponent implements OnInit, OnDestroy {
   @Select(ViewProfileState.vcode) vcode$: Observable<string>;
   @Select(SpnProfileState.spns) spns$: Observable<any[]>;
+  @ViewChild('playChart') playChart: PlayChartComponent;
 
   isAutoSync = true;
-  intSecState = 5;
+  intSecState = 7;
   itv: any;
   len = 30;
   intSec = 1;
@@ -135,7 +137,8 @@ export class VehicleComponent implements OnInit, OnDestroy {
     this.loadTimeLabel();
     this.loadVehicleState();
     this.loadVehicleStatePeriodically();
-    // this.loadPlayChartData();
+    this.loadPlayChartData();
+    this.playChart.pause();
   }
 
   ngOnDestroy() {
@@ -182,6 +185,7 @@ export class VehicleComponent implements OnInit, OnDestroy {
     this.vehicle$ = this.vcode$.pipe(
       switchMap(vcode => this.dataService.getVehicleState(vcode)),
       map(vehicles => this.utilityService.attachGeoLocationAndMapLabel(vehicles)[0]),
+      share()
     );
 
     this.vehicleStateSpnList$ = this.vehicle$.pipe(
@@ -205,7 +209,9 @@ export class VehicleComponent implements OnInit, OnDestroy {
     this.playChartLabels = Array.from(new Array(this.len), (v, i) =>
       `${((this.len - i - 1) * this.intSec)}s`
     );
-    this.playChartData$ = this.utilityService.getCurrentData();
+    // this.playChartData$ = this.utilityService.getCurrentData();
+    // this.playChartData$ = timer(0, this.intSec * 1000).pipe(map(n => n * 100));
+    this.playChartData$ = of(0);
   }
 
 }

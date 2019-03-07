@@ -32,7 +32,7 @@ export class ChartGaugeComponent implements OnInit, OnChanges {
             text: this.title
         },
         animation: {
-          duration: 0
+          duration: 1000
         }
     };
 
@@ -74,7 +74,8 @@ export class ChartGaugeComponent implements OnInit, OnChanges {
     if (value > max) {
       value = max;
     }
-    const valueSection = value * 100 / max;
+
+    const valueSection = Math.round(value / max * 100);
     const remainSection = 100 - valueSection;
     return [valueSection, remainSection];
   }
