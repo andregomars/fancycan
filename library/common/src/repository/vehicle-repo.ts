@@ -1,8 +1,10 @@
 import { ViewProfileCache } from '../cache';
 import { ObjectID } from 'bson';
-import { MongoClient, InsertOneWriteOpResult  } from 'mongodb';
-import { ICanState, IVehicleState, Geolocation,
-    IRuleEvent, IVehicleMalfuction } from 'fancycan-model';
+import { MongoClient, InsertOneWriteOpResult } from 'mongodb';
+import {
+    ICanState, IVehicleState, Geolocation,
+    IRuleEvent, IVehicleMalfuction
+} from 'fancycan-model';
 
 import { MongoLayer } from '../core';
 
@@ -16,15 +18,19 @@ export class VehicleRepository {
     }
 
     public async upsertVehicleState(state: IVehicleState) {
-        await this.conn.db('main').collection('vehicle_state').updateOne(
-            { vcode: state.vcode },
-            {
-                $currentDate: { editDate: true },
-                $set: state,
-                $setOnInsert: { createDate: new Date() },
-            },
-            { upsert: true },
-        );
+        try {
+            await this.conn.db('main').collection('vehicle_state').updateOne(
+                { vcode: state.vcode },
+                {
+                    $currentDate: { editDate: true },
+                    $set: state,
+                    $setOnInsert: { createDate: new Date() },
+                },
+                { upsert: true },
+            );
+        } catch (err) {
+            console.log('Error when upsert vehicle state!');
+        }
     }
 
     public async insertVehicleMalfuncState(state: any): Promise<InsertOneWriteOpResult> {

@@ -16,6 +16,7 @@ describe('When test Vehicle Repository', () => {
         canData: Buffer.from('BAQAAFQCACA=', 'base64'),
         localPort: 5888,
         remotePort: 6005,
+        createDate: new Date()
 
     };
     const def9004: IJ1939 = {

@@ -22,6 +22,11 @@ export class MongoLayer {
 
   public async connect() {
     await this.client.connect();
+    await this.init();
   }
 
+  private async init() {
+    this.client.db('main').collection('vehicle_state').createIndex({vcode: 1}, {unique: true});
+
+  }
 }

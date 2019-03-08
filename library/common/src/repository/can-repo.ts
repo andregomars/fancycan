@@ -39,6 +39,7 @@ export class CanRepository {
             canData: buffer.slice(-8),
             localPort: localPort,
             remotePort: remotePort,
+            createDate: new Date()
         };
     }
 

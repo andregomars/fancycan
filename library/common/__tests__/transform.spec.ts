@@ -103,7 +103,7 @@ describe('When test transform', () => {
         canData: Buffer.from('BAQAAFQCACA=', 'base64'),
         localPort: 5888,
         remotePort: 6005,
-
+        createDate: new Date()
     };
 
     const sample9006: ICan = {
@@ -114,6 +114,7 @@ describe('When test transform', () => {
         canData: Buffer.from('YABF/hcAUXM=', 'base64'),
         localPort: 5888,
         remotePort: 6005,
+        createDate: new Date()
     };
 
     const sample2911: ICan = {
@@ -124,6 +125,7 @@ describe('When test transform', () => {
         canData: Buffer.from('z//w//8BC/8=', 'base64'),
         localPort: 5888,
         remotePort: 6005,
+        createDate: new Date()
     };
 
     it('get spn from header', () => {

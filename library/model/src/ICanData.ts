@@ -9,4 +9,5 @@ export interface ICan {
     canData: Buffer;
     localPort: number;
     remotePort: number;
+    createDate: Date;
 }
