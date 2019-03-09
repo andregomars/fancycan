@@ -1,4 +1,4 @@
-import { VehicleRepository, MalfuncSettingCache, VehicleOrch, UserRepository } from 'fancycan-common';
+import { VehicleRepository, MalfuncSettingCache, VehicleOrch } from 'fancycan-common';
 import { RuleEngine } from './rule-engine';
 
 export class MalfuncProceccor {

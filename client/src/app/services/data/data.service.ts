@@ -61,6 +61,17 @@ export class DataService {
       .get<any>(`${this.mongoUrl}/vehicle_state`, { headers, params });
   }
 
+  getCanStatesByDateRange(vcode: string, beginDate: Date, endDate: Date): Observable<any> {
+    const params = new HttpParams().set('np', '')
+      .set('filter', `{'vcode': '${vcode}'}`)
+      .set('filter', `{'createDate':{'$gte':{'$date': '${beginDate}'}}}`)
+      .set('filter', `{'createDate':{'$lt':{'$date': '${endDate}'}}}`)
+      .set('pagesize', '1000');
+    const headers = this.mongoApiHeader;
+    return this.http
+      .get<any>(`${this.mongoUrl}/can`, { headers, params });
+  }
+
   getVehicleMalfuncState(vcode: string): Observable<any> {
     const params = new HttpParams().set('np', '').set('filter', `{'vcode': '${vcode}'}`);
     const headers = this.mongoApiHeader;
@@ -76,6 +87,8 @@ export class DataService {
     return this.http
       .get<any>(`${this.mongoUrl}/vehicle_malfunc_state`, { headers, params });
   }
+
+
 
   getAlertStats(): Observable<any> {
     return this.http
