@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
-import { Observable, pipe } from 'rxjs';
-
+import { Observable  } from 'rxjs';
 
 import { environment, DataSourceType } from '../../../environments/environment';
 import { share, map } from 'rxjs/operators';
+import { ObjectID } from 'bson';
 
 @Injectable({
   providedIn: 'root'
@@ -62,15 +62,28 @@ export class DataService {
   }
 
   getCanStatesByDateRange(vcode: string, beginDate: Date, endDate: Date): Observable<any> {
+    const beginID =  ObjectID.createFromTime(beginDate.getTime() / 1000);
+    const endID =  ObjectID.createFromTime(endDate.getTime() / 1000);
     const params = new HttpParams().set('np', '')
       .set('filter', `{'vcode': '${vcode}'}`)
-      .set('filter', `{'createDate':{'$gte':{'$date': '${beginDate}'}}}`)
-      .set('filter', `{'createDate':{'$lt':{'$date': '${endDate}'}}}`)
+      .set('filter', `{'_id':{'$gte':{'$oid': '${beginID.toString()}'}}}`)
+      .set('filter', `{'_id':{'$lt':{'$oid': '${endID.toString()}'}}}`)
       .set('pagesize', '1000');
     const headers = this.mongoApiHeader;
     return this.http
       .get<any>(`${this.mongoUrl}/can`, { headers, params });
   }
+
+  // getCanStatesByDateRange(vcode: string, beginDate: Date, endDate: Date): Observable<any> {
+  //   const params = new HttpParams().set('np', '')
+  //     .set('filter', `{'vcode': '${vcode}'}`)
+  //     .set('filter', `{'createDate':{'$gte':{'$date': '${beginDate.toISOString()}'}}}`)
+  //     .set('filter', `{'createDate':{'$lt':{'$date': '${endDate.toISOString()}'}}}`)
+  //     .set('pagesize', '1000');
+  //   const headers = this.mongoApiHeader;
+  //   return this.http
+  //     .get<any>(`${this.mongoUrl}/can`, { headers, params });
+  // }
 
   getVehicleMalfuncState(vcode: string): Observable<any> {
     const params = new HttpParams().set('np', '').set('filter', `{'vcode': '${vcode}'}`);
