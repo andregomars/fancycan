@@ -1,6 +1,6 @@
 {
   "name": "fancycan-common",
-  "version": "1.0.59",
+  "version": "1.0.60",
   "main": "dist/lib/index.js",
   "license": "MIT",
   "types": "dist/types/index.d.ts",
@@ -11,7 +11,7 @@
     "lint": "npx tslint -c tslint.json -p tsconfig.json",
     "prebuild": "rimraf dist",
     "build": "npx tsc",
-    "test": "rimraf dist && jest",
+    "test": "rimraf dist && jest --watch",
     "prepublishOnly": "npx tsc"
   },
   "dependencies": {
