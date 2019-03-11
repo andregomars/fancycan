@@ -1,9 +1,10 @@
 import { VehicleRepository, MalfuncSettingCache, VehicleOrch } from 'fancycan-common';
-import { RuleEngine } from './rule-engine';
+import { RuleEngine } from './../rule-engine';
 
-export class MalfuncProceccor {
+export class MalfuncProcessor {
 
     public async run() {
+        console.log(`Start ${MalfuncProcessor.name}...`);
         const settings = new MalfuncSettingCache().retrieveMalfuncSettingFromCache();
         const vehicleRepo = new VehicleRepository();
         const vehicleOrch = new VehicleOrch();
@@ -24,7 +25,7 @@ export class MalfuncProceccor {
 
             for (const event of events) {
                 const malfuncID = await vehicleOrch.saveVehicleMalfuncStateDoc(state, event);
-                await vehicleOrch.notifyMalfunctionSubscribers(state, event, malfuncID);
+                await vehicleOrch.notifyMalfunctionSubscribers(state, event);
             }
         }
 

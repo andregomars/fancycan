@@ -4,7 +4,7 @@ module.exports = {
     script: 'dist/app.js',
 
     // Options reference: https://pm2.io/doc/en/runtime/reference/ecosystem-file/
-    cron_restart: '*/1 * * * *',
+    cron_restart: '*/15 * * * *',
     args: 'one two',
     instances: 1,
     autorestart: false,
