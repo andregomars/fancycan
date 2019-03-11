@@ -1,5 +1,5 @@
 import { ViewProfileCache } from '../cache';
-import { ObjectID } from 'bson';
+import { ObjectID, UpdateWriteOpResult } from 'mongodb';
 import { MongoClient, InsertOneWriteOpResult } from 'mongodb';
 import {
     ICanState, IVehicleState, Geolocation,
@@ -17,9 +17,9 @@ export class VehicleRepository {
         this.viewProfileCache = new ViewProfileCache();
     }
 
-    public async upsertVehicleState(state: IVehicleState) {
+    public async upsertVehicleState(state: IVehicleState): Promise<UpdateWriteOpResult | undefined> {
         try {
-            await this.conn.db('main').collection('vehicle_state').updateOne(
+            return await this.conn.db('main').collection('vehicle_state').updateOne(
                 { vcode: state.vcode },
                 {
                     $currentDate: { editDate: true },

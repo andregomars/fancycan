@@ -1,6 +1,6 @@
 import { EmailLayer } from '../src/core';
 
-describe('When test email layer', () => {
+describe.skip('When test email layer', () => {
     it('should call email api failed due to incorrect credential', async () => {
         const to = 'andregomars@gmail.com';
         const subject = 'a test from sendgrid api by fancycan';

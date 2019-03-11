@@ -1,8 +1,9 @@
 import { Buffer } from 'buffer/';
 import { ICanState, ICan, IJ1939 } from 'fancycan-model';
-import { ObjectID } from 'bson';
+import { ObjectID } from 'mongodb';
 import { SpnCache } from '../src/cache';
 import { CanRepository } from '../src/repository';
+import { MongoLayer } from '../src/core';
 
 describe('When test CAN repo', () => {
     const spnCache = new SpnCache();
@@ -35,8 +36,6 @@ describe('When test CAN repo', () => {
         canData: Buffer.from('BAQAAFQCACA=', 'base64'),
         localPort: 5888,
         remotePort: 6005,
-        createDate: new Date()
-
     };
 
     beforeAll(() => {
@@ -47,5 +46,29 @@ describe('When test CAN repo', () => {
         const canRepo = new CanRepository();
         const actual: ICanState[] = canRepo.buildCanState(sample9004);
         expect(actual.length).toBe(1);
+    });
+
+    it('should able to build object id by givin date', () => {
+        const expected = new ObjectID('5c8372800000000000000000');
+        const date20190309 = new Date(2019, 2, 9);
+        const actual =  ObjectID.createFromTime(date20190309.getTime() / 1000);
+
+        expect(actual).toEqual(expected);
+    });
+
+    it.skip('should remove old data from CAN state', async () => {
+        const today = new Date(new Date().toDateString());
+        await MongoLayer.getInstance().connect();
+        const conn = MongoLayer.getInstance().Client;
+
+        try {
+            const canRepo = new CanRepository();
+            const result = await canRepo.cleanHistory(today);
+            expect(result.nRemoved).toBeGreaterThan(0);
+        } catch (err) {
+            expect(err).toBeUndefined();
+        } finally {
+            conn.close();
+        }
     });
 });

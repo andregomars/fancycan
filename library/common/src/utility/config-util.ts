@@ -1,4 +1,5 @@
 import config from 'config';
+import { IJobProcessor } from 'fancycan-model';
 
 export class ConfigUtility {
     public static getEmailApiKey(): string {
@@ -45,5 +46,9 @@ export class ConfigUtility {
     public static getTopicName(name: string = 'default'): string {
         const defaultTopic = 'tCan';
         return config.get(`mqConfig.topics.${name}`) || defaultTopic;
+    }
+
+    public static getJobProcessors(): IJobProcessor[] {
+        return config.get<IJobProcessor[]>('jobProcessors');
     }
 }

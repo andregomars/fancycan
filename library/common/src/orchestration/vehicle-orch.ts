@@ -1,4 +1,4 @@
-import { ObjectID } from 'bson';
+import { ObjectID, UpdateWriteOpResult } from 'mongodb';
 import { format } from 'date-fns';
 
 import { ICanState, IVehicleState, IRuleEvent } from 'fancycan-model';
@@ -14,13 +14,13 @@ export class VehicleOrch {
         this.userRepo = new UserRepository();
     }
 
-    public async saveVehicleStateDoc(canState: ICanState) {
+    public async saveVehicleStateDoc(canState: ICanState): Promise<UpdateWriteOpResult | undefined> {
         const state = this.vehicleRepo.buildVehicleState(canState);
         if (!state) {
             console.log(`vehicle state build failed for vcode : ${canState.vcode} & can objID: ${canState.vcode}`);
             return;
         }
-        await this.vehicleRepo.upsertVehicleState(state);
+        return await this.vehicleRepo.upsertVehicleState(state);
     }
 
     public async saveVehicleMalfuncStateDoc(vehicleState: IVehicleState, ruleEvent: IRuleEvent): Promise<ObjectID> {
@@ -29,7 +29,7 @@ export class VehicleOrch {
         return result.insertedId;
     }
 
-    public async notifyMalfunctionSubscribers(vehicleState: IVehicleState, ruleEvent: IRuleEvent, malfuncDocID?: ObjectID) {
+    public async notifyMalfunctionSubscribers(vehicleState: IVehicleState, ruleEvent: IRuleEvent) {
         const subject = 'fancycan.com - Malfunction Notification';
         const urlAppWeb = ConfigUtility.getCommonConfig('urlAppWeb');
         const html = `

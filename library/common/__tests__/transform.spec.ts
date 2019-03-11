@@ -1,19 +1,14 @@
-import { ObjectID } from 'bson';
+import { ObjectID } from 'mongodb';
 import { Buffer } from 'buffer/';
 
 import { ICan, IJ1939, Dm1Collection, Dm1EntryType, ViewProfileStateModel } from 'fancycan-model';
 import { SpnCache, ViewProfileCache } from '../src/cache';
 import { TransformUtility } from 'fancycan-utility';
-// const chunker = require('stream-chunker');
-
-// jest.mock('mongodb');
-// jest.mock('../src/app/firelayer');
 
 describe('When test transform', () => {
     const transform = new TransformUtility();
     const spnCache = new SpnCache();
     const viewProfileCache = new ViewProfileCache();
-    // const canRawSample = 'iAzwAgPN/////////4gY8wkAAA8AAAAAAHGIGPwA9AAAABgAAABmiAj+bgsCHy8fnx4LH4gY/Af0oAmgCUgCWYiIGPwUIQAAAABcAgAAiAzwAgPN/////////4gM0i8nABGgAAAAAACIGO8ZIX9f////////iBj68iGgCgAVAqoKAIgY/BchhjQAAAAAAMSIGPwE9EQBBTo5O3MSiBj+vwsFH3t/e3///4gY/+EZQKQAAs8wMACIGP/iGU08Of/M/8z/iAzwAgPN/////////4gY/+MZbgAWAf////+IGOz/GSAKAAL/yv4AiBjw1hn//////wA//4gI/m4L1R4CH94eSh8=';
 
     beforeAll(() => {
         spnCache.storeSpnsIntoCacheGroupedByPgn([def9004, def2911]);
@@ -103,7 +98,6 @@ describe('When test transform', () => {
         canData: Buffer.from('BAQAAFQCACA=', 'base64'),
         localPort: 5888,
         remotePort: 6005,
-        createDate: new Date()
     };
 
     const sample9006: ICan = {
@@ -114,7 +108,6 @@ describe('When test transform', () => {
         canData: Buffer.from('YABF/hcAUXM=', 'base64'),
         localPort: 5888,
         remotePort: 6005,
-        createDate: new Date()
     };
 
     const sample2911: ICan = {
@@ -125,7 +118,6 @@ describe('When test transform', () => {
         canData: Buffer.from('z//w//8BC/8=', 'base64'),
         localPort: 5888,
         remotePort: 6005,
-        createDate: new Date()
     };
 
     it('get spn from header', () => {
@@ -147,29 +139,6 @@ describe('When test transform', () => {
         const actual = transform.decodeData(sample2911.canData, def2911);
         expect(actual).toEqual(3);
     });
-
-    // it('should split buffer through stream-chunker properly', ( done ) => {
-    //     expect.hasAssertions();
-
-    //     let total = 0;
-    //     const stream = new Readable({
-    //         read() {
-    //             return;
-    //         },
-    //     });
-    //     const buffer = Buffer.from(canRawSample, 'base64');
-
-    //     stream.pipe(chunker(13))
-    //         .on('data', (chunk: Buffer) => {
-    //             total += 1;
-    //         }).on('end', () => {
-    //             expect(total).toBe(20);
-    //             done();
-    //         });
-
-    //     stream.push(buffer);
-    //     stream.push(null);
-    // });
 
     it('should get J1939 value from CAN data', () => {
         const buffer = Buffer.from('BAQAAFQCACA=', 'base64');

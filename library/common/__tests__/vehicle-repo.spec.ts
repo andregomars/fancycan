@@ -1,6 +1,6 @@
 import { Buffer } from 'buffer/';
 import { ICanState, ICan, IJ1939, ViewProfileStateModel } from 'fancycan-model';
-import { ObjectID } from 'bson';
+import { ObjectID } from 'mongodb';
 import { CanRepository, VehicleRepository } from '../src/repository';
 import { SpnCache, ViewProfileCache } from '../src/cache';
 
@@ -16,8 +16,6 @@ describe('When test Vehicle Repository', () => {
         canData: Buffer.from('BAQAAFQCACA=', 'base64'),
         localPort: 5888,
         remotePort: 6005,
-        createDate: new Date()
-
     };
     const def9004: IJ1939 = {
         Code: 'voltage',

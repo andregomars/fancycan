@@ -14,6 +14,10 @@
         "apiKey": "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",
         "from": "NoReply@fancycan.com"
     },
+    "processors": [
+        { "name": "MalfuncProcessor", "enabled": true},
+        { "name": "CleanProcessor", "enabled": true, "backUpDays": 3 }
+    ],
     "common": {
         "urlAppWeb": "https://app.fancycan.com"
     }

@@ -1,10 +1,14 @@
-import { ObjectID } from 'bson';
 import { Buffer } from 'buffer/';
-import { MongoClient } from 'mongodb';
+import { MongoClient, BulkWriteResult, ObjectID } from 'mongodb';
 import { ICan, ICanState, ICanRaw } from 'fancycan-model';
 import { MongoLayer } from '../core';
 import { TransformUtility } from 'fancycan-utility';
 import { SpnCache } from '../cache';
+
+const DB_MAIN = 'main';
+const COLL_CAN = 'can';
+const COLL_CAN_RAW = 'can_raw';
+const COLL_CAN_STATE = 'can_state';
 
 export class CanRepository {
     private conn: MongoClient;
@@ -18,16 +22,24 @@ export class CanRepository {
     }
 
     public async insertCanRaw(doc: ICanRaw): Promise<ObjectID> {
-        const result = await this.conn.db('main').collection('can_raw').insertOne(doc);
+        const result = await this.conn.db(DB_MAIN).collection(COLL_CAN_RAW).insertOne(doc);
         return result.insertedId;
     }
 
     public async insertCan(doc: ICan) {
-        await this.conn.db('main').collection('can').insertOne(doc);
+        await this.conn.db(DB_MAIN).collection(COLL_CAN).insertOne(doc);
     }
 
     public async insertCanStates(docs: ICanState[]) {
-        await this.conn.db('main').collection('can_state').insertMany(docs, { forceServerObjectId: true });
+        await this.conn.db(DB_MAIN).collection(COLL_CAN_STATE).insertMany(docs, { forceServerObjectId: true });
+    }
+
+    public async cleanHistory(cutoffDate: Date): Promise<BulkWriteResult> {
+        const cutoffOID =  ObjectID.createFromTime(cutoffDate.getTime() / 1000);
+
+        const bulk = this.conn.db(DB_MAIN).collection(COLL_CAN).initializeUnorderedBulkOp();
+        bulk.find({ _id: { $lt: cutoffOID }}).remove();
+        return await bulk.execute();
     }
 
     public buildCan(buffer: Buffer, rawID: ObjectID, localPort: number, remotePort: number): ICan {
@@ -39,7 +51,6 @@ export class CanRepository {
             canData: buffer.slice(-8),
             localPort: localPort,
             remotePort: remotePort,
-            createDate: new Date()
         };
     }
 
@@ -64,10 +75,8 @@ export class CanRepository {
         const canStates = new Array<ICanState>();
         for (const spn of spns!) {
             const val = this.transform.decodeData(can.canData, spn);
-            // const vcode = _.random(6001, 6010).toString();
             const state: ICanState = {
                 canObjID: can._id,
-                // canObjID: can.rawID,
                 vcode: can.remotePort.toString(),
                 spnNo: spn.SPNNo,
                 spnName: spn.SPNName,
