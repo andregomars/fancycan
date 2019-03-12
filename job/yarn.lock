@@ -1159,10 +1159,10 @@ fancycan-cache@^1.0.0:
   dependencies:
     node-cache "^4.2.0"
 
-fancycan-common@^1.0.62:
-  version "1.0.62"
-  resolved "https://registry.yarnpkg.com/fancycan-common/-/fancycan-common-1.0.62.tgz#406f6031f3cbe390d2b27b0a0d29b3130399b6c7"
-  integrity sha512-pLdmH2+aKrrUlbLiCeoBuaFvQJpbIXcdHnsac+ozzuiPmbBzlOEf9242TtMejyEQLO7CN7QGRCl175nNPQyjGA==
+fancycan-common@^1.0.64:
+  version "1.0.64"
+  resolved "https://registry.yarnpkg.com/fancycan-common/-/fancycan-common-1.0.64.tgz#54dc3a45e9821acac47c6de24bbd70f21626723e"
+  integrity sha512-VT0F1PeenuEiCAL29RpCQ2Dvnb/qgtKFlk5xcx3DNomif+X6w+bdTnDjugLh1IIMjcX+iTrOBidAPVfEM/ZfDA==
   dependencies:
     "@sendgrid/mail" "^6.3.1"
     axios "^0.18.0"

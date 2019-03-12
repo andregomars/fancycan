@@ -1,15 +1,24 @@
-import { CanRepository, ConfigUtility } from 'fancycan-common';
+import { ConfigUtility, RepositoryCommon } from 'fancycan-common';
 import { startOfToday, subDays } from 'date-fns';
+
+const DB_MAIN = 'main';
+const COLL_CAN_RAW = 'can_raw';
+const COLL_CAN = 'can';
+const COLL_CAN_STATE = 'can_state';
 
 export class CleanProcessor {
 
     public async run() {
         console.log(`Start ${CleanProcessor.name}...`);
-        const canRepo = new CanRepository();
         const cutoffDate = this.getCutoffDate();
+        const repo = new RepositoryCommon();
 
-        const result = await canRepo.cleanHistory(cutoffDate);
-        console.log(`Clean history records before ${cutoffDate.toDateString()} from CAN: ${result.nRemoved}`);
+        const cleanCollections = [COLL_CAN_RAW, COLL_CAN];
+
+        for (const collection of cleanCollections) {
+            const result = await repo.cleanCollectionHistory(cutoffDate, DB_MAIN, collection);
+            console.log(`Cleaned history records before ${cutoffDate.toDateString()} from ${DB_MAIN.toUpperCase()}.${collection.toUpperCase()}: ${result.nRemoved}`);
+        }
 
     }
 

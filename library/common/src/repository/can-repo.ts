@@ -1,5 +1,5 @@
 import { Buffer } from 'buffer/';
-import { MongoClient, BulkWriteResult, ObjectID } from 'mongodb';
+import { MongoClient, ObjectID } from 'mongodb';
 import { ICan, ICanState, ICanRaw } from 'fancycan-model';
 import { MongoLayer } from '../core';
 import { TransformUtility } from 'fancycan-utility';
@@ -32,14 +32,6 @@ export class CanRepository {
 
     public async insertCanStates(docs: ICanState[]) {
         await this.conn.db(DB_MAIN).collection(COLL_CAN_STATE).insertMany(docs, { forceServerObjectId: true });
-    }
-
-    public async cleanHistory(cutoffDate: Date): Promise<BulkWriteResult> {
-        const cutoffOID =  ObjectID.createFromTime(cutoffDate.getTime() / 1000);
-
-        const bulk = this.conn.db(DB_MAIN).collection(COLL_CAN).initializeUnorderedBulkOp();
-        bulk.find({ _id: { $lt: cutoffOID }}).remove();
-        return await bulk.execute();
     }
 
     public buildCan(buffer: Buffer, rawID: ObjectID, localPort: number, remotePort: number): ICan {
