@@ -92,7 +92,7 @@ export class DataService {
       .get<any>(`${this.mongoUrl}/vehicle_malfunc_state`, { headers, params });
   }
 
-  getVehicleMalfuncStateByLatestN(vcode: string, latestN: number): Observable<any> {
+  getVehicleMalfuncStatesByLatestN(vcode: string, latestN: number): Observable<any> {
     const params = new HttpParams().set('np', '')
       .set('filter', `{'vcode': '${vcode}'}`)
       .set('count', '').set('page', '1').set('pagesize', latestN.toString());
@@ -101,6 +101,19 @@ export class DataService {
       .get<any>(`${this.mongoUrl}/vehicle_malfunc_state`, { headers, params });
   }
 
+  getVehicleMalfuncStatesByDateRange(vcode: string, beginDate: Date, endDate: Date): Observable<any> {
+    const beginID =  ObjectID.createFromTime(beginDate.getTime() / 1000);
+    const endID =  ObjectID.createFromTime(endDate.getTime() / 1000);
+    const params = new HttpParams().set('np', '')
+      .set('filter', `{'vcode': '${vcode}'}`)
+      .set('filter', `{'_id':{'$gte':{'$oid': '${beginID.toString()}'}}}`)
+      .set('filter', `{'_id':{'$lt':{'$oid': '${endID.toString()}'}}}`)
+      .set('keys', `{'vcode':1,'malfuncID':1, 'malfuncName':1, 'malfuncSpns':1, 'malfuncLevel':1,'createDate':1}`)
+      .set('pagesize', '1000');
+    const headers = this.mongoApiHeader;
+    return this.http
+      .get<any>(`${this.mongoUrl}/vehicle_malfunc_state`, { headers, params });
+  }
 
 
   getAlertStats(): Observable<any> {

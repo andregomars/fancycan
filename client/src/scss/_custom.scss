@@ -5,6 +5,20 @@
     opacity: 0.4;
 }
 
+.div-disabled-title {
+    pointer-events: none;
+    opacity: 0.4;
+
+    ::before {
+        content: "Feature is disabled...";
+        display: block;
+        text-align: center;
+        background-color: yellow;
+        color: red;
+        font-weight: bold;
+    }
+}
+
 h2 {
     font-family: 'Roboto Slab', serif;
 }

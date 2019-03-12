@@ -2,9 +2,9 @@ import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { getStyle, hexToRgba } from '@coreui/coreui-pro/dist/js/coreui-utilities';
 import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
 
-import { Observable, Observer, timer, from, of } from 'rxjs';
+import { Observable, timer, of } from 'rxjs';
 import { DataService, UtilityService } from '../../services';
-import { share, map, tap, switchMap, concatMap } from 'rxjs/operators';
+import { share, map, tap, switchMap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { MapStyle } from './../shared/map-style';
 import { Select } from '@ngxs/store';
@@ -138,7 +138,7 @@ export class VehicleComponent implements OnInit, OnDestroy {
     this.loadVehicleState();
     this.loadVehicleStatePeriodically();
     this.loadPlayChartData();
-    this.playChart.pause();
+    // this.playChart.pause();
   }
 
   ngOnDestroy() {
@@ -195,7 +195,7 @@ export class VehicleComponent implements OnInit, OnDestroy {
     );
 
     this.alerts$ = this.vcode$.pipe(
-      switchMap(vcode => this.dataService.getVehicleMalfuncStateByLatestN(vcode, 5)),
+      switchMap(vcode => this.dataService.getVehicleMalfuncStatesByLatestN(vcode, 5)),
       // map((alerts: any[]) => alerts.slice(0, 5)),
       share()
     );
@@ -211,7 +211,7 @@ export class VehicleComponent implements OnInit, OnDestroy {
     );
     // this.playChartData$ = this.utilityService.getCurrentData();
     // this.playChartData$ = timer(0, this.intSec * 1000).pipe(map(n => n * 100));
-    this.playChartData$ = of(0);
+    // this.playChartData$ = of(0);
   }
 
 }

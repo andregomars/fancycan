@@ -22,18 +22,18 @@
           <tr *ngFor="let item of alerts$ | async">
             <td>
               <a class="btn btn-link text-primary" 
-                (click)="nav(item.fleet_code, item.vehicle_number, item.updated_time)">
-                <small>{{ item.CreatedDate.$date | date:'MM/dd HH:mm:ss'}}</small>
+                (click)="nav(item.vcode, item.createDate.$date)">
+                <small>{{ item.createDate.$date | date:'MM/dd HH:mm:ss' }}</small>
               </a>
             </td>
             <td>
-              <div class="small">{{ item.spn }}</div>
+              <div class="small">{{ item.malfuncSpns }}</div>
             </td>
             <td>
-              <div class="small">{{ item.type | titlecase }}</div>
+              <div class="small">{{ item.malfuncLevel | titlecase }}</div>
             </td>
             <td>
-              <div class="small">{{ item.CreatedDate.$date | date:'MM/dd HH:mm'}}</div>
+              <div class="small"></div>
             </td>
           </tr>
         </tbody>

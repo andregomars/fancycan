@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
-import { ViewProfileState } from '../../states';
+import { Navigate } from '@ngxs/router-plugin';
+import { switchMap, share, take, map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { startOfToday } from 'date-fns';
+
+import { ViewProfileState } from '../../states';
 import { DataService } from '../../services';
 import { SetProfile } from '../../actions';
-import { Navigate } from '@ngxs/router-plugin';
-import { switchMap, share } from 'rxjs/operators';
 
 @Component({
   selector: 'app-malfunction-list',
@@ -23,14 +25,19 @@ export class MalfunctionListComponent implements OnInit {
 
   ngOnInit() {
     // this.alerts$ = this.dataService.getAlerts();
+    // this.alerts$ = this.vcode$.pipe(
+    //   switchMap(vcode => this.dataService.getVehicleMalfuncState(vcode)),
+    //   share()
+    // );
     this.alerts$ = this.vcode$.pipe(
-      switchMap(vcode => this.dataService.getVehicleMalfuncState(vcode)),
+      switchMap(vcode => this.dataService.getVehicleMalfuncStatesByDateRange(vcode, startOfToday(), new Date())),
+      map((list: any[]) => list.slice(0, 14)),
       share()
     );
   }
 
-  nav(fcode: string, vcode: string, time: string) {
-    this.store.dispatch(new SetProfile(fcode, vcode, null, null));
+  nav(vcode: string, time: string) {
+    this.store.dispatch(new SetProfile(null, vcode, null, null));
     this.store.dispatch(new Navigate(
       ['vehicle/playback', vcode],
       { time: time}

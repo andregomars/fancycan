@@ -37,11 +37,11 @@
             [src]="imgEngineCheck" class="img-fluid" alt="bus" width="35px" height="28px">
         </div>
       </div>
-      <div class="row mt-2 pt-2 justify-content-around border border-secondary rounded">
+      <div class="row mt-2 pt-2 justify-content-around border border-secondary rounded ">
         <div class="col-5">
           <label>Transmission</label>
         </div>
-        <div class="col-4">
+        <div class="col-4 div-disabled">
           <app-transmission-switch [shift]="(vehicle$ | async)?.transmission"></app-transmission-switch>
         </div>
         <div class="col-3">
@@ -49,8 +49,20 @@
             [src]="imgTransmissionCheck" class="img-fluid" alt="bus" width="35px" height="28px">
         </div>
       </div>
+      <div class="row mt-2 pt-2 justify-content-around border border-secondary rounded">
+        <div class="col-5">
+          <label>Engine Idle</label>
+        </div>
+        <div class="col-4">
+          <app-switch [isSwitchOn]="(vehicle$ | async)?.spn9007 && (vehicle$ | async)?.spn84"></app-switch>
+        </div>
+        <div class="col-3">
+          <img *ngIf="(vehicle$ | async)?.transmission_check"
+            [src]="imgTransmissionCheck" class="img-fluid" alt="bus" width="35px" height="28px">
+        </div>
+      </div>
       <div class="row mt-2 py-2 border border-secondary rounded">
-        <div class="col-12 col-lg-8">
+        <div class="col-12">
           <div class="row">
             <div class="col">
               <app-tooltip-label label="fuel economy"></app-tooltip-label>
@@ -58,9 +70,10 @@
           </div>
           <div class="row">
             <div class="col">
-              <div class="card mb-0 div-disabled">
-                <app-play-chart #playChart [len]="len" [intSec]="intSec"
-                  [labels]="playChartLabels" [data$]="playChartData$"></app-play-chart>
+              <div class="card mb-0 div-disabled-title">
+                <div></div>
+                <!-- <app-play-chart #playChart [len]="len" [intSec]="intSec"
+                  [labels]="playChartLabels" [data$]="playChartData$"></app-play-chart> -->
                 <!-- <div class="chart-wrapper mt-0" style="height:70px;">
                   <canvas baseChart class="chart" [datasets]="lineChart3Data" [labels]="lineChart3Labels" [options]="lineChart3Options"
                     [colors]="lineChart3Colours" [legend]="lineChart3Legend" [chartType]="lineChart3Type"></canvas>
@@ -79,7 +92,7 @@
             </div>
           </div>
         </div>
-        <div class="col-12 col-lg-4">
+        <!-- <div class="col-12 col-lg-4">
           <div class="row">
             <div class="col">
               <app-tooltip-label label="engine idle"></app-tooltip-label>
@@ -103,10 +116,11 @@
               <small>Idle:</small>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
-      <div class="row">
-        <div class="col mt-2 p-2 div-disabled" [style.min-height.px]="mapMinHeight" [style.background-color]="'#242f3e'">
+      <div class="row mt-2">
+        <div class="col-12 div-disabled-title "><div></div></div>
+        <div class="col px-2 div-disabled" [style.min-height.px]="mapMinHeight" [style.background-color]="'#242f3e'">
           <agm-map id="map_canvas" *ngIf="loadMap" [zoom]="mapZoom" [streetViewControl]=false [styles]="mapStyle"
             [latitude]="map_lat" [longitude]="map_lgt">
             <ng-container *ngIf="(vehicle$ | async)?.geolocations as locations">
