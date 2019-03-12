@@ -43,9 +43,19 @@
           <div class="card-body">
             <div class="row h-100">
               <div class="col-12 col-md-6 ">
-                <input type="text" class="form-control w-50 my-1" placeholder="SPN" formControlName="SPNNo">
-                <input type="text" class="form-control w-100 mt-1 mb-3" placeholder="SPN Name" formControlName="SPNName">
-                <div class="row no-gutters">
+                <div class="input-group input-group-sm my-1 spn-input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">SPN No</span>
+                  </div>
+                  <input type="text" class="form-control" formControlName="SPNNo">
+                </div>
+                <div class="input-group input-group-sm my-1 spn-input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">SPN Name</span>
+                  </div>
+                  <input type="text" class="form-control" formControlName="SPNName">
+                </div>
+                <!-- <div class="row no-gutters">
                   <div class="col-6">
                     <input type="text" class="form-control my-1" placeholder="PGN" formControlName="PGNNo">
                   </div>
@@ -55,21 +65,93 @@
                   <div class="col-5">
                     <input type="text" class="form-control my-1" placeholder="CAN ID">
                   </div>
-                </div>
-                <input type="text" class="form-control w-50 mb-3" placeholder="Source address">
-                <input type="text" class="form-control w-50 my-1" placeholder="Start Bit" formControlName="StartBit">
-                <input type="text" class="form-control w-50 my-1" placeholder="Length" formControlName="Length">
-                <input type="text" class="form-control w-50 my-1" placeholder="Resolution" formControlName="Resolution">
-                <input type="text" class="form-control w-50 my-1" placeholder="Offset" formControlName="Offset">
-                <input type="text" class="form-control w-50 my-1" placeholder="Unit" formControlName="Unit">
-                <input type="text" class="form-control w-50 my-1" placeholder="Frequency">
+                </div> -->
                 <div class="row no-gutters">
-                  <div class="col-6">
-                    <input type="text" class="form-control my-1" placeholder="Max Value" formControlName="LowerDataRange">
+                  <div class="col-12 col-md-6">
+                    <div class="input-group input-group-sm my-1 spn-input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">PGN Name</span>
+                      </div>
+                      <input type="text" class="form-control" formControlName="PGNNo">
+                    </div>
+                  </div>
+                  <div class="col-1 text-center align-self-center">
+                    Or
+                  </div>
+                  <div class="col-11 col-md-5">
+                    <div class="input-group input-group-sm my-1">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">CAN ID</span>
+                      </div>
+                      <input type="text" class="form-control">
+                    </div>
+                  </div>
+                </div>
+                <div class="input-group input-group-sm my-1 spn-input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">Source Address</span>
+                  </div>
+                  <input type="text" class="form-control" disabled>
+                </div>
+                <div class="input-group input-group-sm my-1 spn-input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">Start Byte</span>
+                  </div>
+                  <input type="text" class="form-control" formControlName="StartByte">
+                </div>
+                <div class="input-group input-group-sm my-1 spn-input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">Start Bit</span>
+                  </div>
+                  <input type="text" class="form-control" formControlName="StartBit">
+                </div>
+                <div class="input-group input-group-sm my-1 spn-input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">Length</span>
+                  </div>
+                  <input type="text" class="form-control" formControlName="Length">
+                </div>
+                <div class="input-group input-group-sm my-1 spn-input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">Resolution</span>
+                  </div>
+                  <input type="text" class="form-control" formControlName="Resolution">
+                </div>
+                <div class="input-group input-group-sm my-1 spn-input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">Offset</span>
+                  </div>
+                  <input type="text" class="form-control" formControlName="Offset">
+                </div>
+                <div class="input-group input-group-sm my-1 spn-input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">Unit</span>
+                  </div>
+                  <input type="text" class="form-control" formControlName="Unit">
+                </div>
+                <div class="input-group input-group-sm my-1 spn-input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">Frequency</span>
+                  </div>
+                  <input type="text" class="form-control">
+                </div>
+                <div class="row no-gutters">
+                  <div class="col-12 col-md-6">
+                    <div class="input-group input-group-sm my-1 spn-input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">Min Value</span>
+                      </div>
+                      <input type="text" class="form-control" formControlName="LowerDataRange">
+                    </div>
                   </div>
                   <div class="col-1"></div>
-                  <div class="col-5">
-                    <input type="text" class="form-control my-1" placeholder="Min Value" formControlName="UpperDataRange">
+                  <div class="col-12 col-md-5">
+                    <div class="input-group input-group-sm my-1">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">Max Value</span>
+                      </div>
+                      <input type="text" class="form-control" formControlName="UpperDataRange">
+                    </div>
                   </div>
                 </div>
               </div>

@@ -7,6 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class SwitchComponent implements OnInit {
   @Input() isSwitchOn: boolean;
+  @Input() isDisabled = false;
 
   constructor() { }
 

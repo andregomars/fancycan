@@ -1,4 +1,4 @@
-<label class="switch switch-label switch-outline-primary-alt" >
+<label class="switch switch-label" [ngClass]="isDisabled ? 'switch-outline-secondary-alt' : 'switch-outline-primary-alt'">
   <input type="checkbox" class="switch-input" (click)="clickSwitch($event)" checked/>
   <ng-container *ngIf="isSwitchOn; then switchOn; else switchOff">
   </ng-container>

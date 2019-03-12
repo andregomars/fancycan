@@ -7,6 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class TransmissionSwitchComponent implements OnInit {
   @Input() shift: string;
+  @Input() isDisabled  = false;
 
   constructor() { }
 

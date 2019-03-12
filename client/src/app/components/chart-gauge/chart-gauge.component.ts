@@ -32,7 +32,7 @@ export class ChartGaugeComponent implements OnInit, OnChanges {
             text: this.title
         },
         animation: {
-          duration: 1000
+          duration: 0
         }
     };
 

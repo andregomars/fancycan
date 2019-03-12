@@ -5,7 +5,7 @@
       <button class="btn btn-link pull-right p-0" (click)="switchSyncStatus()">
         <ng-container *ngIf="isAutoSync; then tSpin; else tStill"></ng-container>
         <ng-template #tSpin>
-          <i class="fa fa-refresh fa-spin"></i>&nbsp;<small>Manual Sync</small>
+          <i class="fa fa-refresh fa-spin"></i>&nbsp;<small>Stop Sync</small>
         </ng-template>
         <ng-template #tStill>
           <i class="fa fa-refresh"></i>&nbsp;<small>Auto Sync</small>
@@ -41,8 +41,9 @@
         <div class="col-5">
           <label>Transmission</label>
         </div>
-        <div class="col-4 div-disabled">
-          <app-transmission-switch [shift]="(vehicle$ | async)?.transmission"></app-transmission-switch>
+        <div class="col-4">
+          <!-- <app-transmission-switch [shift]="(vehicle$ | async)?.transmission"></app-transmission-switch> -->
+          <app-transmission-switch shift="P" isDisabled="true"></app-transmission-switch>
         </div>
         <div class="col-3">
           <img *ngIf="(vehicle$ | async)?.transmission_check"
@@ -65,7 +66,7 @@
         <div class="col-12">
           <div class="row">
             <div class="col">
-              <app-tooltip-label label="fuel economy"></app-tooltip-label>
+              <app-tooltip-label label="fuel economy / energy consumption"></app-tooltip-label>
             </div>
           </div>
           <div class="row">
@@ -185,8 +186,16 @@
         </div>
       </div>
       <div class="row px-2">
-        <div class="col text-center">
-          <img [src]="imgBus" class="img-fluid" alt="bus" width="60%" height="auto">
+        <div class="col-3 text-center align-self-center">
+          <i class="fa fa-arrow-left fa-4x text-warning"></i>
+          <div class="text-muted">L turn signal</div>
+        </div>
+        <div class="col-6 text-center">
+          <img [src]="imgBus" class="img-fluid" alt="bus" width="80%" height="auto">
+        </div>
+        <div class="col-3 text-center align-self-center">
+          <i class="fa fa-arrow-right fa-4x text-warning"></i>
+          <div class="text-muted">R turn signal</div>
         </div>
       </div>
       <div class="row">
@@ -307,12 +316,24 @@
                     <td>
                       <div class="small">{{ item.name }}</div>
                     </td>
-                    <td>
-                      <div class="small">{{ item.value }}</div>
-                    </td>
-                    <td>
-                      <div class="small">{{ item.unit }}</div>
-                    </td>
+                    <ng-container *ngIf="item.spn === '917'; then divMileConvert; else divRegular;">
+                    </ng-container>
+                    <ng-template #divMileConvert>
+                      <td>
+                        <div  class="small" >{{ item.value / 1600 | number:'1.0-2'}}</div>
+                      </td>
+                      <td>
+                        <div class="small">mi</div>
+                      </td>
+                    </ng-template>
+                    <ng-template #divRegular >
+                      <td>
+                        <div class="small" >{{ item.value }}</div>
+                      </td>
+                      <td>
+                        <div class="small">{{ item.unit }}</div>
+                      </td>
+                    </ng-template>
                   </tr>
                 </tbody>
               </table>
