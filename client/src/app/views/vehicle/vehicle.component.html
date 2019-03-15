@@ -2,8 +2,8 @@
   <div class="row mt-2">
     <div class="col-12 col-md-4 px-0">
       <app-nav-label></app-nav-label>
-      <button class="btn btn-link pull-right p-0" (click)="switchSyncStatus()">
-        <ng-container *ngIf="isAutoSync; then tSpin; else tStill"></ng-container>
+      <button class="btn btn-link pull-right p-0" (click)="toggleSyncStatus()">
+        <ng-container *ngIf="pauser.value; then tStill; else tSpin"></ng-container>
         <ng-template #tSpin>
           <i class="fa fa-refresh fa-spin"></i>&nbsp;<small>Stop Sync</small>
         </ng-template>
