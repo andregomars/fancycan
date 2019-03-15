@@ -6,9 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./datepicker-bar.component.scss']
 })
 export class DatepickerBarComponent implements OnInit {
-  bsValue = new Date();
   bsRangeValue: Date[];
-  maxDate = new Date();
+  minDate: Date = new Date();
+  maxDate: Date = new Date();
   months: any[];
   years: number[];
   selectedMonth: any;
@@ -27,8 +27,8 @@ export class DatepickerBarComponent implements OnInit {
     this.years = [2018, 2017, 2016];
 
     // this.selectedMonth = { name: 'Sep', value: 9};
-    this.maxDate.setDate(this.maxDate.getDate() + 7);
-    this.bsRangeValue = [this.bsValue, this.maxDate];
+    this.minDate.setDate(new Date().getDate() - 7);
+    this.bsRangeValue = [this.minDate, this.maxDate];
   }
 
 }

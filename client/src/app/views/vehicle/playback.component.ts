@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService, UtilityService } from '../../services';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { map, share, switchMap, tap, timeout, take } from 'rxjs/operators';
 import { Select } from '@ngxs/store';
+import { subMinutes, addSeconds } from 'date-fns';
 
 import { environment } from '../../../environments/environment';
 import { MapStyle } from '../shared/map-style';
@@ -16,6 +17,11 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class PlaybackComponent implements OnInit {
   @Select(ViewProfileState.vcode) vcode$: Observable<string>;
+  pauser = new BehaviorSubject<boolean>(false);
+  beginTime$: Observable<Date>;
+  chosenTime$: Observable<Date>;
+
+
   selectedTime: Date = new Date();
   bsRangeValue: Date[];
   maxDate = new Date();
@@ -36,8 +42,7 @@ export class PlaybackComponent implements OnInit {
   gaugeType = 'semi';
   gaugeThick = 15;
 
-  lastUpdated = '2018-08-28 23:32:55';
-  startTime$: Observable<Date>;
+  // lastUpdated = '2018-08-28 23:32:55';
   engineRunning = 45;
   engineIdle = 60;
   odometer = 27026.8;
@@ -70,29 +75,40 @@ export class PlaybackComponent implements OnInit {
   }
 
   private loadTime() {
-    this.startTime$ = this.route.queryParamMap.pipe(
+    this.chosenTime$ = this.route.queryParamMap.pipe(
       map(params => params.get('time') || null),
-      map(time => time ? new Date(time) : new Date()),
-      tap(time => {
-        setTimeout(() => {
-          this.selectedTime = time;
-        }, 100);
-      })
+      map(time => time ? new Date(+time) : new Date())
+    );
+
+    this.beginTime$ = this.chosenTime$.pipe(
+      map(time => subMinutes(time, 3))
     );
   }
 
   private loadData() {
-    this.vehicles$ = this.dataService.getRealtimeStates().pipe(
-      switchMap(states =>
-        this.vcode$.pipe(
-          map(vcode =>
-            states.filter(state => state.code === vcode)
-          )
-        )
-      ),
-      map(vehicles => this.utilityService.attachMapLabels(vehicles)),
-      share()
+    const data$ = this.vcode$.pipe(
+      switchMap(vcode => this.beginTime$.pipe(
+        switchMap(beginTime => {
+          const endTime = addSeconds(beginTime, 1);
+          return this.dataService.getCansByDateRange(vcode, beginTime, endTime);
+        })
+      )
+     )
     );
+
+    data$.subscribe(x => console.log(x))
+
+    // this.vehicles$ = this.dataService.getRealtimeStates().pipe(
+    //   switchMap(states =>
+    //     this.vcode$.pipe(
+    //       map(vcode =>
+    //         states.filter(state => state.code === vcode)
+    //       )
+    //     )
+    //   ),
+    //   map(vehicles => this.utilityService.attachMapLabels(vehicles)),
+    //   share()
+    // );
 
     // this.definitions$ = this.dataService.getDefinitions().pipe(
     //   share()
@@ -115,9 +131,9 @@ export class PlaybackComponent implements OnInit {
   }
 
   private loadVehicle() {
-    this.vehicle$ = this.vehicles$.pipe(
-      map(vehicles => vehicles[0])
-    );
+    // this.vehicle$ = this.vehicles$.pipe(
+    //   map(vehicles => vehicles[0])
+    // );
     // this.vehicle$ = this.dataService.getPanels().pipe(
     //   switchMap(vehicles =>
     //     this.vcode$.pipe(

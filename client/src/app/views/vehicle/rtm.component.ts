@@ -7,8 +7,8 @@ import { Buffer } from 'buffer/';
 import { ObjectID } from 'bson';
 
 import { environment } from '../../../environments/environment';
-import { ICan } from '../../models/ican';
-import { ICanEntry, Dm1Collection } from 'fancycan-model';
+// import { ICan } from '../../models/ican';
+import { ICanEntry, Dm1Collection, ICan } from 'fancycan-model';
 import { Dm1AlertService } from '../../services/utility/dm1-alert.service';
 
 @Component({

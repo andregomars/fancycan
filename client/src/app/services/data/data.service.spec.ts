@@ -39,7 +39,7 @@ describe('DataService', () => {
     const vcode = '6005';
     const beginDate = new Date('2019-03-08T08:07:22.000Z');
     const endDate = new Date('2019-03-08T08:07:23.000Z');
-    const output = await dataService.getCanStatesByDateRange(vcode, beginDate, endDate).toPromise();
+    const output = await dataService.getCansByDateRange(vcode, beginDate, endDate).toPromise();
 
     const expected = 85;
     expect(output).toBeTruthy();
@@ -50,7 +50,7 @@ describe('DataService', () => {
     const vcode = '6005';
     const beginDate = new Date('2019-03-08T08:07:22.000Z');
     const endDate = new Date('2019-03-08T08:07:23.000Z');
-    const output = await dataService.getCanStatesByDateRange(vcode, beginDate, endDate).toPromise();
+    const output = await dataService.getCansByDateRange(vcode, beginDate, endDate).toPromise();
 
     const expected = 85;
     expect(output).toBeTruthy();

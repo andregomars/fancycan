@@ -2795,6 +2795,13 @@ fancycan-model@^1.0.26:
   dependencies:
     buffer "^5.2.1"
 
+fancycan-model@^1.0.34:
+  version "1.0.34"
+  resolved "https://registry.yarnpkg.com/fancycan-model/-/fancycan-model-1.0.34.tgz#d3153d40ad8401491c949291bbc5b96391a92356"
+  integrity sha512-JonqbnaaLfpjgTNWP5EMWqWrZOVsKTrg2BX6+EYLKhwDNxx8MHsas84g5Rh5tpvUo9G7yfkKmqr6Ho4sCc6qwQ==
+  dependencies:
+    buffer "^5.2.1"
+
 fancycan-utility@^1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/fancycan-utility/-/fancycan-utility-1.0.3.tgz#a0c277ceef3a001cc51070a0dd42edc873d14803"

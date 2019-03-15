@@ -61,14 +61,14 @@ export class DataService {
       .get<any>(`${this.mongoUrl}/vehicle_state`, { headers, params });
   }
 
-  getCanStatesByDateRange(vcode: string, beginDate: Date, endDate: Date): Observable<any> {
+  getCansByDateRange(vcode: string, beginDate: Date, endDate: Date): Observable<any> {
     const beginID =  ObjectID.createFromTime(beginDate.getTime() / 1000);
     const endID =  ObjectID.createFromTime(endDate.getTime() / 1000);
-    const params = new HttpParams().set('np', '')
-      .set('filter', `{'vcode': '${vcode}'}`)
-      .set('filter', `{'_id':{'$gte':{'$oid': '${beginID.toString()}'}}}`)
-      .set('filter', `{'_id':{'$lt':{'$oid': '${endID.toString()}'}}}`)
-      .set('pagesize', '1000');
+    const params = new HttpParams().append('np', '')
+      .append('filter', `{'vcode': '${vcode}'}`)
+      .append('filter', `{'_id':{'$gte':{'$oid': '${beginID.toString()}'}}}`)
+      .append('filter', `{'_id':{'$lt':{'$oid': '${endID.toString()}'}}}`)
+      .append('pagesize', '1000');
     const headers = this.mongoApiHeader;
     return this.http
       .get<any>(`${this.mongoUrl}/can`, { headers, params });
@@ -86,16 +86,16 @@ export class DataService {
   // }
 
   getVehicleMalfuncState(vcode: string): Observable<any> {
-    const params = new HttpParams().set('np', '').set('filter', `{'vcode': '${vcode}'}`);
+    const params = new HttpParams().append('np', '').append('filter', `{'vcode': '${vcode}'}`);
     const headers = this.mongoApiHeader;
     return this.http
       .get<any>(`${this.mongoUrl}/vehicle_malfunc_state`, { headers, params });
   }
 
   getVehicleMalfuncStatesByLatestN(vcode: string, latestN: number): Observable<any> {
-    const params = new HttpParams().set('np', '')
-      .set('filter', `{'vcode': '${vcode}'}`)
-      .set('count', '').set('page', '1').set('pagesize', latestN.toString());
+    const params = new HttpParams().append('np', '')
+      .append('filter', `{'vcode': '${vcode}'}`)
+      .append('count', '').set('page', '1').set('pagesize', latestN.toString());
     const headers = this.mongoApiHeader;
     return this.http
       .get<any>(`${this.mongoUrl}/vehicle_malfunc_state`, { headers, params });
@@ -104,12 +104,12 @@ export class DataService {
   getVehicleMalfuncStatesByDateRange(vcode: string, beginDate: Date, endDate: Date): Observable<any> {
     const beginID =  ObjectID.createFromTime(beginDate.getTime() / 1000);
     const endID =  ObjectID.createFromTime(endDate.getTime() / 1000);
-    const params = new HttpParams().set('np', '')
-      .set('filter', `{'vcode': '${vcode}'}`)
-      .set('filter', `{'_id':{'$gte':{'$oid': '${beginID.toString()}'}}}`)
-      .set('filter', `{'_id':{'$lt':{'$oid': '${endID.toString()}'}}}`)
-      .set('keys', `{'vcode':1,'malfuncID':1, 'malfuncName':1, 'malfuncSpns':1, 'malfuncLevel':1,'createDate':1}`)
-      .set('pagesize', '1000');
+    const params = new HttpParams().append('np', '')
+      .append('filter', `{'vcode': '${vcode}'}`)
+      .append('filter', `{'_id':{'$gte':{'$oid': '${beginID.toString()}'}}}`)
+      .append('filter', `{'_id':{'$lt':{'$oid': '${endID.toString()}'}}}`)
+      .append('keys', `{'vcode':1,'malfuncID':1, 'malfuncName':1, 'malfuncSpns':1, 'malfuncLevel':1,'createDate':1}`)
+      .append('pagesize', '1000');
     const headers = this.mongoApiHeader;
     return this.http
       .get<any>(`${this.mongoUrl}/vehicle_malfunc_state`, { headers, params });
