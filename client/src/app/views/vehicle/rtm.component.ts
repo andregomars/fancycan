@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService, SmartQueueService } from '../../services';
+import { DataService, SmartQueueService, UtilityService } from '../../services';
 import { Observable } from 'rxjs';
 import { map, share } from 'rxjs/operators';
 import { MqttService, IMqttMessage } from 'ngx-mqtt';
@@ -7,7 +7,6 @@ import { Buffer } from 'buffer/';
 import { ObjectID } from 'bson';
 
 import { environment } from '../../../environments/environment';
-// import { ICan } from '../../models/ican';
 import { ICanEntry, Dm1Collection, ICan } from 'fancycan-model';
 import { Dm1AlertService } from '../../services/utility/dm1-alert.service';
 
@@ -68,6 +67,7 @@ export class RtmComponent implements OnInit {
     private dataService: DataService,
     private smartQueueService: SmartQueueService,
     private dm1AlertService: Dm1AlertService,
+    private utilityService: UtilityService
   ) { }
 
   ngOnInit() {
@@ -91,14 +91,10 @@ export class RtmComponent implements OnInit {
     this.cans$ =
       this.mqttService.observe(this.topic).pipe(
         map((message: IMqttMessage) => {
-          const canMsg: ICan = JSON.parse(message.payload.toString());
-          const can: ICanEntry = {
-            key: Buffer.from(canMsg.canID).toString('hex'),
-            value: Buffer.from(canMsg.canData).toString('hex'),
-            time: new ObjectID(canMsg.rawID).getTimestamp()
-          };
-          this.smartQueueService.push(can);
-          this.dm1AlertService.push(can);
+          const can: ICan = JSON.parse(message.payload.toString());
+          const canEntry = this.utilityService.buildCanEntry(can);
+          this.smartQueueService.push(canEntry);
+          this.dm1AlertService.push(canEntry);
           return this.smartQueueService.queue;
         }),
       );
@@ -108,30 +104,8 @@ export class RtmComponent implements OnInit {
     this.topic = environment.topic;
   }
 
-  // private toHexString(byteArray: any[]) {
-  //   return Array.from(byteArray, (byte) => {
-  //     return ('0' + (byte & 0xFF).toString(16)).slice(-2);
-  //   }).join('');
-  // }
 
   private loadData() {
-    // this.definitions$ = this.dataService.getDefinitions().pipe(
-    //   share()
-    // );
-
-    // this.cans$ = this.dataService.getCANs().pipe(
-    //   map((cans: any[]) =>
-    //     cans.slice(0, 15).map(can => {
-    //       return {
-    //         id: can.id,
-    //         value: this.utitlityService.formatRawCAN(can.value)
-    //       };
-    //     })
-    //   ),
-    //   share()
-    // );
-
-
     this.maxDate.setDate(this.maxDate.getDate() + 7);
     this.bsRangeValue = [this.bsValue, this.maxDate];
   }

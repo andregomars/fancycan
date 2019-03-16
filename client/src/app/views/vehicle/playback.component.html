@@ -9,7 +9,7 @@
           Start Time: {{ beginTime$ | async | date: 'yyyy-MM-dd HH:mm:ss'}}
         </div>
         <div class="col-6 col-md-4">
-          <div class="border border-rounded w-75">
+          <div class="border border-rounded">
             <button class="btn btn-link">
               <i class="fa fa-rotate-left" (click)="resetPlayer()"></i>
             </button>
@@ -73,19 +73,27 @@
               <tr>
                 <th><small>CAN ID</small></th>
                 <th><small>Start bit</small></th>
-                <th><small>Length</small></th>
+                <th>
+                  <small>Length</small>
+                  <button *ngIf="!isFiltering" (click)="filterCans()" class="btn btn-link pull-right p-0 m-0">
+                    <i class="fa fa-filter"></i>
+                  </button>
+                  <button *ngIf="isFiltering" (click)="filterCans()" class="btn btn-link text-danger pull-right p-0 m-0">
+                    <i class="fa fa-times"></i>
+                  </button>
+                </th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td>
-                  <input type="text" class="form-control" />
+                  <input type="text" class="form-control" [(ngModel)]="filterCanID" />
                 </td>
                 <td>
-                  <input type="text" class="form-control" />
+                  <input type="text" class="form-control" [(ngModel)]="filterStartBit" />
                 </td>
                 <td>
-                  <input type="text" class="form-control" />
+                  <input type="text" class="form-control" [(ngModel)]="filterLength" />
                 </td>
               </tr>
             </tbody>
@@ -104,10 +112,10 @@
             <tbody>
               <tr>
                 <td>
-                  <input type="text" class="form-control" />
+                  <input type="text" class="form-control" [value]="max" disabled />
                 </td>
                 <td>
-                  <input type="text" class="form-control" />
+                  <input type="text" class="form-control" [value]="min" disabled />
                 </td>
               </tr>
             </tbody>
@@ -118,32 +126,38 @@
             <thead class="text-white thead-light bg-primary">
               <tr>
                 <th><small>Times</small></th>
-                <th><small>Time</small></th>
+                <th><small>Time (s)</small></th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td>
-                  <input type="text" class="form-control" />
+                  <input type="text" class="form-control" [value]="times" disabled />
                 </td>
                 <td>
-                  <input type="text" class="form-control" />
+                  <input type="text" class="form-control" [value]="time" disabled />
                 </td>
               </tr>
             </tbody>
           </table>
         </div>
       </div>
-      <div class="row mt-2 py-2 border border-secondary rounded">
+      <div class="row mt-2 py-2 border border-secondary rounded px-0">
         <ul class="col list-unstyled">
-          <li *ngFor="let item of cansPausable$ | async" class="row text-monospace">
-            <div class="col-4">
-              <!-- {{ item.id }} -->
-              {{ item.canID.$binary }}
-            </div>
-            <div class="col-8">
-              <!-- {{ item.value }} -->
-              {{ item.canData.$binary }}
+          <!-- <li *ngFor="let item of cansPausable$ | async" class="row text-monospace"> -->
+          <li *ngFor="let item of cansToShow$ | async">
+            <div [ngClass]="filterKey && filterKey.toUpperCase() === item.key.toUpperCase() ? 'text-warning' : '' ">
+              <div class="row text-monospace no-gutters p-0 m-0">
+                <div class="col-3">
+                  {{ item.key | uppercase }}
+                </div>
+                <div class="col-5">
+                  {{ item.value | uppercase }}
+                </div>
+                <div class="col-4">
+                  {{ item.time | date: 'HH:mm:ss' }}
+                </div>
+              </div>
             </div>
           </li>
         </ul>

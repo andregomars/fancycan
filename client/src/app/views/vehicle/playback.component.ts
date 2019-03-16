@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService, UtilityService } from '../../services';
+import { DataService, UtilityService, SmartQueueService } from '../../services';
 import { Observable, BehaviorSubject, timer, NEVER } from 'rxjs';
 import { map, share, switchMap, tap, timeout, take } from 'rxjs/operators';
 import { Select } from '@ngxs/store';
@@ -9,6 +9,7 @@ import { environment } from '../../../environments/environment';
 import { MapStyle } from '../shared/map-style';
 import { ViewProfileState } from '../../states';
 import { ActivatedRoute } from '@angular/router';
+import { ICan } from 'fancycan-model';
 
 @Component({
   selector: 'app-vehicle-playback',
@@ -21,9 +22,13 @@ export class PlaybackComponent implements OnInit {
   cansPausable$: Observable<any>;
   beginTime$: Observable<Date>;
   chosenTime$: Observable<Date>;
+  cansToShow$: Observable<any>;
   marginMinutes = 3;
   timerIncrementalSec = 1;
-
+  isFiltering = false;
+  filterCanID: string;
+  filterStartBit: number;
+  filterLength: number;
 
   selectedTime: Date = new Date();
   // bsRangeValue: Date[];
@@ -47,9 +52,26 @@ export class PlaybackComponent implements OnInit {
   imgBus = 'assets/img/vehicle/bus.png';
   imgEngineCheck = 'assets/img/vehicle/check_engine.png';
 
+  get min() {
+    return this.smartQueueService.min;
+  }
+  get max() {
+    return this.smartQueueService.max;
+  }
+  get time() {
+    return this.smartQueueService.timer;
+  }
+  get times() {
+    return this.smartQueueService.times;
+  }
+  get filterKey() {
+    return this.smartQueueService.filterKey;
+  }
+
   constructor(
     private dataService: DataService,
     private route: ActivatedRoute,
+    private smartQueueService: SmartQueueService,
     private utilityService: UtilityService
   ) { }
 
@@ -58,16 +80,26 @@ export class PlaybackComponent implements OnInit {
     this.loadData();
   }
 
-  public togglePlayer() {
+  filterCans() {
+    this.isFiltering = !this.isFiltering;
+
+    if (this.isFiltering && this.filterCanID) {
+      this.smartQueueService.setFilter(this.filterCanID, +this.filterStartBit, +this.filterLength);
+    } else {
+      this.smartQueueService.clearFilter();
+    }
+  }
+
+  togglePlayer() {
     this.pauser.next(!this.pauser.value);
   }
 
-  public stopPlayer() {
+  stopPlayer() {
     this.pauser.next(true);
     this.loadTime();
   }
 
-  public resetPlayer() {
+  resetPlayer() {
     this.pauser.next(true);
     this.loadTime();
     this.pauser.next(false);
@@ -90,7 +122,10 @@ export class PlaybackComponent implements OnInit {
         switchMap(baseTime => {
           const beginTime = addSeconds(baseTime, incremental);
           const endTime = addSeconds(beginTime, 1);
-          return this.dataService.getCansByDateRange(vcode, beginTime, endTime);
+          const cansBson$ = this.dataService.getCansByDateRange(vcode, beginTime, endTime);
+          return cansBson$.pipe(
+            map((cansBson: ICan[]) => this.utilityService.buildCanEntries(cansBson, true)
+          ));
         })
       )
      )
@@ -103,6 +138,13 @@ export class PlaybackComponent implements OnInit {
 
     this.cansPausable$ = this.pauser.pipe(
       switchMap(paused => paused ? NEVER : cansTimer$)
+    );
+
+    this.cansToShow$ = this.cansPausable$.pipe(
+      map(cans => {
+        cans.map(can => this.smartQueueService.push(can));
+        return this.smartQueueService.queue;
+      })
     );
 
 

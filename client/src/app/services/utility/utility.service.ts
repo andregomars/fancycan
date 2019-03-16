@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map, share, tap } from 'rxjs/operators';
 import { format } from 'date-fns';
+import { ICan, ICanEntry } from 'fancycan-model';
+import { Buffer } from 'buffer/';
+import { ObjectID } from 'bson';
 
 @Injectable({
     providedIn: 'root'
@@ -249,7 +252,30 @@ export class UtilityService {
                 enabled: key === enabledKey
             };
         });
+    }
 
+    public buildCanEntry(can: ICan): ICanEntry {
+        return {
+            key: Buffer.from(can.canID).toString('hex'),
+            value: Buffer.from(can.canData).toString('hex'),
+            time: new ObjectID(can.rawID).getTimestamp()
+        } as ICanEntry;
+    }
+
+    public buildCanEntryFromCanBson(canBson: any): ICanEntry {
+        return {
+            key: Buffer.from(canBson.canID.$binary, 'base64').toString('hex'),
+            value: Buffer.from(canBson.canData.$binary, 'base64').toString('hex'),
+            time: new ObjectID(canBson.rawID.$oid).getTimestamp()
+        } as ICanEntry;
+    }
+
+    public buildCanEntries(cans: any[], isBson: boolean): ICanEntry[] {
+        if (isBson) {
+            return cans.map(can => this.buildCanEntryFromCanBson(can));
+        } else {
+            return cans.map(can => this.buildCanEntry(can as ICan));
+        }
     }
 
 }
