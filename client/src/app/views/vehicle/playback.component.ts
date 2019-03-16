@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService, UtilityService } from '../../services';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject, timer, NEVER } from 'rxjs';
 import { map, share, switchMap, tap, timeout, take } from 'rxjs/operators';
 import { Select } from '@ngxs/store';
 import { subMinutes, addSeconds } from 'date-fns';
@@ -17,20 +17,18 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class PlaybackComponent implements OnInit {
   @Select(ViewProfileState.vcode) vcode$: Observable<string>;
-  pauser = new BehaviorSubject<boolean>(false);
+  pauser = new BehaviorSubject<boolean>(true);
+  cansPausable$: Observable<any>;
   beginTime$: Observable<Date>;
   chosenTime$: Observable<Date>;
+  marginMinutes = 3;
+  timerIncrementalSec = 1;
 
 
   selectedTime: Date = new Date();
-  bsRangeValue: Date[];
-  maxDate = new Date();
-  rawDataList: any[];
-  vehicle$: Observable<any>;
-  vehicles$: Observable<any>;
-  // definitions$: Observable<any>;
-  cans$: Observable<any>;
-  checklist$: Observable<any>;
+  // bsRangeValue: Date[];
+  // maxDate = new Date();
+
 
   loadMap = environment.loadMap;
   mapMinHeight = 350;
@@ -39,10 +37,9 @@ export class PlaybackComponent implements OnInit {
   bus_number: string;
   map_lat = 34.056539;
   map_lgt = -118.237485;
-  gaugeType = 'semi';
-  gaugeThick = 15;
+  // gaugeType = 'semi';
+  // gaugeThick = 15;
 
-  // lastUpdated = '2018-08-28 23:32:55';
   engineRunning = 45;
   engineIdle = 60;
   odometer = 27026.8;
@@ -59,19 +56,21 @@ export class PlaybackComponent implements OnInit {
   ngOnInit() {
     this.loadTime();
     this.loadData();
-    this.loadVehicle();
-    this.loadChecklist();
   }
 
-  private loadChecklist() {
-    this.checklist$ = this.vcode$.pipe(
-      switchMap(vcode =>
-        this.dataService.getChecklist().pipe(
-          map((items: any[]) =>
-            items.filter(item => item.vehicle_code === vcode))
-        )),
-      share()
-    );
+  public togglePlayer() {
+    this.pauser.next(!this.pauser.value);
+  }
+
+  public stopPlayer() {
+    this.pauser.next(true);
+    this.loadTime();
+  }
+
+  public resetPlayer() {
+    this.pauser.next(true);
+    this.loadTime();
+    this.pauser.next(false);
   }
 
   private loadTime() {
@@ -81,14 +80,15 @@ export class PlaybackComponent implements OnInit {
     );
 
     this.beginTime$ = this.chosenTime$.pipe(
-      map(time => subMinutes(time, 3))
+      map(time => subMinutes(time, this.marginMinutes))
     );
   }
 
   private loadData() {
-    const data$ = this.vcode$.pipe(
+    const cans$ = (incremental: number) => this.vcode$.pipe(
       switchMap(vcode => this.beginTime$.pipe(
-        switchMap(beginTime => {
+        switchMap(baseTime => {
+          const beginTime = addSeconds(baseTime, incremental);
           const endTime = addSeconds(beginTime, 1);
           return this.dataService.getCansByDateRange(vcode, beginTime, endTime);
         })
@@ -96,54 +96,20 @@ export class PlaybackComponent implements OnInit {
      )
     );
 
-    data$.subscribe(x => console.log(x))
-
-    // this.vehicles$ = this.dataService.getRealtimeStates().pipe(
-    //   switchMap(states =>
-    //     this.vcode$.pipe(
-    //       map(vcode =>
-    //         states.filter(state => state.code === vcode)
-    //       )
-    //     )
-    //   ),
-    //   map(vehicles => this.utilityService.attachMapLabels(vehicles)),
-    //   share()
-    // );
-
-    // this.definitions$ = this.dataService.getDefinitions().pipe(
-    //   share()
-    // );
-
-    this.cans$ = this.dataService.getCANs().pipe(
-      map((cans: any[]) =>
-        cans.slice(0, 15).map(can => {
-          return {
-            id: can.id,
-            value: this.utilityService.formatRawCAN(can.value)
-          };
-        })
-      ),
+    const cansTimer$ = timer(0, this.timerIncrementalSec * 1000).pipe(
+      switchMap((incremental) => cans$(incremental)),
       share()
     );
+
+    this.cansPausable$ = this.pauser.pipe(
+      switchMap(paused => paused ? NEVER : cansTimer$)
+    );
+
 
     // this.maxDate.setDate(this.maxDate.getDate() + 7);
     // this.bsRangeValue = [this.bsValue, this.maxDate];
   }
 
-  private loadVehicle() {
-    // this.vehicle$ = this.vehicles$.pipe(
-    //   map(vehicles => vehicles[0])
-    // );
-    // this.vehicle$ = this.dataService.getPanels().pipe(
-    //   switchMap(vehicles =>
-    //     this.vcode$.pipe(
-    //       map(vcode =>
-    //         vehicles.find(vehicle => vehicle.code === vcode)
-    //       )
-    //     )
-    //   ),
-    //   share()
-    // );
-  }
+
 }
 

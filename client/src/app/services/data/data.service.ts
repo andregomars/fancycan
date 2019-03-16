@@ -65,7 +65,7 @@ export class DataService {
     const beginID =  ObjectID.createFromTime(beginDate.getTime() / 1000);
     const endID =  ObjectID.createFromTime(endDate.getTime() / 1000);
     const params = new HttpParams().append('np', '')
-      .append('filter', `{'vcode': '${vcode}'}`)
+      .append('filter', `{'remotePort': ${vcode}}`)
       .append('filter', `{'_id':{'$gte':{'$oid': '${beginID.toString()}'}}}`)
       .append('filter', `{'_id':{'$lt':{'$oid': '${endID.toString()}'}}}`)
       .append('pagesize', '1000');

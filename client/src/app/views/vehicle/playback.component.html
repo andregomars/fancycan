@@ -8,20 +8,26 @@
         <div class="col-12 col-md-6">
           Start Time: {{ beginTime$ | async | date: 'yyyy-MM-dd HH:mm:ss'}}
         </div>
-        <div class="col-6 col-md-3">
+        <div class="col-6 col-md-4">
           <div class="border border-rounded w-75">
-            <button class="btn btn-link btn-sm">
-              <i class="fa fa-rotate-left"></i>
+            <button class="btn btn-link">
+              <i class="fa fa-rotate-left" (click)="resetPlayer()"></i>
             </button>
-            <button class="btn btn-link btn-sm">
+            <button class="btn btn-link" (click)="stopPlayer()">
               <i class="fa fa-stop"></i>
             </button>
-            <button class="btn btn-link btn-sm">
-              <i class="fa fa-play"></i>
+            <button class="btn btn-link" (click)="togglePlayer()">
+              <ng-container *ngIf="pauser.value; then tPlay; else tPause"></ng-container>
+              <ng-template #tPlay>
+                <i class="fa fa-play"></i>
+              </ng-template>
+              <ng-template #tPause>
+                <i class="fa fa-pause"></i>
+              </ng-template>
             </button>
           </div>
         </div>
-        <div class="col-6 col-md-3">
+        <div class="col-6 col-md-2">
           <label class="btn btn-link btn-primary btn-small border-0 pull-right">
             <i class="fa fa-upload"></i>
             <input type="file" hidden>
@@ -130,12 +136,14 @@
       </div>
       <div class="row mt-2 py-2 border border-secondary rounded">
         <ul class="col list-unstyled">
-          <li *ngFor="let item of cans$ | async" class="row text-monospace">
+          <li *ngFor="let item of cansPausable$ | async" class="row text-monospace">
             <div class="col-4">
-              {{ item.id }}
+              <!-- {{ item.id }} -->
+              {{ item.canID.$binary }}
             </div>
             <div class="col-8">
-              {{ item.value }}
+              <!-- {{ item.value }} -->
+              {{ item.canData.$binary }}
             </div>
           </li>
         </ul>
