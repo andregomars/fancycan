@@ -7,7 +7,7 @@ import { subMinutes, addSeconds } from 'date-fns';
 
 import { environment } from '../../../environments/environment';
 import { MapStyle } from '../shared/map-style';
-import { ViewProfileState } from '../../states';
+import { ViewProfileState, SpnProfileState } from '../../states';
 import { ActivatedRoute } from '@angular/router';
 import { ICan } from 'fancycan-model';
 
@@ -18,6 +18,7 @@ import { ICan } from 'fancycan-model';
 })
 export class PlaybackComponent implements OnInit, OnDestroy {
   @Select(ViewProfileState.vcode) vcode$: Observable<string>;
+  @Select(SpnProfileState.spns) spns$: Observable<any[]>;
   pauser = new BehaviorSubject<boolean>(true);
   vehicleState = new BehaviorSubject<any>(null);
   cansPausable$: Observable<any>;

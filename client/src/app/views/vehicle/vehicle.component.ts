@@ -20,10 +20,13 @@ export class VehicleComponent implements OnInit, OnDestroy {
   @Select(ViewProfileState.vcode) vcode$: Observable<string>;
   @Select(SpnProfileState.spns) spns$: Observable<any[]>;
   @ViewChild('playChart') playChart: PlayChartComponent;
+  syncSpinner = new BehaviorSubject<boolean>(false);
   pauser = new BehaviorSubject<boolean>(false);
 
   intSecPlayChart = 1;
-  intSecState = 7;
+  intSecState = 15;
+  intSecSpin = 1;
+
   len = 30;
   temperatureMax = 300;
   temperatureMin = -300;
@@ -116,6 +119,9 @@ export class VehicleComponent implements OnInit, OnDestroy {
     if (this.pauser) {
       this.pauser.unsubscribe();
     }
+    if (this.syncSpinner) {
+      this.syncSpinner.unsubscribe();
+    }
   }
 
   toggleSyncStatus() {
@@ -124,11 +130,14 @@ export class VehicleComponent implements OnInit, OnDestroy {
 
   private loadVehicle() {
     const vehicleOnTimer$ = timer(0, this.intSecState * 1000).pipe(
+      tap(() => this.syncSpinner.next(true)),
       switchMap(() =>
         this.vcode$.pipe(
           switchMap(vcode => this.dataService.getVehicleState(vcode)),
           map(vehicles => this.utilityService.attachGeoLocationAndMapLabel(vehicles)[0]),
       )),
+      // extend spinning effect for the spinner
+      tap(() => timer(this.intSecSpin * 1000).subscribe(() => this.syncSpinner.next(false))),
       share()
     );
 

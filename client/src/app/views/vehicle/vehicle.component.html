@@ -3,12 +3,13 @@
     <div class="col-12 col-md-4 px-0">
       <app-nav-label></app-nav-label>
       <button class="btn btn-link pull-right p-0" (click)="toggleSyncStatus()">
+        <i class="fa fa-refresh" [ngClass]="syncSpinner.value ? 'fa-spin fa-lg' : ''"></i>&nbsp;
         <ng-container *ngIf="pauser.value; then tStill; else tSpin"></ng-container>
         <ng-template #tSpin>
-          <i class="fa fa-refresh fa-spin"></i>&nbsp;<small>Stop Sync</small>
+          <small>Stop Sync</small>
         </ng-template>
         <ng-template #tStill>
-          <i class="fa fa-refresh"></i>&nbsp;<small>Auto Sync</small>
+          <small>Auto Sync</small>
         </ng-template>
       </button>
     </div>
