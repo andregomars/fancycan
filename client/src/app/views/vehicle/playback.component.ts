@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { DataService, UtilityService, SmartQueueService } from '../../services';
 import { Observable, BehaviorSubject, timer, NEVER } from 'rxjs';
 import { map, share, switchMap, tap, timeout, take } from 'rxjs/operators';
@@ -16,9 +16,10 @@ import { ICan } from 'fancycan-model';
   templateUrl: './playback.component.html',
   styleUrls: ['./playback.component.scss']
 })
-export class PlaybackComponent implements OnInit {
+export class PlaybackComponent implements OnInit, OnDestroy {
   @Select(ViewProfileState.vcode) vcode$: Observable<string>;
   pauser = new BehaviorSubject<boolean>(true);
+  vehicleState = new BehaviorSubject<any>(null);
   cansPausable$: Observable<any>;
   beginTime$: Observable<Date>;
   chosenTime$: Observable<Date>;
@@ -78,6 +79,15 @@ export class PlaybackComponent implements OnInit {
   ngOnInit() {
     this.loadTime();
     this.loadData();
+  }
+
+  ngOnDestroy() {
+    if (this.pauser) {
+      this.pauser.unsubscribe();
+    }
+    if (this.vehicleState) {
+      this.vehicleState.unsubscribe();
+    }
   }
 
   filterCans() {
@@ -148,8 +158,6 @@ export class PlaybackComponent implements OnInit {
     );
 
 
-    // this.maxDate.setDate(this.maxDate.getDate() + 7);
-    // this.bsRangeValue = [this.bsValue, this.maxDate];
   }
 
 

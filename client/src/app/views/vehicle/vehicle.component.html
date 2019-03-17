@@ -55,7 +55,7 @@
           <label>Engine Idle</label>
         </div>
         <div class="col-4">
-          <app-switch [isSwitchOn]="(vehicle$ | async)?.spn9007 && (vehicle$ | async)?.spn84"></app-switch>
+          <app-switch [isSwitchOn]="(vehicle$ | async)?.spn9007 && (vehicle$ | async)?.spn84 === 0"></app-switch>
         </div>
         <div class="col-3">
           <img *ngIf="(vehicle$ | async)?.transmission_check"
@@ -187,14 +187,14 @@
       </div>
       <div class="row px-2">
         <div class="col-3 text-center align-self-center">
-          <i class="fa fa-arrow-left fa-4x text-warning"></i>
+          <i class="fa fa-arrow-left fa-3x text-warning"></i>
           <div class="text-muted">L turn signal</div>
         </div>
         <div class="col-6 text-center">
           <img [src]="imgBus" class="img-fluid" alt="bus" width="80%" height="auto">
         </div>
         <div class="col-3 text-center align-self-center">
-          <i class="fa fa-arrow-right fa-4x text-warning"></i>
+          <i class="fa fa-arrow-right fa-3x text-warning"></i>
           <div class="text-muted">R turn signal</div>
         </div>
       </div>

@@ -98,7 +98,7 @@
   {
     "fleet_code": "BYD",
     "name": "High Voltage Status",
-    "pgn": "94516",
+    "pgn": "64516",
     "spn": "9007",
     "unit": "bit",
     "type": "Proprietary"
