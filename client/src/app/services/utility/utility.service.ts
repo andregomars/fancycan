@@ -5,6 +5,7 @@ import { format } from 'date-fns';
 import { ICan, ICanEntry } from 'fancycan-model';
 import { Buffer } from 'buffer/';
 import { ObjectID } from 'bson';
+import { TransformService } from './transform.service';
 
 @Injectable({
     providedIn: 'root'
@@ -47,6 +48,9 @@ export class UtilityService {
     //             vehicles.filter(vehicle => vehicle.fcode.toUpperCase() === fcode.toUpperCase()))
     //     );
     // }
+    constructor(
+        private transform: TransformService
+    ) {}
 
     getVehiclesByFleetCode(fcode: string, fleets$: Observable<any>) {
         return fleets$.pipe(
@@ -220,6 +224,27 @@ export class UtilityService {
         }
 
         return spns;
+    }
+
+    buildVehicleState(vehicleState: any, cans: ICanEntry[], spnProfiles: any[]): any {
+        console.log(vehicleState)
+        console.log(cans)
+        console.log(spnProfiles)
+        for (const can of cans) {
+            if (can.key) {
+                const pgn = this.transform.decodePGN(Buffer.from(can.key, 'hex'));
+                if (pgn) {
+                    // get pgn related spn definitions
+                    const spnDefs = spnProfiles.filter(p => vehicleState.fcode === p.fleet_code && p.pgn === pgn.toString());
+                    for (const spnDef of spnDefs) {
+                        const val = this.transform.decodeData(Buffer.from(can.value, 'hex'), spnDef);
+                        vehicleState['spn' + spnDef.spn] = val;
+                    }
+                }
+            }
+        }
+
+        return vehicleState;
     }
 
     private randomObject(): any {

@@ -22,13 +22,14 @@ export class Startup {
     }
 
     private async initCacheStorage() {
-        const spns = await this.fire.getDefinitionWithSpecs().toPromise<IJ1939[]>();
+        const defs = await this.fire.getDefinitions().toPromise();
+        const spnsProp = await this.fire.getProprietarySpnList().toPromise();
+        const spnsJ1939 = await this.fire.getJ1939SpnList().toPromise();
+        const spns = this.transform.getDefinitionWithSpecs(defs, spnsProp, spnsJ1939);
         this.spnCache.storeSpnsIntoCacheGroupedByPgn(spns);
 
-        // const fleets$ = await this.fire.getFleets();
         const fleets = await this.fire.getFleets().toPromise();
         const flattedVehicles: ViewProfileStateModel[] = await this.transform.getFlattedVehicles(fleets);
-            // await this.transform.getFlattedVehicles(fleets$).toPromise<ViewProfileStateModel[]>();
         this.viewProfileCache.storeViewProfileIntoCacheGroupedByVehicleCode(flattedVehicles);
     }
 

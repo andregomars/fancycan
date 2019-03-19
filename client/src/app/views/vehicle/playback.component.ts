@@ -9,7 +9,7 @@ import { environment } from '../../../environments/environment';
 import { MapStyle } from '../shared/map-style';
 import { ViewProfileState, SpnProfileState } from '../../states';
 import { ActivatedRoute } from '@angular/router';
-import { ICan } from 'fancycan-model';
+import { ICan, ICanEntry } from 'fancycan-model';
 
 @Component({
   selector: 'app-vehicle-playback',
@@ -18,7 +18,8 @@ import { ICan } from 'fancycan-model';
 })
 export class PlaybackComponent implements OnInit, OnDestroy {
   @Select(ViewProfileState.vcode) vcode$: Observable<string>;
-  @Select(SpnProfileState.spns) spns$: Observable<any[]>;
+  @Select(ViewProfileState.fcode) fcode$: Observable<string>;
+  @Select(SpnProfileState.spns) spnProfiles$: Observable<any[]>;
   pauser = new BehaviorSubject<boolean>(true);
   vehicleState = new BehaviorSubject<any>(null);
   cansPausable$: Observable<any>;
@@ -27,6 +28,7 @@ export class PlaybackComponent implements OnInit, OnDestroy {
   cansToShow$: Observable<any>;
   marginMinutes = 3;
   timerIncrementalSec = 1;
+  intSecState = 15;
   isFiltering = false;
   filterCanID: string;
   filterStartBit: number;
@@ -135,8 +137,13 @@ export class PlaybackComponent implements OnInit, OnDestroy {
           const endTime = addSeconds(beginTime, 1);
           const cansBson$ = this.dataService.getCansByDateRange(vcode, beginTime, endTime);
           return cansBson$.pipe(
-            map((cansBson: ICan[]) => this.utilityService.buildCanEntries(cansBson, true)
-          ));
+            // get can entries for ui showing
+            map((cansBson: ICan[]) => this.utilityService.buildCanEntries(cansBson, true)),
+            // update vehicle state
+            tap((canEntries: ICanEntry[]) => {
+              this.updateVehicleState(canEntries, incremental);
+            }),
+          );
         })
       )
      )
@@ -158,7 +165,24 @@ export class PlaybackComponent implements OnInit, OnDestroy {
       })
     );
 
+  }
 
+  private updateVehicleState(canEntries: ICanEntry[], incremental: number) {
+      if (incremental % this.intSecState === 0) {
+        this.fcode$.pipe(
+          switchMap((fcode) => this.spnProfiles$.pipe(
+            map(spnProfiles => {
+                let vState = this.vehicleState.value;
+                if (!vState) {
+                  vState = { fcode: fcode };
+                }
+                const vStatePatched = this.utilityService.buildVehicleState(vState, canEntries, spnProfiles);
+                this.vehicleState.next(vStatePatched);
+            })
+          )),
+          tap(() => console.log(this.vehicleState.value))
+        ).subscribe();
+      }
   }
 
 

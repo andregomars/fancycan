@@ -56,19 +56,4 @@ describe('When test CAN repo', () => {
         expect(actual).toEqual(expected);
     });
 
-    it.skip('should remove old data from CAN state', async () => {
-        const today = new Date(new Date().toDateString());
-        await MongoLayer.getInstance().connect();
-        const conn = MongoLayer.getInstance().Client;
-
-        try {
-            const canRepo = new CanRepository();
-            const result = await canRepo.cleanHistory(today);
-            expect(result.nRemoved).toBeGreaterThan(0);
-        } catch (err) {
-            expect(err).toBeUndefined();
-        } finally {
-            conn.close();
-        }
-    });
 });

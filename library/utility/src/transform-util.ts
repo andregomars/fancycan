@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import { Buffer } from 'buffer/';
+
 import { IJ1939, Dm1EntryType, Dm1Collection, Dm1Data, ViewProfileStateModel } from 'fancycan-model';
 
 export class TransformUtility {
@@ -69,43 +70,6 @@ export class TransformUtility {
         }
     }
 
-    // public getViewProfileByVehicleCode(vcode: string, fleets$: Observable<any>): Observable<ViewProfileStateModel> {
-    //     return this.getFlattedVehicles(fleets$).pipe(
-    //         map((vehicles: any[]) => vehicles.find((vehicle: any) => vehicle.vcode === vcode)),
-    //         map((vehicle: any) => {
-    //             return {
-    //                 fcode: vehicle.fcode,
-    //                 fname: vehicle.fname,
-    //                 vcode: vehicle.vcode,
-    //                 vin: vehicle.vin
-    //             };
-    //         })
-    //     );
-    // }
-
-    // public getViewProfileByFleetCode(fcode: string, fleets$: Observable<any>): Observable<any[]> {
-    //     return this.getFlattedVehicles(fleets$).pipe(
-    //         map((vehicles: any[]) =>
-    //             vehicles.filter((vehicle: any) => vehicle.fcode.toUpperCase() === fcode.toUpperCase()))
-    //     );
-    // }
-
-    // public getFlattedVehicles(fleets$: Observable<any>): Observable<any> {
-    //     return fleets$.pipe(
-    //         map((fleets: any[]) => fleets.reduce((all, fleet) => {
-    //             const vlist = fleet.vehicles.map((v: any) => {
-    //                 return {
-    //                     vcode: v.code,
-    //                     vin: v.vin,
-    //                     fcode: fleet.code,
-    //                     fname: fleet.name
-    //                 };
-    //             });
-    //             return [...all, ...vlist];
-    //         }, []))
-    //     );
-    // }
-
     public getViewProfileByVehicleCode(vcode: string, fleets: any[]): ViewProfileStateModel {
          const vehicle = this.getFlattedVehicles(fleets).find((v: any) => v.vcode === vcode);
          return {
@@ -137,7 +101,59 @@ export class TransformUtility {
             }, []);
     }
 
-    /// private helpers section
+    public getDefinitionWithSpecs(defs: any[], spnsProp: any[], spnsJ1939: any[]): IJ1939[] {
+        spnsJ1939 = this.getFlattedSPNSpecs(spnsJ1939);
+        const spnGroups = defs.map((def: any) => {
+            const spnsPropMatched = spnsProp.filter((spn: any) =>
+                def.type === 'Proprietary' && def.spn === spn.SPNNo && def.pgn === spn.PGNNo);
+            const spns1939Matched = spnsJ1939.filter((spn: any) =>
+                def.type === 'J1939' && def.spn === spn.SPNNo && def.pgn === spn.PGNNo);
+            const spns = [...spnsPropMatched, ...spns1939Matched];
+            return spns.map((spn: any) => {
+                return {
+                    Code: def.code,
+                    SPNNo: +spn.SPNNo,
+                    SPNName: spn.SPNName,
+                    PGNNo: +spn.PGNNo,
+                    PGNName: spn.PGNName,
+                    StartByte: +spn.StartByte,
+                    StartBit: +spn.StartBit,
+                    Length: +spn.Length,
+                    Resolution: +spn.Resolution,
+                    Offset: +spn.Offset,
+                    Unit: spn.Unit,
+                    LowerDataRange: +spn.LowerDataRange,
+                    UpperDataRange: +spn.UpperDataRange,
+                    Status: spn.Status,
+                } as IJ1939;
+            });
+        }).filter((x: any) => x.length > 0);  // remove def entry that cannot be found either in Proprietary or J1939 specs
+
+        // deconstruct nested arrays
+        return spnGroups.reduce((pre: IJ1939[], cur: IJ1939[]) => [...pre, ...cur]);
+    }
+
+            // }),
+    //     );
+    // }
+
+    /// --- private helpers section ---
+
+    private getFlattedSPNSpecs(specs: any[]): any[] {
+        return specs.map((pgn: any) =>
+            pgn.SPNItems.map((spn: any) =>
+                Object.assign({},
+                    spn,
+                    { TransmissionRate: pgn.TransmissionRate },
+                    { PGNNo: pgn.PGNNo },
+                    { PGNName: pgn.PGNName },
+                    { SA: pgn.SA },
+                    { DA: pgn.DA },
+                    { Priority: pgn.Priority },
+                ),
+            ),
+        ).reduce((acc, cur) => [...acc, ...cur], []);
+    }
 
     private decodeDm1Single(buffer: Buffer): Dm1Collection {
         const data = this.buildDm1DataFromBuffer(buffer.slice(2, 6));

@@ -1149,15 +1149,16 @@ fancycan-model@^1.0.34:
   dependencies:
     buffer "^5.2.1"
 
-fancycan-utility@^1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/fancycan-utility/-/fancycan-utility-1.0.3.tgz#a0c277ceef3a001cc51070a0dd42edc873d14803"
-  integrity sha512-52zfDfq1RNcPg7P28msPL4hGPmmIv8OSLMef9ylQHbXoEYxVs1tfux8Dlp2Oxrqkp/SCB5TkAttlC33yDbtt1w==
+fancycan-utility@^1.0.6:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/fancycan-utility/-/fancycan-utility-1.0.6.tgz#46ade290090feed24a711b5e3028fd65ca53c214"
+  integrity sha512-Pll5SgaRXG9hX32rbwJmyUAqIbweNwfwDwpya9eqoLOOu+u7Xu4WLv6AHK4YJnBSau4FBXjY52hU6BOQ0u+HUQ==
   dependencies:
     bson "^4.0.1"
     buffer "^5.2.1"
     fancycan-model "^1.0.26"
     lodash "^4.17.11"
+    rxjs "^6.4.0"
 
 fast-deep-equal@^2.0.1:
   version "2.0.1"
@@ -3236,6 +3237,13 @@ rxjs@^6.3.3:
   version "6.3.3"
   resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-6.3.3.tgz#3c6a7fa420e844a81390fb1158a9ec614f4bad55"
   integrity sha512-JTWmoY9tWCs7zvIk/CvRjhjGaOd+OVBM987mxFo+OW66cGpdKjZcpmc74ES1sB//7Kl/PAe8+wEakuhG4pcgOw==
+  dependencies:
+    tslib "^1.9.0"
+
+rxjs@^6.4.0:
+  version "6.4.0"
+  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-6.4.0.tgz#f3bb0fe7bda7fb69deac0c16f17b50b0b8790504"
+  integrity sha512-Z9Yfa11F6B9Sg/BK9MnqnQ+aQYicPLtilXBp2yUtDt2JRCE0h26d33EnfO3ZxoNxG0T92OUucP3Ct7cpfkdFfw==
   dependencies:
     tslib "^1.9.0"
 

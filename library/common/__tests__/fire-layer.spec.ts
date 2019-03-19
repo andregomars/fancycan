@@ -1,4 +1,4 @@
-import { IJ1939 } from 'fancycan-model';
+import { TransformUtility } from 'fancycan-utility';
 import { FireLayer } from '../src/core';
 
 it('should get definition from remote source', () => {
@@ -8,13 +8,13 @@ it('should get definition from remote source', () => {
     });
 });
 
-it('should get definition with specification details', (done) => {
+it('should get definition with specification details', async () => {
     const fireLayer = new FireLayer();
-    fireLayer.getDefinitionWithSpecs().subscribe({
-        next: (spn: IJ1939[]) => {
-            expect(spn).toBeDefined();
-            expect(spn.length).toEqual(16);
-        },
-        complete: () => done(),
-    });
+    const transform = new TransformUtility();
+    const defs = await fireLayer.getDefinitions().toPromise();
+    const spnsProp = await fireLayer.getProprietarySpnList().toPromise();
+    const spnsJ1939 = await fireLayer.getJ1939SpnList().toPromise();
+    const spns = transform.getDefinitionWithSpecs(defs, spnsProp, spnsJ1939);
+    expect(spns).toBeDefined();
+    expect(spns.length).toEqual(17);
 });
