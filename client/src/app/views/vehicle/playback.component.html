@@ -46,24 +46,35 @@
           <label>Engine</label>
         </div>
         <div class="col-4">
-          <label class="switch switch-label switch-outline-secondary-alt">
-            <input type="checkbox" class="switch-input">
-            <span class="switch-slider" data-checked="On" data-unchecked="Off"></span>
-          </label>
+          <app-switch [isSwitchOn]="vehicleState.value.spn9007"></app-switch>
         </div>
         <div class="col-3">
-          <img [src]="imgEngineCheck" class="img-fluid" alt="bus" width="35px" height="28px">
+          <img *ngIf="vehicleState.value.engine_check"
+            [src]="imgEngineCheck" class="img-fluid" alt="bus" width="35px" height="28px">
         </div>
       </div>
       <div class="row mt-2 pt-2 justify-content-around border border-secondary rounded">
         <div class="col-5">
           <label>Transmission</label>
         </div>
-        <div class="col-7">
-          <label class="switch switch-label switch-outline-secondary-alt">
-            <input type="checkbox" class="switch-input">
-            <span class="switch-slider" data-checked="D" data-unchecked="P"></span>
-          </label>
+        <div class="col-4">
+          <app-transmission-switch shift="P" isDisabled="true"></app-transmission-switch>
+        </div>
+        <div class="col-3">
+          <img *ngIf="vehicleState.value.transmission_check"
+            [src]="imgTransmissionCheck" class="img-fluid" alt="bus" width="35px" height="28px">
+        </div>
+      </div>
+      <div class="row mt-2 pt-2 justify-content-around border border-secondary rounded">
+        <div class="col-5">
+          <label>Engine Idle</label>
+        </div>
+        <div class="col-4">
+          <app-switch [isSwitchOn]="vehicleState.value.spn9007 && vehicleState.value.spn84 === 0"></app-switch>
+        </div>
+        <div class="col-3">
+          <img *ngIf="vehicleState.value.transmission_check"
+            [src]="imgTransmissionCheck" class="img-fluid" alt="bus" width="35px" height="28px">
         </div>
       </div>
       <div class="row mt-2 border border-secondary rounded">
@@ -144,7 +155,6 @@
       </div>
       <div class="row mt-2 py-2 border border-secondary rounded px-0">
         <ul class="col list-unstyled">
-          <!-- <li *ngFor="let item of cansPausable$ | async" class="row text-monospace"> -->
           <li *ngFor="let item of cansToShow$ | async">
             <div [ngClass]="filterKey && filterKey.toUpperCase() === item.key.toUpperCase() ? 'text-warning' : '' ">
               <div class="row text-monospace no-gutters p-0 m-0">
@@ -165,99 +175,87 @@
     </div>
     <div class="col-12 col-lg-4">
       <div class="row no-gutters mt-2">
-        <div class="col-6 text-center">
-          <!-- <ngx-gauge size="100" foregroundColor="#17a2b8" [type]="gaugeType" [value]="85" [label]="'Speed'" [thick]="gaugeThick"
-            [append]="">
-          </ngx-gauge> -->
-          <app-chart-gauge [value]="85" 
+        <div class="col-6 text-center py-1 vehicle-gauge" >
+          <app-chart-gauge [value]="vehicleState.value.spn84"
             [max]="100" title="Speed"></app-chart-gauge>
         </div>
-        <div class="col-6 text-center">
-          <!-- <ngx-gauge size="100" foregroundColor="#17a2b8" [type]="gaugeType" [value]="57" [label]="'RPM'" [thick]="gaugeThick"
-            [append]="">
-          </ngx-gauge> -->
-          <app-chart-gauge [value]="57" 
-            [max]="100" title="RPM"></app-chart-gauge>
+        <div class="col-6 text-center py-1 vehicle-gauge-alt">
+          <app-chart-gauge [value]="vehicleState.value.spn190"
+            [max]="5000" title="RPM"></app-chart-gauge>
         </div>
-        <div class="col-6 text-center">
-          <!-- <ngx-gauge size="100" foregroundColor="#17a2b8" [type]="gaugeType" [value]="68.3" [label]="'Spare 1'" [thick]="gaugeThick"
-            [append]="">
-          </ngx-gauge> -->
-          <app-chart-gauge [value]="57" 
-            [max]="100" title="Spare 1"></app-chart-gauge>
+        <div class="col-6 text-center py-1 vehicle-gauge-alt">
+          <app-chart-gauge [value]="vehicleState.value.spn9000"
+            [max]="100" title="SOC(%)"></app-chart-gauge>
         </div>
-        <div class="col-6 text-center">
-          <!-- <ngx-gauge size="100" foregroundColor="#17a2b8" [type]="gaugeType" [value]="68.3" [label]="'Spare 2'" [thick]="gaugeThick"
-            [append]="">
-          </ngx-gauge> -->
-          <app-chart-gauge [value]="57" 
-            [max]="100" title="Spare 2"></app-chart-gauge>
+        <div class="col-6 text-center py-1 vehicle-gauge">
+          <app-chart-gauge [value]="vehicleState.value.spn9001"
+            [max]="300" title="Battery kWh"></app-chart-gauge>
         </div>
       </div>
       <div class="dropdown-divider"></div>
       <div class="row">
         <div class="col-12 col-md-6">
-          Odometer: {{ odometer }}
+          Odometer(mi): {{ vehicleState.value.spn917 / 1000 / 1.6 | number:'1.1-2' }}
         </div>
         <div class="col-12 col-md-6">
-          VIN: {{ vin }}
+          VIN: {{ vin$ | async }}
         </div>
       </div>
       <div class="row px-2">
-        <div class="col text-center">
-          <img [src]="imgBus" class="img-fluid" alt="bus" width="60%" height="auto">
+        <div class="col-3 text-center align-self-center">
+          <i class="fa fa-arrow-left fa-3x text-warning"></i>
+          <div class="text-muted">L turn signal</div>
+        </div>
+        <div class="col-6 text-center">
+          <img [src]="imgBus" class="img-fluid" alt="bus" width="80%" height="auto">
+        </div>
+        <div class="col-3 text-center align-self-center">
+          <i class="fa fa-arrow-right fa-3x text-warning"></i>
+          <div class="text-muted">R turn signal</div>
         </div>
       </div>
       <div class="row">
         <div class="col">
           <div class="row">
             <div class="col">
-              <label>Coolant level</label>
+              <label>Battery Voltage</label>
             </div>
           </div>
-          <div class="progress border border-dark">
-            <div class="progress-bar bg-success" [style.width.%]="'50'">
-            </div>
-          </div>
+          <app-progress-bar [value]="vehicleState.value.spn9002"
+            min="0" max="800"></app-progress-bar>
         </div>
       </div>
       <div class="row">
         <div class="col">
           <div class="row">
             <div class="col">
-              <label>Coolant temperature</label>
+              <label>Battery Current</label>
             </div>
           </div>
-          <div class="progress border border-dark">
-            <div class="progress-bar bg-success" [style.width.%]="'90'">
-            </div>
-          </div>
+          <app-progress-bar [value]="vehicleState.value.spn9003"
+            [min]="-300" [max]="300"></app-progress-bar>
         </div>
       </div>
       <div class="row">
         <div class="col">
           <div class="row">
             <div class="col">
-              <label>Spare 1</label>
+              <label>L-C Battery Temp</label>
             </div>
           </div>
-          <div class="progress border border-dark">
-            <div class="progress-bar bg-success" [style.width.%]="'22'">
-            </div>
-          </div>
+          <app-progress-bar [value]="vehicleState.value.spn9005"
+            min="0" max="220"></app-progress-bar>
         </div>
       </div>
       <div class="row">
         <div class="col">
           <div class="row">
             <div class="col">
-              <label>Spare 2</label>
+              <label>H-C Battery Temp</label>
             </div>
           </div>
-          <div class="progress border border-dark">
-            <div class="progress-bar bg-success" [style.width.%]="'80'">
-            </div>
-          </div>
+          <app-progress-bar [value]="vehicleState.value.spn9006"
+            [min]="0" [max]="220"></app-progress-bar>
         </div>
       </div>
       <div class="row mt-2">
@@ -267,10 +265,7 @@
               <label>Front door</label>
             </div>
             <div class="col-5 text-right">
-              <label class="switch switch-label switch-outline-secondary-alt">
-                <input type="checkbox" class="switch-input" checked>
-                <span class="switch-slider" data-checked="On" data-unchecked="Off"></span>
-              </label>
+              <app-switch [isSwitchOn]="vehicleState.value.spn9010"></app-switch>
             </div>
           </div>
         </div>
@@ -280,36 +275,27 @@
               <label>Rear door</label>
             </div>
             <div class="col-5 text-right">
-              <label class="switch switch-label switch-outline-secondary-alt">
-                <input type="checkbox" class="switch-input">
-                <span class="switch-slider" data-checked="On" data-unchecked="Off"></span>
-              </label>
+              <app-switch [isSwitchOn]="vehicleState.value.spn9011"></app-switch>
             </div>
           </div>
         </div>
         <div class="col-12 col-md-6">
           <div class="row">
             <div class="col-7">
-              <label>Spare 1</label>
+              <label>Left Charging</label>
             </div>
             <div class="col-5 text-right">
-              <label class="switch switch-label switch-outline-secondary-alt">
-                <input type="checkbox" class="switch-input" checked>
-                <span class="switch-slider" data-checked="On" data-unchecked="Off"></span>
-              </label>
+              <app-switch [isSwitchOn]="vehicleState.value.spn9008"></app-switch>
             </div>
           </div>
         </div>
         <div class="col-12 col-md-6">
           <div class="row">
             <div class="col-7">
-              <label>Spare 2</label>
+              <label>Right Charging</label>
             </div>
             <div class="col-5 text-right">
-              <label class="switch switch-label switch-outline-secondary-alt">
-                <input type="checkbox" class="switch-input">
-                <span class="switch-slider" data-checked="On" data-unchecked="Off"></span>
-              </label>
+              <app-switch [isSwitchOn]="vehicleState.value.spn9009"></app-switch>
             </div>
           </div>
         </div>

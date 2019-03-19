@@ -26,6 +26,11 @@ export class ViewProfileState {
         return state.vcode;
     }
 
+    @Selector()
+    static vin(state: ViewProfileStateModel) {
+        return state.vin;
+    }
+
     constructor(
         private dataService: DataService,
         private transformService: TransformService

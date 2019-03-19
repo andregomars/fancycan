@@ -18,6 +18,7 @@ import { PlayChartComponent } from '../../components/play-chart/play-chart.compo
 })
 export class VehicleComponent implements OnInit, OnDestroy {
   @Select(ViewProfileState.vcode) vcode$: Observable<string>;
+  @Select(ViewProfileState.vin) vin$: Observable<string>;
   @Select(SpnProfileState.spns) spns$: Observable<any[]>;
   @ViewChild('playChart') playChart: PlayChartComponent;
   syncSpinner = new BehaviorSubject<boolean>(false);

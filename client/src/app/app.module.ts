@@ -79,7 +79,7 @@ import { FormsModule } from '@angular/forms';
     ]),
     NgxsRouterPluginModule.forRoot(),
     NgxsStoragePluginModule.forRoot({
-      key: ['viewprofile.fcode', 'viewprofile.vcode', 'spnprofiles']
+      key: ['viewprofile.fcode', 'viewprofile.vcode', 'viewprofile.vin', 'spnprofiles']
     }),
     NgxsReduxDevtoolsPluginModule.forRoot(),
     // NgxsLoggerPluginModule.forRoot(),

@@ -43,7 +43,6 @@
           <label>Transmission</label>
         </div>
         <div class="col-4">
-          <!-- <app-transmission-switch [shift]="(vehicle$ | async)?.transmission"></app-transmission-switch> -->
           <app-transmission-switch shift="P" isDisabled="true"></app-transmission-switch>
         </div>
         <div class="col-3">
@@ -180,10 +179,10 @@
       <div class="dropdown-divider"></div>
       <div class="row">
         <div class="col-12 col-md-6">
-          Odometer: {{ (vehicle$ | async)?.spn917 / 1000 / 1.6 | number:'1.1-2' }} mi
+          Odometer(mi): {{ (vehicle$ | async)?.spn917 / 1000 / 1.6 | number:'1.1-2' }}
         </div>
         <div class="col-12 col-md-6">
-          VIN: {{ (vehicle$ | async)?.vin }}
+          VIN: {{ vin$ | async }}
         </div>
       </div>
       <div class="row px-2">

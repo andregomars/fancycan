@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { DataService, UtilityService, SmartQueueService } from '../../services';
 import { Observable, BehaviorSubject, timer, NEVER } from 'rxjs';
-import { map, share, switchMap, tap, timeout, take } from 'rxjs/operators';
+import { map, share, switchMap, tap } from 'rxjs/operators';
 import { Select } from '@ngxs/store';
 import { subMinutes, addSeconds } from 'date-fns';
 
@@ -19,9 +19,10 @@ import { ICan, ICanEntry } from 'fancycan-model';
 export class PlaybackComponent implements OnInit, OnDestroy {
   @Select(ViewProfileState.vcode) vcode$: Observable<string>;
   @Select(ViewProfileState.fcode) fcode$: Observable<string>;
+  @Select(ViewProfileState.vin) vin$: Observable<string>;
   @Select(SpnProfileState.spns) spnProfiles$: Observable<any[]>;
   pauser = new BehaviorSubject<boolean>(true);
-  vehicleState = new BehaviorSubject<any>(null);
+  vehicleState = new BehaviorSubject<any>({});
   cansPausable$: Observable<any>;
   beginTime$: Observable<Date>;
   chosenTime$: Observable<Date>;
@@ -146,7 +147,7 @@ export class PlaybackComponent implements OnInit, OnDestroy {
           );
         })
       )
-     )
+      )
     );
 
     const cansTimer$ = timer(0, this.timerIncrementalSec * 1000).pipe(
@@ -168,21 +169,15 @@ export class PlaybackComponent implements OnInit, OnDestroy {
   }
 
   private updateVehicleState(canEntries: ICanEntry[], incremental: number) {
-      if (incremental % this.intSecState === 0) {
-        this.fcode$.pipe(
-          switchMap((fcode) => this.spnProfiles$.pipe(
-            map(spnProfiles => {
-                let vState = this.vehicleState.value;
-                if (!vState) {
-                  vState = { fcode: fcode };
-                }
-                const vStatePatched = this.utilityService.buildVehicleState(vState, canEntries, spnProfiles);
-                this.vehicleState.next(vStatePatched);
-            })
-          )),
-          tap(() => console.log(this.vehicleState.value))
-        ).subscribe();
-      }
+    if (incremental % this.intSecState === 0) {
+      this.spnProfiles$.pipe(
+        map(spnProfiles => {
+          const vStatePatched =
+            this.utilityService.buildVehicleState(this.vehicleState.value, canEntries, spnProfiles);
+          this.vehicleState.next(vStatePatched);
+        }),
+      ).subscribe();
+    }
   }
 
 

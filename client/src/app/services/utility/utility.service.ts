@@ -2,10 +2,11 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map, share, tap } from 'rxjs/operators';
 import { format } from 'date-fns';
-import { ICan, ICanEntry } from 'fancycan-model';
 import { Buffer } from 'buffer/';
 import { ObjectID } from 'bson';
-import { TransformService } from './transform.service';
+import { ICan, ICanEntry } from 'fancycan-model';
+import { TransformUtility } from 'fancycan-utility';
+// import { TransformService } from './transform.service';
 
 @Injectable({
     providedIn: 'root'
@@ -13,7 +14,8 @@ import { TransformService } from './transform.service';
 export class UtilityService {
 
     constructor(
-        private transform: TransformService
+        // private transform: TransformService
+        private transform: TransformUtility
     ) {}
 
     getVehiclesByFleetCode(fcode: string, fleets$: Observable<any>) {
@@ -175,13 +177,13 @@ export class UtilityService {
         for (const key in vehicleState) {
             if (key.startsWith('spn')) {
                 const spn = key.substring(3).trimRight();
-                const spnProfile = spnProfileList.find(profile => profile.spn === spn);
+                const spnProfile = spnProfileList.find(profile => profile.SPNNo === +spn);
                 if (spnProfile) {
                     spns.push({
                         spn: spn,
-                        name: spnProfile.name,
+                        name: spnProfile.SPNName,
                         value: vehicleState[key],
-                        unit: spnProfile.unit
+                        unit: spnProfile.Unit
                     });
                 }
             }
@@ -191,18 +193,15 @@ export class UtilityService {
     }
 
     buildVehicleState(vehicleState: any, cans: ICanEntry[], spnProfiles: any[]): any {
-        console.log(vehicleState)
-        console.log(cans)
-        console.log(spnProfiles)
         for (const can of cans) {
             if (can.key) {
                 const pgn = this.transform.decodePGN(Buffer.from(can.key, 'hex'));
                 if (pgn) {
                     // get pgn related spn definitions
-                    const spnDefs = spnProfiles.filter(p => vehicleState.fcode === p.fleet_code && p.pgn === pgn.toString());
+                    const spnDefs = spnProfiles.filter(p => p.PGNNo === pgn);
                     for (const spnDef of spnDefs) {
                         const val = this.transform.decodeData(Buffer.from(can.value, 'hex'), spnDef);
-                        vehicleState['spn' + spnDef.spn] = val;
+                        vehicleState['spn' + spnDef.SPNNo] = val;
                     }
                 }
             }
