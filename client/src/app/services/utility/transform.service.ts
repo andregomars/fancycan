@@ -37,4 +37,8 @@ export class TransformService {
     return this.transform.getViewProfileByFleetCode(fcode, fleets);
   }
 
+  getDefinitionWithSpecs(defs: any[], spnsProp: any[], spnsJ1939: any[]): IJ1939[] {
+    return this.transform.getDefinitionWithSpecs(defs, spnsProp, spnsJ1939);
+  }
+
 }

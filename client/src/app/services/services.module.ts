@@ -1,5 +1,5 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
-import { TransformUtility } from 'fancycan-utility';
+// import { TransformUtility } from 'fancycan-utility';
 import { DataService, PromptUpdateService, TransformService } from './index';
 
 @NgModule({
@@ -10,7 +10,7 @@ import { DataService, PromptUpdateService, TransformService } from './index';
 
   ],
   providers: [
-    TransformUtility,
+    // TransformUtility,
     DataService,
     // StorageService,
     PromptUpdateService,
@@ -23,7 +23,7 @@ export class ServicesModule {
       ngModule: ServicesModule,
       providers: [
         DataService,
-        TransformUtility,
+        // TransformUtility,
         // StorageService,
         PromptUpdateService,
         TransformService
