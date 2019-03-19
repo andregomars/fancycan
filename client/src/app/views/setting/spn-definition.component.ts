@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, NEVER } from 'rxjs';
 import { Select } from '@ngxs/store';
 import { map, switchMap, share, tap } from 'rxjs/operators';
 
@@ -30,13 +30,12 @@ export class SpnDefinitionComponent implements OnInit {
 
   ngOnInit() {
     this.initForms(0);
-    // this.loadSpnList();
   }
 
   selectSpn(selectedSpn: any) {
-    const spnNo = selectedSpn.spn;
-    const sourceType = selectedSpn.type;
-    this.getSpn(spnNo, sourceType).subscribe(spn => {
+    const spnNo = selectedSpn.SPNNo;
+    // const sourceType = selectedSpn.type;
+    this.getSpn(spnNo).subscribe(spn => {
       if (spn) {
         this.initForms(spn.StatusList.length);
         this.spnForm.setValue({
@@ -75,30 +74,40 @@ export class SpnDefinitionComponent implements OnInit {
 
   }
 
-  // private loadSpnList() {
-  //   this.spnList$ = this.dataService.getDefinitions().pipe(
-  //     switchMap(spns =>
-  //         this.fcode$.pipe(
-  //           map(fcode => spns.filter(spn => spn.fleet_code === fcode)),
-  //           share()
-  //       )
-  //     )
-  //   );
-  // }
-
-  private getSpn(spnNo: string, sourceType: string): Observable<any> {
-    if (sourceType === 'J1939') {
-      const data$ = this.dataService.getSpnSpecs();
-      return this.utilityService.getFlattedSPNSpecWithStatusArray(data$).pipe(
-        map(spnList => spnList.find(spn => spn.SPNNo === spnNo))
-      );
-    } else {
-      const data$ = this.dataService.getProprietarySpnList();
-      return this.utilityService.getSPNListWithStatusArray(data$).pipe(
-        map(spnList => spnList.find(spn => spn.SPNNo === spnNo))
-      );
-    }
+  private getSpn(spnNo: number): Observable<any> {
+    return this.dataService.getDefinitions().pipe(
+      switchMap((defs: any[]) => {
+        const spnDef = defs.find(def => +def.spn === spnNo);
+        if (spnDef && spnDef.type === 'J1939') {
+          const data$ = this.dataService.getSpnSpecs();
+          return this.utilityService.getFlattedSPNSpecWithStatusArray(data$).pipe(
+            map(spnList => spnList.find(spn => +spn.SPNNo === spnNo))
+          );
+        } else if (spnDef && spnDef.type === 'Proprietary') {
+          const data$ = this.dataService.getProprietarySpnList();
+          return this.utilityService.getSPNListWithStatusArray(data$).pipe(
+            map(spnList => spnList.find(spn => +spn.SPNNo === spnNo))
+          );
+        } else {
+          return NEVER;
+        }
+      })
+    );
   }
+
+  // private getSpn(spnNo: string, sourceType: string): Observable<any> {
+  //   if (sourceType === 'J1939') {
+  //     const data$ = this.dataService.getSpnSpecs();
+  //     return this.utilityService.getFlattedSPNSpecWithStatusArray(data$).pipe(
+  //       map(spnList => spnList.find(spn => spn.SPNNo === spnNo))
+  //     );
+  //   } else {
+  //     const data$ = this.dataService.getProprietarySpnList();
+  //     return this.utilityService.getSPNListWithStatusArray(data$).pipe(
+  //       map(spnList => spnList.find(spn => spn.SPNNo === spnNo))
+  //     );
+  //   }
+  // }
 
   private buildStatusForms(count: number): FormArray {
     const array = [];

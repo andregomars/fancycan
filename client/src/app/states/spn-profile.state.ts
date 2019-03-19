@@ -1,35 +1,51 @@
 import { State, Selector, Action, StateContext } from '@ngxs/store';
-import { SpnProfileStateModel } from '../models';
+import { forkJoin } from 'rxjs';
+import { tap, map } from 'rxjs/operators';
+import { TransformUtility } from 'fancycan-utility';
+import { IJ1939 } from 'fancycan-model';
+
+// import { SpnProfileStateModel } from '../models';
 import { SetSpnProfiles, ClearSpnProfiles } from '../actions';
 import { DataService } from '../services';
-import { tap, map } from 'rxjs/operators';
 
-const defaults: SpnProfileStateModel[] = [];
+const defaults: IJ1939[] = [];
 
-@State<SpnProfileStateModel[]>({
+@State<IJ1939[]>({
     name: 'spnprofiles',
     defaults: defaults
 })
 export class SpnProfileState {
     @Selector()
-    static spns(state: SpnProfileStateModel[]) {
+    static spns(state: IJ1939[]) {
         return state;
     }
 
     constructor(
-        private dataService: DataService
+        private dataService: DataService,
+        private transormUtility: TransformUtility
     ) { }
 
     @Action(SetSpnProfiles)
-    setSpnProfile(ctx: StateContext<SpnProfileStateModel[]>, action: SetSpnProfiles) {
-        return this.dataService.getDefinitions().pipe(
-            map((defs: any[]) => defs.filter(def => def.fleet_code === action.fcode)),
+    setSpnProfile(ctx: StateContext<IJ1939[]>, action: SetSpnProfiles) {
+        const defs$ = this.dataService.getDefinitions().pipe(
+            map((defs: any[]) => defs.filter(def => def.fleet_code === action.fcode))
+        );
+        const spnsProp$ = this.dataService.getProprietarySpnList();
+        const spnsJ1939$ = this.dataService.getSpnSpecs();
+        return forkJoin(defs$, spnsProp$, spnsJ1939$).pipe(
+            map(([defs, spnsProp, spnsJ1939]) => this.transormUtility.getDefinitionWithSpecs(defs, spnsProp, spnsJ1939)),
+            tap(x => console.log(x)),
+            // map((defSpecs: any[]) => defSpecs.filter(def => def.fleet_code === action.fcode)),
             tap(profiles => ctx.setState(profiles))
         );
+        // return this.dataService.getDefinitions().pipe(
+        //     map((defs: any[]) => defs.filter(def => def.fleet_code === action.fcode)),
+        //     tap(profiles => ctx.setState(profiles))
+        // );
     }
 
     @Action(ClearSpnProfiles)
-    clearSpnProfile(ctx: StateContext<SpnProfileStateModel[]>) {
+    clearSpnProfile(ctx: StateContext<IJ1939[]>) {
         ctx.setState(defaults);
     }
 }

@@ -12,42 +12,6 @@ import { TransformService } from './transform.service';
 })
 export class UtilityService {
 
-    // private getFlattedVehicles(fleets$: Observable<any>): Observable<any> {
-    //     return fleets$.pipe(
-    //         map(fleets => fleets.reduce((all, fleet) => {
-    //             const vlist = fleet.vehicles.map(v => {
-    //                 return {
-    //                     vcode: v.code,
-    //                     vin: v.vin,
-    //                     fcode: fleet.code,
-    //                     fname: fleet.name
-    //                 };
-    //             });
-    //             return [...all, ...vlist];
-    //         }, []))
-    //     );
-    // }
-
-    // getViewProfileByVehicleCode(vcode: string, fleets$: Observable<any>): Observable<ViewProfileStateModel> {
-    //     return this.getFlattedVehicles(fleets$).pipe(
-    //         map((vehicles: any[]) => vehicles.find(vehicle => vehicle.vcode === vcode)),
-    //         map(vehicle => {
-    //             return {
-    //                 fcode: vehicle.fcode,
-    //                 fname: vehicle.fname,
-    //                 vcode: vehicle.vcode,
-    //                 vin: vehicle.vin
-    //             };
-    //         })
-    //     );
-    // }
-
-    // getViewProfileByFleetCode(fcode: string, fleets$: Observable<any>): Observable<any[]> {
-    //     return this.getFlattedVehicles(fleets$).pipe(
-    //         map((vehicles: any[]) =>
-    //             vehicles.filter(vehicle => vehicle.fcode.toUpperCase() === fcode.toUpperCase()))
-    //     );
-    // }
     constructor(
         private transform: TransformService
     ) {}

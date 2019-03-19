@@ -1,223 +1,120 @@
-[
-  {
-    "fleet_code": "BYD",
-    "name": "Wheel-Based Vehicle Speed",
-    "pgn": "65265",
-    "spn": "84",
-    "length": "16",
-    "offset": "0",
-    "resolution": "0.00242956061",
-    "startbit": "1",
-    "startbyte": "3",
-    "unit": "mph",
-    "type": "J1939"
-  },
-  {
-    "fleet_code": "BYD",
-    "name": "Engine Speed",
-    "pgn": "61444",
-    "spn": "190",
-    "length": "16",
-    "offset": "0",
-    "resolution": "0.125",
-    "startbit": "1",
-    "startbyte": "4",
-    "unit": "rpm",
-    "type": "J1939"
-  },
-  {
-    "fleet_code": "BYD",
-    "name": "Latitude position of the vehicle",
-    "pgn": "65267",
-    "spn": "584",
-    "length": "32",
-    "offset": "-210",
-    "resolution": "1",
-    "startbit": "1",
-    "startbyte": "1",
-    "unit": "deg",
-    "type": "J1939"
-  },
-  {
-    "fleet_code": "BYD",
-    "name": "Longitude position of the vehicle",
-    "pgn": "65267",
-    "spn": "585",
-    "length": "32",
-    "offset": "-210",
-    "resolution": "1",
-    "startbit": "1",
-    "startbyte": "5",
-    "unit": "deg",
-    "type": "J1939"
-  },
-  {
-    "fleet_code": "BYD",
-    "name": "High Resolution Vehicle Distance",
-    "pgn": "65217",
-    "spn": "917",
-    "length": "32",
-    "offset": "0",
-    "resolution": "5",
-    "startbit": "1",
-    "startbyte": "1",
-    "unit": "m",
-    "type": "J1939"
-  },
-  {
-    "fleet_code": "BYD",
-    "name": "State Of Charge",
-    "pgn": "64519",
-    "spn": "9000",
-    "length": "16",
-    "offset": "0",
-    "resolution": "0.1",
-    "startbit": "1",
-    "startbyte": "5",
-    "unit": "%",
-    "type": "Proprietary"
-  },
-  {
-    "fleet_code": "BYD",
-    "name": "Battery Energy",
-    "pgn": "64527",
-    "spn": "9001",
-    "length": "16",
-    "offset": "0",
-    "resolution": "0.1",
-    "startbit": "1",
-    "startbyte": "6",
-    "unit": "kWh",
-    "type": "Proprietary"
-  },
-  {
-    "fleet_code": "BYD",
-    "name": "Battery Voltage",
-    "pgn": "64520",
-    "spn": "9002",
-    "length": "16",
-    "offset": "0",
-    "resolution": "1",
-    "startbit": "1",
-    "startbyte": "1",
-    "unit": "V",
-    "type": "Proprietary"
-  },
-  {
-    "fleet_code": "BYD",
-    "name": "Battery Current",
-    "pgn": "64520",
-    "spn": "9003",
-    "length": "16",
-    "offset": "-1000",
-    "resolution": "0.1",
-    "startbit": "1",
-    "startbyte": "3",
-    "unit": "A",
-    "type": "Proprietary"
-  },
-  {
-    "fleet_code": "BYD",
-    "name": "Motor Voltage",
-    "pgn": "64534",
-    "spn": "9004",
-    "length": "16",
-    "offset": "0",
-    "resolution": "1",
-    "startbit": "1",
-    "startbyte": "5",
-    "unit": "V",
-    "type": "Proprietary"
-  },
-  {
-    "fleet_code": "BYD",
-    "name": "L-C Battery Temp",
-    "pgn": "64523",
-    "spn": "9005",
-    "length": "8",
-    "offset": "-40",
-    "resolution": "1.8",
-    "startbit": "1",
-    "startbyte": "3",
-    "unit": "F",
-    "type": "Proprietary"
-  },
-  {
-    "fleet_code": "BYD",
-    "name": "H-C Battery Temp",
-    "pgn": "64523",
-    "spn": "9006",
-    "length": "8",
-    "offset": "-40",
-    "resolution": "1.8",
-    "startbit": "1",
-    "startbyte": "7",
-    "unit": "F",
-    "type": "Proprietary"
-  },
-  {
-    "fleet_code": "BYD",
-    "name": "High Voltage Status",
-    "pgn": "64516",
-    "spn": "9007",
-    "length": "2",
-    "offset": "0",
-    "resolution": "1",
-    "startbit": "1",
-    "startbyte": "2",
-    "unit": "bit",
-    "type": "Proprietary"
-  },
-  {
-    "fleet_code": "BYD",
-    "name": "Left Charge Status",
-    "pgn": "64538",
-    "spn": "9008",
-    "length": "4",
-    "offset": "0",
-    "resolution": "1",
-    "startbit": "3",
-    "startbyte": "1",
-    "unit": "bit",
-    "type": "Proprietary"
-  },
-  {
-    "fleet_code": "BYD",
-    "name": "Right Charge Status",
-    "pgn": "64537",
-    "spn": "9009",
-    "length": "4",
-    "offset": "0",
-    "resolution": "1",
-    "startbit": "3",
-    "startbyte": "1",
-    "unit": "bit",
-    "type": "Proprietary"
-  },
-  {
-    "fleet_code": "BYD",
-    "name": "Front Door Status",
-    "pgn": "64230",
-    "spn": "9010",
-    "length": "2",
-    "offset": "0",
-    "resolution": "1",
-    "startbit": "1",
-    "startbyte": "1",
-    "unit": "bit",
-    "type": "Proprietary"
-  },
-  {
-    "fleet_code": "BYD",
-    "name": "Rear Door Status",
-    "pgn": "64230",
-    "spn": "9011",
-    "length": "2",
-    "offset": "0",
-    "resolution": "1",
-    "startbit": "3",
-    "startbyte": "1",
-    "unit": "bit",
-    "type": "Proprietary"
-  }
-]
+[ {
+  "fleet_code" : "BYD",
+  "name" : "Wheel-Based Vehicle Speed",
+  "pgn" : "65265",
+  "spn" : "84",
+  "type" : "J1939",
+  "unit" : "mph"
+}, {
+  "fleet_code" : "BYD",
+  "name" : "Engine Speed",
+  "pgn" : "61444",
+  "spn" : "190",
+  "type" : "J1939",
+  "unit" : "rpm"
+}, {
+  "fleet_code" : "BYD",
+  "name" : "Latitude position of the vehicle",
+  "pgn" : "65267",
+  "spn" : "584",
+  "type" : "J1939",
+  "unit" : "deg"
+}, {
+  "fleet_code" : "BYD",
+  "name" : "Longitude position of the vehicle",
+  "pgn" : "65267",
+  "spn" : "585",
+  "type" : "J1939",
+  "unit" : "deg"
+}, {
+  "fleet_code" : "BYD",
+  "name" : "High Resolution Vehicle Distance",
+  "pgn" : "65217",
+  "spn" : "917",
+  "type" : "J1939",
+  "unit" : "m"
+}, {
+  "fleet_code" : "BYD",
+  "name" : "State Of Charge",
+  "pgn" : "64519",
+  "spn" : "9000",
+  "type" : "Proprietary",
+  "unit" : "%"
+}, {
+  "fleet_code" : "BYD",
+  "name" : "Battery Energy",
+  "pgn" : "64527",
+  "spn" : "9001",
+  "type" : "Proprietary",
+  "unit" : "kWh"
+}, {
+  "fleet_code" : "BYD",
+  "name" : "Battery Voltage",
+  "pgn" : "64520",
+  "spn" : "9002",
+  "type" : "Proprietary",
+  "unit" : "V"
+}, {
+  "fleet_code" : "BYD",
+  "name" : "Battery Current",
+  "pgn" : "64520",
+  "spn" : "9003",
+  "type" : "Proprietary",
+  "unit" : "A"
+}, {
+  "fleet_code" : "BYD",
+  "name" : "Motor Voltage",
+  "pgn" : "64534",
+  "spn" : "9004",
+  "type" : "Proprietary",
+  "unit" : "V"
+}, {
+  "fleet_code" : "BYD",
+  "name" : "L-C Battery Temp",
+  "pgn" : "64523",
+  "spn" : "9005",
+  "type" : "Proprietary",
+  "unit" : "F"
+}, {
+  "fleet_code" : "BYD",
+  "name" : "H-C Battery Temp",
+  "pgn" : "64523",
+  "spn" : "9006",
+  "type" : "Proprietary",
+  "unit" : "F"
+}, {
+  "fleet_code" : "BYD",
+  "name" : "High Voltage Status",
+  "pgn" : "64516",
+  "spn" : "9007",
+  "type" : "Proprietary",
+  "unit" : "bit"
+}, {
+  "fleet_code" : "BYD",
+  "name" : "Left Charge Status",
+  "pgn" : "64538",
+  "spn" : "9008",
+  "type" : "Proprietary",
+  "unit" : "bit"
+}, {
+  "fleet_code" : "BYD",
+  "name" : "Right Charge Status",
+  "pgn" : "64537",
+  "spn" : "9009",
+  "type" : "Proprietary",
+  "unit" : "bit"
+}, {
+  "fleet_code" : "BYD",
+  "name" : "Front Door Status",
+  "pgn" : "64230",
+  "spn" : "9010",
+  "type" : "Proprietary",
+  "unit" : "bit"
+}, {
+  "fleet_code" : "BYD",
+  "name" : "Rear Door Status",
+  "pgn" : "64230",
+  "spn" : "9011",
+  "type" : "Proprietary",
+  "unit" : "bit"
+} ]

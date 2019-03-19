@@ -1,100 +1,223 @@
 [
-    {
-        "name": "Parking Brake Switch",
-        "pgn": "65265",
-        "spn": "70",
-        "fleet_code": "OMNIT",
-        "type": "Proprietary"
-    },
-    {
-        "name": "Transmission Requested Gear",
-        "pgn": "256",
-        "spn": "525",
-        "fleet_code": "OMNIT",
-        "type": "J1939"
-    },
-    {
-        "name": "Engine Oil Pressure",
-        "pgn": "65263",
-        "spn": "100",
-        "fleet_code": "OMNIT",
-        "type": "Proprietary"
-    },
-    {
-        "name": "Engine Coolant Temperature",
-        "pgn": "65263",
-        "spn": "110",
-        "fleet_code": "OMNIT",
-        "type": "Proprietary"
-    },
-    {
-        "name": "Engine Coolant Level",
-        "pgn": "65263",
-        "spn": "111",
-        "fleet_code": "OMNIT",
-        "type": "Proprietary"
-    },
-    {
-        "name": "Transmission Oil Temperature",
-        "pgn": "65272",
-        "spn": "177",
-        "fleet_code": "OMNIT",
-        "type": "Proprietary"
-    },
-    {
-        "name": "Engine Average Fuel Economy",
-        "pgn": "65266",
-        "spn": "185",
-        "fleet_code": "OMNIT",
-        "type": "Proprietary"
-    },
-    {
-        "name": "Engine Speed",
-        "pgn": "61444",
-        "spn": "190",
-        "fleet_code": "OMNIT",
-        "type": "Proprietary"
-    },
-    {
-        "name": "Anti-Lock Braking (ABS) Active",
-        "pgn": "61441",
-        "spn": "563",
-        "fleet_code": "OMNIT",
-        "type": "Proprietary"
-    },
-    {
-        "name": "GPS Latitude",
-        "pgn": "65267",
-        "spn": "584",
-        "fleet_code": "OMNIT",
-        "type": "Proprietary"
-    },
-    {
-        "name": "GPS Longitude",
-        "pgn": "65267",
-        "spn": "585",
-        "fleet_code": "OMNIT",
-        "type": "Proprietary"
-    },
-    {
-        "name": "High Resolution Total Vehicle Distance",
-        "pgn": "65217",
-        "spn": "917",
-        "fleet_code": "OMNIT",
-        "type": "Proprietary"
-    },
-    {
-        "name": "High Resolution Trip Distance",
-        "pgn": "65217",
-        "spn": "918",
-        "fleet_code": "OMNIT",
-        "type": "Proprietary"
-    },
-    {
-        "name": "ABS Fully Operational",
-        "pgn": "61441",
-        "spn": "1243",
-        "fleet_code": "OMNIT",
-        "type": "Proprietary"
-    }
+  {
+    "fleet_code": "BYD",
+    "name": "Wheel-Based Vehicle Speed",
+    "pgn": "65265",
+    "spn": "84",
+    "length": "16",
+    "offset": "0",
+    "resolution": "0.00242956061",
+    "startbit": "1",
+    "startbyte": "3",
+    "unit": "mph",
+    "type": "J1939"
+  },
+  {
+    "fleet_code": "BYD",
+    "name": "Engine Speed",
+    "pgn": "61444",
+    "spn": "190",
+    "length": "16",
+    "offset": "0",
+    "resolution": "0.125",
+    "startbit": "1",
+    "startbyte": "4",
+    "unit": "rpm",
+    "type": "J1939"
+  },
+  {
+    "fleet_code": "BYD",
+    "name": "Latitude position of the vehicle",
+    "pgn": "65267",
+    "spn": "584",
+    "length": "32",
+    "offset": "-210",
+    "resolution": "1",
+    "startbit": "1",
+    "startbyte": "1",
+    "unit": "deg",
+    "type": "J1939"
+  },
+  {
+    "fleet_code": "BYD",
+    "name": "Longitude position of the vehicle",
+    "pgn": "65267",
+    "spn": "585",
+    "length": "32",
+    "offset": "-210",
+    "resolution": "1",
+    "startbit": "1",
+    "startbyte": "5",
+    "unit": "deg",
+    "type": "J1939"
+  },
+  {
+    "fleet_code": "BYD",
+    "name": "High Resolution Vehicle Distance",
+    "pgn": "65217",
+    "spn": "917",
+    "length": "32",
+    "offset": "0",
+    "resolution": "5",
+    "startbit": "1",
+    "startbyte": "1",
+    "unit": "m",
+    "type": "J1939"
+  },
+  {
+    "fleet_code": "BYD",
+    "name": "State Of Charge",
+    "pgn": "64519",
+    "spn": "9000",
+    "length": "16",
+    "offset": "0",
+    "resolution": "0.1",
+    "startbit": "1",
+    "startbyte": "5",
+    "unit": "%",
+    "type": "Proprietary"
+  },
+  {
+    "fleet_code": "BYD",
+    "name": "Battery Energy",
+    "pgn": "64527",
+    "spn": "9001",
+    "length": "16",
+    "offset": "0",
+    "resolution": "0.1",
+    "startbit": "1",
+    "startbyte": "6",
+    "unit": "kWh",
+    "type": "Proprietary"
+  },
+  {
+    "fleet_code": "BYD",
+    "name": "Battery Voltage",
+    "pgn": "64520",
+    "spn": "9002",
+    "length": "16",
+    "offset": "0",
+    "resolution": "1",
+    "startbit": "1",
+    "startbyte": "1",
+    "unit": "V",
+    "type": "Proprietary"
+  },
+  {
+    "fleet_code": "BYD",
+    "name": "Battery Current",
+    "pgn": "64520",
+    "spn": "9003",
+    "length": "16",
+    "offset": "-1000",
+    "resolution": "0.1",
+    "startbit": "1",
+    "startbyte": "3",
+    "unit": "A",
+    "type": "Proprietary"
+  },
+  {
+    "fleet_code": "BYD",
+    "name": "Motor Voltage",
+    "pgn": "64534",
+    "spn": "9004",
+    "length": "16",
+    "offset": "0",
+    "resolution": "1",
+    "startbit": "1",
+    "startbyte": "5",
+    "unit": "V",
+    "type": "Proprietary"
+  },
+  {
+    "fleet_code": "BYD",
+    "name": "L-C Battery Temp",
+    "pgn": "64523",
+    "spn": "9005",
+    "length": "8",
+    "offset": "-40",
+    "resolution": "1.8",
+    "startbit": "1",
+    "startbyte": "3",
+    "unit": "F",
+    "type": "Proprietary"
+  },
+  {
+    "fleet_code": "BYD",
+    "name": "H-C Battery Temp",
+    "pgn": "64523",
+    "spn": "9006",
+    "length": "8",
+    "offset": "-40",
+    "resolution": "1.8",
+    "startbit": "1",
+    "startbyte": "7",
+    "unit": "F",
+    "type": "Proprietary"
+  },
+  {
+    "fleet_code": "BYD",
+    "name": "High Voltage Status",
+    "pgn": "64516",
+    "spn": "9007",
+    "length": "2",
+    "offset": "0",
+    "resolution": "1",
+    "startbit": "1",
+    "startbyte": "2",
+    "unit": "bit",
+    "type": "Proprietary"
+  },
+  {
+    "fleet_code": "BYD",
+    "name": "Left Charge Status",
+    "pgn": "64538",
+    "spn": "9008",
+    "length": "4",
+    "offset": "0",
+    "resolution": "1",
+    "startbit": "3",
+    "startbyte": "1",
+    "unit": "bit",
+    "type": "Proprietary"
+  },
+  {
+    "fleet_code": "BYD",
+    "name": "Right Charge Status",
+    "pgn": "64537",
+    "spn": "9009",
+    "length": "4",
+    "offset": "0",
+    "resolution": "1",
+    "startbit": "3",
+    "startbyte": "1",
+    "unit": "bit",
+    "type": "Proprietary"
+  },
+  {
+    "fleet_code": "BYD",
+    "name": "Front Door Status",
+    "pgn": "64230",
+    "spn": "9010",
+    "length": "2",
+    "offset": "0",
+    "resolution": "1",
+    "startbit": "1",
+    "startbyte": "1",
+    "unit": "bit",
+    "type": "Proprietary"
+  },
+  {
+    "fleet_code": "BYD",
+    "name": "Rear Door Status",
+    "pgn": "64230",
+    "spn": "9011",
+    "length": "2",
+    "offset": "0",
+    "resolution": "1",
+    "startbit": "3",
+    "startbyte": "1",
+    "unit": "bit",
+    "type": "Proprietary"
+  }
 ]

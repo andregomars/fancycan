@@ -2802,15 +2802,16 @@ fancycan-model@^1.0.34:
   dependencies:
     buffer "^5.2.1"
 
-fancycan-utility@^1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/fancycan-utility/-/fancycan-utility-1.0.3.tgz#a0c277ceef3a001cc51070a0dd42edc873d14803"
-  integrity sha512-52zfDfq1RNcPg7P28msPL4hGPmmIv8OSLMef9ylQHbXoEYxVs1tfux8Dlp2Oxrqkp/SCB5TkAttlC33yDbtt1w==
+fancycan-utility@^1.0.8:
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/fancycan-utility/-/fancycan-utility-1.0.8.tgz#9175900e3c8a6b2c0585cfe41db81be0df590061"
+  integrity sha512-yWctmcFvr9hgLIAsQChiA2IghJWLV3LT5Am9vZ77bed5gadh0o0y0BZ3hjLxB1oBmXhILTSfa9ncF1GmZyO/sg==
   dependencies:
     bson "^4.0.1"
     buffer "^5.2.1"
     fancycan-model "^1.0.26"
     lodash "^4.17.11"
+    rxjs "^6.4.0"
 
 fast-deep-equal@^1.0.0:
   version "1.1.0"

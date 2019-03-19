@@ -54,7 +54,7 @@
     "core-js": "^2.5.7",
     "date-fns": "^1.30.1",
     "fancycan-model": "^1.0.34",
-    "fancycan-utility": "^1.0.3",
+    "fancycan-utility": "^1.0.8",
     "firebase": "^5.8.4",
     "flag-icon-css": "^3.2.0",
     "font-awesome": "^4.7.0",
