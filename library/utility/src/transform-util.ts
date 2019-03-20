@@ -58,7 +58,8 @@ export class TransformUtility {
         }
 
         const val = Buffer.from(parsedValues).readUIntLE(0, bytesCount);
-        return _.round(val * definition.Resolution + definition.Offset, 4);
+        // return _.round(val * definition.Resolution + definition.Offset, 4);
+        return val * definition.Resolution + definition.Offset;
     }
 
     public decodeDm1(canData: string, entryType: Dm1EntryType, dm1Collection: Dm1Collection): Dm1Collection {

@@ -1149,10 +1149,10 @@ fancycan-model@^1.0.34:
   dependencies:
     buffer "^5.2.1"
 
-fancycan-utility@^1.0.6:
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/fancycan-utility/-/fancycan-utility-1.0.6.tgz#46ade290090feed24a711b5e3028fd65ca53c214"
-  integrity sha512-Pll5SgaRXG9hX32rbwJmyUAqIbweNwfwDwpya9eqoLOOu+u7Xu4WLv6AHK4YJnBSau4FBXjY52hU6BOQ0u+HUQ==
+fancycan-utility@^1.0.9:
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/fancycan-utility/-/fancycan-utility-1.0.9.tgz#28e86739987dcb7935996af58dad088823a0a2db"
+  integrity sha512-AIPL2gDSsZWJKu0IoAWcMIcpPK6E9r3iW0/e/dfvCNiXfeDpY9ouSlJHHBStcVnAxdpomG7p4WwlHaKeeywxqA==
   dependencies:
     bson "^4.0.1"
     buffer "^5.2.1"

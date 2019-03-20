@@ -1447,10 +1447,10 @@ fancycan-cache@^1.0.0:
   dependencies:
     node-cache "^4.2.0"
 
-fancycan-common@^1.0.65:
-  version "1.0.65"
-  resolved "https://registry.yarnpkg.com/fancycan-common/-/fancycan-common-1.0.65.tgz#60cc230d397f9dabbb8ff69f8bf75303768f07b7"
-  integrity sha512-fSdQ//nzZn2ctfBOZW9U+SoZgLJkYgZ8p4tQpejFWfsoT1xFQBsvqihNwzX85XiNkVLF5wl2dVLjq8NkUl5FMg==
+fancycan-common@^1.0.66:
+  version "1.0.66"
+  resolved "https://registry.yarnpkg.com/fancycan-common/-/fancycan-common-1.0.66.tgz#0196a1b2b094f68bfc60fb3ddd3451f7c3af60f0"
+  integrity sha512-KM1F4h5sExhy08mQl0ehRycLhQgHmEkVYD0/Tc7gLXsCt1o7Jn45PG/bhWQQIrhtlflbgqViLK5OtoEYcFo9dg==
   dependencies:
     "@sendgrid/mail" "^6.3.1"
     axios "^0.18.0"
@@ -1460,7 +1460,7 @@ fancycan-common@^1.0.65:
     date-fns "^1.30.1"
     fancycan-cache "^1.0.0"
     fancycan-model "^1.0.34"
-    fancycan-utility "^1.0.6"
+    fancycan-utility "^1.0.9"
     lodash "^4.17.11"
     mongodb "^3.1.13"
     rxios "^1.1.2"
@@ -1481,10 +1481,10 @@ fancycan-model@^1.0.34:
   dependencies:
     buffer "^5.2.1"
 
-fancycan-utility@^1.0.6, fancycan-utility@^1.0.8:
-  version "1.0.8"
-  resolved "https://registry.yarnpkg.com/fancycan-utility/-/fancycan-utility-1.0.8.tgz#9175900e3c8a6b2c0585cfe41db81be0df590061"
-  integrity sha512-yWctmcFvr9hgLIAsQChiA2IghJWLV3LT5Am9vZ77bed5gadh0o0y0BZ3hjLxB1oBmXhILTSfa9ncF1GmZyO/sg==
+fancycan-utility@^1.0.9:
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/fancycan-utility/-/fancycan-utility-1.0.9.tgz#28e86739987dcb7935996af58dad088823a0a2db"
+  integrity sha512-AIPL2gDSsZWJKu0IoAWcMIcpPK6E9r3iW0/e/dfvCNiXfeDpY9ouSlJHHBStcVnAxdpomG7p4WwlHaKeeywxqA==
   dependencies:
     bson "^4.0.1"
     buffer "^5.2.1"
