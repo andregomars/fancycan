@@ -5,7 +5,6 @@ import { format } from 'date-fns';
 import { Buffer } from 'buffer/';
 import { ObjectID } from 'bson';
 import { ICan, ICanEntry } from 'fancycan-model';
-// import { TransformUtility } from 'fancycan-utility';
 import { TransformService } from './transform.service';
 
 @Injectable({
@@ -15,7 +14,6 @@ export class UtilityService {
 
     constructor(
         private transform: TransformService
-        // private transform: TransformUtility
     ) {}
 
     getVehiclesByFleetCode(fcode: string, fleets$: Observable<any>) {

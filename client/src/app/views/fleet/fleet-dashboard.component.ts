@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, timer } from 'rxjs';
+import { Observable, timer, BehaviorSubject } from 'rxjs';
 import { share, map, tap, debounce, switchMap } from 'rxjs/operators';
 
 import { DataService, UtilityService } from '../../services';
@@ -18,6 +18,7 @@ import { SetProfile } from '../../actions';
 export class FleetDashboardComponent implements OnInit {
   @Select(ViewProfileState.fcode) fcode$: Observable<string>;
 
+  bus_number: string;
   hideSideInfo: boolean;
   loadMap = environment.loadMap;
   mapMinHeight = 768;
@@ -25,8 +26,10 @@ export class FleetDashboardComponent implements OnInit {
   mapStyle = new MapStyle().styler;
   vehicles$: Observable<any>;
   filteredVehicles$: Observable<any>;
-  map_lat = 34.056539;
-  map_lgt = -118.237485;
+  map_lat = 34.1061376;
+  map_lgt = -117.8230976;
+  // map_lat = 34.056539;
+  // map_lgt = -118.237485;
 
   constructor(
     private dataService: DataService,
@@ -59,8 +62,8 @@ export class FleetDashboardComponent implements OnInit {
     this.hideSideInfo = !this.hideSideInfo;
   }
 
-  nav(fcode: string, vcode: string) {
-    this.store.dispatch(new SetProfile(fcode, vcode, null, null));
+  nav(fcode: string, vcode: string, vin: string) {
+    this.store.dispatch(new SetProfile(fcode, vcode, null, vin));
     this.store.dispatch(new Navigate(['/vehicle/panel', vcode]));
   }
 
@@ -73,9 +76,20 @@ export class FleetDashboardComponent implements OnInit {
         vehicles.filter((el, idx, arr) =>
           idx === arr.findIndex(item => item.code === el.code))
       ),
+      map(vehicles => vehicles.map(v => this.mapSPNtoGeo(v))),
       map(vehicles => this.utilityService.attachGeoLocationAndMapLabel(vehicles)),
       share()
     );
+  }
+
+  private mapSPNtoGeo(vehicle: any): any {
+    if (!vehicle || !vehicle.spn584 || !vehicle.spn585) {
+      return vehicle;
+    }
+
+    vehicle.geolocations = [ { latitude: vehicle.spn584, longitude: vehicle.spn585 } ];
+    return vehicle;
+
   }
 
   // private loadData() {

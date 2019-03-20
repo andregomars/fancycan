@@ -43,8 +43,10 @@ export class VehicleComponent implements OnInit, OnDestroy {
   mapZoom = 15;
   mapStyle = new MapStyle().styler;
   bus_number: string;
-  map_lat = 34.056539;
-  map_lgt = -118.237485;
+  map_lat = 34.1061376;
+  map_lgt = -117.8230976;
+  // map_lat = 34.056539;
+  // map_lgt = -118.237485;
 
   // // gauge config
   // gaugeForegroundColor = '#17a2b8';
