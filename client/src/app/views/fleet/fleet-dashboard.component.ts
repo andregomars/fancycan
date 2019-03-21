@@ -1,5 +1,5 @@
-import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
-import { Observable, BehaviorSubject, of, Subject } from 'rxjs';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Observable, BehaviorSubject, } from 'rxjs';
 import { share, map, tap, switchMap, debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
 
 import { DataService, UtilityService } from '../../services';
@@ -15,11 +15,11 @@ import { SetProfile } from '../../actions';
   templateUrl: './fleet-dashboard.component.html',
   styleUrls: ['./fleet-dashboard.component.scss']
 })
-export class FleetDashboardComponent implements OnInit, OnDestroy, AfterViewInit {
+export class FleetDashboardComponent implements OnInit, OnDestroy {
   @Select(ViewProfileState.fcode) fcode$: Observable<string>;
   vehicles$: Observable<any>;
   filteredVehicles$: Observable<any>;
-  searchTerm$ = new Subject<string>();
+  searchTerm$ = new BehaviorSubject<string>('');
   locations$ = new BehaviorSubject<any>({});
   loadMap = environment.loadMap;
   hideSideInfo: boolean;
@@ -40,27 +40,16 @@ export class FleetDashboardComponent implements OnInit, OnDestroy, AfterViewInit
 
   ngOnInit() {
     this.hideSideInfo = false;
-    this.vehicles$ = this.fcode$.pipe(
-      switchMap(fcode => this.dataService.getVehicleStates(fcode)),
-      share()
-    );
-    this.filteredVehicles$ = this.search(this.searchTerm$).pipe(
-      tap(vehicles => {
-        const vlocs = vehicles.map(v => this.mapSPNtoGeo(v));
-        const locs = this.utilityService.attachGeoLocationAndMapLabel(vlocs);
-        this.locations$.next(locs);
-      })
-    );
-
-  }
-
-  ngAfterViewInit() {
-    this.searchTerm$.next('');
+    this.assignVehicles();
+    this.assignFilteredVehicles();
   }
 
   ngOnDestroy() {
     if (this.searchTerm$) {
       this.searchTerm$.unsubscribe();
+    }
+    if (this.locations$) {
+      this.locations$.unsubscribe();
     }
   }
 
@@ -71,6 +60,23 @@ export class FleetDashboardComponent implements OnInit, OnDestroy, AfterViewInit
   nav(fcode: string, vcode: string, vin: string) {
     this.store.dispatch(new SetProfile(fcode, vcode, null, vin));
     this.store.dispatch(new Navigate(['/vehicle/panel', vcode]));
+  }
+
+  private assignVehicles() {
+    this.vehicles$ = this.fcode$.pipe(
+      switchMap(fcode => this.dataService.getVehicleStates(fcode))
+    );
+  }
+
+  private assignFilteredVehicles() {
+    this.filteredVehicles$ = this.search(this.searchTerm$).pipe(
+      tap(vehicles => {
+        const vlocs = vehicles.map((v: any) => this.mapSPNtoGeo(v));
+        const locs = this.utilityService.attachGeoLocationAndMapLabel(vlocs);
+        this.locations$.next(locs);
+      })
+    );
+
   }
 
   private search(term$: Observable<string>) {

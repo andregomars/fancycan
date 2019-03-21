@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { DataService, UtilityService } from '../../services';
-import { Observable, timer } from 'rxjs';
-import { ViewProfileStateModel } from '../../models';
-import { switchMap, map, debounce, tap } from 'rxjs/operators';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { switchMap, map, tap, debounceTime, distinctUntilChanged, share } from 'rxjs/operators';
 import { Select, Store } from '@ngxs/store';
 import { ViewProfileState } from '../../states';
 import { SetProfile } from '../../actions';
@@ -13,11 +12,11 @@ import { Navigate } from '@ngxs/router-plugin';
   templateUrl: './vehicle-list.component.html',
   styleUrls: ['./vehicle-list.component.scss']
 })
-export class VehicleListComponent implements OnInit {
-  @Select(ViewProfileState) viewProfile$: Observable<ViewProfileStateModel>;
-  bus_number: string;
+export class VehicleListComponent implements OnInit, OnDestroy {
+  @Select(ViewProfileState.fcode) fcode$: Observable<string>;
   vehicles$: Observable<any>;
   filteredVehicles$: Observable<any>;
+  searchTerm$ = new BehaviorSubject<string>('');
   isListView = true;
 
   constructor(
@@ -27,8 +26,14 @@ export class VehicleListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.loadData();
-    this.filteredVehicles$ = this.vehicles$;
+    this.assignVehicles();
+    this.assignFilteredVehicles();
+  }
+
+  ngOnDestroy() {
+    if (this.searchTerm$) {
+      this.searchTerm$.unsubscribe();
+    }
   }
 
   nav(fcode: string, vcode: string, vin: string) {
@@ -40,26 +45,42 @@ export class VehicleListComponent implements OnInit {
     this.store.dispatch(new Navigate(['/setting/fleet']));
   }
 
-  filterVehicles(vcode: string) {
-      if (!vcode || vcode.length === 0) {
-        this.loadData();
-        return;
-      }
-
-      this.filteredVehicles$ = this.vehicles$.pipe(
-        debounce(() => timer(300)),
-        map(vehicles =>
-          vehicles.filter(v => v.code.toUpperCase().indexOf(vcode.trim().toUpperCase()) > -1)
-        ),
-      );
+  toggleView() {
+    this.isListView = !this.isListView;
   }
 
-  private loadData() {
-    this.vehicles$ = this.viewProfile$.pipe(
-      switchMap(profile => {
+  private assignVehicles() {
+    this.vehicles$ = this.fcode$.pipe(
+      switchMap(fcode => {
         const fleets$ = this.dataService.getFleets();
-        return this.utilityService.getVehiclesByFleetCode(profile.fcode, fleets$);
-      }),
+        return this.utilityService.getVehiclesByFleetCode(fcode, fleets$);
+      })
     );
   }
+
+  private assignFilteredVehicles() {
+    this.filteredVehicles$ = this.search(this.searchTerm$);
+  }
+
+  private search(term$: Observable<string>) {
+    return term$.pipe(
+      debounceTime(300),
+      distinctUntilChanged(),
+      switchMap(term => this.searchEntries(term))
+    );
+  }
+
+  private searchEntries(term: string): Observable<string> {
+    if (!term || term.length === 0 || term.trim().length === 0) {
+      return this.vehicles$;
+    }
+
+    return this.vehicles$.pipe(
+      map(vehicles =>
+        vehicles.filter(v => v.code.toUpperCase().indexOf(term.trim().toUpperCase()) > -1)
+      )
+    );
+
+  }
+
 }
