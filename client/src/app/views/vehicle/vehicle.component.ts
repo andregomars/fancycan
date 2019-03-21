@@ -25,7 +25,7 @@ export class VehicleComponent implements OnInit, OnDestroy {
   pauser = new BehaviorSubject<boolean>(false);
 
   intSecPlayChart = 1;
-  intSecState = 15;
+  intSecState = 5;
   intSecSpin = 1;
 
   len = 30;
