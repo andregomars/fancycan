@@ -4,7 +4,7 @@
       [style.min-height.px]="mapMinHeight" [style.background-color]="'#242f3e'">
       <agm-map id="map_canvas" *ngIf="loadMap" [zoom]="mapZoom" [streetViewControl]=false [styles]="mapStyle" [latitude]="map_lat"
         [longitude]="map_lgt">
-        <ng-container *ngIf="(vehicles$ | async) as locations">
+        <ng-container *ngIf="locations$.value as locations">
           <agm-marker-cluster *ngIf="locations && locations.length > 0" [imagePath]="'https://googlemaps.github.io/js-marker-clusterer/images/m'">
             <agm-marker *ngFor="let loc of locations" [latitude]="loc.latitude" [longitude]="loc.longitude" iconUrl="assets/img/map/bus.orange.40.png"
               [label]="loc.label">
@@ -29,13 +29,11 @@
           <i class="fa fa-angle-double-right fa-lg"></i>
         </button>
         <input class="form-control bg-dark input-filter" size="5" type="text" 
-          [(ngModel)]="bus_number" placeholder="Filter by vehicle number"
-          (keyup)="filterVehicles(bus_number)" [hidden]="hideSideInfo"/>
-        <!-- <input class="form-control bg-dark input-filter" size="5" type="text" placeholder="Filter by vehicle number"
-          (keyup)="filterVehicles($event.target.value)" [hidden]="hideSideInfo"/> -->
+          placeholder="Filter by vehicle number"
+          (keyup)="searchTerm$.next($event.target.value)" [hidden]="hideSideInfo"/>
       </div>
       <div class="table-responsive-lg" [hidden]="hideSideInfo">
-        <table class="table table-striped table-hover table-outline table-sm mt-1">
+        <table class="table table-striped table-hover table-outline table-sm mt-1 w-100">
           <thead class="text-white thead-light bg-primary">
             <tr>
               <th class="w-25 text-center"><small>#</small></th>

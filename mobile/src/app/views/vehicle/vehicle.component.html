@@ -1,7 +1,52 @@
 <StackLayout>
-	<ActionBar [title]="vcode" class="action-bar">
-	</ActionBar>
-    <StackLayout>
-        <Label class="h1" text="vehicle works!"></Label>
-    </StackLayout>
+    <ActionBar [title]="vcode" class="action-bar">
+    </ActionBar>
+    <GridLayout rows="150" columns="125,125,125" marginTop="-20">
+        <RadRadialGauge title="68.3" subtitle="kW" row="0" col="0">
+            <RadialScale tkRadialGaugeScales startAngle="180" sweepAngle="180" minimum="0" maximum="100">
+                <TitleStyle tkRadialGaugeTitleStyle textColor="black" ios:textSize="20" ios:verticalOffset="0"
+                    android:verticalOffset="10"></TitleStyle>
+                <SubtitleStyle tkRadialGaugeSubtitleStyle textColor="black"></SubtitleStyle>
+                <ScaleStyle tkRadialScaleStyle majorTicksCount="0" minorTicksCount="0" lineThickness="0" labelsCount="0"
+                    ticksOffset="0"></ScaleStyle>
+                <RadialBarIndicator tkRadialScaleIndicators minimum="0" maximum="68.3" location="0.5">
+                    <BarIndicatorStyle tkRadialBarIndicatorStyle fillColor="#4dbd74"></BarIndicatorStyle>
+                </RadialBarIndicator>
+                <RadialBarIndicator tkRadialScaleIndicators minimum="68.4" maximum="100" location="0.5">
+                    <BarIndicatorStyle tkRadialBarIndicatorStyle fillColor="#f0f3f5"></BarIndicatorStyle>
+                </RadialBarIndicator>
+            </RadialScale>
+        </RadRadialGauge>
+        <RadRadialGauge title="85" subtitle="V" row="0" col="1">
+            <RadialScale tkRadialGaugeScales startAngle="180" sweepAngle="180" minimum="0" maximum="100">
+                <TitleStyle tkRadialGaugeTitleStyle textColor="black" ios:textSize="20" ios:verticalOffset="0"
+                    android:verticalOffset="10"></TitleStyle>
+                <SubtitleStyle tkRadialGaugeSubtitleStyle textColor="black"></SubtitleStyle>
+                <ScaleStyle tkRadialScaleStyle majorTicksCount="0" minorTicksCount="0" lineThickness="0" labelsCount="0"
+                    ticksOffset="0"></ScaleStyle>
+                <RadialBarIndicator tkRadialScaleIndicators minimum="0" maximum="85" location="0.5">
+                    <BarIndicatorStyle tkRadialBarIndicatorStyle fillColor="#4dbd74"></BarIndicatorStyle>
+                </RadialBarIndicator>
+                <RadialBarIndicator tkRadialScaleIndicators minimum="86" maximum="100" location="0.5">
+                    <BarIndicatorStyle tkRadialBarIndicatorStyle fillColor="#f0f3f5"></BarIndicatorStyle>
+                </RadialBarIndicator>
+            </RadialScale>
+        </RadRadialGauge>
+        <RadRadialGauge title="57" subtitle="A" row="0" col="3">
+            <RadialScale tkRadialGaugeScales startAngle="180" sweepAngle="180" minimum="0" maximum="100">
+                <TitleStyle tkRadialGaugeTitleStyle textColor="black" ios:textSize="20" ios:verticalOffset="0"
+                    android:verticalOffset="10"></TitleStyle>
+                <SubtitleStyle tkRadialGaugeSubtitleStyle textColor="black"></SubtitleStyle>
+                <ScaleStyle tkRadialScaleStyle majorTicksCount="0" minorTicksCount="0" lineThickness="0" labelsCount="0"
+                    ticksOffset="0"></ScaleStyle>
+                <RadialBarIndicator tkRadialScaleIndicators minimum="0" maximum="57" location="0.5">
+                    <BarIndicatorStyle tkRadialBarIndicatorStyle fillColor="#4dbd74"></BarIndicatorStyle>
+                </RadialBarIndicator>
+                <RadialBarIndicator tkRadialScaleIndicators minimum="58" maximum="100" location="0.5">
+                    <BarIndicatorStyle tkRadialBarIndicatorStyle fillColor="#f0f3f5"></BarIndicatorStyle>
+                </RadialBarIndicator>
+            </RadialScale>
+        </RadRadialGauge>
+    </GridLayout>
+
 </StackLayout>

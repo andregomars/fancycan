@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable, timer, BehaviorSubject } from 'rxjs';
-import { share, map, tap, debounce, switchMap } from 'rxjs/operators';
+import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
+import { Observable, BehaviorSubject, of, Subject } from 'rxjs';
+import { share, map, tap, switchMap, debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
 
 import { DataService, UtilityService } from '../../services';
 import { MapStyle } from './../shared/map-style';
@@ -15,17 +15,18 @@ import { SetProfile } from '../../actions';
   templateUrl: './fleet-dashboard.component.html',
   styleUrls: ['./fleet-dashboard.component.scss']
 })
-export class FleetDashboardComponent implements OnInit {
+export class FleetDashboardComponent implements OnInit, OnDestroy, AfterViewInit {
   @Select(ViewProfileState.fcode) fcode$: Observable<string>;
-
-  bus_number: string;
-  hideSideInfo: boolean;
-  loadMap = environment.loadMap;
-  mapMinHeight = 768;
-  mapZoom = 12;
-  mapStyle = new MapStyle().styler;
   vehicles$: Observable<any>;
   filteredVehicles$: Observable<any>;
+  searchTerm$ = new Subject<string>();
+  locations$ = new BehaviorSubject<any>({});
+  loadMap = environment.loadMap;
+  hideSideInfo: boolean;
+
+  mapZoom = 12;
+  mapMinHeight = 768;
+  mapStyle = new MapStyle().styler;
   map_lat = 34.1061376;
   map_lgt = -117.8230976;
   // map_lat = 34.056539;
@@ -39,23 +40,28 @@ export class FleetDashboardComponent implements OnInit {
 
   ngOnInit() {
     this.hideSideInfo = false;
-    this.loadData();
-    this.filteredVehicles$ = this.vehicles$;
+    this.vehicles$ = this.fcode$.pipe(
+      switchMap(fcode => this.dataService.getVehicleStates(fcode)),
+      share()
+    );
+    this.filteredVehicles$ = this.search(this.searchTerm$).pipe(
+      tap(vehicles => {
+        const vlocs = vehicles.map(v => this.mapSPNtoGeo(v));
+        const locs = this.utilityService.attachGeoLocationAndMapLabel(vlocs);
+        this.locations$.next(locs);
+      })
+    );
+
   }
 
-  filterVehicles(vcode: string) {
-      if (!vcode || vcode.length === 0) {
-        this.loadData();
-        this.filteredVehicles$ = this.vehicles$;
-        return;
-      }
+  ngAfterViewInit() {
+    this.searchTerm$.next('');
+  }
 
-      this.filteredVehicles$ = this.vehicles$.pipe(
-        debounce(() => timer(300)),
-        map(vehicles =>
-          vehicles.filter(v => v.vcode.toString().toUpperCase().indexOf(vcode.trim().toUpperCase()) > -1)
-        )
-      );
+  ngOnDestroy() {
+    if (this.searchTerm$) {
+      this.searchTerm$.unsubscribe();
+    }
   }
 
   resizeSideInfo() {
@@ -67,19 +73,25 @@ export class FleetDashboardComponent implements OnInit {
     this.store.dispatch(new Navigate(['/vehicle/panel', vcode]));
   }
 
-  private loadData() {
-    this.vehicles$ = this.fcode$.pipe(
-      switchMap(fcode =>
-        this.dataService.getVehicleStates(fcode)
-      ),
-      map((vehicles: any[]) =>
-        vehicles.filter((el, idx, arr) =>
-          idx === arr.findIndex(item => item.code === el.code))
-      ),
-      map(vehicles => vehicles.map(v => this.mapSPNtoGeo(v))),
-      map(vehicles => this.utilityService.attachGeoLocationAndMapLabel(vehicles)),
-      share()
+  private search(term$: Observable<string>) {
+    return term$.pipe(
+      // filter(term => term.length > 2),
+      debounceTime(300),
+      distinctUntilChanged(),
+      switchMap(term => this.searchEntries(term))
     );
+  }
+
+  private searchEntries(term: string): Observable<string> {
+    if (!term || term.length === 0 || term.trim().length === 0) {
+      return this.vehicles$;
+    }
+
+    return this.vehicles$.pipe(
+      map(vehicles =>
+        vehicles.filter(v => v.vcode.toString().toUpperCase().indexOf(term.trim().toUpperCase()) > -1))
+    );
+
   }
 
   private mapSPNtoGeo(vehicle: any): any {
@@ -92,22 +104,5 @@ export class FleetDashboardComponent implements OnInit {
 
   }
 
-  // private loadData() {
-  //   this.vehicles$ = this.dataService.getRealtimeStates().pipe(
-  //     switchMap(states =>
-  //       this.fcode$.pipe(
-  //         map(fcode =>
-  //           states.filter(state => state.fleet_code === fcode)
-  //         )
-  //       )
-  //     ),
-  //     map((vehicles: any[]) =>
-  //       vehicles.filter((el, idx, arr) =>
-  //         idx === arr.findIndex(item => item.code === el.code))
-  //     ),
-  //     map(vehicles => this.utilityService.attachMapLabels(vehicles)),
-  //     share()
-  //   );
-  // }
 
 }
