@@ -124,9 +124,9 @@
         <div class="col px-2" [style.min-height.px]="mapMinHeight" [style.background-color]="'#242f3e'">
           <agm-map id="map_canvas" *ngIf="loadMap" [zoom]="mapZoom" [streetViewControl]=false [styles]="mapStyle"
             [latitude]="map_lat" [longitude]="map_lgt">
-            <ng-container *ngIf="(vehicle$ | async)?.spn584 && (vehicle$ | async)?.spn585">
+            <ng-container *ngIf="(vehicle$ | async) as vehicle">
                 <agm-marker iconUrl="assets/img/map/arrow_orange.20.png"
-                  [latitude]="(vehicle$ | async)?.spn584" [longitude]="(vehicle$ | async)?.spn585">
+                  [latitude]="vehicle.spn584" [longitude]="vehicle.spn585">
                 </agm-marker>
             </ng-container>
             <!-- <ng-container *ngIf="(vehicle$ | async)?.geolocations as locations">

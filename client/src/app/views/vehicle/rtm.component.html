@@ -24,13 +24,14 @@
           <label>Engine</label>
         </div>
         <div class="col-4">
-          <label class="switch switch-label switch-outline-secondary-alt">
+          <app-switch [isSwitchOn]="vehicleState.value.spn9007"></app-switch>
+          <!-- <label class="switch switch-label switch-outline-secondary-alt">
             <input type="checkbox" class="switch-input">
             <span class="switch-slider" data-checked="On" data-unchecked="Off"></span>
-          </label>
+          </label> -->
         </div>
         <div class="col-3">
-          <img [src]="imgEngineCheck" class="img-fluid" alt="bus" width="35px" height="28px">
+          <!-- <img [src]="imgEngineCheck" class="img-fluid" alt="bus" width="35px" height="28px"> -->
         </div>
       </div>
       <div class="row mt-2 pt-2 justify-content-around border border-secondary rounded">
@@ -38,10 +39,23 @@
           <label>Transmission</label>
         </div>
         <div class="col-7">
-          <label class="switch switch-label switch-outline-secondary-alt">
+          <app-transmission-switch shift="P" isDisabled="true"></app-transmission-switch>
+          <!-- <label class="switch switch-label switch-outline-secondary-alt">
             <input type="checkbox" class="switch-input">
             <span class="switch-slider" data-checked="D" data-unchecked="P"></span>
-          </label>
+          </label> -->
+        </div>
+      </div>
+      <div class="row mt-2 pt-2 justify-content-around border border-secondary rounded">
+        <div class="col-5">
+          <label>Engine Idle</label>
+        </div>
+        <div class="col-4">
+          <app-switch [isSwitchOn]="vehicleState.value.spn9007 && vehicleState.value.spn84 === 0"></app-switch>
+        </div>
+        <div class="col-3">
+          <!-- <img *ngIf="vehicleState.value.transmission_check"
+            [src]="imgTransmissionCheck" class="img-fluid" alt="bus" width="35px" height="28px"> -->
         </div>
       </div>
       <div class="row mt-2 py-2 border border-secondary rounded">

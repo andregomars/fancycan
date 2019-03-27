@@ -1,21 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { DataService, SmartQueueService, UtilityService } from '../../services';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { map, share } from 'rxjs/operators';
 import { MqttService, IMqttMessage } from 'ngx-mqtt';
-import { Buffer } from 'buffer/';
-import { ObjectID } from 'bson';
 
 import { environment } from '../../../environments/environment';
 import { ICanEntry, Dm1Collection, ICan } from 'fancycan-model';
 import { Dm1AlertService } from '../../services/utility/dm1-alert.service';
+import { SpnProfileState } from '../../states';
+import { Select } from '@ngxs/store';
 
 @Component({
   selector: 'app-vehicle-rtm',
   templateUrl: './rtm.component.html',
   styleUrls: ['./rtm.component.scss']
 })
-export class RtmComponent implements OnInit {
+export class RtmComponent implements OnInit, OnDestroy {
+  @Select(SpnProfileState.spns) spnProfiles$: Observable<any[]>;
+  vehicleState = new BehaviorSubject<any>({});
+
   bsValue = new Date();
   bsRangeValue: Date[];
   maxDate = new Date();
@@ -76,6 +79,16 @@ export class RtmComponent implements OnInit {
     this.subscribeMqtt();
   }
 
+  ngOnDestroy() {
+    if (this.mqttService) {
+      this.mqttService.disconnect();
+    }
+    if (this.vehicleState) {
+      this.vehicleState.unsubscribe();
+    }
+
+  }
+
   filterCans() {
     this.isFiltering = !this.isFiltering;
 
@@ -95,6 +108,7 @@ export class RtmComponent implements OnInit {
           const canEntry = this.utilityService.buildCanEntry(can);
           this.smartQueueService.push(canEntry);
           this.dm1AlertService.push(canEntry);
+          this.updatePaticularVehicleState(canEntry);
           return this.smartQueueService.queue;
         }),
       );
@@ -110,4 +124,13 @@ export class RtmComponent implements OnInit {
     this.bsRangeValue = [this.bsValue, this.maxDate];
   }
 
+  private updatePaticularVehicleState(canEntry: ICanEntry) {
+      this.spnProfiles$.pipe(
+        map(spnProfiles => {
+          const vStatePatched =
+            this.utilityService.buildVehicleState(this.vehicleState.value, [canEntry], spnProfiles);
+          this.vehicleState.next(vStatePatched);
+        }),
+      ).subscribe();
+  }
 }

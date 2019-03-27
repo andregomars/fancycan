@@ -29,7 +29,7 @@ export class PlaybackComponent implements OnInit, OnDestroy {
   cansToShow$: Observable<any>;
   marginMinutes = 3;
   timerIncrementalSec = 1;
-  intSecState = 15;
+  intSecState = 5;
   isFiltering = false;
   filterCanID: string;
   filterStartBit: number;
@@ -42,13 +42,13 @@ export class PlaybackComponent implements OnInit, OnDestroy {
 
   loadMap = environment.loadMap;
   mapMinHeight = 350;
-  mapZoom = 10;
+  mapZoom = 15;
   mapStyle = new MapStyle().styler;
   bus_number: string;
-  map_lat = 34.056539;
-  map_lgt = -118.237485;
-  // gaugeType = 'semi';
-  // gaugeThick = 15;
+  map_lat = 34.1061376;
+  map_lgt = -117.8230976;
+  // map_lat = 34.056539;
+  // map_lgt = -118.237485;
 
   engineRunning = 45;
   engineIdle = 60;
