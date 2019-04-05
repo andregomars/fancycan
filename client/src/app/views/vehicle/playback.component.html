@@ -78,7 +78,7 @@
         </div>
       </div>
       <div class="row mt-2 border border-secondary rounded">
-        <div class="col table-responsive-lg">
+        <div class="col-12 table-responsive-lg">
           <table class="table table-striped table-hover table-outline table-sm mt-1">
             <thead class="text-white thead-light bg-primary">
               <tr>
@@ -110,8 +110,8 @@
             </tbody>
           </table>
         </div>
-      </div>
-      <div class="row mt-2 border border-secondary rounded">
+      <!-- </div>
+      <div class="row mt-2 border border-secondary rounded"> -->
         <div class="col-6 table-responsive-lg">
           <table class="table table-striped table-hover table-outline table-sm mt-1">
             <thead class="text-white thead-light bg-primary">
@@ -152,6 +152,24 @@
             </tbody>
           </table>
         </div>
+      </div>
+      <div class="row mt-2 py-2 border border-secondary rounded px-0"
+        *ngIf="filteredEntries.length > 0">
+        <ul class="col list-unstyled">
+          <li *ngFor="let item of filteredEntries">
+              <div class="row text-monospace no-gutters p-0 m-0">
+                <div class="col-3 text-warning">
+                  {{ item.key | uppercase }}
+                </div>
+                <div class="col-5">
+                  {{ item.value | uppercase }}
+                </div>
+                <div class="col-4">
+                  {{ item.time | date: 'HH:mm:ss' }}
+                </div>
+              </div>
+          </li>
+        </ul>
       </div>
       <div class="row mt-2 py-2 border border-secondary rounded px-0">
         <ul class="col list-unstyled">
