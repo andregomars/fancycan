@@ -21,7 +21,7 @@ export class PlaybackComponent implements OnInit, OnDestroy {
   @Select(ViewProfileState.fcode) fcode$: Observable<string>;
   @Select(ViewProfileState.vin) vin$: Observable<string>;
   @Select(SpnProfileState.spns) spnProfiles$: Observable<any[]>;
-  pauser = new BehaviorSubject<boolean>(true);
+  pauser = new BehaviorSubject<boolean>(false);
   vehicleState = new BehaviorSubject<any>({});
   cansPausable$: Observable<any>;
   beginTime$: Observable<Date>;
@@ -71,6 +71,9 @@ export class PlaybackComponent implements OnInit, OnDestroy {
   }
   get filterKey() {
     return this.smartQueueService.filterKey;
+  }
+  get filteredEntries() {
+    return this.smartQueueService.filteredEntries;
   }
 
   constructor(
@@ -161,6 +164,7 @@ export class PlaybackComponent implements OnInit, OnDestroy {
 
     this.cansToShow$ = this.cansPausable$.pipe(
       map(cans => {
+        this.smartQueueService.clearFilteredEntries();
         cans.map(can => this.smartQueueService.push(can));
         return this.smartQueueService.queue;
       })

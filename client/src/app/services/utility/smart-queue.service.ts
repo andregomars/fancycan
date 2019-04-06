@@ -10,6 +10,7 @@ import { TransformService } from './transform.service';
 })
 export class SmartQueueService {
   private _queue: ICanEntry[];
+  private _filteredEntries: ICanEntry[];
   private _min: number;
   private _max: number;
   private _timer: number;
@@ -39,11 +40,15 @@ export class SmartQueueService {
   get filterKey() {
     return this._filterKey;
   }
+  get filteredEntries() {
+    return this._filteredEntries;
+  }
 
   constructor(
     private transformService: TransformService
   ) {
     this._queue = [];
+    this._filteredEntries = [];
     this.clearFilter();
   }
 
@@ -56,7 +61,11 @@ export class SmartQueueService {
     this._times = null;
     this._min = null;
     this._max = null;
-
+    this.clearFilteredEntries();
+  }
+  
+  clearFilteredEntries() {
+    this._filteredEntries.length = 0
   }
 
   setFilter(id: string, startBit: number, length: number) {
@@ -78,11 +87,20 @@ export class SmartQueueService {
       this.increaseTimes();
       this.extendTimer();
       this.calculateMinMax(entry.value);
+      this.buildFilteredList(entry);
     }
   }
 
   pop(): ICanEntry {
     return this._queue.pop();
+  }
+
+  private buildFilteredList(entry: ICanEntry) {
+    // if (this._filteredEntries.findIndex(
+    //   entry => entry.key.toUpperCase() !== entry.key.toUpperCase()) > -1) {
+    //   this.filteredEntries.length = 0;
+    // }
+    this._filteredEntries.push(entry);
   }
 
   private calculateMinMax(canData: string) {
