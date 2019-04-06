@@ -9,7 +9,7 @@
 				<ng-template let-item="item">
 					<GridLayout class="item list-group-item">
                         <Label [text]="item.name" class="list-group-item-heading"
-                            [nsRouterLink]="item.name"></Label>
+                            [nsRouterLink]="[item.name]"></Label>
 					</GridLayout>
 				</ng-template>
 			</ListView>

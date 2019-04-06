@@ -9,7 +9,7 @@ import { ObservableArray } from "tns-core-modules/data/observable-array";
   moduleId: module.id,
 })
 export class VehicleListComponent implements OnInit {
-	searchHint = "Search for vehicle id and press enter";
+	searchHint = 'Search for vehicle id and press enter';
 	myItems: ObservableArray<DataItem> = new ObservableArray<DataItem>();
 	private arrayItems: Array<DataItem> = [];
 
@@ -31,7 +31,7 @@ export class VehicleListComponent implements OnInit {
 		let searchValue = searchBar.text.toLowerCase();
 
 		this.myItems = new ObservableArray<DataItem>();
-		if (searchValue !== "") {
+		if (searchValue) {
 			for (let i = 0; i < this.arrayItems.length; i++) {
 				if (this.arrayItems[i].name.toLowerCase().indexOf(searchValue) !== -1) {
 					this.myItems.push(this.arrayItems[i]);
@@ -42,7 +42,7 @@ export class VehicleListComponent implements OnInit {
 
 	public onClear(args) {
 		let searchBar = <SearchBar>args.object;
-		searchBar.text = "";
+		searchBar.text = '';
 		searchBar.hint = this.searchHint;
 
 		this.myItems = new ObservableArray<DataItem>();

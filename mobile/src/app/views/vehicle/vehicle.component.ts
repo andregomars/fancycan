@@ -16,6 +16,9 @@ export class VehicleComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.log(this.activeRoute.snapshot.url);
+    console.log(this.activeRoute.snapshot.parent.url);
+    console.log(this.activeRoute.snapshot.root.url);
     this.vcode = this.activeRoute.snapshot.params["id"];
   }
 
