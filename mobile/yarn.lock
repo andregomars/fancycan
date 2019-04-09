@@ -2766,10 +2766,10 @@ nanomatch@^1.2.9:
     snapdragon "^0.8.1"
     to-regex "^3.0.1"
 
-nativescript-angular@7.2.2:
-  version "7.2.2"
-  resolved "https://registry.yarnpkg.com/nativescript-angular/-/nativescript-angular-7.2.2.tgz#67c283c93286b7e7f3ea93c1bbfece3760d3aa61"
-  integrity sha512-fSiOYA97CuiG48bX7sQGpmClz8bPW/Vf1PcwJ/ZjXIu3HDkaeQLyMABEjpotq+0J9P4wSjxPdO3Z/SWOLI8pxw==
+nativescript-angular@~7.2.2:
+  version "7.2.3"
+  resolved "https://registry.yarnpkg.com/nativescript-angular/-/nativescript-angular-7.2.3.tgz#297d282acd9b1fc4be4b190f673551238186df8f"
+  integrity sha512-6XWkjIqfuFcHa3qnq9j2veCJItOIohlnAY/xf+CStqebbxaLkeS5VgUYmCZlqveoND+0/VT81tvXYWkrLgfoyA==
   dependencies:
     nativescript-intl "^3.0.0"
     reflect-metadata "^0.1.8"
@@ -2829,6 +2829,18 @@ nativescript-theme-core@~1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/nativescript-theme-core/-/nativescript-theme-core-1.0.4.tgz#cf2880c7fbf2fe5f43e2235d309750790803efe1"
   integrity sha1-zyiAx/vy/l9D4iNdMJdQeQgD7+E=
+
+nativescript-ui-core@~2.0.0:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/nativescript-ui-core/-/nativescript-ui-core-2.0.1.tgz#c59fee4d714d5138460b7aa98df217f1e02b643e"
+  integrity sha512-6XeRrbp3cP7MFqny6TXpF8VVwhA5bfE2iC1RIB+YjEclK+gC1b+4iov4Yl8c4oP6CMQ40AfwU11R9cEsuRr81g==
+
+nativescript-ui-gauge@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/nativescript-ui-gauge/-/nativescript-ui-gauge-4.0.0.tgz#0c829c716ca460a142532474ad47cd7d9e8d9c30"
+  integrity sha512-ohNiffasF+saJaFeMxBTKhjtdvjpfeMbo3ag7Tikau4dYsXYIYdUBFz9LHPpRR8kfjaWdHB2bsBYjshLOyXulQ==
+  dependencies:
+    nativescript-ui-core "~2.0.0"
 
 nativescript-worker-loader@~0.9.0:
   version "0.9.5"
@@ -4254,17 +4266,17 @@ timers-browserify@^2.0.4:
   dependencies:
     setimmediate "^1.0.4"
 
-tns-core-modules-widgets@5.2.0:
-  version "5.2.0"
-  resolved "https://registry.yarnpkg.com/tns-core-modules-widgets/-/tns-core-modules-widgets-5.2.0.tgz#ed7574e2d46295933f06dd940db210827477d25d"
-  integrity sha512-OHzP0Fnd2ya3m2kx+ilfjQRSzZNUr0SQovRSPwblP7hXe8gSJMb1dmn1Q+WWVkbHMKt74NtIQb+X6ez45CUviA==
+tns-core-modules-widgets@5.3.0:
+  version "5.3.0"
+  resolved "https://registry.yarnpkg.com/tns-core-modules-widgets/-/tns-core-modules-widgets-5.3.0.tgz#4651f9b756ea8ee43650dbbfb3e968d05ee26aac"
+  integrity sha512-mR8Pof0NhMRhPYcshQ54WyPrlbrqmTgrwxALtF1485fbCAHblz/2DqU7yGmTgC5LNdV7yhNeHYouoYg3TYOZbA==
 
-tns-core-modules@~5.2.2:
-  version "5.2.2"
-  resolved "https://registry.yarnpkg.com/tns-core-modules/-/tns-core-modules-5.2.2.tgz#07a0198784e1dd84acda899fc0b840fe9d860002"
-  integrity sha512-LjCFqwCXzwGoJMkfpZydO3ePdH8KslJOp+JfbWcNCg//Z5hfhNOJ0qUaZ68g4EnKa3EWcCAPN+c1u5RacN7VdA==
+tns-core-modules@^5.3.1:
+  version "5.3.1"
+  resolved "https://registry.yarnpkg.com/tns-core-modules/-/tns-core-modules-5.3.1.tgz#e73de4d1da12e3a7424a39c0608cdc5a6851ae90"
+  integrity sha512-b1zBFr+LTxnUe+jxMqyfjHYXKqbECT/YNqtxmJpbma9P+gqPTfFJ1eFWU+yVNQVDIQhZ/Wy8P56H6cm99nmYoQ==
   dependencies:
-    tns-core-modules-widgets "5.2.0"
+    tns-core-modules-widgets "5.3.0"
     tslib "^1.9.3"
 
 to-arraybuffer@^1.0.0:

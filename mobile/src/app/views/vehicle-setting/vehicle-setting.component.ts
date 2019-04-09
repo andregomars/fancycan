@@ -17,7 +17,7 @@ export class VehicleSettingComponent implements OnInit {
   }
 
   logoff() {
-    this.routerExtension.navigate(["login"], { clearHistory: true });
+    this.routerExtension.navigate(['login'], { clearHistory: true });
     
   }
 
