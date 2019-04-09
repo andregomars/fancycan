@@ -160,6 +160,7 @@ export class LoginComponent implements OnInit {
 
     login() {
         this.updateErrors(true);
+        // const url = '/main/default/(vehicleTab:vehicle//settingTab:setting//checklistTab:checklist)';
 
         if (this.isValidForm()) {
             this.isAuthenticating = true;

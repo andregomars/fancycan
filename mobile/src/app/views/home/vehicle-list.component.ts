@@ -14,17 +14,17 @@ export class VehicleListComponent implements OnInit {
 	private arrayItems: Array<DataItem> = [];
 
 	constructor() {
+	}
+
+	ngOnInit() {
 		const count = 20;
 		for (let i = 0; i < count; i++) {
-			
 			const code = 'A' + this.zeroFill(i, 2);
 			this.arrayItems.push(new DataItem(code));
 		}
 
 		this.myItems = new ObservableArray<DataItem>(this.arrayItems);
 	}
-
-	ngOnInit() {}
 
 	public onSubmit(args) {
 		let searchBar = <SearchBar>args.object;

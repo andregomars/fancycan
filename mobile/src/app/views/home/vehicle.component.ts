@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { RouterExtensions, PageRoute, LocationState } from 'nativescript-angular';
+import { RouterExtensions } from 'nativescript-angular';
 
 @Component({
   selector: 'app-vehicle',
@@ -12,13 +12,12 @@ export class VehicleComponent implements OnInit {
   vcode: string;
 
   constructor(
+    // private routerExt: RouterExtensions,
     private activeRoute: ActivatedRoute
   ) { }
 
   ngOnInit() {
-    // console.log('url: '+this.activeRoute.snapshot.url);
-    // console.log('parent url: '+this.activeRoute.snapshot.parent.url);
-    // console.log(this.pageRoute.activatedRoute.value)
+    // console.log(this.routerExt.router.routerState.snapshot.url)
     this.vcode = this.activeRoute.snapshot.params["id"];
   }
 

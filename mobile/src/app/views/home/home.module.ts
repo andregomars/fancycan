@@ -1,6 +1,6 @@
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 
-import { VehicleRoutingModule } from './vehicle-routing.module';
+import { HomeRoutingModule } from './home-routing.module';
 import { NativeScriptCommonModule } from 'nativescript-angular/common';
 import { VehicleComponent } from './vehicle.component';
 import { VehicleListComponent } from './vehicle-list.component';
@@ -9,10 +9,10 @@ import { NativeScriptUIGaugeModule } from 'nativescript-ui-gauge/angular';
 @NgModule({
   declarations: [VehicleComponent, VehicleListComponent],
   imports: [
-    VehicleRoutingModule,
+    HomeRoutingModule,
     NativeScriptUIGaugeModule,
     NativeScriptCommonModule
   ],
   schemas: [NO_ERRORS_SCHEMA]
 })
-export class VehicleModule { }
+export class HomeModule { }

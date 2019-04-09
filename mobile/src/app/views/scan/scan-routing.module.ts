@@ -11,4 +11,4 @@ const routes: Routes = [
   imports: [NativeScriptRouterModule.forChild(routes)],
   exports: [NativeScriptRouterModule]
 })
-export class CheckListRoutingModule { }
+export class ScanRoutingModule { }

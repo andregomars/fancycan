@@ -16,14 +16,18 @@ export class DefaultLayoutComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.redirect();
+  }
+
+  private redirect() {
     this.routerExtension.navigate(
       [
         { 
           outlets: 
           { 
-            vehicleTab: ['vehicle'],
-            settingTab: ['setting'],
-            checklistTab: ['checklist'] 
+            homeTab: ['home'],
+            scanTab: ['scan'],
+            moreTab: ['more'] 
           }
         }
       ], 

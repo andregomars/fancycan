@@ -1,15 +1,15 @@
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 
-import { CheckListRoutingModule } from './check-list-routing.module';
+import { ScanRoutingModule } from './scan-routing.module';
 import { NativeScriptCommonModule } from 'nativescript-angular/common';
 import { CheckListComponent } from './check-list.component';
 
 @NgModule({
   declarations: [CheckListComponent],
   imports: [
-    CheckListRoutingModule,
+    ScanRoutingModule,
     NativeScriptCommonModule
   ],
   schemas: [NO_ERRORS_SCHEMA]
 })
-export class CheckListModule { }
+export class ScanModule { }

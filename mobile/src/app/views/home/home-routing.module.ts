@@ -14,4 +14,4 @@ const routes: Routes = [
   imports: [NativeScriptRouterModule.forChild(routes)],
   exports: [NativeScriptRouterModule]
 })
-export class VehicleRoutingModule { }
+export class HomeRoutingModule { }

@@ -9,22 +9,22 @@ const routes: Routes = [
     component: DefaultLayoutComponent,
     children: [
       {
-        path: 'vehicle',
+        path: 'home',
         component: NSEmptyOutletComponent,
-        outlet: 'vehicleTab',
-        loadChildren: '~/app/views/vehicle/vehicle.module#VehicleModule'
+        outlet: 'homeTab',
+        loadChildren: '~/app/views/home/home.module#HomeModule'
       },
       {
-        path: 'setting',
+        path: 'scan',
         component: NSEmptyOutletComponent,
-        outlet: 'settingTab',
-        loadChildren: '~/app/views/vehicle-setting/vehicle-setting.module#VehicleSettingModule'
+        outlet: 'scanTab',
+        loadChildren: '~/app/views/scan/scan.module#ScanModule'
       },
       {
-        path: 'checklist',
+        path: 'more',
         component: NSEmptyOutletComponent,
-        outlet: 'checklistTab',
-        loadChildren: '~/app/views/check-list/check-list.module#CheckListModule'
+        outlet: 'moreTab',
+        loadChildren: '~/app/views/more/more.module#MoreModule'
       },
     ]
   }
