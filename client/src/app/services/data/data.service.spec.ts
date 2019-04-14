@@ -46,7 +46,7 @@ describe('DataService', () => {
     expect(output.length).toEqual(expected);
   }));
 
-  fit('should get CAN states by speicied _id date range', inject([DataService], async (dataService: DataService) => {
+  xit('should get CAN states by speicied _id date range', inject([DataService], async (dataService: DataService) => {
     const vcode = '6005';
     const beginDate = new Date('2019-03-08T08:07:22.000Z');
     const endDate = new Date('2019-03-08T08:07:23.000Z');

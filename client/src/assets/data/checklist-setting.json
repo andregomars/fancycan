@@ -1,7 +1,7 @@
 [
     {
         "id": 1,
-        "fleet_code": "OMNIT",
+        "fleet_code": "BYD",
         "item": "tire",
         "location": "front right",
         "type": ["status", "value", "condition"],
@@ -10,7 +10,7 @@
     },
     {
         "id": 2,
-        "fleet_code": "OMNIT",
+        "fleet_code": "BYD",
         "item": "tire2",
         "location": "rear left",
         "type": ["status", "value" ],
@@ -19,7 +19,7 @@
     },
     {
         "id": 3,
-        "fleet_code": "OMNIT",
+        "fleet_code": "BYD",
         "item": "tire2",
         "location": "rear left",
         "type": ["condition"],
@@ -28,7 +28,7 @@
     },
     {
         "id": 4,
-        "fleet_code": "OMNIT",
+        "fleet_code": "BYD",
         "item": "tire2",
         "location": "rear left",
         "type": ["value", "condition"],
@@ -37,7 +37,7 @@
     },
     {
         "id": 5,
-        "fleet_code": "OMNIT",
+        "fleet_code": "BYD",
         "item": "break",
         "location": "rear right",
         "type": ["status" ],

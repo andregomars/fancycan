@@ -52,12 +52,11 @@ describe('UtilityService', () => {
     expect(output).toEqual(expected);
   }));
 
-  it('should return vechicle srtate spn list', inject([UtilityService], (utility: UtilityService) => {
-    const input = 'A1';
+  it('should return vechicle state spn list', inject([UtilityService], (utility: UtilityService) => {
     const spnProfileList = [
-      {fleet_code: 'BYD', name: 'Wheel-Based Vehicle Speed', pgn: '65265', spn: '84', unit: 'mph', type: 'J1939'}
-      , {fleet_code: 'BYD', name: 'Engine Speed', pgn: '61444', spn: '190', unit: 'rpm', type: 'J1939'}
-      , {fleet_code: 'BYD', name: 'State Of Charge', pgn: '64519', spn: '9000', unit: '%', type: 'Proprietary'}
+      {fleet_code: 'BYD', name: 'Wheel-Based Vehicle Speed', pgn: '65265', SPNNo: 84, unit: 'mph', type: 'J1939'}
+      , {fleet_code: 'BYD', name: 'Engine Speed', pgn: '61444', SPNNo: 190, unit: 'rpm', type: 'J1939'}
+      , {fleet_code: 'BYD', name: 'State Of Charge', pgn: '64519', SPNNo: 9000, unit: '%', type: 'Proprietary'}
     ];
 
     const vehicleState = {
@@ -112,6 +111,16 @@ describe('UtilityService', () => {
     expect(output[0].spn).toEqual('9000');
     expect(output[1].spn).toEqual('190');
     expect(output[2].spn).toEqual('84');
+  }));
+
+  it('should return qr code', inject([UtilityService], (utility: UtilityService) => {
+    const fcode = 'BYD';
+    const item = 'tire';
+    const location = 'fl';
+    const output = utility.buildQrCode(fcode, item, location);
+
+    const expected = 'http://localhost:9876/fleet/checklist/BYD?item=tire&loc=fl';
+    expect(output).toEqual(expected);
   }));
 
   // it('should get value from CAN data', inject([UtilityService], (utility: UtilityService) => {

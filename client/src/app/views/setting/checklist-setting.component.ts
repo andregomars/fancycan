@@ -17,6 +17,7 @@ export class ChecklistSettingComponent implements OnInit {
   entries$: Observable<any[]>;
   rootForm: FormGroup;
   checkTypeOptions = ['status', 'value', 'condition'];
+  context = { message: 'test' };
 
   constructor(
     private dataService: DataService,
@@ -35,7 +36,15 @@ export class ChecklistSettingComponent implements OnInit {
       switchMap(fcode =>
         this.dataService.getChecklistSetting().pipe(
           map((entries: any[]) =>
-            entries.filter(fleet => fleet.fleet_code === fcode))
+            entries.filter(fleet => fleet.fleet_code === fcode)),
+          map(entries =>
+            entries.map(entry => {
+              const qrCode =
+                this.utilityService.buildQrCode(entry.fleet_code,
+                  entry.item, entry.location);
+              return { ...entry, qrcode: qrCode };
+            })
+          )
         )),
       share()
     );
@@ -75,6 +84,7 @@ export class ChecklistSettingComponent implements OnInit {
         // type: null,
         type: this.buildSelectionForms(this.checkTypeOptions),
         picture: null,
+        qrcode: null,
         note: null
       }));
     this.rootForm = this.fb.group({
@@ -89,6 +99,7 @@ export class ChecklistSettingComponent implements OnInit {
         location: e.location,
         type: this.utilityService.convertSelectOptions(this.checkTypeOptions, e.type),
         picture: e.picture,
+        qrcode: e.qrcode,
         note: e.note
       };
     });

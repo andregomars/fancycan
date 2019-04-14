@@ -264,4 +264,12 @@ export class UtilityService {
         }
     }
 
+    // output e.g. https://app.fancycan.com/fleet/checklist/BYD?item=tire&loc=fl
+    public buildQrCode(fcode: string, item: string, location: string): string {
+        const protocol = window.location.protocol;
+        const host = window.location.host;
+        const url = `${protocol}//${host}/fleet/checklist`;
+        return `${url}/${fcode}?item=${item}&loc=${location}`;
+    }
+
 }

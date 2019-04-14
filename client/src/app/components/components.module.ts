@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import { BsDatepickerModule  } from 'ngx-bootstrap/datepicker';
+import { PopoverModule } from 'ngx-bootstrap/popover';
 import { ChartsModule } from 'ng2-charts';
 
 import { TooltipLabelComponent } from './tooltip-label/tooltip-label.component';
@@ -25,6 +26,7 @@ import { SpnDefListComponent } from './spn-def-list/spn-def-list.component';
       ChartsModule,
       TypeaheadModule,
       TooltipModule,
+      PopoverModule,
       BsDatepickerModule
   ],
   declarations: [

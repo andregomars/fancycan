@@ -57,6 +57,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
+import { PopoverModule } from 'ngx-bootstrap/popover';
 import { LoginComponent } from './views/common/login.component';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
@@ -98,6 +99,7 @@ import { FormsModule } from '@angular/forms';
     TypeaheadModule.forRoot(),
     TabsModule.forRoot(),
     ButtonsModule.forRoot(),
+    PopoverModule.forRoot(),
     ChartsModule,
     MqttModule.forRoot(MQTT_PROXY_OPTIONS),
     ServicesModule.forRoot(),
