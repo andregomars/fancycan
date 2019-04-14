@@ -14,7 +14,8 @@ import { ICan, ICanEntry } from 'fancycan-model';
 @Component({
   selector: 'app-vehicle-playback',
   templateUrl: './playback.component.html',
-  styleUrls: ['./playback.component.scss']
+  styleUrls: ['./playback.component.scss'],
+  providers: [ SmartQueueService ]
 })
 export class PlaybackComponent implements OnInit, OnDestroy {
   @Select(ViewProfileState.vcode) vcode$: Observable<string>;

@@ -126,7 +126,7 @@ export class CompareStatisticComponent implements OnInit {
       }))
     );
 
-    const fleets$ = this.dataService.getFleets();
+    // const fleets$ = this.dataService.getFleets();
     this.vehicleList$ = this.fcode$.pipe(
       // switchMap(fcode =>
       //   this.transformService.getViewProfileByFleetCode(fcode, fleets$)),
@@ -136,6 +136,7 @@ export class CompareStatisticComponent implements OnInit {
             this.transformService.getViewProfileByFleetCode(fcode, fleets))
           )
         ),
+      tap(x => console.log(x)),
       share()
     );
 
@@ -153,7 +154,7 @@ export class CompareStatisticComponent implements OnInit {
     // ['2018-09-01', ...'2018-09-07']
     const daysofOneWeekLabels =
       // Array.from(new Array(7), (val, index) => moment('2018-09-01').add(index, 'days').format('YYYY-MM-DD') );
-      Array.from(new Array(7), (val, index) => format(addDays(new Date(2018, 8, 1), index), 'YYYY-MM-DD'));
+      Array.from(new Array(7), (val, index) => format(addDays(new Date(2019, 3, 7), index), 'YYYY-MM-DD'));
     this.chartLabels = daysofOneWeekLabels;
   }
 

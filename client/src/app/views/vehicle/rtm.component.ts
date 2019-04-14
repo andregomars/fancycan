@@ -13,7 +13,8 @@ import { Select } from '@ngxs/store';
 @Component({
   selector: 'app-vehicle-rtm',
   templateUrl: './rtm.component.html',
-  styleUrls: ['./rtm.component.scss']
+  styleUrls: ['./rtm.component.scss'],
+  providers: [ SmartQueueService ]
 })
 export class RtmComponent implements OnInit, OnDestroy {
   @Select(SpnProfileState.spns) spnProfiles$: Observable<any[]>;

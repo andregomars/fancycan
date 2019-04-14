@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { map, share, tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { format } from 'date-fns';
 import { Buffer } from 'buffer/';
 import { ObjectID } from 'bson';
@@ -269,7 +269,7 @@ export class UtilityService {
         const protocol = window.location.protocol;
         const host = window.location.host;
         const url = `${protocol}//${host}/fleet/checklist`;
-        return `${url}/${fcode}?item=${item}&loc=${location}`;
+        return encodeURI(`${url}/${fcode}?item=${item}&loc=${location}`);
     }
 
 }

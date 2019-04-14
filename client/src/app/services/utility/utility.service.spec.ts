@@ -116,10 +116,10 @@ describe('UtilityService', () => {
   it('should return qr code', inject([UtilityService], (utility: UtilityService) => {
     const fcode = 'BYD';
     const item = 'tire';
-    const location = 'fl';
+    const location = 'front left';
     const output = utility.buildQrCode(fcode, item, location);
 
-    const expected = 'http://localhost:9876/fleet/checklist/BYD?item=tire&loc=fl';
+    const expected = 'http://localhost:9876/fleet/checklist/BYD?item=tire&loc=front%20left';
     expect(output).toEqual(expected);
   }));
 
