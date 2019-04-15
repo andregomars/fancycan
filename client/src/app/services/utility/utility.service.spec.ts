@@ -113,13 +113,22 @@ describe('UtilityService', () => {
     expect(output[2].spn).toEqual('84');
   }));
 
-  it('should return qr code', inject([UtilityService], (utility: UtilityService) => {
+  it('should return qr code for checklist', inject([UtilityService], (utility: UtilityService) => {
     const fcode = 'BYD';
     const item = 'tire';
     const location = 'front left';
-    const output = utility.buildQrCode(fcode, item, location);
+    const output = utility.buildQrCodeForChecklist(fcode, item, location);
 
     const expected = 'http://localhost:9876/fleet/checklist/BYD?item=tire&loc=front%20left';
+    expect(output).toEqual(expected);
+  }));
+
+  it('should return qr code for vehicle', inject([UtilityService], (utility: UtilityService) => {
+    const vcode = '6005';
+    const ports = '60051,60052';
+    const output = utility.buildQrCodeForVehicle(vcode, ports);
+
+    const expected = 'http://localhost:9876/vehicle/panel/6005?ports=60051,60052';
     expect(output).toEqual(expected);
   }));
 

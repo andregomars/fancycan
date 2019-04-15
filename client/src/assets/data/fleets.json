@@ -156,7 +156,7 @@
             {
                 "code": "6001",
                 "vin": "1ZW21312312231",
-                "mac": "6001",
+                "mac": "60011,60012",
                 "picture": "https://s3.aws.com/vpic.png",
                 "note": "",
                 "created": "2018-10-20 15:32:41"
@@ -164,7 +164,7 @@
             {
                 "code": "6002",
                 "vin": "1ZW21312312231",
-                "mac": "6002",
+                "mac": "60021,60022",
                 "picture": "https://s3.aws.com/vpic.png",
                 "note": "",
                 "created": "2018-10-20 15:32:41"
@@ -172,7 +172,7 @@
             {
                 "code": "6003",
                 "vin": "1ZW21312312231",
-                "mac": "6003",
+                "mac": "60031,60032",
                 "picture": "https://s3.aws.com/vpic.png",
                 "note": "",
                 "created": "2018-10-20 15:32:41"
@@ -180,7 +180,7 @@
             {
                 "code": "6004",
                 "vin": "1ZW21312312231",
-                "mac": "6004",
+                "mac": "60041,60042",
                 "picture": "https://s3.aws.com/vpic.png",
                 "note": "",
                 "created": "2018-10-20 15:32:41"

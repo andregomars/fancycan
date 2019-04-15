@@ -4,7 +4,6 @@ import { DataService, TransformService } from '../../services';
 import { share, map, switchMap, tap } from 'rxjs/operators';
 import { Select } from '@ngxs/store';
 import { IOption } from 'ng-select';
-// import * as moment from 'moment';
 import { addDays, format, isSameDay } from 'date-fns';
 import { getStyle, hexToRgba } from '@coreui/coreui-pro/dist/js/coreui-utilities';
 import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';

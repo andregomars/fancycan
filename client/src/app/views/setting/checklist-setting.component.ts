@@ -40,7 +40,7 @@ export class ChecklistSettingComponent implements OnInit {
           map(entries =>
             entries.map(entry => {
               const qrCode =
-                this.utilityService.buildQrCode(entry.fleet_code,
+                this.utilityService.buildQrCodeForChecklist(entry.fleet_code,
                   entry.item, entry.location);
               return { ...entry, qrcode: qrCode };
             })

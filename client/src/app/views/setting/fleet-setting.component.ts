@@ -2,7 +2,7 @@ import { Component, OnInit, Output } from '@angular/core';
 import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { ViewProfileState } from '../../states';
-import { DataService } from '../../services';
+import { DataService, UtilityService } from '../../services';
 import { switchMap, share, map, tap } from 'rxjs/operators';
 import { FormGroup, FormBuilder } from '@angular/forms';
 
@@ -20,6 +20,7 @@ export class FleetSettingComponent implements OnInit {
 
   constructor(
     private dataService: DataService,
+    private utilityService: UtilityService,
     private fb: FormBuilder
   ) { }
 
@@ -34,7 +35,7 @@ export class FleetSettingComponent implements OnInit {
       switchMap(fcode =>
         this.dataService.getFleets().pipe(
           map((fleets: any[]) =>
-            fleets.find(fleet => fleet.code === fcode))
+            fleets.find(fleet => fleet.code === fcode)),
         )),
       share()
     );
@@ -47,6 +48,7 @@ export class FleetSettingComponent implements OnInit {
         vin: null,
         mac: null,
         picture: null,
+        qrcode: null,
         created: null,
         note: null
       }));
@@ -103,11 +105,13 @@ export class FleetSettingComponent implements OnInit {
 
   private filterVehicleFields(vehicles: any[]) {
     return vehicles.map(v => {
+      const qrcode = this.utilityService.buildQrCodeForVehicle(v.code, v.mac);
       return {
         code: v.code,
         vin: v.vin,
         mac: v.mac,
         picture: v.picture,
+        qrcode: qrcode,
         note: v.note,
         created: v.created
       };

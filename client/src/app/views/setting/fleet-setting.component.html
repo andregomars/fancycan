@@ -101,6 +101,7 @@
               <th width="150">Identification</th>
               <th width="180">Create Time</th>
               <th width="200">Picture</th>
+              <th width="100">Qr Code</th>
               <th>Note</th>
               <th></th>
             </tr>
@@ -122,6 +123,15 @@
                 </td>
                 <td>
                   <input type="text" class="form-control" formControlName="picture" name="picture">
+                </td>
+                <td width="50" height="50" class="text-center">
+                  <qrcode [qrdata]="entry.get('qrcode').value" [usesvg]="'true'" 
+                    [level]="'M'" 
+                    triggers="mouseenter:mouseleave" placement="bottom"
+                    [popover]="tPopover" [popoverContext]="entry.get('qrcode')"></qrcode>
+                  <ng-template #tPopover let-qr="value">
+                    <qrcode [qrdata]="qr" [usesvg]="'true'" [level]="'M'"></qrcode>
+                  </ng-template>
                 </td>
                 <td class="text-center">
                   <input type="text" class="form-control" formControlName="note" name="note">

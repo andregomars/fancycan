@@ -264,12 +264,20 @@ export class UtilityService {
         }
     }
 
-    // output e.g. https://app.fancycan.com/fleet/checklist/BYD?item=tire&loc=fl
-    public buildQrCode(fcode: string, item: string, location: string): string {
+    // output e.g. https://app.fancycan.com/fleet/checklist/BYD?item=tire&loc=front%20left
+    public buildQrCodeForChecklist(fcode: string, item: string, location: string): string {
         const protocol = window.location.protocol;
         const host = window.location.host;
         const url = `${protocol}//${host}/fleet/checklist`;
         return encodeURI(`${url}/${fcode}?item=${item}&loc=${location}`);
+    }
+
+    // output e.g. https://app.fancycan.com/vehicle/panel/6005?ports=60051,60052
+    public buildQrCodeForVehicle(vcode: string, ports: string): string {
+        const protocol = window.location.protocol;
+        const host = window.location.host;
+        const url = `${protocol}//${host}/vehicle/panel`;
+        return encodeURI(`${url}/${vcode}?ports=${ports}`);
     }
 
 }
