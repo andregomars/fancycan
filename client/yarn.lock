@@ -2802,10 +2802,10 @@ fancycan-model@^1.0.34:
   dependencies:
     buffer "^5.2.1"
 
-fancycan-utility@^1.0.9:
-  version "1.0.9"
-  resolved "https://registry.yarnpkg.com/fancycan-utility/-/fancycan-utility-1.0.9.tgz#28e86739987dcb7935996af58dad088823a0a2db"
-  integrity sha512-AIPL2gDSsZWJKu0IoAWcMIcpPK6E9r3iW0/e/dfvCNiXfeDpY9ouSlJHHBStcVnAxdpomG7p4WwlHaKeeywxqA==
+fancycan-utility@^1.0.10:
+  version "1.0.10"
+  resolved "https://registry.yarnpkg.com/fancycan-utility/-/fancycan-utility-1.0.10.tgz#2a89672d73849888a7597ff031b85ac73e13740b"
+  integrity sha512-uN/QX7qeiADkZl5p6SzxrLBHbhUsq1KKlnrZCp/iFlkkpU3itvTlkdzWq+Kz7j0A7NHnWNPawNKvSw45L5HAsQ==
   dependencies:
     bson "^4.0.1"
     buffer "^5.2.1"

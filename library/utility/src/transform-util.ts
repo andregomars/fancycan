@@ -72,34 +72,39 @@ export class TransformUtility {
     }
 
     public getViewProfileByVehicleCode(vcode: string, fleets: any[]): ViewProfileStateModel {
-         const vehicle = this.getFlattedVehicles(fleets).find((v: any) => v.vcode === vcode);
-         return {
+        const vehicle = this.getFlattedVehicles(fleets).find((v: any) => v.vcode === vcode);
+        return {
             fcode: vehicle.fcode,
             fname: vehicle.fname,
             vcode: vehicle.vcode,
             vin: vehicle.vin
-         };
+        };
     }
 
+    // public getViewProfileByFleetCode(fcode: string, fleets: any[]): any[] {
+    //     return this.getFlattedVehicles(fleets).
+    //         map((vehicles: any[]) =>
+    //             vehicles.filter((vehicle: any) =>
+    //                 vehicle.fcode.toUpperCase() === fcode.toUpperCase()));
+    // }
+
     public getViewProfileByFleetCode(fcode: string, fleets: any[]): any[] {
-        return this.getFlattedVehicles(fleets).
-            map((vehicles: any[]) =>
-                vehicles.filter((vehicle: any) =>
-                    vehicle.fcode.toUpperCase() === fcode.toUpperCase()));
+        return this.getFlattedVehicles(fleets).filter((vehicle: any) =>
+            vehicle.fcode.toUpperCase() === fcode.toUpperCase());
     }
 
     public getFlattedVehicles(fleets: any[]): any[] {
         return fleets.reduce((all, fleet) => {
-                const vlist = fleet.vehicles.map((v: any) => {
-                    return {
-                        vcode: v.code,
-                        vin: v.vin,
-                        fcode: fleet.code,
-                        fname: fleet.name
-                    };
-                });
-                return [...all, ...vlist];
-            }, []);
+            const vlist = fleet.vehicles.map((v: any) => {
+                return {
+                    vcode: v.code,
+                    vin: v.vin,
+                    fcode: fleet.code,
+                    fname: fleet.name
+                };
+            });
+            return [...all, ...vlist];
+        }, []);
     }
 
     public getDefinitionWithSpecs(defs: any[], spnsProp: any[], spnsJ1939: any[]): IJ1939[] {
@@ -134,7 +139,7 @@ export class TransformUtility {
         return spnGroups.reduce((pre: IJ1939[], cur: IJ1939[]) => [...pre, ...cur]);
     }
 
-            // }),
+    // }),
     //     );
     // }
 

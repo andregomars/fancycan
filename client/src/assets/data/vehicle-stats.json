@@ -1,7 +1,7 @@
 [
     {
-        "fleet_code": "OMNIT",
-        "vehicle_code": "5001",
+        "fleet_code": "BYD",
+        "vehicle_code": "6005",
         "odometer": 10000,
         "mileage": 50000,
         "engine_on": 7,
@@ -12,11 +12,11 @@
         "soc_used": 450,
         "energy_charged": 600,
         "energy_used": 550,
-        "updated": "2018-09-01 00:00:00"
+        "updated": "2019-04-11 00:00:00"
     },
     {
-        "fleet_code": "OMNIT",
-        "vehicle_code": "5001",
+        "fleet_code": "BYD",
+        "vehicle_code": "6005",
         "odometer": 10000,
         "mileage": 50000,
         "engine_on": 7,
@@ -27,11 +27,11 @@
         "soc_used": 0,
         "energy_charged": 0,
         "energy_used": 0,
-        "updated": "2018-09-02 00:00:00"
+        "updated": "2019-04-12 00:00:00"
     },
     {
-        "fleet_code": "OMNIT",
-        "vehicle_code": "5003",
+        "fleet_code": "BYD",
+        "vehicle_code": "6005",
         "odometer": 10000,
         "mileage": 50000,
         "engine_on": 7,
@@ -42,11 +42,11 @@
         "soc_used": 350,
         "energy_charged": 230,
         "energy_used": 100,
-        "updated": "2018-09-03 00:00:00"
+        "updated": "2019-04-13 00:00:00"
     },
     {
-        "fleet_code": "OMNIT",
-        "vehicle_code": "5004",
+        "fleet_code": "BYD",
+        "vehicle_code": "6005",
         "odometer": 10000,
         "mileage": 50000,
         "engine_on": 7,
@@ -57,11 +57,11 @@
         "soc_used": 450,
         "energy_charged": 600,
         "energy_used": 550,
-        "updated": "2018-09-04 00:00:00"
+        "updated": "2019-04-14 00:00:00"
     },
     {
-        "fleet_code": "OMNIT",
-        "vehicle_code": "5001",
+        "fleet_code": "BYD",
+        "vehicle_code": "6006",
         "odometer": 10000,
         "mileage": 50000,
         "engine_on": 7,
@@ -72,11 +72,11 @@
         "soc_used": 350,
         "energy_charged": 230,
         "energy_used": 100,
-        "updated": "2018-09-04 00:00:00"
+        "updated": "2019-04-14 00:00:00"
     },
     {
-        "fleet_code": "OMNIT",
-        "vehicle_code": "5001",
+        "fleet_code": "BYD",
+        "vehicle_code": "6005",
         "odometer": 10000,
         "mileage": 50000,
         "engine_on": 7,
@@ -87,11 +87,11 @@
         "soc_used": 350,
         "energy_charged": 230,
         "energy_used": 100,
-        "updated": "2018-09-05 00:00:00"
+        "updated": "2019-04-15 00:00:00"
     },
     {
-        "fleet_code": "OMNIT",
-        "vehicle_code": "5012",
+        "fleet_code": "BYD",
+        "vehicle_code": "6006",
         "odometer": 10000,
         "mileage": 50000,
         "engine_on": 7,
@@ -102,6 +102,6 @@
         "soc_used": 450,
         "energy_charged": 600,
         "energy_used": 550,
-        "updated": "2018-09-05 00:00:00"
+        "updated": "2019-04-15 00:00:00"
     }
 ]

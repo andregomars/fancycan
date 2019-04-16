@@ -97,7 +97,6 @@ export class CompareStatisticComponent implements OnInit {
 
   constructor(
     private dataService: DataService,
-    // private utilityService: UtilityService
     private transformService: TransformService
   ) { }
 
@@ -112,30 +111,22 @@ export class CompareStatisticComponent implements OnInit {
   }
 
   private loadDefault() {
-    // this.definitions$ = this.dataService.getDefinitions().pipe(
-    //   share()
-    // );
-
     this.spnList$ = this.spns$.pipe(
       map(defs => defs.map(def => {
         return {
-          label: def.spn,
-          value: def.spn
+          label: def.SPNNo,
+          value: def.SPNNo
         };
       }))
     );
 
-    // const fleets$ = this.dataService.getFleets();
     this.vehicleList$ = this.fcode$.pipe(
-      // switchMap(fcode =>
-      //   this.transformService.getViewProfileByFleetCode(fcode, fleets$)),
       switchMap(fcode =>
         this.dataService.getFleets().pipe(
           map((fleets: any[]) =>
             this.transformService.getViewProfileByFleetCode(fcode, fleets))
           )
         ),
-      tap(x => console.log(x)),
       share()
     );
 
