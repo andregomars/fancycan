@@ -20,7 +20,7 @@
             "name": "CleanProcessor",
             "enabled": true,
             "backupDays": 0,
-            "collections": ["can_row", "can", "can_state"]
+            "collections": ["can_raw", "can", "can_state"]
         }
     ],
     "common": {
