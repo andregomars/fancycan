@@ -16,7 +16,12 @@
     },
     "jobProcessors": [
         { "name": "MalfuncProcessor", "enabled": true },
-        { "name": "CleanProcessor", "enabled": true, "backupDays": 0 }
+        { 
+            "name": "CleanProcessor",
+            "enabled": true,
+            "backupDays": 0,
+            "collections": ["can_row", "can", "can_state"]
+        }
     ],
     "common": {
         "urlAppWeb": "https://app.fancycan.com"
