@@ -1,15 +1,21 @@
-<StackLayout>
-	<ActionBar title="Vehicles" class="action-bar">
+<StackLayout class="page">
+	<ActionBar title="Home" class="action-bar">
 	</ActionBar>
-	<ScrollView class="page">
+	<ScrollView>
 		<StackLayout>
-			<SearchBar [hint]="searchHint" 
-				(clear)="onClear($event)" (submit)="onSubmit($event)"></SearchBar>
-			<ListView [items]="myItems" class="list-group">
+			<GridLayout rows="*" columns="*, auto">
+				<SearchBar #searchBar [hint]="searchHint" color="black"
+					row="0" col="0"
+					(textChange)="onSearchBar($event)"
+					(tap)="onSearchBar($event)"
+					(clear)="onClear($event)" (submit)="onSubmit($event)"></SearchBar>
+				<Button row="0" col="1" *ngIf="enlargeSearchBar"
+					text="Cancel" (tap)="onCancelSearch()"></Button>
+			</GridLayout>
+			<ListView [items]="myItems" class="list-group" *ngIf="enlargeSearchBar">
 				<ng-template let-item="item">
-					<GridLayout class="item list-group-item">
-                        <Label [text]="item.name" class="list-group-item-heading"
-                            [nsRouterLink]="[item.name]"></Label>
+					<GridLayout class="item list-group-item" [nsRouterLink]="item.name">
+						<Label [text]="item.name" class="list-group-item-heading"></Label>
 					</GridLayout>
 				</ng-template>
 			</ListView>

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { SearchBar } from "tns-core-modules/ui/search-bar";
+import { Page } from "tns-core-modules/ui/page";
 import { ObservableArray } from "tns-core-modules/data/observable-array";
 
 @Component({
@@ -9,11 +10,15 @@ import { ObservableArray } from "tns-core-modules/data/observable-array";
   moduleId: module.id,
 })
 export class VehicleListComponent implements OnInit {
+	@ViewChild("searchBar") searchBar: SearchBar;
 	searchHint = 'Search for vehicle id and press enter';
 	myItems: ObservableArray<DataItem> = new ObservableArray<DataItem>();
+	enlargeSearchBar: boolean;
 	private arrayItems: Array<DataItem> = [];
 
-	constructor() {
+	constructor(
+		private page: Page
+	) {
 	}
 
 	ngOnInit() {
@@ -26,7 +31,7 @@ export class VehicleListComponent implements OnInit {
 		this.myItems = new ObservableArray<DataItem>(this.arrayItems);
 	}
 
-	public onSubmit(args) {
+	onSubmit(args: any) {
 		let searchBar = <SearchBar>args.object;
 		let searchValue = searchBar.text.toLowerCase();
 
@@ -40,7 +45,7 @@ export class VehicleListComponent implements OnInit {
 		}
 	}
 
-	public onClear(args) {
+	onClear(args: any) {
 		let searchBar = <SearchBar>args.object;
 		searchBar.text = '';
 		searchBar.hint = this.searchHint;
@@ -49,6 +54,26 @@ export class VehicleListComponent implements OnInit {
 		this.arrayItems.forEach(item => {
 			this.myItems.push(item);
 		});
+	}
+
+	onTap(target: string) {
+		console.log('tapped: '+target);
+	}
+
+	onSearchBar(args: any) {
+		this.enlargeSearchBar = true;
+		this.page.actionBarHidden = true;
+	}
+
+	onTextChange(args: any) {
+		this.page.actionBarHidden = true;
+		this.enlargeSearchBar = true;
+	}
+
+	onCancelSearch() {
+		this.enlargeSearchBar = false;
+		this.page.actionBarHidden = false;
+		// this.searchBar.dismissSoftInput();
 	}
 
 	private zeroFill(num: number, width: number) {
