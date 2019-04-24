@@ -1,4 +1,15 @@
 /* Add mobile styles for the component here.  */
 .btn {
+    background-color: #4dbd74;
+    border-radius: 5;
     color: white;
+    font-family: FontAwesome;
+    font-size: 18;
+    vertical-align: middle;
+    width: 75%;
+}
+
+.btn:active {
+    background-color: lightslategray;
+    color:white;
 }
