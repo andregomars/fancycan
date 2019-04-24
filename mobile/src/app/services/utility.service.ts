@@ -9,14 +9,15 @@ const regex: any = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}
 @Injectable()
 export class UtilityService {
 
-    public isValidEmail(email: String) {
+    isValidEmail(email: String) {
         if (!email)
             return false;
 
         return regex.test(email);
     }
 
-    public isTablet() {
+    isTablet() {
         return device.deviceType === DeviceType.Tablet;
     }
+
 }

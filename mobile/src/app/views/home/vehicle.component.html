@@ -1,52 +1,87 @@
-<StackLayout>
-    <ActionBar [title]="vcode" class="action-bar">
-    </ActionBar>
-    <GridLayout rows="150" columns="125,125,125" marginTop="-20">
-        <RadRadialGauge title="68.3" subtitle="kW" row="0" col="0">
-            <RadialScale tkRadialGaugeScales startAngle="180" sweepAngle="180" minimum="0" maximum="100">
-                <TitleStyle tkRadialGaugeTitleStyle textColor="black" ios:textSize="20" ios:verticalOffset="0"
-                    android:verticalOffset="10"></TitleStyle>
-                <SubtitleStyle tkRadialGaugeSubtitleStyle textColor="black"></SubtitleStyle>
-                <ScaleStyle tkRadialScaleStyle majorTicksCount="0" minorTicksCount="0" lineThickness="0" labelsCount="0"
-                    ticksOffset="0"></ScaleStyle>
-                <RadialBarIndicator tkRadialScaleIndicators minimum="0" maximum="68.3" location="0.5">
-                    <BarIndicatorStyle tkRadialBarIndicatorStyle fillColor="#4dbd74"></BarIndicatorStyle>
-                </RadialBarIndicator>
-                <RadialBarIndicator tkRadialScaleIndicators minimum="68.4" maximum="100" location="0.5">
-                    <BarIndicatorStyle tkRadialBarIndicatorStyle fillColor="#f0f3f5"></BarIndicatorStyle>
-                </RadialBarIndicator>
-            </RadialScale>
-        </RadRadialGauge>
-        <RadRadialGauge title="85" subtitle="V" row="0" col="1">
-            <RadialScale tkRadialGaugeScales startAngle="180" sweepAngle="180" minimum="0" maximum="100">
-                <TitleStyle tkRadialGaugeTitleStyle textColor="black" ios:textSize="20" ios:verticalOffset="0"
-                    android:verticalOffset="10"></TitleStyle>
-                <SubtitleStyle tkRadialGaugeSubtitleStyle textColor="black"></SubtitleStyle>
-                <ScaleStyle tkRadialScaleStyle majorTicksCount="0" minorTicksCount="0" lineThickness="0" labelsCount="0"
-                    ticksOffset="0"></ScaleStyle>
-                <RadialBarIndicator tkRadialScaleIndicators minimum="0" maximum="85" location="0.5">
-                    <BarIndicatorStyle tkRadialBarIndicatorStyle fillColor="#4dbd74"></BarIndicatorStyle>
-                </RadialBarIndicator>
-                <RadialBarIndicator tkRadialScaleIndicators minimum="86" maximum="100" location="0.5">
-                    <BarIndicatorStyle tkRadialBarIndicatorStyle fillColor="#f0f3f5"></BarIndicatorStyle>
-                </RadialBarIndicator>
-            </RadialScale>
-        </RadRadialGauge>
-        <RadRadialGauge title="57" subtitle="A" row="0" col="3">
-            <RadialScale tkRadialGaugeScales startAngle="180" sweepAngle="180" minimum="0" maximum="100">
-                <TitleStyle tkRadialGaugeTitleStyle textColor="black" ios:textSize="20" ios:verticalOffset="0"
-                    android:verticalOffset="10"></TitleStyle>
-                <SubtitleStyle tkRadialGaugeSubtitleStyle textColor="black"></SubtitleStyle>
-                <ScaleStyle tkRadialScaleStyle majorTicksCount="0" minorTicksCount="0" lineThickness="0" labelsCount="0"
-                    ticksOffset="0"></ScaleStyle>
-                <RadialBarIndicator tkRadialScaleIndicators minimum="0" maximum="57" location="0.5">
-                    <BarIndicatorStyle tkRadialBarIndicatorStyle fillColor="#4dbd74"></BarIndicatorStyle>
-                </RadialBarIndicator>
-                <RadialBarIndicator tkRadialScaleIndicators minimum="58" maximum="100" location="0.5">
-                    <BarIndicatorStyle tkRadialBarIndicatorStyle fillColor="#f0f3f5"></BarIndicatorStyle>
-                </RadialBarIndicator>
-            </RadialScale>
-        </RadRadialGauge>
-    </GridLayout>
-
-</StackLayout>
+<ScrollView>
+    <StackLayout class="page">
+        <ActionBar [title]="vcode" class="action-bar">
+        </ActionBar>
+        <GridLayout rows="50, 50, 50" columns="200, 200">
+            <Label class="h3 m-15" text="Engine" textWrap="true" row="0" col="0"></Label>
+            <Switch class="m-15" checked="true" row="0" col="1"></Switch>
+            <Label class="h3 m-15" text="Transmission" textWrap="true" row="1" col="0"></Label>
+            <Switch class="m-15" checked="false" row="1" col="1" isEnabled="false"></Switch>
+            <Label class="h3 m-15" text="Engine Idle" textWrap="true" row="2" col="0"></Label>
+            <Switch class="m-15" checked="false" row="2" col="1"></Switch>
+        </GridLayout>
+        <GridLayout rows="150, 150" columns="200, 200">
+            <!-- https://github.com/telerik/nativescript-ui-samples-angular/blob/master/gauge/app/examples/style-bindings/gauges-style-bindings.component.html -->
+            <RadRadialGauge title="68.3" subtitle="Speed" row="0" col="0">
+                <RadialScale tkRadialGaugeScales startAngle="180" sweepAngle="180" minimum="0" maximum="100">
+                    <TitleStyle tkRadialGaugeTitleStyle textColor="white" ios:textSize="20" ios:verticalOffset="0"
+                        android:verticalOffset="10"></TitleStyle>
+                    <SubtitleStyle tkRadialGaugeSubtitleStyle textColor="white"></SubtitleStyle>
+                    <ScaleStyle tkRadialScaleStyle majorTicksCount="0" minorTicksCount="0" lineThickness="0"
+                        labelsCount="0" ticksOffset="0"></ScaleStyle>
+                    <RadialBarIndicator tkRadialScaleIndicators minimum="0" maximum="9.3" location="0.5">
+                        <BarIndicatorStyle tkRadialBarIndicatorStyle fillColor="#4dbd74"></BarIndicatorStyle>
+                    </RadialBarIndicator>
+                    <RadialBarIndicator tkRadialScaleIndicators minimum="9.3" maximum="100" location="0.5">
+                        <BarIndicatorStyle tkRadialBarIndicatorStyle fillColor="#f0f3f5"></BarIndicatorStyle>
+                    </RadialBarIndicator>
+                </RadialScale>
+            </RadRadialGauge>
+            <RadRadialGauge title="0" subtitle="RPM" row="0" col="1">
+                <RadialScale tkRadialGaugeScales startAngle="180" sweepAngle="180" minimum="0" maximum="5000">
+                    <TitleStyle tkRadialGaugeTitleStyle textColor="white" ios:textSize="20" ios:verticalOffset="0"
+                        android:verticalOffset="10"></TitleStyle>
+                    <SubtitleStyle tkRadialGaugeSubtitleStyle textColor="white"></SubtitleStyle>
+                    <ScaleStyle tkRadialScaleStyle majorTicksCount="0" minorTicksCount="0" lineThickness="0"
+                        labelsCount="0" ticksOffset="0"></ScaleStyle>
+                    <RadialBarIndicator tkRadialScaleIndicators minimum="0" maximum="0" location="0.5">
+                        <BarIndicatorStyle tkRadialBarIndicatorStyle fillColor="#4dbd74"></BarIndicatorStyle>
+                    </RadialBarIndicator>
+                    <RadialBarIndicator tkRadialScaleIndicators minimum="0" maximum="5000" location="0.5">
+                        <BarIndicatorStyle tkRadialBarIndicatorStyle fillColor="#f0f3f5"></BarIndicatorStyle>
+                    </RadialBarIndicator>
+                </RadialScale>
+            </RadRadialGauge>
+            <RadRadialGauge title="98.9" subtitle="SOC(%)" row="1" col="0">
+                <RadialScale tkRadialGaugeScales startAngle="180" sweepAngle="180" minimum="0" maximum="100">
+                    <TitleStyle tkRadialGaugeTitleStyle textColor="white" ios:textSize="20" ios:verticalOffset="0"
+                        android:verticalOffset="10"></TitleStyle>
+                    <SubtitleStyle tkRadialGaugeSubtitleStyle textColor="white"></SubtitleStyle>
+                    <ScaleStyle tkRadialScaleStyle majorTicksCount="0" minorTicksCount="0" lineThickness="0"
+                        labelsCount="0" ticksOffset="0"></ScaleStyle>
+                    <RadialBarIndicator tkRadialScaleIndicators minimum="0" maximum="98.9" location="0.5">
+                        <BarIndicatorStyle tkRadialBarIndicatorStyle fillColor="#4dbd74"></BarIndicatorStyle>
+                    </RadialBarIndicator>
+                    <RadialBarIndicator tkRadialScaleIndicators minimum="98.9" maximum="100" location="0.5">
+                        <BarIndicatorStyle tkRadialBarIndicatorStyle fillColor="#f0f3f5"></BarIndicatorStyle>
+                    </RadialBarIndicator>
+                </RadialScale>
+            </RadRadialGauge>
+            <RadRadialGauge title="255.2" subtitle="Battery kWh" row="1" col="1">
+                <RadialScale tkRadialGaugeScales startAngle="180" sweepAngle="180" minimum="0" maximum="300">
+                    <TitleStyle tkRadialGaugeTitleStyle textColor="white" ios:textSize="20" ios:verticalOffset="0"
+                        android:verticalOffset="10"></TitleStyle>
+                    <SubtitleStyle tkRadialGaugeSubtitleStyle textColor="white"></SubtitleStyle>
+                    <ScaleStyle tkRadialScaleStyle majorTicksCount="0" minorTicksCount="0" lineThickness="0"
+                        labelsCount="0" ticksOffset="0"></ScaleStyle>
+                    <RadialBarIndicator tkRadialScaleIndicators minimum="0" maximum="255.2" location="0.5">
+                        <BarIndicatorStyle tkRadialBarIndicatorStyle fillColor="#4dbd74"></BarIndicatorStyle>
+                    </RadialBarIndicator>
+                    <RadialBarIndicator tkRadialScaleIndicators minimum="255.2s" maximum="300" location="0.5">
+                        <BarIndicatorStyle tkRadialBarIndicatorStyle fillColor="#f0f3f5"></BarIndicatorStyle>
+                    </RadialBarIndicator>
+                </RadialScale>
+            </RadRadialGauge>
+        </GridLayout>
+        <StackLayout marginTop="-30">
+            <Label text="Battery Voltage" class="h3 m-15"></Label>
+            <Progress value="624" color="#4dbd74" backgroundColor="#f0f3f5" maxValue="800" class="m-20"></Progress>
+            <Label text="Battery Current" class="h3 m-15"></Label>
+            <Progress value="17.3" color="#4dbd74" backgroundColor="#f0f3f5" maxValue="300" class="m-20"></Progress>
+            <Label text="L-C Battery Temp" class="h3 m-15"></Label>
+            <Progress value="69.8" color="#4dbd74" backgroundColor="#f0f3f5" maxValue="220" class="m-20"></Progress>
+            <Label text="H-C Battery Temp" class="h3 m-15"></Label>
+            <Progress value="77" color="#4dbd74" backgroundColor="#f0f3f5" maxValue="220" class="m-20"></Progress>
+        </StackLayout>
+    </StackLayout>
+</ScrollView>

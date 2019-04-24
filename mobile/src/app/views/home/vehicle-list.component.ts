@@ -2,6 +2,10 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { SearchBar } from "tns-core-modules/ui/search-bar";
 import { Page } from "tns-core-modules/ui/page";
 import { ObservableArray } from "tns-core-modules/data/observable-array";
+import { DataService } from '~/app/services/data.service';
+import { Observable } from 'rxjs';
+import { UtilityService } from '~/app/services/utility.service';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-vehicle-list',
@@ -15,20 +19,25 @@ export class VehicleListComponent implements OnInit {
 	myItems: ObservableArray<DataItem> = new ObservableArray<DataItem>();
 	enlargeSearchBar: boolean;
 	private arrayItems: Array<DataItem> = [];
+	private fcode = 'BYD';
 
 	constructor(
-		private page: Page
+		private page: Page,
+		private dataService: DataService,
 	) {
 	}
 
 	ngOnInit() {
-		const count = 20;
-		for (let i = 0; i < count; i++) {
-			const code = 'A' + this.zeroFill(i, 2);
-			this.arrayItems.push(new DataItem(code));
-		}
-
-		this.myItems = new ObservableArray<DataItem>(this.arrayItems);
+		// const count = 20;
+		// for (let i = 0; i < count; i++) {
+		// 	const code = 'A' + this.zeroFill(i, 2);
+		// 	this.arrayItems.push(new DataItem(code));
+		// }
+	
+		this.loadVehicleCodes(this.fcode).subscribe(vcodes => { 
+			vcodes.forEach(vcode => this.arrayItems.push(new DataItem(vcode)));
+			this.myItems = new ObservableArray<DataItem>(this.arrayItems);
+		});
 	}
 
 	onSubmit(args: any) {
@@ -74,6 +83,16 @@ export class VehicleListComponent implements OnInit {
 		this.enlargeSearchBar = false;
 		this.page.actionBarHidden = false;
 		// this.searchBar.dismissSoftInput();
+	}
+
+    private loadVehicleCodes(fcode: string): Observable<string[]> {
+		const fleets$ = this.dataService.getFleets();
+        return fleets$.pipe(
+            map((fleets: any[]) =>
+                fleets.find(fleet => fleet.code.toUpperCase() === fcode.toUpperCase())
+                    .vehicles.map((vehicle: any) => vehicle.code)
+            )
+        );
 	}
 
 	private zeroFill(num: number, width: number) {
