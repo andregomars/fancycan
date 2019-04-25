@@ -4,7 +4,6 @@ import { Page } from "tns-core-modules/ui/page";
 import { ObservableArray } from "tns-core-modules/data/observable-array";
 import { DataService } from '~/app/services/data.service';
 import { Observable } from 'rxjs';
-import { UtilityService } from '~/app/services/utility.service';
 import { map } from 'rxjs/operators';
 
 @Component({
@@ -82,7 +81,8 @@ export class VehicleListComponent implements OnInit {
 	onCancelSearch() {
 		this.enlargeSearchBar = false;
 		this.page.actionBarHidden = false;
-		// this.searchBar.dismissSoftInput();
+		const searchBar = <SearchBar>this.page.getViewById('searchBar');
+		searchBar.dismissSoftInput();
 	}
 
     private loadVehicleCodes(fcode: string): Observable<string[]> {

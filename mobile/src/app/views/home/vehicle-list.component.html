@@ -4,7 +4,9 @@
 	<ScrollView>
 		<StackLayout>
 			<GridLayout rows="*" columns="*, auto">
-				<SearchBar #searchBar [hint]="searchHint" color="black"
+				<SearchBar #searchBar id="searchBar" [hint]="searchHint"
+					color="black" backgroundColor="#103241"
+					borderColor="red"
 					row="0" col="0"
 					(textChange)="onSearchBar($event)"
 					(tap)="onSearchBar($event)"
@@ -14,7 +16,8 @@
 			</GridLayout>
 			<ListView [items]="myItems" class="list-group" *ngIf="enlargeSearchBar">
 				<ng-template let-item="item">
-					<GridLayout class="item list-group-item" [nsRouterLink]="item.name">
+					<GridLayout class="item list-group-item" backgroundColor="#103241"
+						[nsRouterLink]="item.name">
 						<Label [text]="item.name" class="list-group-item-heading"></Label>
 					</GridLayout>
 				</ng-template>
