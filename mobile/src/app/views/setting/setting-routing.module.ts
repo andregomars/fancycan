@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { Routes } from '@angular/router';
 import { NativeScriptRouterModule } from 'nativescript-angular/router';
-import { ProfileComponent } from './profile.component';
+import { VehicleSettingComponent } from './vehicle-setting.component';
 
 const routes: Routes = [
-    { path: "", component: ProfileComponent }
+    { path: "", component: VehicleSettingComponent }
 ];
 
 @NgModule({
   imports: [NativeScriptRouterModule.forChild(routes)],
   exports: [NativeScriptRouterModule]
 })
-export class MoreRoutingModule { }
+export class SettingRoutingModule { }

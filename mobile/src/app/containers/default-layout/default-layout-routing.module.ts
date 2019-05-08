@@ -21,6 +21,18 @@ const routes: Routes = [
         loadChildren: '~/app/views/scan/scan.module#ScanModule'
       },
       {
+        path: 'setting',
+        component: NSEmptyOutletComponent,
+        outlet: 'settingTab',
+        loadChildren: '~/app/views/setting/setting.module#SettingModule'
+      },
+      {
+        path: 'alert',
+        component: NSEmptyOutletComponent,
+        outlet: 'alertTab',
+        loadChildren: '~/app/views/alert/alert.module#AlertModule'
+      },
+      {
         path: 'more',
         component: NSEmptyOutletComponent,
         outlet: 'moreTab',

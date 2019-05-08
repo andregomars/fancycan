@@ -1,15 +1,15 @@
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 
-import { MoreRoutingModule } from './more-routing.module';
+import { AlertRoutingModule } from './alert-routing.module';
 import { NativeScriptCommonModule } from 'nativescript-angular/common';
-import { ProfileComponent } from './profile.component';
+import { NotificationComponent } from './notification.component';
 
 @NgModule({
-  declarations: [ProfileComponent],
+  declarations: [NotificationComponent],
   imports: [
-    MoreRoutingModule,
+    AlertRoutingModule,
     NativeScriptCommonModule
   ],
   schemas: [NO_ERRORS_SCHEMA]
 })
-export class MoreModule { }
+export class AlertModule { }

@@ -27,6 +27,8 @@ export class DefaultLayoutComponent implements OnInit {
           { 
             homeTab: ['home'],
             scanTab: ['scan'],
+            settingTab: ['setting'],
+            alertTab: ['alert'],
             moreTab: ['more'] 
           }
         }

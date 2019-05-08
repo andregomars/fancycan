@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { RouterExtensions } from 'nativescript-angular';
 
 @Component({
-  selector: 'app-vehicle-setting',
-  templateUrl: './vehicle-setting.component.html',
-  styleUrls: ['./vehicle-setting.component.css'],
+  selector: 'app-profile',
+  templateUrl: './profile.component.html',
+  styleUrls: ['./profile.component.css'],
   moduleId: module.id,
 })
-export class VehicleSettingComponent implements OnInit {
+export class ProfileComponent implements OnInit {
 
   constructor(
     private routerExtension: RouterExtensions
