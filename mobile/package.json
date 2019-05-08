@@ -1,10 +1,10 @@
 {
   "nativescript": {
     "id": "com.fancycan.pilot",
-    "tns-ios": {
+    "tns-android": {
       "version": "5.3.1"
     },
-    "tns-android": {
+    "tns-ios": {
       "version": "5.3.1"
     }
   },
@@ -12,7 +12,10 @@
   "license": "SEE LICENSE IN <your-license-filename>",
   "repository": "<fill-your-repository-here>",
   "scripts": {
-    "start": "tns preview"
+    "start": "tns preview",
+    "ios": "tns run ios --bundle",
+    "icon": "tns resources generate icons ./src/assets/images/fc.logo.png",
+    "splash": "tns resources generate splashes ./src/assets/images/fc.logo.png --background '#FFFFFF'"
   },
   "dependencies": {
     "@angular/animations": "~7.2.0",

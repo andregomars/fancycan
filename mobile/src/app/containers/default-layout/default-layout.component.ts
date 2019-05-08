@@ -31,7 +31,10 @@ export class DefaultLayoutComponent implements OnInit {
           }
         }
       ], 
-      { relativeTo: this.activeRoute }
+      { 
+        transition: { name: 'fade' },
+        relativeTo: this.activeRoute
+      }
     );
   }
 

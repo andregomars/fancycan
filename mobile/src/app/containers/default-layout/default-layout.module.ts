@@ -14,4 +14,5 @@ import { DefaultLayoutComponent } from './default-layout.component';
   ],
   schemas: [NO_ERRORS_SCHEMA]
 })
-export class DefaultLayoutModule { }
+export class DefaultLayoutModule {
+}
