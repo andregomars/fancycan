@@ -17,6 +17,8 @@ export class VehicleListComponent implements OnInit {
 	searchHint = 'Search for vehicle id and press enter';
 	myItems: ObservableArray<DataItem> = new ObservableArray<DataItem>();
 	enlargeSearchBar: boolean;
+	// vStates = [];
+	vStates = [{ vcode: 323}, {vcode: 5445}];
 	private arrayItems: Array<DataItem> = [];
 	private fcode = 'BYD';
 
@@ -27,16 +29,13 @@ export class VehicleListComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		// const count = 20;
-		// for (let i = 0; i < count; i++) {
-		// 	const code = 'A' + this.zeroFill(i, 2);
-		// 	this.arrayItems.push(new DataItem(code));
-		// }
-	
 		this.loadVehicleCodes(this.fcode).subscribe(vcodes => { 
 			vcodes.forEach(vcode => this.arrayItems.push(new DataItem(vcode)));
 			this.myItems = new ObservableArray<DataItem>(this.arrayItems);
 		});
+
+		this.loadVehicleStates(this.fcode);
+		
 	}
 
 	onSubmit(args: any) {
@@ -85,14 +84,21 @@ export class VehicleListComponent implements OnInit {
 		searchBar.dismissSoftInput();
 	}
 
-    private loadVehicleCodes(fcode: string): Observable<string[]> {
+  private loadVehicleCodes(fcode: string): Observable<string[]> {
 		const fleets$ = this.dataService.getFleets();
-        return fleets$.pipe(
-            map((fleets: any[]) =>
-                fleets.find(fleet => fleet.code.toUpperCase() === fcode.toUpperCase())
-                    .vehicles.map((vehicle: any) => vehicle.code)
-            )
-        );
+		return fleets$.pipe(
+				map((fleets: any[]) =>
+						fleets.find(fleet => fleet.code.toUpperCase() === fcode.toUpperCase())
+								.vehicles.map((vehicle: any) => vehicle.code)
+				)
+		);
+	}
+
+	private loadVehicleStates(fcode: string) {
+		this.dataService.getVehicleStates(fcode).subscribe(states => {
+			console.log(states);
+			this.vStates = states;
+		});
 	}
 
 	private zeroFill(num: number, width: number) {

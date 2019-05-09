@@ -13,6 +13,12 @@ export const environment = {
         storageBucket: 'xxx',
         messagingSenderId: 'xxx'
     },
+    mongodbAPI: {
+        // url: 'http://localhost:8080',
+        url: 'https://api.fancycan.com/rest',
+        database: 'main',
+        authToken: 'Basic YWRtaW46Y2hhbmdlaXQ='
+    },
     loadMap: false,
     dataSource: DataSourceType.Local
 }

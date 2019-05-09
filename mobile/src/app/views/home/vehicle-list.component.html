@@ -14,7 +14,7 @@
 				<Button row="0" col="1" *ngIf="enlargeSearchBar"
 					text="Cancel" (tap)="onCancelSearch()"></Button>
 			</GridLayout>
-			<ListView [items]="myItems" class="list-group" *ngIf="enlargeSearchBar">
+			<ListView [items]="myItems" height="300" class="list-group" *ngIf="enlargeSearchBar">
 				<ng-template let-item="item">
 					<GridLayout class="item list-group-item" backgroundColor="#103241"
 						[nsRouterLink]="item.name">
@@ -22,6 +22,18 @@
 					</GridLayout>
 				</ng-template>
 			</ListView>
+			<GridLayout rows="*">
+				<ListView [items]="vStates">
+					<ng-template let-item="item" let-i="index">
+						<StackLayout>
+							<Label [text]="'test'"></Label>
+						</StackLayout>
+						<!-- <StackLayout>
+							<Label *ngFor="let element of item.vcode" [text]="element.text"></Label>
+						</StackLayout> -->
+					</ng-template>
+				</ListView>
+			</GridLayout>
 		</StackLayout>
 	</ScrollView>
 </StackLayout>

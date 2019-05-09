@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders, } from '@angular/common/http';
 import { Observable  } from 'rxjs';
 
 import { environment, } from '../../environments/environment';
@@ -10,11 +10,15 @@ import { share, map } from 'rxjs/operators';
 })
 export class DataService {
   private rootUrl: string;
+  private mongoApiHeader: HttpHeaders;
+  private mongoUrl: string;
 
   constructor(
     private http: HttpClient
   ) {
     this.rootUrl = environment.firebase.databaseURL;
+    this.mongoUrl = `${environment.mongodbAPI.url}/${environment.mongodbAPI.database}`;
+    this.mongoApiHeader = new HttpHeaders().append('Authorization', environment.mongodbAPI.authToken);
   }
 
   getFleets(): Observable<any> {
@@ -100,5 +104,12 @@ export class DataService {
   getUsers(): Observable<any> {
     return this.http
       .get<any>(`${this.rootUrl}/users.json`);
+  }
+
+  getVehicleStates(fcode: string): Observable<any> {
+    const params = new HttpParams().set('np', '').set('filter', `{'fcode': '${fcode}'}`);
+    const headers = this.mongoApiHeader;
+    return this.http
+      .get<any>(`${this.mongoUrl}/vehicle_state`, { headers, params });
   }
 }
