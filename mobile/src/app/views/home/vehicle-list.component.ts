@@ -17,8 +17,7 @@ export class VehicleListComponent implements OnInit {
 	searchHint = 'Search for vehicle id and press enter';
 	myItems: ObservableArray<DataItem> = new ObservableArray<DataItem>();
 	enlargeSearchBar: boolean;
-	// vStates = [];
-	vStates = [{ vcode: 323}, {vcode: 5445}];
+	vStates = [];
 	private arrayItems: Array<DataItem> = [];
 	private fcode = 'BYD';
 
@@ -64,7 +63,6 @@ export class VehicleListComponent implements OnInit {
 	}
 
 	onTap(target: string) {
-		console.log('tapped: '+target);
 	}
 
 	onSearchBar(args: any) {
@@ -96,7 +94,6 @@ export class VehicleListComponent implements OnInit {
 
 	private loadVehicleStates(fcode: string) {
 		this.dataService.getVehicleStates(fcode).subscribe(states => {
-			console.log(states);
 			this.vStates = states;
 		});
 	}
