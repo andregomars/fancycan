@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders, } from '@angular/common/http';
-import { Observable  } from 'rxjs';
+import { Observable, forkJoin  } from 'rxjs';
+// import { TransformUtility } from "fancycan-utility";
 
 import { environment, } from '../../environments/environment';
-import { share, map } from 'rxjs/operators';
+import { share, map, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,7 @@ export class DataService {
   private mongoUrl: string;
 
   constructor(
+    // private transform: TransformUtility,
     private http: HttpClient
   ) {
     this.rootUrl = environment.firebase.databaseURL;
@@ -112,4 +114,16 @@ export class DataService {
     return this.http
       .get<any>(`${this.mongoUrl}/vehicle_state`, { headers, params });
   }
+  
+  // getSpnProfile(fcode: string): Observable<any> {
+  //     const defs$ = this.getDefinitions().pipe(
+  //         map((defs: any[]) => defs.filter(def => def.fleet_code === fcode))
+  //     );
+  //     const spnsProp$ = this.getProprietarySpnList();
+  //     const spnsJ1939$ = this.getSpnSpecs();
+  //     return forkJoin(defs$, spnsProp$, spnsJ1939$).pipe(
+  //           map(([defs, spnsProp, spnsJ1939]) => this.transform.getDefinitionWithSpecs(defs, spnsProp, spnsJ1939)),
+  //     );
+  // }
+
 }

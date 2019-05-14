@@ -20,4 +20,25 @@ export class UtilityService {
         return device.deviceType === DeviceType.Tablet;
     }
 
+    buildVehicleStateSpnList(vehicleState: any, spnProfileList: any[]): any[] {
+        const spns = [];
+        for (const key in vehicleState) {
+            if (key.startsWith('spn')) {
+                const spn = key.substring(3).trim();
+                const spnProfile = spnProfileList.find(profile => profile.SPNNo === +spn);
+                if (spnProfile) {
+                    spns.push({
+                        spn: spn,
+                        name: spnProfile.SPNName,
+                        value: vehicleState[key],
+                        unit: spnProfile.Unit
+                    });
+                }
+            }
+        }
+
+        return spns;
+    }
+
+
 }

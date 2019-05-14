@@ -20,5 +20,6 @@ export const environment = {
         authToken: 'Basic YWRtaW46Y2hhbmdlaXQ='
     },
     loadMap: false,
+    defaultFleetCode: 'BYD',
     dataSource: DataSourceType.Local
 }

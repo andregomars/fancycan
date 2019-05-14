@@ -4,10 +4,14 @@ import { TextField } from "tns-core-modules/ui/text-field";
 import { Page } from "tns-core-modules/ui/page";
 import { prompt, inputType } from "tns-core-modules/ui/dialogs";
 import { isAndroid, device } from "tns-core-modules/platform";
-import * as app from "tns-core-modules/application";
+// import * as app from "tns-core-modules/application";
+import { android as androidApp } from "tns-core-modules/application";
+import { setString } from "tns-core-modules/application-settings";
 
 import { UtilityService } from "../../services/utility.service";
 import { User } from "~/app/models/user";
+import { DataService } from "~/app/services/data.service";
+import { environment } from "~/environments/environment";
 
 declare var android: any;
 
@@ -23,6 +27,7 @@ export class LoginComponent implements OnInit {
     @ViewChild('email') emailField: ElementRef;
 
     user: User;
+    fcode = environment.defaultFleetCode;
     isAuthenticating = false;
 
     public hideIcon = String.fromCharCode(0xf070);
@@ -40,6 +45,7 @@ export class LoginComponent implements OnInit {
     constructor(
       private utilityService: UtilityService,
       private page: Page,
+      private dataService: DataService,
       private routerExtensions: RouterExtensions,
     ) {
         this.user = new User();
@@ -55,7 +61,7 @@ export class LoginComponent implements OnInit {
 
         if (isAndroid && device.sdkVersion >= '21') {
             var View = android.view.View;
-            var window = app.android.startActivity.getWindow();
+            var window = androidApp.startActivity.getWindow();
             window.setStatusBarColor(0x000000);
 
             var decorView = window.getDecorView();
@@ -163,6 +169,7 @@ export class LoginComponent implements OnInit {
         // const url = '/main/default/(vehicleTab:vehicle//settingTab:setting//checklistTab:checklist)';
 
         if (this.isValidForm()) {
+            this.initApplicationData();
             this.isAuthenticating = true;
             // Use the backend service to login
             // this.backendService.loginWithKinvey(this.user)
@@ -203,6 +210,12 @@ export class LoginComponent implements OnInit {
                 //     });
             }
         });
+    }
+
+    private initApplicationData() {
+        // this.dataService.getSpnProfile(this.fcode).subscribe(data => {
+        //     setString('spnProfile', JSON.stringify(data));
+        // });
     }
 }
 
