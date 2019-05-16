@@ -1,6 +1,9 @@
 {
   "nativescript": {
-    "id": "com.fancycan.demo"
+    "id": "com.fancycan.demo",
+    "tns-ios": {
+      "version": "5.4.0"
+    }
   },
   "description": "NativeScript Application",
   "license": "SEE LICENSE IN <your-license-filename>",
