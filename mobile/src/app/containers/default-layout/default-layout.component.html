@@ -1,12 +1,22 @@
 <TabView class="fa h3" tabBackgroundColor="black" selectedTabTextColor="white"
     selectedIndex="0" androidTabsPosition="bottom">
-    <page-router-outlet
+    <!-- <page-router-outlet
         *tabItem="{title: '&#xf207;'}"
+        name="homeTab">
+    </page-router-outlet> -->
+
+    <page-router-outlet
+        *tabItem="{title: 'Vehicle', iconSource: 'res://tabicons/bus'}"
         name="homeTab">
     </page-router-outlet>
 
-    <page-router-outlet
+    <!-- <page-router-outlet
         *tabItem="{title: '&#xf03a;'}"
+        name="scanTab">
+    </page-router-outlet> -->
+
+    <page-router-outlet
+        *tabItem="{title: 'Checklist', iconSource: 'res://tabicons/list'}"
         name="scanTab">
     </page-router-outlet>
 
