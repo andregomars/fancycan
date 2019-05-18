@@ -10,7 +10,7 @@
   "repository": "<fill-your-repository-here>",
   "scripts": {
     "start": "tns preview",
-    "ios": "tns run ios --bundle",
+    "ios": "tns prepare ios && tns run ios --bundle",
     "icon": "tns resources generate icons ./src/assets/images/fc.logo.png",
     "splash": "tns resources generate splashes ./src/assets/images/fc.logo.png --background '#FFFFFF'"
   },

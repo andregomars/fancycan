@@ -1,56 +1,27 @@
-<TabView class="fa h3" tabBackgroundColor="black" selectedTabTextColor="white"
+<TabView class="" tabBackgroundColor="black" selectedTabTextColor="white"
     selectedIndex="0" androidTabsPosition="bottom">
-    <!-- <page-router-outlet
-        *tabItem="{title: '&#xf207;'}"
-        name="homeTab">
-    </page-router-outlet> -->
-
     <page-router-outlet
-        *tabItem="{title: 'Vehicle', iconSource: 'res://tabicons/bus'}"
+        *tabItem="{title: 'Vehicles', iconSource: 'res://tabicons/bus.white'}"
         name="homeTab">
     </page-router-outlet>
 
-    <!-- <page-router-outlet
-        *tabItem="{title: '&#xf03a;'}"
-        name="scanTab">
-    </page-router-outlet> -->
-
     <page-router-outlet
-        *tabItem="{title: 'Checklist', iconSource: 'res://tabicons/list'}"
+        *tabItem="{title: 'Checklist', iconSource: 'res://tabicons/list.white'}"
         name="scanTab">
     </page-router-outlet>
 
     <page-router-outlet
-        *tabItem="{title: '&#xf013;'}"
+        *tabItem="{title: 'Setting', iconSource: 'res://tabicons/cog.white'}"
         name="settingTab">
     </page-router-outlet>
 
     <page-router-outlet
-        *tabItem="{title: '&#xf071;'}"
+        *tabItem="{title: 'Notifications', iconSource: 'res://tabicons/exclamation-triangle.white'}"
         name="alertTab">
     </page-router-outlet>
 
     <page-router-outlet
-        *tabItem="{title: '&#xf2c0;'}"
+        *tabItem="{title: 'Me', iconSource: 'res://tabicons/user.white'}"
         name="moreTab">
     </page-router-outlet>
 </TabView>
-
-<!-- <TabView class="fa h3" tabBackgroundColor="black" selectedTabTextColor="white"
-    selectedIndex="0" androidTabsPosition="bottom">
-    <page-router-outlet
-        *tabItem="{iconSource: 'res://bus.icon.20.png', title: 'Home'}"
-        name="homeTab">
-    </page-router-outlet>
-
-    <page-router-outlet
-        *tabItem="{iconSource: 'res://icon', title: 'Scan'}"
-        name="scanTab">
-    </page-router-outlet>
-
-    <page-router-outlet
-        *tabItem="{iconSource: 'res://icon', title: 'Scan'}"
-        name="moreTab">
-    </page-router-outlet>
-</TabView> -->
-
