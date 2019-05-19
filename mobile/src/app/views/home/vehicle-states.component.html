@@ -1,17 +1,20 @@
 <StackLayout class="page">
     <ActionBar title="Vehicle" class="action-bar"></ActionBar>
-    <GridLayout rows="50, auto" columns="*, *, *, *" class="text-center">
+    <GridLayout rows="50, 10, auto" columns="50, 230, 50, 40" class="text-center" color="white">
         <Label row="0" col="0" text="SPN" ></Label>
         <Label row="0" col="1" text="Name"></Label>
         <Label row="0" col="2" text="Value"></Label>
-        <Label row="0" col="3" text="Unit"></Label>
-        <!-- <Label row="1" col="0" colSpan="4" text="test"></Label> -->
-        <!-- <StackLayout row="1" col="0" colSpan="4">
-           <Label text="test"></Label>
-        </StackLayout> -->
-        <ScrollView row="1" col="0" colSpan="4">
+        <Label row="0" col="3" text=""></Label>
+        <StackLayout row="1" col="0" colSpan="4" class="hr-light m-10"></StackLayout>
+        <ScrollView row="2" col="0" colSpan="4">
             <StackLayout>
-                <Label text="test"></Label>
+                <StackLayout orientation="horizontal" class="m-y-10"
+                    *ngFor="let state of spnProfile">
+                    <Label [text]="state.SPNNo" fontSize="12" width="50"></Label>
+                    <Label [text]="state.SPNName" fontSize="12" width="230"></Label>
+                    <Label [text]="state.PGNNo" fontSize="12" width="50"></Label>
+                    <Label [text]="state.Unit" fontSize="12" width="40"></Label>
+                </StackLayout>
             </StackLayout>
         </ScrollView>
     </GridLayout>

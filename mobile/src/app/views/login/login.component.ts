@@ -213,9 +213,9 @@ export class LoginComponent implements OnInit {
     }
 
     private initApplicationData() {
-        // this.dataService.getSpnProfile(this.fcode).subscribe(data => {
-        //     setString('spnProfile', JSON.stringify(data));
-        // });
+        this.dataService.getSpnProfile(this.fcode).subscribe(data => {
+            setString('spnProfile', JSON.stringify(data));
+        });
     }
 }
 

@@ -13,7 +13,7 @@ export class VehicleStatesComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    // this.spnProfile = JSON.parse(getString('spnProfile'));
+    this.spnProfile = JSON.parse(getString('spnProfile'));
     // console.log(this.spnProfile)
     
   }
