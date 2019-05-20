@@ -7,12 +7,14 @@ import { isAndroid, device } from "tns-core-modules/platform";
 // import * as app from "tns-core-modules/application";
 import { android as androidApp } from "tns-core-modules/application";
 import { setString } from "tns-core-modules/application-settings";
+import { topmost } from "tns-core-modules/ui/frame";
 
 import { UtilityService } from "../../services/utility.service";
 import { User } from "~/app/models/user";
 import { DataService } from "~/app/services/data.service";
 import { environment } from "~/environments/environment";
 
+declare const UIBarStyle: any;
 declare var android: any;
 
 @Component({
@@ -54,7 +56,9 @@ export class LoginComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.page.actionBarHidden = true;
+        this.setTopMostStyle();
+
+        this.page.actionBarHidden = false;
         this.page.cssClasses.add("login-page-background");
         this.page.backgroundSpanUnderStatusBar = true;
         this.showHideIcon = this.hideIcon;
@@ -216,6 +220,14 @@ export class LoginComponent implements OnInit {
         this.dataService.getSpnProfile(this.fcode).subscribe(data => {
             setString('spnProfile', JSON.stringify(data));
         });
+    }
+    
+    private setTopMostStyle() {
+        if (topmost().ios) {
+            const navBar = topmost().ios.controller.navigationBar;
+            navBar.barStyle = UIBarStyle.Black;
+        }
+
     }
 }
 
