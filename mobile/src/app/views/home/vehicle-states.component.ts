@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { getString } from "tns-core-modules/application-settings";
+import { UtilityService } from '~/app/services/utility.service';
 
 @Component({
   selector: 'app-vehicle-states',
@@ -10,12 +10,12 @@ import { getString } from "tns-core-modules/application-settings";
 export class VehicleStatesComponent implements OnInit {
   spnProfile: any;
 
-  constructor() { }
+  constructor(
+    private utilityService: UtilityService
+  ) { }
 
   ngOnInit() {
-    this.spnProfile = JSON.parse(getString('spnProfile'));
-    // console.log(this.spnProfile)
-    
+    this.spnProfile = this.utilityService.getSpnProfile(); 
   }
 
 }

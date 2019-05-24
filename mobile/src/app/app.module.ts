@@ -1,8 +1,8 @@
 import { NgModule, NO_ERRORS_SCHEMA } from "@angular/core";
 import { NativeScriptModule } from "nativescript-angular/nativescript.module";
 // import { TransformUtility } from "fancycan-utility";
-// import { BarcodeScanner } from 'nativescript-barcodescanner';
-import { BarcodeScannerService as BarcodeScanner } from "./services/barcode-scanner.service";
+import { BarcodeScanner } from 'nativescript-barcodescanner';
+// import { BarcodeScannerService as BarcodeScanner } from "./services/barcode-scanner.service";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";

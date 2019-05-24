@@ -217,6 +217,10 @@ export class LoginComponent implements OnInit {
     }
 
     private initApplicationData() {
+        this.dataService.getVehicleCodes(this.fcode).subscribe(data => {
+            setString('vehicleCodes', JSON.stringify(data));
+        });
+
         this.dataService.getSpnProfile(this.fcode).subscribe(data => {
             setString('spnProfile', JSON.stringify(data));
         });
@@ -229,5 +233,6 @@ export class LoginComponent implements OnInit {
         }
 
     }
+
 }
 

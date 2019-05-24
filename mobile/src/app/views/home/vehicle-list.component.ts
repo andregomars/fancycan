@@ -5,6 +5,7 @@ import { ObservableArray } from "tns-core-modules/data/observable-array";
 import { DataService } from '~/app/services/data.service';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { UtilityService } from '~/app/services/utility.service';
 
 @Component({
   selector: 'app-vehicle-list',
@@ -24,17 +25,20 @@ export class VehicleListComponent implements OnInit {
 	constructor(
 		private page: Page,
 		private dataService: DataService,
+		private utilityService: UtilityService
 	) {
 	}
 
 	ngOnInit() {
-		this.loadVehicleCodes(this.fcode).subscribe(vcodes => { 
-			vcodes.forEach(vcode => this.arrayItems.push(new DataItem(vcode)));
-			this.myItems = new ObservableArray<DataItem>(this.arrayItems);
-		});
+		// this.loadVehicleCodes(this.fcode).subscribe(vcodes => { 
+		// 	vcodes.forEach(vcode => this.arrayItems.push(new DataItem(vcode)));
+		// 	this.myItems = new ObservableArray<DataItem>(this.arrayItems);
+		// });
 
+		const vcodes = this.utilityService.getVehicleCodes();
+		vcodes.forEach(vcode => this.arrayItems.push(new DataItem(vcode)));
+		this.myItems = new ObservableArray<DataItem>(this.arrayItems);
 		this.loadVehicleStates(this.fcode);
-		
 	}
 
 	onSubmit(args: any) {

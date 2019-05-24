@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-// import { BarcodeScanner } from "nativescript-barcodescanner";
-import { BarcodeScannerService as BarcodeScanner } from "../../services/barcode-scanner.service";
+import { BarcodeScanner } from "nativescript-barcodescanner";
+// import { BarcodeScannerService as BarcodeScanner } from "../../services/barcode-scanner.service";
 
 @Component({
   selector: 'app-check-list',

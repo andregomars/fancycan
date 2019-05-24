@@ -131,4 +131,13 @@ export class DataService {
       return of(defs);
     }
 
+    getVehicleCodes(fcode: string): Observable<string> {
+      return this.getFleets().pipe(
+          map((fleets: any[]) =>
+              fleets.find(fleet => fleet.code.toUpperCase() === fcode.toUpperCase())
+                .vehicles.map((vehicle: any) => vehicle.code)
+          )
+      );
+    }
+
 }
