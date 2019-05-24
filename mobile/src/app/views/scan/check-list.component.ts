@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BarcodeScanner } from "nativescript-barcodescanner";
+import { UtilityService } from '~/app/services/utility.service';
 // import { BarcodeScannerService as BarcodeScanner } from "../../services/barcode-scanner.service";
 
 @Component({
@@ -9,8 +10,13 @@ import { BarcodeScanner } from "nativescript-barcodescanner";
   moduleId: module.id,
 })
 export class CheckListComponent implements OnInit {
+  vcodes: string[];
+  sourceText: string;
+  checkLog: CheckListFormEntity;
+
   constructor(
-    private barcodeScanner: BarcodeScanner
+    private barcodeScanner: BarcodeScanner,
+    private utilityService: UtilityService
   ) {
 
   }
@@ -39,6 +45,33 @@ export class CheckListComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.vcodes = this.utilityService.getVehicleCodes();
+    this.checkLog = {
+      vcode: '',
+      item: '',
+      location: '',
+      type: '',
+      value: '',
+      condition: ''
+    }
   }
 
+  onPropertyCommitted($event: any) {
+    this.sourceText = $event.object.source.toString();
+    console.log(this.sourceText);
+  }
+
+  selectVehicle($event: any) {
+    // console.log($event);
+  }
+}
+
+// title="https://app.fancycan.com/fleet/checklist/BYD?item=tire2&loc=rear%20left"
+export interface CheckListFormEntity {
+  vcode: string;
+  item: string;
+  location: string;
+  type: string;
+  value: string;
+  condition: string;
 }

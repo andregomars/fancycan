@@ -1,12 +1,30 @@
 <StackLayout class="page">
 	<ActionBar title="Checklist" class="action-bar">
 	</ActionBar>    
-	<Button text="&#xf029;" (tap)="onScan()" class="btn-scan" marginTop="20"></Button>
-	<StackLayout row="1" col="0" colSpan="4" class="hr-light m-10"></StackLayout>
-	<StackLayout>
-		<!-- <ListPicker [items]="pokemons" selectedIndex="0" (selectedIndexChange)="selectedIndexChanged($event)" class="p-15"></ListPicker> -->
-	</StackLayout>
-	<StackLayout></StackLayout>
-	<StackLayout></StackLayout>
-	<StackLayout></StackLayout>
+	<Button text="&#xf029;" (tap)="onScan()" class="btn-scan m-y-20"></Button>
+	<GridLayout tkExampleTitle tkToggleNavButton rows="auto, auto, *">
+		<Label text="Please scan or input checked item: " fontWeight="bold" color="white" margin="10" ></Label>
+		<RadDataForm [source]="checkLog" (propertyCommitted)="onPropertyCommitted($event)" row="1">
+			<TKEntityProperty tkDataFormProperty name="vcode" index="0"
+				displayName="Vehicle #" [valuesProvider]="vcodes">
+				<TKPropertyEditor tkEntityPropertyEditor type="Picker"></TKPropertyEditor>
+			</TKEntityProperty>
+			<TKEntityProperty tkDataFormProperty name="item" index="1">
+				<TKPropertyEditor tkEntityPropertyEditor type="Text"></TKPropertyEditor>
+			</TKEntityProperty>
+			<TKEntityProperty tkDataFormProperty name="location" index="2">
+				<TKPropertyEditor tkEntityPropertyEditor type="Text"></TKPropertyEditor>
+			</TKEntityProperty>
+			<TKEntityProperty tkDataFormProperty name="type" index="3">
+				<TKPropertyEditor tkEntityPropertyEditor type="Text"></TKPropertyEditor>
+			</TKEntityProperty>
+			<TKEntityProperty tkDataFormProperty name="value" index="4">
+				<TKPropertyEditor tkEntityPropertyEditor type="Text"></TKPropertyEditor>
+			</TKEntityProperty>
+			<TKEntityProperty tkDataFormProperty name="condition" index="5">
+				<TKPropertyEditor tkEntityPropertyEditor type="Text"></TKPropertyEditor>
+			</TKEntityProperty>
+		</RadDataForm>
+		<Button class="eloha-font-semibold login-submit" text="Submit" row="2"></Button>
+	</GridLayout>
 </StackLayout>
