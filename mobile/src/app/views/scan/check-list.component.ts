@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BarcodeScanner } from "nativescript-barcodescanner";
 import { UtilityService } from '~/app/services/utility.service';
+import { ParamMap } from '@angular/router';
 // import { BarcodeScannerService as BarcodeScanner } from "../../services/barcode-scanner.service";
 
 @Component({
@@ -21,6 +22,12 @@ export class CheckListComponent implements OnInit {
 
   }
 
+  onScanTest() {
+    const url = 'https://app.fancycan.com/fleet/checklist/BYD?item=tire2&loc=rear%20left';
+    const paramMap = this.utilityService.getUrlParams(url);
+    console.log(paramMap);
+  }
+
   onScan() {
     this.barcodeScanner.scan({
       formats: "QR_CODE, EAN_13",
@@ -33,14 +40,14 @@ export class CheckListComponent implements OnInit {
       orientation: undefined,
       openSettingsIfPermissionWasPreviouslyDenied: true //ios only 
     }).then((result) => {
-      alert({
-        title: "You Scanned ",
-        message: "Format: " + result.format + ",\nContent: " + result.text,
-        okButtonText: "OK"
-      });
+      this.parseScanText(result.format, result.text);
     }, (errorMessage) => {
-      console.log("Error when scanning " + errorMessage);
-    }
+        alert({
+          title: "Scan Fails",
+          message: errorMessage,
+          okButtonText: "OK"
+        })
+      }
     );
   }
 
@@ -63,6 +70,21 @@ export class CheckListComponent implements OnInit {
 
   selectVehicle($event: any) {
     // console.log($event);
+  }
+
+  private parseScanText(format: string, text: string) {
+    const paramMap = this.utilityService.getUrlParams(text);
+    if (paramMap && paramMap.keys && paramMap.keys.length > 0) {
+      this.checkLog.item = paramMap.get('item');
+      this.checkLog.location = paramMap.get('loc')
+    } else {
+      const message = `Your scanned ${format} content is invalid. \n ${text}.`;
+      alert({
+        title: "Scan Fails",
+        message: message,
+        okButtonText: "OK"
+      })
+    }
   }
 }
 

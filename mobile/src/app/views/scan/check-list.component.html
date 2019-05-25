@@ -2,8 +2,8 @@
 	<ActionBar title="Checklist" class="action-bar">
 	</ActionBar>    
 	<Button text="&#xf029;" (tap)="onScan()" class="btn-scan m-y-20"></Button>
-	<GridLayout tkExampleTitle tkToggleNavButton rows="auto, auto, *">
-		<Label text="Please scan or input checked item: " fontWeight="bold" color="white" margin="10" ></Label>
+	<GridLayout tkExampleTitle tkToggleNavButton rows="auto, auto">
+		<Label text="Please select vehicle and scan: " fontWeight="bold" color="white" margin="10" ></Label>
 		<RadDataForm [source]="checkLog" (propertyCommitted)="onPropertyCommitted($event)" row="1">
 			<TKEntityProperty tkDataFormProperty name="vcode" index="0"
 				displayName="Vehicle #" [valuesProvider]="vcodes">
@@ -25,6 +25,8 @@
 				<TKPropertyEditor tkEntityPropertyEditor type="Text"></TKPropertyEditor>
 			</TKEntityProperty>
 		</RadDataForm>
-		<Button class="eloha-font-semibold login-submit" text="Submit" row="2"></Button>
 	</GridLayout>
+	<StackLayout class="m-x-auto p-10">
+		<Button class="eloha-font-semibold login-submit p-x-30" text="Submit"></Button>
+	</StackLayout>
 </StackLayout>

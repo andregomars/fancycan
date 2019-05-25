@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { DefaultUrlSerializer, ParamMap } from "@angular/router";
 
 import { DeviceType } from "tns-core-modules/ui/enums";
 import { device } from "tns-core-modules/platform";
@@ -9,6 +10,9 @@ const regex: any = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}
 
 @Injectable()
 export class UtilityService {
+    constructor(
+        private urlSerializer: DefaultUrlSerializer
+    ) {}
 
     isValidEmail(email: String) {
         if (!email)
@@ -47,6 +51,19 @@ export class UtilityService {
 
     getSpnProfile(): string[] {
         return this.getFromCache('spnProfile');
+    }
+
+    getUrlParams(url: string): ParamMap {
+        if (!url) {
+            return null;
+        }
+
+        if (url.startsWith('http://') || url.startsWith('https://')) {
+            url = url.replace('http://', '').replace('https://', '');
+        }
+
+        const urlTree = this.urlSerializer.parse(unescape(url));
+        return urlTree.queryParamMap;
     }
 
     private getFromCache(key: string): any {
