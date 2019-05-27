@@ -72,7 +72,11 @@ export class CheckListComponent implements OnInit, OnDestroy {
   }
 
   onTapSubmit() {
-    
+      alert({
+        title: 'Checklist',
+        message: 'Submitted successfully!',
+        okButtonText: 'OK'
+      })
   }
 
   private parseScanText(format: string, text: string) {
