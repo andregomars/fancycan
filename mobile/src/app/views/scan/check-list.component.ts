@@ -60,7 +60,7 @@ export class CheckListComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.vcodes = this.utilityService.getVehicleCodes();
-    this.checkLog$ = new BehaviorSubject<Checklist>(defaultChecklist)
+    this.checkLog$ = new BehaviorSubject<Checklist>({...defaultChecklist});
   }
 
   ngOnDestroy() {
@@ -77,6 +77,7 @@ export class CheckListComponent implements OnInit, OnDestroy {
         message: 'Submitted successfully!',
         okButtonText: 'OK'
       })
+      this.clearChecklist();
   }
 
   private parseScanText(format: string, text: string) {
@@ -102,6 +103,10 @@ export class CheckListComponent implements OnInit, OnDestroy {
         message: message,
         okButtonText: 'OK'
       })
+  }
+
+  private clearChecklist() {
+    this.checkLog$.next({...defaultChecklist});
   }
 }
 
