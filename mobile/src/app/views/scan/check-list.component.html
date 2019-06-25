@@ -15,14 +15,15 @@
 			<TKEntityProperty tkDataFormProperty name="location" index="2">
 				<TKPropertyEditor tkEntityPropertyEditor type="Text"></TKPropertyEditor>
 			</TKEntityProperty>
-			<TKEntityProperty tkDataFormProperty name="type" index="3">
-				<TKPropertyEditor tkEntityPropertyEditor type="Text"></TKPropertyEditor>
+			<TKEntityProperty tkDataFormProperty name="status" index="3"
+				displayName="Status On/Off">
+				<TKPropertyEditor tkEntityPropertyEditor type="Switch"></TKPropertyEditor>
 			</TKEntityProperty>
 			<TKEntityProperty tkDataFormProperty name="value" index="4">
 				<TKPropertyEditor tkEntityPropertyEditor type="Text"></TKPropertyEditor>
 			</TKEntityProperty>
-			<TKEntityProperty tkDataFormProperty name="condition" index="5">
-				<TKPropertyEditor tkEntityPropertyEditor type="Text"></TKPropertyEditor>
+			<TKEntityProperty tkDataFormProperty name="condition" index="5" [valuesProvider]="conditionOpts">
+				<TKPropertyEditor tkEntityPropertyEditor type="Picker"></TKPropertyEditor>
 			</TKEntityProperty>
 		</RadDataForm>
 	</GridLayout>

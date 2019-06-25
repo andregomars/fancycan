@@ -3,7 +3,7 @@ export interface Checklist {
   vcode: string;
   item: string;
   location: string;
-  type: string;
+  status: boolean;
   value: string;
   condition: string;
 }
@@ -12,7 +12,7 @@ export const defaultChecklist: Checklist = {
     vcode: '',
     item: '',
     location: '',
-    type: '',
+    status: false,
     value: '',
     condition: ''
 }

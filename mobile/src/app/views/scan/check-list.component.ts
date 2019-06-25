@@ -13,7 +13,9 @@ import { Checklist, defaultChecklist } from '~/app/models/checklist';
 })
 export class CheckListComponent implements OnInit, OnDestroy {
   scanDialogTitle = 'Scan Result';
+  conditionOpts = ['Please Select', 'Fair', 'Good', 'Very Good', 'Excellent'];
   vcodes: string[];
+
   sourceText: string;
   checkLog$: BehaviorSubject<Checklist>;
 
@@ -31,7 +33,7 @@ export class CheckListComponent implements OnInit, OnDestroy {
       vcode: this.checkLog$.getValue().vcode,
       item: paramMap.get('item'),
       location: paramMap.get('loc'),
-      type: '',
+      status: false,
       value: '',
       condition: ''
     })
@@ -87,7 +89,7 @@ export class CheckListComponent implements OnInit, OnDestroy {
         vcode: this.checkLog$.getValue().vcode,
         item: paramMap.get('item'),
         location: paramMap.get('loc'),
-        type: '',
+        status: false,
         value: '',
         condition: ''
       });
