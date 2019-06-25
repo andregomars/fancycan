@@ -28,7 +28,7 @@ export class CheckListComponent implements OnInit, OnDestroy {
 
   onScanTest() {
     const url = 'https://app.fancycan.com/fleet/checklist/BYD?item=tire2&loc=rear%20left';
-    const paramMap = this.utilityService.getUrlParams(url);
+    const paramMap = this.utilityService.getUrlQueryParams(url);
     this.checkLog$.next({
       vcode: this.checkLog$.getValue().vcode,
       item: paramMap.get('item'),
@@ -83,7 +83,7 @@ export class CheckListComponent implements OnInit, OnDestroy {
   }
 
   private parseScanText(format: string, text: string) {
-    const paramMap = this.utilityService.getUrlParams(text);
+    const paramMap = this.utilityService.getUrlQueryParams(text);
     if (paramMap && paramMap.keys && paramMap.keys.length > 0) {
       this.checkLog$.next({
         vcode: this.checkLog$.getValue().vcode,

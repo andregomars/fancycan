@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { DefaultUrlSerializer, ParamMap } from "@angular/router";
+import { DefaultUrlSerializer, ParamMap, UrlTree, PRIMARY_OUTLET, UrlSegment } from "@angular/router";
 
 import { DeviceType } from "tns-core-modules/ui/enums";
 import { device } from "tns-core-modules/platform";
@@ -53,7 +53,25 @@ export class UtilityService {
         return this.getFromCache('spnProfile');
     }
 
-    getUrlParams(url: string): ParamMap {
+    getUrlQueryParams(url: string): ParamMap {
+        const urlTree = this.getUrlTree(url);
+        return urlTree.queryParamMap;
+    }
+
+    getUrlPrimarySegments(url: string): UrlSegment[] {
+        const urlTree = this.getUrlTree(url);
+        let segments = [];
+        if (urlTree.root && urlTree.root.children) {
+            const primaryGroup = urlTree.root.children[PRIMARY_OUTLET];
+            if (primaryGroup) {
+                segments = primaryGroup.segments;
+            }
+        }
+        return segments;
+    }
+    
+
+    private getUrlTree(url: string): UrlTree {
         if (!url) {
             return null;
         }
@@ -62,8 +80,7 @@ export class UtilityService {
             url = url.replace('http://', '').replace('https://', '');
         }
 
-        const urlTree = this.urlSerializer.parse(unescape(url));
-        return urlTree.queryParamMap;
+        return this.urlSerializer.parse(unescape(url));
     }
 
     private getFromCache(key: string): any {

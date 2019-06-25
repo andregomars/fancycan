@@ -4,7 +4,7 @@ import { NativeScriptRouterModule } from 'nativescript-angular/router';
 import { CheckListComponent } from './check-list.component';
 
 const routes: Routes = [
-    { path: "", component: CheckListComponent }
+    { path: '', component: CheckListComponent }
 ];
 
 @NgModule({
