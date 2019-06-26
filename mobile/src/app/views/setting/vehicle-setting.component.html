@@ -1,13 +1,13 @@
 <StackLayout class="page">
 	<ActionBar title="Setting" class="action-bar"></ActionBar>
 	<Button text="&#xf029;" (tap)="onScan()" class="btn-scan m-y-20"></Button>
-	<GridLayout tkExampleTitle tkToggleNavButton rows="auto, auto">
-		<Label text="Please scan before input: " fontWeight="bold" color="white" margin="10" ></Label>
+	<GridLayout tkExampleTitle tkToggleNavButton rows="auto, *, auto, auto">
+		<Label text="Please scan before input: " fontWeight="bold" color="white" margin="10" row="0"></Label>
 		<RadDataForm [source]="vehicle$ | async" row="1">
 			<TKEntityProperty tkDataFormProperty name="vcode" index="0" displayName="Vehicle #">
 				<TKPropertyEditor tkEntityPropertyEditor type="Text"></TKPropertyEditor>
 			</TKEntityProperty>
-			<TKEntityProperty tkDataFormProperty name="vin" index="1">
+			<TKEntityProperty tkDataFormProperty name="vin" index="1" displayName="VIN">
 				<TKPropertyEditor tkEntityPropertyEditor type="Text"></TKPropertyEditor>
 			</TKEntityProperty>
 			<TKEntityProperty tkDataFormProperty name="identifier" index="2">
@@ -17,9 +17,14 @@
 				<TKPropertyEditor tkEntityPropertyEditor type="Text"></TKPropertyEditor>
 			</TKEntityProperty>
 		</RadDataForm>
+		<FlexboxLayout flexDirection="column-reverse" row="2">
+			<Image [src]="imageTaken" flexGrow="3" class="p-15 img-rounded"></Image>
+			<Button text="Take Photo" class="btn btn-primary btn-active" (tap)="onTakePhoto()" flexGrow="1"></Button>
+			<!-- <Button text="Request permissions" class="btn btn-primary btn-active" (tap)="onRequestPermissions()" flexGrow="1"></Button> -->
+		</FlexboxLayout>
+		<StackLayout class="m-x-auto p-10" row="3">
+			<Button class="eloha-font-semibold login-submit p-x-30"
+				text="Add" (tap)="onTapSubmit()"></Button>
+		</StackLayout>
 	</GridLayout>
-	<StackLayout class="m-x-auto p-10">
-		<Button class="eloha-font-semibold login-submit p-x-30"
-			text="Add" (tap)="onTapSubmit()"></Button>
-	</StackLayout>
 </StackLayout>

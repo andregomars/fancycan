@@ -3,6 +3,8 @@ import { BarcodeScanner } from "nativescript-barcodescanner";
 import { UtilityService } from '~/app/services/utility.service';
 import { BehaviorSubject } from 'rxjs';
 import { Vehicle, defaultVehicle } from '~/app/models/vehicle';
+import { ImageAsset } from 'tns-core-modules/image-asset';
+import { takePicture, requestPermissions, isAvailable } from "nativescript-camera";
 
 @Component({
   selector: 'app-vehicle-setting',
@@ -12,6 +14,7 @@ import { Vehicle, defaultVehicle } from '~/app/models/vehicle';
 })
 export class VehicleSettingComponent implements OnInit, OnDestroy {
   scanDialogTitle = 'Scan Result';
+  cameraDialogTitle = 'Camera Result';
   conditionOpts = ['Please Select', 'Fair', 'Good', 'Very Good', 'Excellent'];
   defaultFCode = '6005';
   vcodes: string[];
@@ -20,6 +23,12 @@ export class VehicleSettingComponent implements OnInit, OnDestroy {
 
   sourceText: string;
   vehicle$: BehaviorSubject<Vehicle>;
+
+  imageTaken: ImageAsset;
+  saveToGallery: boolean = true;
+  keepAspectRatio: boolean = true;
+  width: number = 300;
+  height: number = 300;
 
   constructor(
     private barcodeScanner: BarcodeScanner,
@@ -65,6 +74,7 @@ export class VehicleSettingComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.vcodes = this.utilityService.getVehicleCodes();
     this.vehicle$ = new BehaviorSubject<Vehicle>({...defaultVehicle});
+    this.onCheckForCamera();
   }
 
   ngOnDestroy() {
@@ -80,6 +90,40 @@ export class VehicleSettingComponent implements OnInit, OnDestroy {
       this.clearVehicleSetting();
   }
 
+  
+  // >> camera-module-photo-code
+  onTakePhoto() {
+    if(!isAvailable()) {
+      this.popAlert(this.cameraDialogTitle, 'Camera is not allowed on this device!');
+      return;
+    }
+
+    let options = {
+        width: this.width,
+        height: this.height,
+        keepAspectRatio: this.keepAspectRatio,
+        saveToGallery: this.saveToGallery
+    };
+
+    requestPermissions()
+      .then((isAllowed: boolean) => {
+        takePicture(options)
+          .then(imageAsset => {
+              this.imageTaken = imageAsset;
+              console.log("Size: " + imageAsset.options.width + "x" + imageAsset.options.height);
+          }).catch(err => {
+              console.log(err.message);
+          });
+        });
+      }
+  // << camera-module-photo-code
+
+  // >> camera-module-perm-code
+  // onRequestPermissions() {
+  //     requestPermissions();
+  // }
+  // << camera-module-perm-code
+
   private parseScanText(format: string, text: string) {
     const paramMap = this.utilityService.getUrlQueryParams(text);
     const segments = this.utilityService.getUrlPrimarySegments(text);
@@ -93,13 +137,13 @@ export class VehicleSettingComponent implements OnInit, OnDestroy {
       })
     } else {
       const message = `Your scanned ${format} content is invalid. \n ${text}.`;
-      this.popScanAlert(message);
+      this.popAlert(this.scanDialogTitle, message);
     }
   }
 
-  private popScanAlert(message: string) {
+  private popAlert(title: string, message: string) {
       alert({
-        title: this.scanDialogTitle, 
+        title: title, 
         message: message,
         okButtonText: 'OK'
       })

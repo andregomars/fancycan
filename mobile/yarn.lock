@@ -2825,6 +2825,13 @@ nativescript-barcodescanner@^3.1.3:
   resolved "https://registry.yarnpkg.com/nativescript-barcodescanner/-/nativescript-barcodescanner-3.1.3.tgz#b48dda6837f345d865a1802c28757dfce25dd6c5"
   integrity sha512-+MWj8JgFr4aAQqUPcVAw6Dy31mmsk55t3qoE9F+ajBuPx0FkX3Ei0L4XD9ePILxXGtfOLD9PxZBYh2ga4WVI4Q==
 
+nativescript-camera@^4.5.0:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/nativescript-camera/-/nativescript-camera-4.5.0.tgz#92260208cb34e1df5760c66ad16725edf6fbfffd"
+  integrity sha512-Ecw9JH0CNgnGKXfqD1oifMoIOSnKBgWkecwVpdKfrChkQaCdKDFWdfdJ6X8+YTSwJH4n43e74JmrPzLN2eitwQ==
+  dependencies:
+    nativescript-permissions "~1.3.0"
+
 nativescript-dev-typescript@^0.9.0:
   version "0.9.0"
   resolved "https://registry.yarnpkg.com/nativescript-dev-typescript/-/nativescript-dev-typescript-0.9.0.tgz#a6c57537ea1f7abde1b3225bdd4252f585eb910d"
@@ -2878,15 +2885,35 @@ nativescript-intl@^3.0.0:
   resolved "https://registry.yarnpkg.com/nativescript-intl/-/nativescript-intl-3.0.0.tgz#82ee9be7d377172b3c4295734723037628e186a7"
   integrity sha1-gu6b59N3Fys8QpVzRyMDdijhhqc=
 
+nativescript-permissions@~1.3.0:
+  version "1.3.6"
+  resolved "https://registry.yarnpkg.com/nativescript-permissions/-/nativescript-permissions-1.3.6.tgz#f79df6b63a3953c0e91ad76713b6c1597677c379"
+  integrity sha512-fkuoboLNdnc3SKdpbffR0Pd84G6iY7GKPirgQLrOFNMP6gLEO8fqJGY1+iFr562sPvlRhCMBjpmauMZuLMwHoQ==
+
 nativescript-theme-core@~1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/nativescript-theme-core/-/nativescript-theme-core-1.0.4.tgz#cf2880c7fbf2fe5f43e2235d309750790803efe1"
   integrity sha1-zyiAx/vy/l9D4iNdMJdQeQgD7+E=
 
+nativescript-ui-autocomplete@^4.0.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/nativescript-ui-autocomplete/-/nativescript-ui-autocomplete-4.1.0.tgz#2cf7a9d70066f576a683ab07988115ba80949584"
+  integrity sha512-vj7DIeWqUxi+o6ZXPFIzlHp7XXf+nLy+TwVy9ku6qTxZTmP4CxU1ipnlHHr7R7f4X9m3wkfGzM8BTC3Z7+m7kQ==
+  dependencies:
+    nativescript-ui-core "~2.0.0"
+
 nativescript-ui-core@~2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/nativescript-ui-core/-/nativescript-ui-core-2.0.1.tgz#c59fee4d714d5138460b7aa98df217f1e02b643e"
   integrity sha512-6XeRrbp3cP7MFqny6TXpF8VVwhA5bfE2iC1RIB+YjEclK+gC1b+4iov4Yl8c4oP6CMQ40AfwU11R9cEsuRr81g==
+
+nativescript-ui-dataform@^4.0.0:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/nativescript-ui-dataform/-/nativescript-ui-dataform-4.0.1.tgz#43e3854edca273bbbcf9d0f8ea6b8b4c53951400"
+  integrity sha512-7Guks4WP9+Yt+//4zEUePEGMJvamKBqlQ4OilGMlZcQ1mpZu0WWI74xn9edlUoDwavyh56FdiNw07FvSQTXnrw==
+  dependencies:
+    nativescript-ui-autocomplete "^4.0.0"
+    nativescript-ui-core "~2.0.0"
 
 nativescript-ui-gauge@^4.0.0:
   version "4.0.0"
