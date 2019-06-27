@@ -66,7 +66,7 @@ export class VehicleSettingComponent implements OnInit, OnDestroy {
         this.parseScanText(result.format, result.text);
       }, 
       (errorMessage) => {
-        this.popScanAlert(errorMessage);
+        this.popAlert(this.scanDialogTitle, errorMessage);
       }
     );
   }
@@ -74,7 +74,7 @@ export class VehicleSettingComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.vcodes = this.utilityService.getVehicleCodes();
     this.vehicle$ = new BehaviorSubject<Vehicle>({...defaultVehicle});
-    this.onCheckForCamera();
+    // this.onCheckForCamera();
   }
 
   ngOnDestroy() {
