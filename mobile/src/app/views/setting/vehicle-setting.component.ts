@@ -1,10 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { BarcodeScanner } from "nativescript-barcodescanner";
-import { UtilityService } from '~/app/services/utility.service';
 import { BehaviorSubject } from 'rxjs';
-import { Vehicle, defaultVehicle } from '~/app/models/vehicle';
 import { ImageAsset } from 'tns-core-modules/image-asset';
 import { takePicture, requestPermissions, isAvailable } from "nativescript-camera";
+
+import { Vehicle, defaultVehicle } from '~/app/models/vehicle';
+import { UtilityService } from '~/app/services/utility.service';
 
 @Component({
   selector: 'app-vehicle-setting',
@@ -74,7 +75,7 @@ export class VehicleSettingComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.vcodes = this.utilityService.getVehicleCodes();
     this.vehicle$ = new BehaviorSubject<Vehicle>({...defaultVehicle});
-    // this.onCheckForCamera();
+
   }
 
   ngOnDestroy() {
@@ -118,12 +119,6 @@ export class VehicleSettingComponent implements OnInit, OnDestroy {
       }
   // << camera-module-photo-code
 
-  // >> camera-module-perm-code
-  // onRequestPermissions() {
-  //     requestPermissions();
-  // }
-  // << camera-module-perm-code
-
   private parseScanText(format: string, text: string) {
     const paramMap = this.utilityService.getUrlQueryParams(text);
     const segments = this.utilityService.getUrlPrimarySegments(text);
@@ -153,4 +148,3 @@ export class VehicleSettingComponent implements OnInit, OnDestroy {
     this.vehicle$.next({...defaultVehicle});
   }
 }
-
