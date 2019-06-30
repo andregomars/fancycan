@@ -56,9 +56,10 @@ export class LoginComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.setTopMostStyle();
+        // this.setTopMostStyle();
+        // this.page.actionBarHidden = false;
 
-        this.page.actionBarHidden = false;
+        this.page.actionBarHidden = true;
         this.page.cssClasses.add("login-page-background");
         this.page.backgroundSpanUnderStatusBar = true;
         this.showHideIcon = this.hideIcon;

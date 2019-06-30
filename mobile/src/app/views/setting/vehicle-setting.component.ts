@@ -91,6 +91,19 @@ export class VehicleSettingComponent implements OnInit, OnDestroy {
       this.clearVehicleSetting();
   }
 
+  onTapRemovePhoto() {
+      this.imageTaken = null;
+  }
+
+  onTapResetSetting() {
+      alert({
+        title: 'Vehicle Setting',
+        message: 'Current setting is cleared!',
+        okButtonText: 'OK'
+      })
+      this.imageTaken = null;
+      this.clearVehicleSetting();
+  }
   
   // >> camera-module-photo-code
   onTakePhoto() {
