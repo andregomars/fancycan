@@ -23,7 +23,8 @@
 		<GridLayout columns="auto, *, auto" class="m-x-4" row="2">
 			<FlexboxLayout col="0" flexDirection="column" justifyContent="space-between">
 				<Button text="&#xf030;" class="btn-camera" (tap)="onTakePhoto()"></Button>
-				<Button text="&#xf1f8;" class="btn-remove-photo" (tap)="onTapRemovePhoto()"></Button>
+				<Button *ngIf="imageTaken"
+					text="&#xf1f8;" class="btn-remove-photo" (tap)="onTapRemovePhoto()"></Button>
 			</FlexboxLayout>
 			<Image [src]="imageTaken" class="img-rounded" col="1"></Image>
 			<FlexboxLayout col="2" flexDirection="column" justifyContent="space-between">

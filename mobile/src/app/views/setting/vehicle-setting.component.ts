@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { BarcodeScanner } from "nativescript-barcodescanner";
 import { BehaviorSubject } from 'rxjs';
 import { ImageAsset } from 'tns-core-modules/image-asset';
+import * as dialogs from 'tns-core-modules/ui/dialogs';
 import { takePicture, requestPermissions, isAvailable } from "nativescript-camera";
 
 import { Vehicle, defaultVehicle } from '~/app/models/vehicle';
@@ -83,12 +84,12 @@ export class VehicleSettingComponent implements OnInit, OnDestroy {
   }
 
   onTapSubmit() {
-      alert({
-        title: 'Vehicle Setting',
-        message: 'Vehicle is added!',
-        okButtonText: 'OK'
-      })
-      this.clearVehicleSetting();
+    alert({
+      title: 'Vehicle Setting',
+      message: 'Vehicle is added!',
+      okButtonText: 'OK'
+    })
+    this.clearVehicleSetting();
   }
 
   onTapRemovePhoto() {
@@ -96,13 +97,18 @@ export class VehicleSettingComponent implements OnInit, OnDestroy {
   }
 
   onTapResetSetting() {
-      alert({
-        title: 'Vehicle Setting',
-        message: 'Current setting is cleared!',
-        okButtonText: 'OK'
-      })
-      this.imageTaken = null;
-      this.clearVehicleSetting();
+    dialogs.confirm('Sure to reset Vehicle Setting?')
+      .then(isConfirmed => {
+        if (isConfirmed) {
+          this.imageTaken = null;
+          this.clearVehicleSetting();
+          // alert({
+          //   title: 'Vehicle Setting',
+          //   message: 'Current setting is cleared!',
+          //   okButtonText: 'OK'
+          // })
+        }
+      });
   }
   
   // >> camera-module-photo-code

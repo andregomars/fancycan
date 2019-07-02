@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { DataService } from '~/app/services/data.service';
 
 @Component({
   selector: 'app-notification',
@@ -7,10 +9,14 @@ import { Component, OnInit } from '@angular/core';
   moduleId: module.id,
 })
 export class NotificationComponent implements OnInit {
+  alerts$: Observable<any>;
 
-  constructor() { }
+  constructor(
+    private dataService: DataService
+  ) { }
 
   ngOnInit() {
+    this.alerts$ = this.dataService.getAlerts();
   }
 
 }

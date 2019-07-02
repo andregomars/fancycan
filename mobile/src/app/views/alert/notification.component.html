@@ -1,3 +1,19 @@
 <StackLayout class="page">
 	<ActionBar title="Notifications" class="action-bar"></ActionBar>
+	<ScrollView>
+		<StackLayout>
+			<ListView height="500" class="page" [items]="alerts$ | async" separatorColor="transparent">
+				<ng-template let-alert="item">
+					<GridLayout columns="70, *, auto" class="m-x-4 m-y-4" color="white">
+						<Label [text]="alert.spn" col="0"></Label>
+						<StackLayout col="1">
+							<Label [text]="alert.name"></Label>
+							<Label [text]="alert.notified_time" class="alert-time"></Label>
+						</StackLayout>
+						<Label [text]="alert.type | titlecase" col="2"></Label>
+					</GridLayout>
+				</ng-template>
+			</ListView>
+		</StackLayout>
+	</ScrollView>
 </StackLayout>
